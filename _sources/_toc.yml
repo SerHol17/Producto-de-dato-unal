@@ -1,0 +1,101 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: Unidad1
+  sections:
+  - file: "Unidades/Unidad_1/repasoPythonC"
+  - file: "Unidades/Unidad_1/Tema 1 - TiposDeDatos Condicionales Ciclos Colecciones Funciones_10_08_2023"
+  - file: "Unidades/Unidad_1/Tema_1_1_2_Multiples_Lenguajes_en_Colab_17_08_2023"
+  - file: "Unidades/Unidad_1/Tema 2 - Arreglos_10_08_2023"
+  - file: "Unidades/Unidad_1/Intro_pandas"
+  - file: "Unidades/Unidad_1/Data_filtering_and_cleaning"
+  - file: "Unidades/Unidad_1/Tema 4 - Analisis numerico y Calculo simbolico con Sympy_04_09_2024"
+  - file: "Unidades/Unidad_1/VisualizacionDinamicaFoliumF"
+  - file: "Unidades/Unidad_1/Automatizaciones"
+  - file: "Unidades/Unidad_1/Ficheros"
+  #- file: "Unidades/Unidad_1/Tema 5 - Manejo de ficheros_10_08_2023"
+  
+  - file: "Unidades/Unidad_1/Tema 6 - Metodos Numericos_2024_01_1"
+  - file: "Unidades/Unidad_1/Tema 7 - Metodos Numericos_2024_01_2"
+  - file: "Unidades/Unidad_1/Tema 8 - Metodos Numericos_2024_01_3"
+  - file: "Unidades/Unidad_1/Tema 9 - Metodos Numericos_2024_01_4"
+  - file: "Unidades/Unidad_1/Evaluemos_Unidad1_10_08_2023"
+ 
+- file: Unidad2
+
+- file: Unidad3
+  sections:
+  - file: "Unidades/Unidad_3/Ejercicio"
+  - file: "Unidades/Unidad_3/Ley_de_Amdahl_Gustafson_Ejercicio"
+  - file: "Unidades/Unidad_3/CalculodeFLOPS"
+  - file: "Unidades/Unidad_3/Metricas programas paralelos"
+  - file: "Unidades/Unidad_3/Recursos Extra"
+##  ##- file: "Unidades/Unidad_3/Evaluemos_Unidad3_2023"
+
+- file: Unidad4
+  sections:
+  - file: "Unidades/Unidad_5/Hilos_en_Python"
+  - file: "Unidades/Unidad_4/Tarea 1"
+  - file: "Unidades/Unidad_4/HilosJavaBasico"
+  - file: "Unidades/Unidad_4/Tarea 2"
+#  #- file: "Unidades/Unidad_4/Hilos2"
+#  #- file: "Unidades/Unidad_5/HilosPython2.0"
+  - file: Unidad5
+
+##  sections:
+  - file: "Unidades/Unidad_5/SocketsBasicoPython"
+  - file: "Unidades/Unidad_5/SocketsServerPython"
+  - file: "Unidades/Unidad_5/SocketsClientePython"
+  - file: "Unidades/Unidad_5/SocketsServerJava"
+  - file: "Unidades/Unidad_5/SocketsClienteJava"  
+  - file: "Unidades/Unidad_5/GPTChatServer"  
+  - file: "Unidades/Unidad_5/GPTChatClient"
+#  - file: "Unidades/Unidad_5/Tarea Unidad 5"
+
+#- file: Unidad6
+
+#- file: Unidad6_5
+#  #sections:
+##    - file: "Unidades/Unidad_6/Evaluemos_lo_aprendido"
+
+#- file: Unidad7
+#  sections:
+#    - file: "Unidades/Unidad_7/threadsC" 
+#    - file: "Unidades/Unidad_7/OpenMP_en_C"
+    
+#- file: Unidad8 
+#  sections:
+#    - file: "Unidades/Unidad_8/1 - Multiprocessing"
+#    - file: "Unidades/Unidad_8/2 - Multiprocessing"
+#    - file: "Unidades/Unidad_8/3 - Multiprocessing"
+#    - file: "Unidades/Unidad_8/4 - Multiprocessing"
+#    - file: "Unidades/Unidad_8/5 - Multiprocessing"
+#    - file: "Unidades/Unidad_8/6 - Multiprocessing"
+#    - file: "Unidades/Unidad_8/7 - Multiprocessing" 
+#    - file: "Unidades/Unidad_8/8 - Multiprocessing" 
+#    - file: "Unidades/Unidad_8/9 - Multiprocessing" 
+#    - file: "Unidades/Unidad_8/10 - Multiprocessing" 
+#    - file: "Unidades/Unidad_8/Multiprocessing" 
+##    - file: "Unidades/Unidad_8/Evaluemos_lo_aprendido"
+##    #- file: "Unidades/Unidad_8/Evaluemos_lo_aprendido"
+#    - file: "Unidades/Unidad_8/Ejercicio_imagenPython"
+#    - file: "Unidades/Unidad_8/Ejercicio_imagenC"
+
+
+#- file: Unidad9
+#  sections:
+#    - file: "Unidades/Unidad_9/Evaluemos_lo_aprendido"
+
+#- file: Unidad10
+#  sections:
+#    - file: "Unidades/Unidad_10/PyCUDA_multiplicar_sumar_elementos"
+#    - file: "Unidades/Unidad_10/PyCUDA_multiplicar_matrices"
+#    - file: "Unidades/Unidad_10/Stable_Diffusion_GPU_vs_CPU"
+##    - file: "Unidades/Unidad_10/Evaluemos_lo_aprendido"
+
+####- file: Unidad11
+##- file: ProyectoFinal
+####- file: README.md  

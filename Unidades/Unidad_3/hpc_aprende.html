@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Métricas HPC — Aprende Paso a Paso · UCaldas 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0A1628;--panel:#0F2335;--border:#1E3A4A;
+  --txt:#E2E8F0;--muted:#64748B;--sub:#94A3B8;
+  --yellow:#F4D35E;--red:#EF4444;--blue:#3B82F6;
+  --green:#10B981;--orange:#F59E0B;--teal:#0D9488;
+  --red-d:#DC2626;--blue-d:#2563EB;
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+
+/* ─── HEADER ─── */
+header{background:linear-gradient(135deg,#0A1628 0%,#0D4F4C 100%);padding:18px 24px 0;border-bottom:1px solid var(--border)}
+.h-eyebrow{color:var(--yellow);font-size:10px;font-weight:700;letter-spacing:5px;margin-bottom:4px}
+.h-title{color:#fff;font-size:21px;font-weight:800;margin-bottom:2px}
+.h-sub{color:#90B4C5;font-size:12px;margin-bottom:14px}
+.tabs{display:flex;gap:3px;overflow-x:auto}
+.tab{padding:8px 15px;border:none;cursor:pointer;border-radius:8px 8px 0 0;
+     font-size:11.5px;font-weight:600;white-space:nowrap;background:rgba(255,255,255,.08);
+     color:#fff;transition:.2s}
+.tab.on{background:#f1f5f9;color:#0A1628}
+
+/* ─── LAYOUT ─── */
+main{max-width:980px;margin:0 auto;padding:20px}
+.panel{display:none}.panel.on{display:block}
+
+/* ─── CARDS ─── */
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
+.card-title{font-size:13px;font-weight:700;color:var(--yellow);margin-bottom:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:620px){.g2,.g3{grid-template-columns:1fr}}
+
+/* ─── METRIC CHIPS ─── */
+.chip{border-radius:10px;padding:11px 13px}
+.chip-val{font-size:22px;font-weight:800}
+.chip-lbl{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* ─── SLIDERS ─── */
+.sl{margin-bottom:12px}
+.sl-head{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--sub);margin-bottom:5px}
+.sl-val{font-weight:800;color:var(--yellow)}
+input[type=range]{width:100%;cursor:pointer}
+.sl-ends{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
+
+/* ─── FORMULA ─── */
+.fbox{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;
+      font-family:monospace;font-size:13px;color:var(--green);margin:10px 0;line-height:1.8}
+.fbox b{color:var(--yellow)}
+
+/* ─── SCENARIO STRIPE ─── */
+.stripe{border-left:3px solid var(--teal);background:rgba(13,148,136,.08);
+        border-radius:0 8px 8px 0;padding:10px 14px;font-size:12px;
+        color:#90B4C5;line-height:1.7;margin-bottom:14px}
+.stripe strong{color:var(--yellow)}
+
+/* ─── INSIGHT ─── */
+.insight{border-radius:8px;padding:11px 14px;font-size:12px;line-height:1.7;margin-top:10px}
+.ins-g{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);color:#6EE7B7}
+.ins-r{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);color:#FCA5A5}
+.ins-b{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.3);color:#93C5FD}
+.ins-y{background:rgba(244,211,94,.08);border:1px solid rgba(244,211,94,.3);color:#FDE68A}
+
+/* ─── PIPELINE BARS ─── */
+.prow{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.plabel{width:85px;font-size:11px;color:var(--muted);text-align:right;flex-shrink:0}
+.ptrack{flex:1;height:26px;background:var(--bg);border-radius:5px;overflow:hidden;display:flex}
+.pseg{height:100%;display:flex;align-items:center;justify-content:center;
+      font-size:9px;font-weight:700;color:#0A1628;transition:width .35s ease;overflow:hidden;white-space:nowrap}
+.ptime{width:48px;font-size:11px;color:var(--muted);text-align:right;flex-shrink:0}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;font-size:10px}
+.leg{display:flex;align-items:center;gap:4px}
+.leg-dot{width:11px;height:11px;border-radius:3px}
+
+/* ─── AMDAHL FRACTION BAR ─── */
+.fbar-wrap{height:28px;border-radius:7px;overflow:hidden;display:flex;margin:10px 0}
+.fbar-s{background:var(--red-d);display:flex;align-items:center;justify-content:center;
+         font-size:10px;font-weight:700;color:#fff;transition:width .3s;white-space:nowrap;overflow:hidden}
+.fbar-p{background:var(--green);display:flex;align-items:center;justify-content:center;
+         font-size:10px;font-weight:700;color:#0A1628;transition:width .3s;white-space:nowrap;overflow:hidden}
+
+/* ─── PAYLOAD VIZ (Gustafson) ─── */
+.payload-grid{display:grid;gap:10px;margin:12px 0}
+.pload-row{display:flex;align-items:center;gap:8px}
+.pload-p{width:50px;font-size:11px;color:var(--muted);text-align:right;flex-shrink:0}
+.pload-bar-wrap{flex:1;height:20px;display:flex;gap:2px;align-items:center}
+.pload-fixed-s{height:100%;background:var(--red-d);border-radius:3px;flex-shrink:0;
+               display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700}
+.pload-chunk{height:100%;border-radius:3px;flex-shrink:0}
+.pload-time{width:48px;font-size:10px;color:var(--muted);text-align:right}
+
+/* ─── TABLE ─── */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:#1E293B;color:var(--txt);padding:7px 11px;text-align:left;font-weight:600}
+td{padding:5px 11px;border-bottom:1px solid var(--border)}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+
+/* ─── EXERCISES ─── */
+.ex{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
+.ex-q{font-size:13px;margin-bottom:9px;line-height:1.6}
+.ex-row{display:flex;gap:8px}
+.ex-row input{flex:1;padding:7px 11px;background:var(--bg);border:1px solid var(--border);
+              border-radius:7px;color:var(--txt);font-size:13px}
+.ex-row input:focus{outline:none;border-color:var(--teal)}
+.btn{padding:7px 15px;border:none;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-hint{background:#1E3A4A;color:var(--sub)}
+.ex-res{margin-top:8px;padding:9px 12px;border-radius:7px;font-size:12px;line-height:1.7}
+canvas{max-height:250px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-eyebrow">UNIDAD 3 · HPC · PROGRAMACIÓN CONCURRENTE · UCALDAS 2026</div>
+  <div class="h-title">Métricas de Rendimiento — Aprende Paso a Paso</div>
+  <div class="h-sub">Speedup · Eficiencia · Ley de Amdahl · Ley de Gustafson · Industria del Software</div>
+  <div class="tabs">
+    <button class="tab on"  onclick="go(0)">🏗️ ¿Por qué paralelo?</button>
+    <button class="tab"     onclick="go(1)">⚡ Speedup &amp; Eficiencia</button>
+    <button class="tab"     onclick="go(2)">🔴 Ley de Amdahl</button>
+    <button class="tab"     onclick="go(3)">🔵 Ley de Gustafson</button>
+    <button class="tab"     onclick="go(4)">📊 Comparación</button>
+    <button class="tab"     onclick="go(5)">🧪 Ejercicios</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════════════════════════════════ TAB 0 -->
+<div class="panel on" id="p0">
+  <div class="stripe">
+    <strong>🏢 Contexto: Netflix Encoding Farm</strong><br>
+    Netflix convierte cada película a 50+ formatos (4K, HD, mobile…).
+    Con <strong>1 servidor</strong> tarda horas. ¿Qué ganan realmente al agregar más servidores?
+    Esta sección te muestra POR QUÉ el paralelismo importa — y por qué no es magia.
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎬 Simulación: Encodear una película de 120 minutos</div>
+    <div class="sl">
+      <div class="sl-head">Servidores de encoding<span class="sl-val" id="v-p0p">4</span></div>
+      <input type="range" id="s-p0p" min="1" max="32" value="4" oninput="updateP0()">
+      <div class="sl-ends"><span>1 servidor</span><span>32 servidores</span></div>
+    </div>
+    <div class="sl">
+      <div class="sl-head">Fracción serial (init + mux + metadata)<span class="sl-val" id="v-p0f">15%</span></div>
+      <input type="range" id="s-p0f" min="1" max="60" value="15" oninput="updateP0()">
+      <div class="sl-ends"><span>1%</span><span>60%</span></div>
+    </div>
+
+    <!-- Timeline visual -->
+    <div style="margin-bottom:6px;font-size:10px;color:var(--muted)">Timeline (ancho = tiempo de ejecución)</div>
+    <div class="prow"><div class="plabel">1 servidor</div>
+      <div class="ptrack" id="bar-p0-1"></div>
+      <div class="ptime" id="t-p0-1">—</div></div>
+    <div class="prow"><div class="plabel" id="lbl-p0-n">N serv.</div>
+      <div class="ptrack" id="bar-p0-n"></div>
+      <div class="ptime" id="t-p0-n">—</div></div>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:var(--red-d)"></div>Serial (no paralelizable)</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div>Paralelo (encoding de frames)</div>
+    </div>
+  </div>
+
+  <div class="g3" style="margin-bottom:16px">
+    <div class="chip" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3)">
+      <div class="chip-val" id="chip-su0" style="color:var(--green)">—</div>
+      <div class="chip-lbl">Speedup obtenido</div>
+    </div>
+    <div class="chip" style="background:rgba(244,211,94,.1);border:1px solid rgba(244,211,94,.3)">
+      <div class="chip-val" id="chip-ef0" style="color:var(--yellow)">—</div>
+      <div class="chip-lbl">Eficiencia</div>
+    </div>
+    <div class="chip" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3)">
+      <div class="chip-val" id="chip-lim0" style="color:var(--red)">—</div>
+      <div class="chip-lbl">Límite teórico (1/f)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📈 ¿Qué pasa al seguir agregando servidores?</div>
+    <canvas id="chart-p0"></canvas>
+    <div class="insight ins-y" id="insight-p0"></div>
+  </div>
+
+  <div class="card" style="background:rgba(13,148,136,.06)">
+    <div class="card-title">💡 La gran lección</div>
+    <div style="font-size:13px;line-height:1.9;color:var(--sub)">
+      El paralelismo NO es gratis. Hay una parte del código que <strong style="color:var(--red)">siempre
+      debe ejecutarse de forma secuencial</strong>: inicialización, sincronización, lectura de disco, etc.
+      Esta fracción determina el <strong style="color:var(--yellow)">límite máximo de speedup</strong>,
+      sin importar cuántos procesadores uses.<br><br>
+      <strong style="color:var(--green)">Dos leyes cuantifican esto:</strong> Amdahl (peor caso, problema fijo)
+      y Gustafson (mejor caso, problema crece). Las dos tabs siguientes las exploran en profundidad.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ TAB 1 -->
+<div class="panel" id="p1">
+  <div class="stripe">
+    <strong>🔧 GitLab CI — Pipeline de tests</strong><br>
+    El equipo de GitLab tiene un suite de 10 000 tests. En 1 runner tarda <strong>200 s</strong>.
+    Al agregar runners paralelos, ¿cuánto se gana? ¿Qué tan eficientemente se usan los recursos?
+  </div>
+
+  <div class="card">
+    <div class="card-title">⏱️ Calculadora en vivo</div>
+    <div class="g2">
+      <div>
+        <div class="sl"><div class="sl-head">Tiempo secuencial T<sub>s</sub><span class="sl-val" id="v1-ts">200s</span></div>
+          <input type="range" id="s1-ts" min="10" max="600" value="200" oninput="updateP1()">
+          <div class="sl-ends"><span>10s</span><span>600s</span></div></div>
+        <div class="sl"><div class="sl-head">Procesadores p<span class="sl-val" id="v1-p">8</span></div>
+          <input type="range" id="s1-p" min="1" max="128" value="8" oninput="updateP1()">
+          <div class="sl-ends"><span>1</span><span>128</span></div></div>
+        <div class="sl"><div class="sl-head">Overhead de coordinación<span class="sl-val" id="v1-ov">0s</span></div>
+          <input type="range" id="s1-ov" min="0" max="60" value="0" oninput="updateP1()">
+          <div class="sl-ends"><span>0s</span><span>60s</span></div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="fbox" id="fbox1">
+          T_s = — s<br>
+          T_p = T_s/p + overhead = — s<br>
+          <b>SpeedUp = T_s / T_p = —×</b><br>
+          <b>Eficiencia = SpeedUp / p = —%</b>
+        </div>
+        <div class="g2" style="gap:8px">
+          <div class="chip" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3)">
+            <div class="chip-val" id="c1-su" style="color:var(--green)">—</div>
+            <div class="chip-lbl">SpeedUp S(p)</div>
+          </div>
+          <div class="chip" style="background:rgba(244,211,94,.1);border:1px solid rgba(244,211,94,.3)">
+            <div class="chip-val" id="c1-ef" style="color:var(--yellow)">—</div>
+            <div class="chip-lbl">Eficiencia E(p)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Speedup y Eficiencia vs Procesadores</div>
+    <canvas id="chart-p1su"></canvas>
+  </div>
+  <div class="card">
+    <div class="card-title">⚙️ Eficiencia E(p) = S(p) / p</div>
+    <canvas id="chart-p1ef"></canvas>
+    <div class="insight ins-y">
+      💡 <strong>Overhead y Eficiencia:</strong> Cada vez que agregas un runner en GitLab CI,
+      hay un costo fijo de coordinación (clonar repo, configurar entorno, recolectar resultados).
+      Ese overhead reduce la eficiencia real. El slider "Overhead" simula ese costo.
+      En la industria, eficiencia &gt; 70% se considera aceptable.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ TAB 2 -->
+<div class="panel" id="p2">
+  <div class="stripe">
+    <strong>🔴 Webpack / esbuild — Compilación de frontend</strong><br>
+    Compilar un proyecto grande de JavaScript tiene partes seriales (resolver dependencias,
+    generar el bundle final) y partes paralelas (transformar cada módulo).
+    La Ley de Amdahl predice el techo de speedup dado el porcentaje serial.
+  </div>
+
+  <!-- Fraction bar -->
+  <div class="card">
+    <div class="card-title">🧩 Descomposición del código</div>
+    <div class="sl">
+      <div class="sl-head">Fracción serial f (código NO paralelizable)
+        <span class="sl-val" id="v2-f" style="color:var(--red)">20%</span></div>
+      <input type="range" id="s2-f" min="1" max="95" value="20" oninput="updateP2()">
+      <div class="sl-ends"><span>1% serial</span><span>95% serial</span></div>
+    </div>
+    <div class="fbar-wrap">
+      <div class="fbar-s" id="fbar2-s">Serial</div>
+      <div class="fbar-p" id="fbar2-p">Paralelo</div>
+    </div>
+    <div class="fbox" id="fbox2">
+      f = 0.20 &nbsp;→&nbsp; <b>S_max = 1/f = 5.00×</b><br>
+      Con p=∞: S = 5.00× &nbsp;|&nbsp; Con p=8: S = — &nbsp;|&nbsp; Con p=64: S = —
+    </div>
+    <div class="g3" style="margin-top:12px">
+      <div class="chip" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3)">
+        <div class="chip-val" id="c2-max" style="color:var(--red)">—</div>
+        <div class="chip-lbl">Speedup máximo (∞ cores)</div>
+      </div>
+      <div class="chip" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)">
+        <div class="chip-val" id="c2-p8" style="color:#F87171">—</div>
+        <div class="chip-lbl">Con p = 8</div>
+      </div>
+      <div class="chip" style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15)">
+        <div class="chip-val" id="c2-p64" style="color:#FCA5A5">—</div>
+        <div class="chip-lbl">Con p = 64</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📈 Speedup según Amdahl — el "techo" es inevitable</div>
+    <canvas id="chart-p2sp"></canvas>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎯 ¿Cuántos cores necesitas REALMENTE? (punto de rendimiento decreciente)</div>
+    <div style="overflow-x:auto"><table id="t2-sweet"></table></div>
+    <div class="insight ins-r" id="ins2"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ TAB 3 -->
+<div class="panel" id="p3">
+  <div class="stripe">
+    <strong>🔵 PyTorch Distributed Training — Entrenamiento de LLMs</strong><br>
+    Al agregar más GPUs, los equipos de ML también <strong>aumentan el batch size y el dataset</strong>.
+    El problema crece con los recursos. Esto es Gustafson: el tiempo permanece constante,
+    pero <strong>se resuelve un problema MÁS GRANDE</strong>.
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔑 El insight clave: problema FIJO vs problema que CRECE</div>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:6px">🔴 Problema FIJO (Amdahl)</div>
+        <div style="font-size:11px;color:var(--sub);line-height:1.7;margin-bottom:8px">
+          Mismo dataset para todos los casos. Más GPU → menos tiempo. Pero la parte serial crea un techo.
+        </div>
+        <canvas id="chart-p3-fixed" style="max-height:160px"></canvas>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:6px">🔵 Problema CRECE (Gustafson)</div>
+        <div style="font-size:11px;color:var(--sub);line-height:1.7;margin-bottom:8px">
+          Más GPU → dataset más grande. El tiempo se mantiene. Pero resuelves MÁS trabajo.
+        </div>
+        <canvas id="chart-p3-grow" style="max-height:160px"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔵 Parámetros — Ley de Gustafson</div>
+    <div class="sl">
+      <div class="sl-head">Fracción serial f (init, logging, checkpoint I/O)
+        <span class="sl-val" id="v3-f" style="color:var(--blue)">10%</span></div>
+      <input type="range" id="s3-f" min="1" max="90" value="10" oninput="updateP3()">
+      <div class="sl-ends"><span>1%</span><span>90%</span></div>
+    </div>
+    <div class="fbox" id="fbox3">
+      f = 0.10 &nbsp;→&nbsp; <b>S(p) = p − f×(p−1)</b><br>
+      p=8: — &nbsp;|&nbsp; p=32: — &nbsp;|&nbsp; p=128: — &nbsp;|&nbsp; Amdahl límite: —
+    </div>
+    <div class="g3">
+      <div class="chip" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3)">
+        <div class="chip-val" id="c3-p8" style="color:var(--blue)">—</div><div class="chip-lbl">p=8 GPUs</div>
+      </div>
+      <div class="chip" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3)">
+        <div class="chip-val" id="c3-p32" style="color:#60A5FA">—</div><div class="chip-lbl">p=32 GPUs</div>
+      </div>
+      <div class="chip" style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3)">
+        <div class="chip-val" id="c3-p128" style="color:#93C5FD">—</div><div class="chip-lbl">p=128 GPUs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payload visualization -->
+  <div class="card">
+    <div class="card-title">📦 Visualización del Payload — La clave de Gustafson</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">
+      Cada fila = un escenario con p GPUs. Rojo = parte serial (fija). Azul = carga paralela por GPU (cada bloque = 1 GPU × carga base).
+    </div>
+    <div id="payload-viz"></div>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:var(--red-d)"></div>Fracción serial (fija, no escala)</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--blue-d)"></div>Carga paralela por GPU (escala con p)</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--orange)"></div>Carga base de referencia (p=1)</div>
+    </div>
+    <div class="insight ins-b">
+      💡 <strong>¿Ves la diferencia?</strong> En Gustafson, el tiempo de ejecución (barra de tiempo = serial + 1 bloque por GPU)
+      es <strong>constante</strong>, pero el problema total (todos los bloques azules) crece linealmente.
+      Por eso el speedup de Gustafson supera el límite de Amdahl: estás midiendo cuánto MÁS TRABAJO haces, no cuánto más rápido vas.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📈 Speedup según Gustafson</div>
+    <canvas id="chart-p3sp"></canvas>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ TAB 4 -->
+<div class="panel" id="p4">
+  <div class="card">
+    <div class="card-title">⚖️ Amdahl vs Gustafson — Control unificado</div>
+    <div class="sl">
+      <div class="sl-head">Fracción serial f<span class="sl-val" id="v4-f">10%</span></div>
+      <input type="range" id="s4-f" min="1" max="90" value="10" oninput="updateP4()">
+      <div class="sl-ends"><span>1%</span><span>90%</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📈 Speedup comparativo</div>
+    <canvas id="chart-p4sp"></canvas>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚙️ Eficiencia comparativa</div>
+    <canvas id="chart-p4ef"></canvas>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Tabla comparativa — f = <span id="v4-fb">10</span>%</div>
+    <div style="overflow-x:auto"><table>
+      <thead><tr><th>p</th>
+        <th style="color:#FCA5A5">Amdahl S</th>
+        <th style="color:#93C5FD">Gustafson S</th>
+        <th style="color:#FCA5A5">Efic. A</th>
+        <th style="color:#93C5FD">Efic. G</th>
+        <th>Δ Speedup</th></tr></thead>
+      <tbody id="comp-tbody"></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏭 ¿Cuándo usa cada ley la industria?</div>
+    <div class="g2" style="gap:14px">
+      <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:13px">
+        <div style="color:var(--red);font-weight:700;margin-bottom:8px;font-size:13px">🔴 Amdahl — Strong Scaling</div>
+        <div style="font-size:12px;color:var(--sub);line-height:1.9">
+          ✅ Renderizar un video de duración fija<br>
+          ✅ Compilar un proyecto con N archivos fijos<br>
+          ✅ Correr un test suite de tamaño fijo<br>
+          ✅ Procesar un batch de datos ya definido<br>
+          <span style="color:var(--muted)">→ El problema NO crece con más hardware</span>
+        </div>
+      </div>
+      <div style="background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.25);border-radius:10px;padding:13px">
+        <div style="color:var(--blue);font-weight:700;margin-bottom:8px;font-size:13px">🔵 Gustafson — Weak Scaling</div>
+        <div style="font-size:12px;color:var(--sub);line-height:1.9">
+          ✅ Entrenar con más datos al agregar GPUs<br>
+          ✅ Indexar más repos al escalar crawlers<br>
+          ✅ Analítica de streaming que crece con usuarios<br>
+          ✅ Simulaciones de mayor resolución/precisión<br>
+          <span style="color:var(--muted)">→ El problema SÍ crece con más hardware</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ TAB 5 -->
+<div class="panel" id="p5">
+  <div class="stripe">
+    <strong>📝 Ejercicios aplicados</strong> — Basados en escenarios reales de ingeniería de software.
+    Ingresa tu respuesta y presiona Verificar (o Enter).
+  </div>
+  <div id="exs"></div>
+</div>
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<script>
+const AM = (f,p) => 1/(f+(1-f)/p);
+const GU = (f,p) => p - f*(p-1);
+const P  = [1,2,4,8,16,32,64,128];
+const C  = {r:'#EF4444',b:'#3B82F6',g:'#10B981',y:'#F4D35E',
+            o:'#F59E0B',t:'#0D9488',gray:'#475569',rD:'#DC2626',bD:'#2563EB'};
+
+let charts={};
+function mkC(id,cfg){if(charts[id])charts[id].destroy();
+  charts[id]=new Chart(document.getElementById(id),cfg);return charts[id];}
+function dk(){return{color:'#94A3B8',grid:{color:'#1E3A4A'},ticks:{color:'#94A3B8',font:{size:10}}};}
+const BASE_OPT=()=>({animation:false,
+  plugins:{legend:{labels:{color:'#94A3B8',boxWidth:12,font:{size:10}}},
+           tooltip:{mode:'index',intersect:false}},
+  scales:{x:{...dk()},y:{...dk()}}});
+
+function switchTab(i){
+  document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',i===j));
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('on',i===j));
+}
+function go(i){switchTab(i);
+  [updateP0,updateP1,updateP2,updateP3,updateP4][i]?.();}
+
+/* ══════════ TAB 0 ══════════ */
+function renderPipeBar(id,segs,total){
+  const c=document.getElementById(id);
+  c.innerHTML=segs.map(s=>{
+    const w=(s.t/total*100).toFixed(1);
+    return `<div class="pseg" style="width:${w}%;background:${s.col}" title="${s.lbl}: ${s.t}s">
+      ${w>10?s.lbl:''}</div>`;
+  }).join('');
+}
+function updateP0(){
+  const p=+document.getElementById('s-p0p').value;
+  const fPct=+document.getElementById('s-p0f').value;
+  const f=fPct/100;
+  document.getElementById('v-p0p').textContent=p;
+  document.getElementById('v-p0f').textContent=fPct+'%';
+  document.getElementById('lbl-p0-n').textContent=p+' serv.';
+
+  const T1=120; // minutos como unidad
+  const Tp=T1*f + T1*(1-f)/p;
+  const su=(T1/Tp).toFixed(2);
+  const ef=((T1/Tp/p)*100).toFixed(0);
+  const lim=(1/f).toFixed(1);
+
+  document.getElementById('chip-su0').textContent=su+'×';
+  document.getElementById('chip-ef0').textContent=ef+'%';
+  document.getElementById('chip-lim0').textContent=lim+'×';
+
+  const maxT=T1;
+  renderPipeBar('bar-p0-1',[{lbl:'Serial',t:T1*f,col:C.rD},{lbl:'Frames',t:T1*(1-f),col:C.b}],maxT);
+  renderPipeBar('bar-p0-n',[{lbl:'Serial',t:T1*f,col:C.rD},{lbl:'Frames/p',t:T1*(1-f)/p,col:C.b}],maxT);
+  document.getElementById('t-p0-1').textContent=T1+'m';
+  document.getElementById('t-p0-n').textContent=Tp.toFixed(1)+'m';
+
+  const sData=P.map(q=>+AM(f,q).toFixed(3));
+  mkC('chart-p0',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'Ideal lineal',data:P,borderColor:C.gray,borderDash:[6,3],borderWidth:1.4,pointRadius:0,fill:false},
+    {label:`Límite 1/f = ${lim}×`,data:P.map(()=>+lim),borderColor:C.rD+'88',borderDash:[4,2],borderWidth:1.5,pointRadius:0,fill:false},
+    {label:'Speedup real',data:sData,borderColor:C.g,borderWidth:3,pointRadius:5,pointBackgroundColor:C.g,fill:false}
+  ]},options:BASE_OPT()});
+
+  const sweet=P.find(q=>AM(f,q)/(1/f)>.85)||P[P.length-1];
+  document.getElementById('insight-p0').innerHTML=
+    `💡 Con f=${fPct}%, agregar más de <strong>${sweet} servidores</strong> ya no vale la pena
+    (alcanzas el 85% del speedup máximo con ${sweet}). Netflix y YouTube enfrentan este límite
+    en cada codificación: la solución es <strong>reducir la fracción serial</strong>, no comprar más hardware.`;
+}
+
+/* ══════════ TAB 1 ══════════ */
+function updateP1(){
+  const ts=+document.getElementById('s1-ts').value;
+  const p =+document.getElementById('s1-p').value;
+  const ov=+document.getElementById('s1-ov').value;
+  document.getElementById('v1-ts').textContent=ts+'s';
+  document.getElementById('v1-p').textContent=p;
+  document.getElementById('v1-ov').textContent=ov+'s';
+  const Tp=ts/p+ov, su=+(ts/Tp).toFixed(3), ef=+(su/p*100).toFixed(1);
+  document.getElementById('c1-su').textContent=su+'×';
+  document.getElementById('c1-ef').textContent=ef+'%';
+  document.getElementById('fbox1').innerHTML=
+    `T_s = ${ts} s &nbsp;|&nbsp; p = ${p}<br>
+     T_p = ${ts}/${p} + ${ov} (overhead) = <b>${Tp.toFixed(2)} s</b><br>
+     <b>SpeedUp = ${ts} / ${Tp.toFixed(2)} = ${su}×</b><br>
+     <b>Eficiencia = ${su} / ${p} = ${ef}%</b>`;
+
+  const suArr=P.map(q=>+(ts/(ts/q+ov)).toFixed(3));
+  const efArr=P.map((q,i)=>+(suArr[i]/q*100).toFixed(1));
+  mkC('chart-p1su',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'Ideal',data:P,borderColor:C.gray,borderDash:[6,3],borderWidth:1.4,pointRadius:0,fill:false},
+    {label:'SpeedUp',data:suArr,borderColor:C.g,borderWidth:3,pointRadius:5,pointBackgroundColor:C.g,fill:false}
+  ]},options:BASE_OPT()});
+  mkC('chart-p1ef',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'100% ideal',data:P.map(()=>100),borderColor:C.g,borderDash:[6,3],borderWidth:1.2,pointRadius:0,fill:false},
+    {label:'70% umbral',data:P.map(()=>70),borderColor:C.o,borderDash:[4,3],borderWidth:1.2,pointRadius:0,fill:false},
+    {label:'Eficiencia (%)',data:efArr,borderColor:C.y,borderWidth:3,pointRadius:5,pointBackgroundColor:C.y,fill:false}
+  ]},options:{...BASE_OPT(),scales:{x:{...dk()},y:{...dk(),...{min:0,max:115}}}}});
+}
+
+/* ══════════ TAB 2 ══════════ */
+function updateP2(){
+  const fPct=+document.getElementById('s2-f').value;
+  const f=fPct/100;
+  document.getElementById('v2-f').textContent=fPct+'%';
+  const sMax=(1/f), s8=AM(f,8), s64=AM(f,64);
+  document.getElementById('c2-max').textContent=sMax.toFixed(2)+'×';
+  document.getElementById('c2-p8').textContent=s8.toFixed(2)+'×';
+  document.getElementById('c2-p64').textContent=s64.toFixed(2)+'×';
+  document.getElementById('fbar2-s').style.width=fPct+'%';
+  document.getElementById('fbar2-p').style.width=(100-fPct)+'%';
+  document.getElementById('fbar2-s').textContent=fPct>8?`Serial ${fPct}%`:'';
+  document.getElementById('fbar2-p').textContent=(100-fPct)>8?`Paralelo ${100-fPct}%`:'';
+  document.getElementById('fbox2').innerHTML=
+    `f = ${f.toFixed(2)} &nbsp;→&nbsp; <b>S_max = 1/f = ${sMax.toFixed(2)}×</b><br>
+     Con p=∞: ${sMax.toFixed(2)}× &nbsp;|&nbsp; Con p=8: ${s8.toFixed(2)}× &nbsp;|&nbsp; Con p=64: ${s64.toFixed(2)}×`;
+
+  const sArr=P.map(q=>+AM(f,q).toFixed(3));
+  mkC('chart-p2sp',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'Ideal lineal',data:P,borderColor:C.gray,borderDash:[6,3],borderWidth:1.4,pointRadius:0,fill:false},
+    {label:`Techo 1/f = ${sMax.toFixed(1)}×`,data:P.map(()=>+sMax.toFixed(2)),borderColor:C.rD+'66',borderDash:[4,2],borderWidth:2,pointRadius:0,fill:false},
+    {label:'Amdahl S(p)',data:sArr,borderColor:C.r,borderWidth:3,pointRadius:5,pointBackgroundColor:C.r,fill:false}
+  ]},options:BASE_OPT()});
+
+  // Sweet-spot table
+  const rows=P.map(p=>{
+    const s=AM(f,p); const pct=(s/sMax*100).toFixed(0);
+    return `<tr>
+      <td style="font-weight:700">p=${p}</td>
+      <td style="color:${C.r}">${s.toFixed(2)}×</td>
+      <td style="color:${C.y}">${pct}%</td>
+      <td>${+pct>90?'✅ Óptimo':+pct>70?'⚠️ Marginal':'❌ Bajo retorno'}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('t2-sweet').innerHTML=
+    `<thead><tr><th>Cores</th><th style="color:#FCA5A5">Speedup</th><th>% del techo</th><th>Veredicto</th></tr></thead>
+     <tbody>${rows}</tbody>`;
+
+  const sweet=P.find(p=>AM(f,p)/sMax>.90)||128;
+  document.getElementById('ins2').innerHTML=
+    `❗ <strong>Insight para Webpack:</strong> Con ${fPct}% de código serial, el 90% del speedup máximo
+    se alcanza con solo <strong>${sweet} workers</strong> (speedup: ${AM(f,sweet).toFixed(2)}×, techo: ${sMax.toFixed(1)}×).
+    En lugar de escalar a 64+ cores, vale más invertir en <strong>reducir la serialización</strong>
+    (ej: optimizar el resolver de dependencias de Webpack).`;
+}
+
+/* ══════════ TAB 3 ══════════ */
+function updateP3(){
+  const fPct=+document.getElementById('s3-f').value;
+  const f=fPct/100;
+  document.getElementById('v3-f').textContent=fPct+'%';
+  const g8=GU(f,8),g32=GU(f,32),g128=GU(f,128),alim=(1/f);
+  document.getElementById('c3-p8').textContent=g8.toFixed(2)+'×';
+  document.getElementById('c3-p32').textContent=g32.toFixed(2)+'×';
+  document.getElementById('c3-p128').textContent=g128.toFixed(2)+'×';
+  document.getElementById('fbox3').innerHTML=
+    `f = ${f.toFixed(2)} &nbsp;→&nbsp; <b>S(p) = p − f×(p−1)</b><br>
+     p=8: ${g8.toFixed(2)}× &nbsp;|&nbsp; p=32: ${g32.toFixed(2)}× &nbsp;|&nbsp;
+     p=128: ${g128.toFixed(2)}× &nbsp;|&nbsp; Amdahl techo: ${alim.toFixed(1)}×`;
+
+  // Fixed vs growing time charts
+  const amArr=P.map(p=>+AM(f,p).toFixed(3));
+  const guArr=P.map(p=>+GU(f,p).toFixed(3));
+
+  mkC('chart-p3-fixed',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'Ideal',data:P,borderColor:C.gray,borderDash:[6,3],borderWidth:1.2,pointRadius:0,fill:false},
+    {label:`Techo ${alim.toFixed(1)}×`,data:P.map(()=>+alim.toFixed(2)),borderColor:C.rD+'55',borderDash:[4,2],borderWidth:1.5,pointRadius:0,fill:false},
+    {label:'Amdahl',data:amArr,borderColor:C.r,borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.r,fill:false}
+  ]},options:{animation:false,plugins:{legend:{labels:{color:'#94A3B8',boxWidth:10,font:{size:9}}}},
+    scales:{x:{...dk()},y:{...dk()}}}});
+
+  mkC('chart-p3-grow',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'Ideal',data:P,borderColor:C.gray,borderDash:[6,3],borderWidth:1.2,pointRadius:0,fill:false},
+    {label:'Gustafson',data:guArr,borderColor:C.b,borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.b,fill:false}
+  ]},options:{animation:false,plugins:{legend:{labels:{color:'#94A3B8',boxWidth:10,font:{size:9}}}},
+    scales:{x:{...dk()},y:{...dk()}}}});
+
+  // Payload visualization
+  const payloadProcs=[1,2,4,8];
+  const maxWidth=600;
+  const baseSerial=f, basePar=(1-f);
+
+  const viz=document.getElementById('payload-viz');
+  viz.innerHTML=payloadProcs.map(p=>{
+    const serialW=Math.round(baseSerial*80);  // fixed width for serial
+    const chunkW=Math.round(basePar*80);      // each parallel chunk
+    const chunks=Array.from({length:p},(_,i)=>
+      `<div class="pload-chunk" style="width:${chunkW}px;background:${i===0?C.o:C.bD};opacity:${i===0?1:0.7}" title="GPU ${i+1}"></div>`
+    ).join('');
+    const totalProb=baseSerial+basePar*p;
+    const execTime=baseSerial+basePar; // constant!
+    return `<div class="pload-row">
+      <div class="pload-p">${p} GPU${p>1?'s':''}</div>
+      <div class="pload-bar-wrap">
+        <div class="pload-fixed-s" style="width:${serialW}px">${fPct}%</div>
+        ${chunks}
+      </div>
+      <div class="pload-time">
+        <span style="color:var(--yellow)">S=${GU(f,p).toFixed(1)}×</span><br>
+        <span style="font-size:9px;color:var(--muted)">t=${execTime.toFixed(2)}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  mkC('chart-p3sp',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'Ideal lineal',data:P,borderColor:C.gray,borderDash:[6,3],borderWidth:1.4,pointRadius:0,fill:false},
+    {label:`Techo Amdahl ${alim.toFixed(1)}×`,data:P.map(()=>+alim.toFixed(2)),borderColor:C.rD+'55',borderDash:[4,2],borderWidth:1.5,pointRadius:0,fill:false},
+    {label:'Gustafson S(p)',data:guArr,borderColor:C.b,borderWidth:3,pointRadius:5,pointBackgroundColor:C.b,fill:false}
+  ]},options:BASE_OPT()});
+}
+
+/* ══════════ TAB 4 ══════════ */
+function updateP4(){
+  const fPct=+document.getElementById('s4-f').value;
+  const f=fPct/100;
+  document.getElementById('v4-f').textContent=fPct+'%';
+  document.getElementById('v4-fb').textContent=fPct;
+
+  const am=P.map(p=>+AM(f,p).toFixed(3));
+  const gu=P.map(p=>+GU(f,p).toFixed(3));
+  const eAm=P.map((p,i)=>+(am[i]/p*100).toFixed(1));
+  const eGu=P.map((p,i)=>+(gu[i]/p*100).toFixed(1));
+
+  mkC('chart-p4sp',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'Ideal',data:P,borderColor:C.gray,borderDash:[6,3],borderWidth:1.4,pointRadius:0,fill:false},
+    {label:`Techo Amdahl ${(1/f).toFixed(1)}×`,data:P.map(()=>+(1/f).toFixed(2)),borderColor:C.rD+'55',borderDash:[4,2],borderWidth:1.5,pointRadius:0,fill:false},
+    {label:'Amdahl',data:am,borderColor:C.r,borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.r,fill:false},
+    {label:'Gustafson',data:gu,borderColor:C.b,borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.b,fill:false}
+  ]},options:BASE_OPT()});
+
+  mkC('chart-p4ef',{type:'line',data:{labels:P.map(q=>'p='+q),datasets:[
+    {label:'100% ideal',data:P.map(()=>100),borderColor:C.g,borderDash:[6,3],borderWidth:1.2,pointRadius:0,fill:false},
+    {label:'70% umbral',data:P.map(()=>70),borderColor:C.o,borderDash:[4,3],borderWidth:1.2,pointRadius:0,fill:false},
+    {label:'Efic. Amdahl',data:eAm,borderColor:C.r,borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.r,fill:false},
+    {label:'Efic. Gustafson',data:eGu,borderColor:C.b,borderWidth:2.5,pointRadius:4,pointBackgroundColor:C.b,fill:false}
+  ]},options:{...BASE_OPT(),scales:{x:{...dk()},y:{...dk(),...{min:0,max:115}}}}});
+
+  document.getElementById('comp-tbody').innerHTML=P.map((p,i)=>{
+    const a=am[i],g=gu[i],d=g-a;
+    return `<tr>
+      <td style="font-weight:700">${p}</td>
+      <td style="color:${C.r}">${a.toFixed(3)}×</td>
+      <td style="color:${C.b}">${g.toFixed(3)}×</td>
+      <td style="color:${C.r}">${eAm[i]}%</td>
+      <td style="color:${C.b}">${eGu[i]}%</td>
+      <td style="color:${d>1?C.g:C.gray};font-weight:${d>2?700:400}">+${d.toFixed(3)}×</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ══════════ TAB 5 — EXERCISES ══════════ */
+const EX=[
+  {ctx:'🔧 GitLab CI — pipeline de tests.',
+   q:'Un test suite tarda 180 s con 1 runner y 45 s con 4 runners. ¿Cuál es el SpeedUp?',
+   a:'4',hint:'SpeedUp = T_s / T_p = 180 / 45 = 4'},
+  {ctx:'🔧 Mismo caso. ',
+   q:'¿Cuál es la eficiencia con 4 runners? (en %)',
+   a:'100',hint:'E = SpeedUp / p = 4 / 4 = 1.0 → 100%'},
+  {ctx:'🎬 Netflix encoding — fracción serial.',
+   q:'Con f = 0.25 (25% serial), ¿cuál es el Speedup MÁXIMO según Amdahl?',
+   a:'4',hint:'S_max = 1/f = 1/0.25 = 4. Sin importar cuántos servidores uses.'},
+  {ctx:'🤖 PyTorch Distributed — Gustafson.',
+   q:'Con f=0.05 y N=20 GPUs según Gustafson: S = N − f×(N−1). ¿Cuál es el speedup? (1 decimal)',
+   a:'19.1',hint:'S = 20 - 0.05×19 = 20 - 0.95 = 19.05 ≈ 19.1'},
+  {ctx:'🔧 Webpack — punto de rendimiento decreciente.',
+   q:'Con f=0.1 y p=16 según Amdahl: S(16) = 1/(0.1 + 0.9/16). ¿Cuál es S? (2 decimales)',
+   a:'6.40',hint:'1/(0.1 + 0.05625) = 1/0.15625 ≈ 6.40'},
+  {ctx:'📦 Overhead en CI/CD.',
+   q:'T_s=200s, p=8, overhead=10s. T_p = 200/8 + 10. ¿Cuál es el SpeedUp? (2 decimales)',
+   a:'5.71',hint:'T_p = 25 + 10 = 35s. S = 200/35 ≈ 5.714 ≈ 5.71'},
+  {ctx:'⚖️ Amdahl vs Gustafson.',
+   q:'Con f=0.2 y p=10: Amdahl vs Gustafson. ¿Cuál da mayor speedup? Escribe "Amdahl" o "Gustafson"',
+   a:'Gustafson',hint:'Amdahl: 1/(0.2+0.8/10)=3.57×. Gustafson: 10-0.2×9=8.2×. Gustafson siempre ≥ Amdahl.'},
+  {ctx:'🎯 Análisis de fracción serial.',
+   q:'T_s=100s, T_paralelo_puro=80s, T_serial=20s. ¿Cuál es f? (2 decimales)',
+   a:'0.20',hint:'f = T_serial / T_s = 20 / 100 = 0.20'}
+];
+
+function buildExs(){
+  document.getElementById('exs').innerHTML=EX.map((e,i)=>`
+    <div class="ex" id="ex-${i}">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:3px">${e.ctx}</div>
+      <div class="ex-q"><strong>Ejercicio ${i+1}:</strong> ${e.q}</div>
+      <div class="ex-row">
+        <input id="ei-${i}" placeholder="Tu respuesta…"
+          onkeydown="if(event.key==='Enter')chkEx(${i})">
+        <button class="btn btn-teal" onclick="chkEx(${i})">Verificar</button>
+        <button class="btn btn-hint" onclick="showHint(${i})">💡 Pista</button>
+      </div>
+      <div id="er-${i}" class="ex-res" style="display:none"></div>
+    </div>`).join('');
+}
+function chkEx(i){
+  const v=document.getElementById('ei-'+i).value.trim();
+  const r=document.getElementById('er-'+i);
+  r.style.display='block';
+  if(v===EX[i].a){
+    r.style.cssText='display:block;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:#6EE7B7;padding:9px 12px;border-radius:7px;font-size:12px;line-height:1.7';
+    r.innerHTML=`✅ <strong>¡Correcto!</strong><br>💡 ${EX[i].hint}`;
+  } else {
+    r.style.cssText='display:block;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#FCA5A5;padding:9px 12px;border-radius:7px;font-size:12px;line-height:1.7';
+    r.innerHTML=`❌ Incorrecto. Respuesta: <strong>${EX[i].a}</strong><br>💡 ${EX[i].hint}`;
+  }
+}
+function showHint(i){
+  const r=document.getElementById('er-'+i);
+  r.style.cssText='display:block;background:rgba(244,211,94,.08);border:1px solid rgba(244,211,94,.3);color:#FDE68A;padding:9px 12px;border-radius:7px;font-size:12px;line-height:1.7';
+  r.innerHTML='💡 '+EX[i].hint;
+}
+
+/* ── INIT ── */
+buildExs();
+updateP0();
+setTimeout(()=>{updateP1();updateP2();updateP3();updateP4();},80);
+</script>
+</body>
+</html>
