@@ -1,0 +1,1170 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Integración de Apache Spark y MongoDB con PySpark &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/UnidadBigData/SparkMongo';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/UnidadBigData/SparkMongo.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/UnidadBigData/SparkMongo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/UnidadBigData/SparkMongo.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Integración de Apache Spark y MongoDB con PySpark</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Integración de Apache Spark y MongoDB con PySpark</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-entorno">1. Configuración del Entorno</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-para-configurar-mongodb-atlas-accion-requerida">1.1. Pasos para Configurar MongoDB Atlas (¡Acción Requerida!)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poblando-mongodb-con-datos-de-ejemplo">2. Poblando MongoDB con Datos de Ejemplo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leer-datos-de-mongodb-con-spark">3. Leer Datos de MongoDB con Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analizar-los-datos-con-spark">4. Analizar los Datos con Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escribir-los-resultados-de-vuelta-a-mongodb">5. Escribir los Resultados de Vuelta a MongoDB</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#integracion-de-apache-spark-y-mongodb-con-pyspark-caso-practico-con-datos-de-netflix">Integración de Apache Spark y MongoDB con PySpark: Caso Práctico con Datos de Netflix</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poblando-mongodb-con-el-dataset-de-netflix">3. Poblando MongoDB con el Dataset de Netflix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4. Leer Datos de MongoDB con Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5. Analizar los Datos con Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escribir-resultados-de-vuelta-a-mongodb">6. Escribir Resultados de Vuelta a MongoDB</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="integracion-de-apache-spark-y-mongodb-con-pyspark">
+<h1>Integración de Apache Spark y MongoDB con PySpark<a class="headerlink" href="#integracion-de-apache-spark-y-mongodb-con-pyspark" title="Link to this heading">#</a></h1>
+<p><strong>Objetivo del Notebook:</strong> Aprender a conectar Apache Spark con una base de datos MongoDB para realizar operaciones de lectura, análisis y escritura. Este es un patrón muy común en arquitecturas de Big Data, donde MongoDB se utiliza como un sistema de almacenamiento flexible y escalable (Operational Datastore) y Spark se usa para el procesamiento y análisis de datos a gran escala.
+![azure-synapse-analytics-integrate-mongodb-atlas-architecture.svg](data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYwIiBoZWlnaHQ9IjQyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgb3ZlcmZsb3c9ImhpZGRlbiI+DQogIDxkZWZzPg0KICAgIDxmaWx0ZXIgaWQ9ImZ4MCIgeD0iLTEwJSIgeT0iLTEwJSIgd2lkdGg9IjEyMCUiIGhlaWdodD0iMTIwJSIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwcmltaXRpdmVVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KICAgICAgPGZlQ29tcG9uZW50VHJhbnNmZXIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4NCiAgICAgICAgPGZlRnVuY1IgdHlwZT0iZGlzY3JldGUiIHRhYmxlVmFsdWVzPSIwIDAiLz4NCiAgICAgICAgPGZlRnVuY0cgdHlwZT0iZGlzY3JldGUiIHRhYmxlVmFsdWVzPSIwIDAiLz4NCiAgICAgICAgPGZlRnVuY0IgdHlwZT0iZGlzY3JldGUiIHRhYmxlVmFsdWVzPSIwIDAiLz4NCiAgICAgICAgPGZlRnVuY0EgdHlwZT0ibGluZWFyIiBzbG9wZT0iMC40NzA1ODgiIGludGVyY2VwdD0iMCIvPg0KICAgICAgPC9mZUNvbXBvbmVudFRyYW5zZmVyPg0KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMiAyIi8+DQogICAgPC9maWx0ZXI+DQogICAgPGNsaXBQYXRoIGlkPSJjbGlwMSI+DQogICAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iOTYwIiBoZWlnaHQ9IjU0MCIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGNsaXBQYXRoIGlkPSJjbGlwMiI+DQogICAgICA8cGF0aCBkPSJNNDg3LjMzNCAxMDQuNUM0NjYuOTkxIDEwNC41IDQ1MC41IDEyMC45OTEgNDUwLjUgMTQxLjMzNEw0NTAuNSAyODguNjY2QzQ1MC41IDMwOS4wMDkgNDY2Ljk5MSAzMjUuNSA0ODcuMzM0IDMyNS41TDY5Ny42NjYgMzI1LjVDNzE4LjAwOSAzMjUuNSA3MzQuNSAzMDkuMDA5IDczNC41IDI4OC42NjZMNzM0LjUgMTQxLjMzNEM3MzQuNSAxMjAuOTkxIDcxOC4wMDkgMTA0LjUgNjk3LjY2NiAxMDQuNVpNMS40MzA1MWUtMDUgOC4wNDY2M2UtMDYgOTYwIDguMDQ2NjNlLTA2IDk2MCA1NDAgMS40MzA1MWUtMDUgNTQwWiIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz4NCiAgICA8L2NsaXBQYXRoPg0KICAgIDxpbWFnZSB3aWR0aD0iOTYwIiBoZWlnaHQ9IjUwMCIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUE4QUFBQUljQ0FNQUFBQU9nemRKQUFBQUFYTlNSMElBcnM0YzZRQUFBQVJuUVUxQkFBQ3hqd3Y4WVFVQUFBQURVRXhVUlFBQUFLZDZQZG9BQUFBQmRGSk9Vd0JBNXRobUFBQUFDWEJJV1hNQUFBN0RBQUFPd3dISGI2aGtBQUFDRGtsRVFWUjRYdTNCTVFFQUFBRENvUFZQYlFzdklBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFEZ29BYnJoUUFCZWlGQXNBQUFBQUJKUlU1RXJrSmdnZz09IiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBpZD0iaW1nMyIvPg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDQiPg0KICAgICAgPHBhdGggZD0iTTQ4Ny4zMzQgMTA0LjVDNDY2Ljk5MSAxMDQuNSA0NTAuNSAxMjAuOTkxIDQ1MC41IDE0MS4zMzRMNDUwLjUgMjg4LjY2NkM0NTAuNSAzMDkuMDA5IDQ2Ni45OTEgMzI1LjUgNDg3LjMzNCAzMjUuNUw2OTcuNjY2IDMyNS41QzcxOC4wMDkgMzI1LjUgNzM0LjUgMzA5LjAwOSA3MzQuNSAyODguNjY2TDczNC41IDE0MS4zMzRDNzM0LjUgMTIwLjk5MSA3MTguMDA5IDEwNC41IDY5Ny42NjYgMTA0LjVaTTEuNDMwNTFlLTA1IDguMDQ2NjNlLTA2IDk2MCA4LjA0NjYzZS0wNiA5NjAgNTQwIDEuNDMwNTFlLTA1IDU0MFoiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIi8+DQogICAgPC9jbGlwUGF0aD4NCiAgICA8Y2xpcFBhdGggaWQ9ImNsaXA1Ij4NCiAgICAgIDxwYXRoIGQ9Ik00ODcuMzM0IDEwNC41QzQ2Ni45OTEgMTA0LjUgNDUwLjUgMTIwLjk5MSA0NTAuNSAxNDEuMzM0TDQ1MC41IDI4OC42NjZDNDUwLjUgMzA5LjAwOSA0NjYuOTkxIDMyNS41IDQ4Ny4zMzQgMzI1LjVMNjk3LjY2NiAzMjUuNUM3MTguMDA5IDMyNS41IDczNC41IDMwOS4wMDkgNzM0LjUgMjg4LjY2Nkw3MzQuNSAxNDEuMzM0QzczNC41IDEyMC45OTEgNzE4LjAwOSAxMDQuNSA2OTcuNjY2IDEwNC41Wk0xLjQzMDUxZS0wNSA4LjA0NjYzZS0wNiA5NjAgOC4wNDY2M2UtMDYgOTYwIDU0MCAxLjQzMDUxZS0wNSA1NDBaIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGNsaXBQYXRoIGlkPSJjbGlwNiI+DQogICAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTMzNDAwIiBoZWlnaHQ9IjQxOTEwMCIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGltYWdlIHdpZHRoPSI3MiIgaGVpZ2h0PSI2NiIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFFZ0FBQUJDQ0FZQUFBRDBkcEFoQUFBQUFYTlNSMElBcnM0YzZRQUFBQVJuUVUxQkFBQ3hqd3Y4WVFVQUFBQUpjRWhaY3dBQURzTUFBQTdEQWNkdnFHUUFBQW5tU1VSQlZIaGU3VngvakJSWEhiLzZzOVM3L1RVemR3ZWVYRzJSMG1LS3B2N0EwSWFFd3UyYm5abTl3OXcxcGhWMlp1OTZnbHF0eG1ocGpQeFRyVFhhMHFRRjJ6UlNhVzluOThEU2doaUQvUkd4cUlGYVVxc242bEdMU0lGQ0FZWHJOZFpyL1h6ZmZPOWd1M3UzZTd1ellUZlpUL0l5TTU5NTgvWjlQdk45NzgyYm5aa0d2ekQ3UmlQYzBoZWQzK3dZUzVXa3VFbTFvMTlYSGZFOXBBMktMVEtxcmY5S3RjVmViQTloZVJEYkp4UkhIMVVkL2UwcGs2Mi9oWHh2NEpqL0tJNDRqdlZoTG1lbkxOZlJmNHc4ZDJwTzlFdkt5bWhjUzhRK05tdkY5UXBYNjhMaXFwNmU5Nkd5UTZqNG1SeGh4U1piakVIb2Z5RnlGT0xQWUhrYTJ5ZWxJVFlabzcrVjk3Z0NDV1dnTExHRnExcFpSRzRSQVNVUlhjR2JXWUFJenh4Ym5JYVlQMlA5U2FSSHdkOGRzZlhibFlTK1NuVmlOMFNjS0NKTC80U1NNT2VGN1k0UEJYbzdJbk51RWUvbllxYkVOZjM5NzlWNkZqZk9XdEdsYUN2RjVWUU95bDZtcm96ZGdFanFqOWpSTmZqdDlUQmxPNVl2Z0R2SlJtM2pJaVl3czkrOEJQdDdHM3A2M3MxVWVZZzQ0aXI4MENINlFhb1kweE5Ra3ZGWmtadEVnRGVyQmxTbk5wd0UzcHdBR2VxWkovNUlKNHJwMGtBRm9Qa2M0UUozSzRtT2VieXJab0VvK3lUU0FYbkNzY3huWXRGQXhEekFCVzF2V0x2NFBVeG5RWWExSTdhcXlkaDk2SmkvclNiMG05R3N1alJIWEJ2cGpWMkpUck8xUGJINFlzN3VMOUJNZ2hnYzZIZG9jTkJza1VBVHV4MTF2aDkxZWx5ejlUV2NNd3ZVdk5IZi9VRnFjMkkvWW5yNlFMOGkyM0pMbi9WaHByTFExcjF3QnUwdkpsR0hDek5wRlBvSFJMd0liZysyZncwaE84SHRJRUhnZmliTnR2VW55SGp3UDhmeUYrQi9pZlZkaU9aOVdBNmpyR1BnUjhiTG5qVFordSs1cWpsbzdoVlhVeDZVZFpTcDZhRzVkMGxMTVFWRWVvMVBhWGJzczlwSy9jczRZM2RBeElNa0VzZjlCZ1lQWWZrS3hMeWVWWEcva3EyL2lkL0NTUlIvUVhvS2FSTTRPZVEzSi9VdUpSbTlncXVaRjJRMGxkUHkrV1hOVEJVUDZuKzRFZ2VaS2dzMFlqVmhGQW9tb3BlR1YwYm5VNGVQSm5rZGpXNzRIWjJ1WWFocEtra2pEa010TkZtRGVEUlJvU1ZGQnpWWnpURVcwQ2hHZ3RxNnUyZHcwU1dEdEpIR2tqcHJ2dzJxUnRRTktvQzZRUVZRTjZnQTZnWVZRTjJnQXFnYlZBQjFnd3FnNWd3S3VOYnFrR3RjeDVzVlIwMFpGRXFaM3crbHJiZVJSc01ENW1lWXJpaHF4cUJ3MnZ5Q05NYzF4enlUektOQnQvTlMzbDB4MUlSQm9jM1cxVERtZGM4Z2EzWFF0YmJSZWpCdHZqRHpBZk1TemxZUlZMMUJ3YTJkSVpqemttZUl0VTV5QTBZWUVUUXNPZGU0VDJhc0VLcmVvSUJyUHVoRmp2bDgrOFp6TjlVYTNkaVZNT3lzTkNsbExHZmFkMVMxUVlnU3k0c1M4MHhna3pXSDZRbkFvRnZadkdQTkthdUZhVjlSdFFhRkIzdUM2R1ArS1EzSXhML0tkQTVnNGs0MjhXR21mRVhWR2hSSVd6K1E1cVROU1crSkVtZ2tvd2hqazY1bjJqZVVaVkN6WTF4R0J5dTJQc3lVTHdnUG1yTmh6S2hua0xHQTZVa1JTbGxyWkY3WDNNZVVieUJ0cEpHME1sVThjUEFTR1VHT2VKWXBYNEJJZUpTalp5TlRVNkl0MHowRFEvOUJMNG9zbTJsZlFObzRDSll3VlR3VVI2eVRCdG5pTHFiS1JtaExyQjJSOEQ4SWZTUHNkaFlkMWpqbVJzOGdjejlUdm9DMFNZT2dsYW5pUUNFSFYrVmZ5dlF3QU5ObEkrVEdmOGlSOEZPbWlzUGF0ZS9DUmVRQkdYa1pJODVzMlNCdEhFRm5pbTVtcmNsWU96cXYvZDZCNGlkTWx3MjZ6a0d6T2lVTkdweSs2WmlyZlVVYTVKcFBNK1VMU0tQWFV2VDlwSjNwYzlDKzJOTVk2Uk50a1lSWWlGRDdMaktma2djNFlpamN2elRJMmNwR0tCVTNwTUMwdFplcGFTRTh1RFFJYzJoS01xWU54bHFaTGh1a2tiUjZtdlZUNUVIRWlYMmFQQ0Z2R3RTRStBN3ZuRWpJTkJoTWRJYTRERitBQzc5TlpGREFqZC9HMUxTQjR4K2pNaWlhbVBJRnBKVTB2OU1IOGlhdlFRaTM5VzFmSy8rUHVmTXgzb2VFVTlaOHBySkFWOHRvZ3NPNGdOek9WQTR3TmZFNjY3VDVPRk8rZ0xTUzVod2Z5Q0FsR1craUN5VXRvUzlDWjNYMytIL2VXRDdyMTBNSHdZMllsSkl3MXhwcEdNei9YSTR5WU02VDBaRzJocGpLUWNEdHVwekwrUmRUWllNMGtsYldQRUlla0Jma0NYbkQyYzVCN2RQbmpqKzBnTXozTUYwV3dtbHJrWGZtcmQ4eWxRUFYxZWQ2NHFjZXlySC9CT1h6cXg4aWpUSmFTRE8wTXowMTZIRVNIRVRQQlk3Uk90TWxJNXp1akpJb05MTWRUT1Vna0xIbXlEeHA2MjlNNVFXYTE1OG9Yd1F6ZnFaS2h0UUpqYVIxMmpwVlIyemdLTHFEcVpLQnZrWE8zRU1aYXl0VE9RZ09HSmQ1QnBsVFRtMWc4aDdLaC96WE1GVXlsSVFjdGRIZmlBMU1GUTkrNmdJam1yNkxxWktCenJXRHhUL0ZWQTVvWWlyenVPWkxUT1VGOXUrVEJtMk9mNXlwa2tIYVNDTnBaYXA0K0RsWi9ZQWNvV1QvOGhwVE9mQW1zWlRIZXBtcFhLQ0RSeDZhNkk3TjNGYis3VmpTUmhwTG1xejZmYnVEUmg0eUlKdzJQc3BVRm1odXhnWk4rbnVoOVBJRmxLZFFNeXdXcEkwMGxuUzd3M2VEMHVZNkZ2Y1FVMW1JWkl3UFNvUFMxaUdtY29CajEzdDV6T2xOTGlkQmRSbEVmUXhtOGhBNVNyTjZwaWVnUHJKOEpodDRtS2tzMExDTzZKSTN6NW9Hakk4d1hSYXF5aUFDK3FDSHBRbXUrVHU2ejhPMGhIY2xUZnVzSTB4bGdhNndaZlM0NWhOTWxZMnFNNmh4d0ZRaDFMc1g3VnBienU5b1d6TkNZd09PTVRXQllOcTRWeDZUdG81VFUyUzZiRlNkUVFRbEU3OENFZlNxSjlqY08vNFBhdE5qWFFvYjk2ck1DSGljT2VnWlo0MDBwYTJGdk1zWFZLVkJCTlh0bWt2WE81NXc4elRTTjVSVWZCYWJkb0x5QkZQeGJwaHl5T09zNHpSZGtRZjdpS28xaU5DSUpnVmorUDYwakp4WGVEa0M4L2FPOHhqVmRnY3orUjlrTHhkVmJkQTRJdDVWdHJ3NlBqK2hyem9jenNSdjVtd1ZRVTBZTkk3Z2dOa2x6WEd0TjRNcEkxbnBCeGNJTldVUWpXZ3ljbHp6TEZNVlIwMFoxUDVNNG1KdVhpTk1WUncxWlJDOWJnVnpua1NIblBPV1lLVlFXd1pkQU5RTktvQzZRUVZRTjZnQTZnWVZRRmtHdGF4YTFrd0hLN1lvN1ozT0dnQnBJNDJrbGFucEFRNi9KazFLbURYL092ZzdRWnE0aFV4Nm43d2dORnZjNjBXUi9ueFo3NWRYR1VnTGFTSnRwSkhwNllOZW5rVVl5cGZ3VlZ1OHJQYVYvMS9VaFFacGtGcmtpUmNIU25yaitYeHdaLzJjL0FmU3pyMFhUSittOFBNeEdiOHdlN1VSenZjVkdOTEEvNlkrVjFMblBBa3VVcElpNzFPbUNuMnhoYzZHbzU5RjJQNGQ2N3RWNzczNWgxQ1J1eFJIM0tZazlWVnFVbndPKzB6c1cweXZoTk9yNGZKSk5oamM2Z2lOSGtHaDcyM1EwaFBYcFJEZnNtcDVNMzI5Z1Y0SGw2K0ZPK0phbEtQVEIxTlFmbEpOaUZ2cGQ5Q1hQQUwrYVVURlg2a3VWQ2Vrdk5NVzFuS1J0MVZCakg4ZUI1WDdOMWVvaXBJNGhaTzBtYXQ2NFVHUGltaTlIWE8wWG4wUmZTQUFGZXpGbWZ5bW10VHZ4UG9HVkRhRnM3c2RsWDhHYVE5TWZSSDc2Wi9OUTRpeW8wZ253WjJtSmRJSkdIOGN4eHpEK2hId2h5azZzVTZmcHRpRnRBUHJhWXBTcEh1MHBQaVdrb2l0d1BvUyt0cUNmRExNRnpRMC9COFJhaEdHanl6R3p3QUFBQUJKUlU1RXJrSmdnZz09IiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBpZD0iaW1nNyIvPg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDgiPg0KICAgICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjQ1NzIwMCIgaGVpZ2h0PSI0MTkxMDAiLz4NCiAgICA8L2NsaXBQYXRoPg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDkiPg0KICAgICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjQ3NjI1MCIgaGVpZ2h0PSI0OTUzMDAiLz4NCiAgICA8L2NsaXBQYXRoPg0KICAgIDxpbWFnZSB3aWR0aD0iNTEiIGhlaWdodD0iNTMiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvanBlZztiYXNlNjQsLzlqLzRBQVFTa1pKUmdBQkFRRUFZQUJnQUFELzJ3QkRBQU1DQWdNQ0FnTURBd01FQXdNRUJRZ0ZCUVFFQlFvSEJ3WUlEQW9NREFzS0N3c05EaElRRFE0UkRnc0xFQllRRVJNVUZSVVZEQThYR0JZVUdCSVVGUlQvMndCREFRTUVCQVVFQlFrRkJRa1VEUXNORkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCVC93QUFSQ0FBMUFETURBU0lBQWhFQkF4RUIvOFFBSHdBQUFRVUJBUUVCQVFFQUFBQUFBQUFBQUFFQ0F3UUZCZ2NJQ1FvTC84UUF0UkFBQWdFREF3SUVBd1VGQkFRQUFBRjlBUUlEQUFRUkJSSWhNVUVHRTFGaEJ5SnhGREtCa2FFSUkwS3h3UlZTMGZBa00ySnlnZ2tLRmhjWUdSb2xKaWNvS1NvME5UWTNPRGs2UTBSRlJrZElTVXBUVkZWV1YxaFpXbU5rWldabmFHbHFjM1IxZG5kNGVYcURoSVdHaDRpSmlwS1RsSldXbDVpWm1xS2pwS1dtcDZpcHFyS3p0TFcydDdpNXVzTER4TVhHeDhqSnl0TFQxTlhXMTlqWjJ1SGk0K1RsNXVmbzZlcng4dlAwOWZiMytQbjYvOFFBSHdFQUF3RUJBUUVCQVFFQkFRQUFBQUFBQUFFQ0F3UUZCZ2NJQ1FvTC84UUF0UkVBQWdFQ0JBUURCQWNGQkFRQUFRSjNBQUVDQXhFRUJTRXhCaEpCVVFkaGNSTWlNb0VJRkVLUm9iSEJDU016VXZBVlluTFJDaFlrTk9FbDhSY1lHUm9tSnlncEtqVTJOemc1T2tORVJVWkhTRWxLVTFSVlZsZFlXVnBqWkdWbVoyaHBhbk4wZFhaM2VIbDZnb09FaFlhSGlJbUtrcE9VbFphWG1KbWFvcU9rcGFhbnFLbXFzck8wdGJhM3VMbTZ3c1BFeGNiSHlNbkswdFBVMWRiWDJObmE0dVBrNWVibjZPbnE4dlAwOWZiMytQbjYvOW9BREFNQkFBSVJBeEVBUHdEOVVQSlQrNHY1VWVTbjl4ZnlwOWZQL3dDMEYrMlQ0UitCdDFQb3FSemVJUEZpS3Avc3UyeWlRbGdDcGxrSXd1UVFjS0dia2NET2E2c1BocTJMcUtsUWp6UCt2dU9YRVlxamhLZnRhOHVWZjE5NTd0ZTNGbnB0cE5kWGNrRnJhd3FYa21tWUlpS09wTEhnRDYxODIrTmYyOC9oNzRYOFRRYVpwMXJkZUk3UlpOdDNxTmtGV0tNZXNlN0htblAwR09oTmVWNlg4TFBqWisxOWVRNnA0KzFHVHdWNEtaaEpEcGl4bU11dlVGTGNuSlAvQUUwbE9lY2dFY1Y5RjZWOEYvaEw4RS9CTnpwdHpwR25teXVvL0x1cHRVUmJpNHZjYzRKSXllZWRxZ0FIa0FWOUhTd2VYNE9TaGltNjFSNmNzTmw2eTZ2eVhYYytYeEdZWTdFVTVWNkxWQ2pIVnpxZGZrOUV2Ti9JN3I0Zi9FandyOFV0R1hVL0RHcVd1cVczSG1MSHhKQ1QvREloK1pEOVJYVWVTbjl4ZnlyNFo4Si9CbXh0ZmlkYytJdmhaWmE3WXh3Z21LMysyYlk0enlTcFlrZktlTUk3c0QzejBIV2VGZjI5SXZEdmpLZndyOFV2REdvZUVyaU53aVg4a1JKeDBEU3hBWkFQVU1tNEhQcHpSamNobENUZURmTnBkeGR1ZGVxVDErWDNIbDVKeGxoODBsS0ZTRFVVN0tyWit5ayt2TEoyZjRXOHo2NjhsUDdpL2xSVVduMzl2cXRoYlh0bk1semFYTWF6UXpSbkt5SXdCVmdlNElJTkZmSnROT3pQMFZOTlhSWXI0MTBYUzdMVlArQ2hldmZiTFNDNzhpQVRSZWZHSDh1UVdjT0hYSTRZZGlPYSt5cStQdkMzL0tRenhMLzE1bi8wamhyNm5JZElZei9yekw4NG55dWZmSGd2K3YwZnlaUDhYUGpkcmxuOFFOVnNJOVN1ZE1oMCs0YUNLQ0NVeGpDOUdPUHZidXZQWTFrK0I5ZThPZU12RXphajQ2MWJVcm5lMzdzWTNSRWVqT0R1QzU3S28rdGZUUGpENEsrQ2ZIMnJSYW5ydWdRWDEvR0FQUDN2R3pBZEEreGh2QS8yczFkMTc0Y2VGZFcwWDdIZWFUWndXc0VXeU9TS05ZbWdVRGphd3h0QUErbkZkOUxQTUhDaENqR2s0dTFtNDJUWG8rdC9rZmwrTTRCemF0amEyT25pbzFWek9jWVZPZHdlOWxKWFNWbG9yWFZ1bGpaOFB3YVhiNlBiTG95VzZhYVZ6RDlseDVaSHFNZGErYy8rQ2dXbFdVL3dkMCsva3RJSkw2RFZvWTRybG8xTWthdEhMdVZXeGtBNEdRT3VCWEdhTjhZTC93Q0gxN2VXT2g2b1pOTmp1V0tKTWl1c2dCSUI5c2pHZHBGZEYrMlI0a1h4ZCt6SG9Xc3JINUl2TlN0cERIL2RQbHpBZ2UyUWEzd2VWVnN2emJEVlpTNW95bXJQcjgvTTlQQThYNFRpTEtNVGhJVW5TcTBvYXgwNWRIYjNHdDB0TjB0K3U1OUEvQ1AvQUpKVDRMLzdBdGwvNklTaWo0Ui84a3A4Ri84QVlGc3YvUkNVVjhUaXY5NHFlci9NL1hzSi91OVAvQ3Z5T3RyNHQrTTJsK09mZ2Y4QXRFNm44WExEdzZ1dmVIcmxGUjJpWm1FY2ZrUnh1Sk5vekdjb1NHSUs4ajZWOXBVaktIVXF3eXA0SU5kdVc1Zzh2cXlrNEtjWnB4a24xVHRmVmJQVGM0c3p5OVpqU2pGVGNKUWFsRnJvMXRvOTk5anhUUWYycnZESGlUd2JGck5yWTZoRmV5ZkwvWnR4RVVZTmpyNW4zU24rME1uMjdWaHllSHZIdnh6bFdUVTV6NGY4TnNjckNGS2gxN0VKbkxuM2JBOVBTdHo0MC9zMDJmeEcwdVJ2RDJxU2VGTlY1YmRiTGlDYytqcU1GZnFwSFhrTlhoTGZGcjlvTDRML0FQRkhhdG9aOFRYMXorNDByVTNnZTZMSC9aa1QvVzhaT0grWWRUeHhYMXVEb1lXdlRkVEtPVlZyN1ZIckZmM2I2TzNmZXgrVTVoaE0yeEdJY09KcWplRlcwYUthalA4QTYrUDR0ZjVWWlgyUFRmSHY3UFB3bDhBMk1PdWVKdGUxRFNMT0VmdkVlOFVDN1lja0JBaGNzZlNQSDlhOForS1h4VjFiOXFDMXN2aDM4TlBCcy84QXdqMm56UnlMY1NEYXdDS3lJV09ka1NZWS9lSko0NkhpdTM4RmZzZ2VLUGlacktlS1BqTHIxMWRYRW56RFNZWmcwZ1hyc2R4OHNhLzdFWTc5UWErclBDdmhIUmZCR2p4YVhvT21XMmxhZkY5MkMyUUtNK3A3c1QzSnlUVVR6TERaWktNM1VlSnJ4MmQzN09MOHVzbjU3SDBHRXlPV0tqS0ZDaEhDMEpXVFNTOXBKTG8vNVYrUHFSZUE5RnVQRGZnZnc3cEYyVU4xWWFkYjJzeGpPVjNwRXF0Zzl4a0dpdDJpdmdaemRTVG5MZDZuNlZUZ3FjRkNPeTBDaWlpb0xDaWlpZ0Fvb29vQUtLS0tBUC9aIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBpZD0iaW1nMTAiLz4NCiAgICA8Y2xpcFBhdGggaWQ9ImNsaXAxMSI+DQogICAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDc2MjUwIiBoZWlnaHQ9IjQ5NDkyNiIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGNsaXBQYXRoIGlkPSJjbGlwMTIiPg0KICAgICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjExMDQ5MDAiIGhlaWdodD0iNDk1MzAwIi8+DQogICAgPC9jbGlwUGF0aD4NCiAgICA8aW1hZ2Ugd2lkdGg9IjEzNSIgaGVpZ2h0PSI2MSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvMndCREFBTUNBZ01DQWdNREF3TUVBd01FQlFnRkJRUUVCUW9IQndZSURBb01EQXNLQ3dzTkRoSVFEUTRSRGdzTEVCWVFFUk1VRlJVVkRBOFhHQllVR0JJVUZSVC8yd0JEQVFNRUJBVUVCUWtGQlFrVURRc05GQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJUL3dBQVJDQUE5QUljREFTSUFBaEVCQXhFQi84UUFId0FBQVFVQkFRRUJBUUVBQUFBQUFBQUFBQUVDQXdRRkJnY0lDUW9MLzhRQXRSQUFBZ0VEQXdJRUF3VUZCQVFBQUFGOUFRSURBQVFSQlJJaE1VRUdFMUZoQnlKeEZES0JrYUVJSTBLeHdSVlMwZkFrTTJKeWdna0tGaGNZR1JvbEppY29LU28wTlRZM09EazZRMFJGUmtkSVNVcFRWRlZXVjFoWldtTmtaV1puYUdscWMzUjFkbmQ0ZVhxRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVIaTQrVGw1dWZvNmVyeDh2UDA5ZmIzK1BuNi84UUFId0VBQXdFQkFRRUJBUUVCQVFBQUFBQUFBQUVDQXdRRkJnY0lDUW9MLzhRQXRSRUFBZ0VDQkFRREJBY0ZCQVFBQVFKM0FBRUNBeEVFQlNFeEJoSkJVUWRoY1JNaU1vRUlGRUtSb2JIQkNTTXpVdkFWWW5MUkNoWWtOT0VsOFJjWUdSb21KeWdwS2pVMk56ZzVPa05FUlVaSFNFbEtVMVJWVmxkWVdWcGpaR1ZtWjJocGFuTjBkWFozZUhsNmdvT0VoWWFIaUltS2twT1VsWmFYbUptYW9xT2twYWFucUttcXNyTzB0YmEzdUxtNndzUEV4Y2JIeU1uSzB0UFUxZGJYMk5uYTR1UGs1ZWJuNk9ucTh2UDA5ZmIzK1BuNi85b0FEQU1CQUFJUkF4RUFQd0Q5VTZLS0tBQ2lpaWdBb29vb0FLS0tLQUNpaWlnQW9vb29BS0tLS0FDaWlpZ0Fvb29vQUtLS0tBQ2lpaWdBb29vb0F3ZFc4VHhKZDZsbytteTI5ejRrdHJGYjVOUGtjQmpHN09pUGpQS2xvM0gxSGJOZk1Yajc0MWF0b09vUGJlSWRhdnRNdWY4QW4xU09TTDhNS0IrdGVGZjhGSS9FZXErRS93QnBEd3pxZWk2bGQ2VHFNSGh1QXhYZGxNMFVxZjZWZGRHVWcxNTc0ZS80S0JmRi9SN0ZiUFVOUjB2eFBicU1CZGEwNUpEajNNZXd0OVNTYStQei9JS3VkOHFoaXAwa3VrZG42N2ZyNkdWUlZISDkyMG41cS82bytnZitGL2FmNW1mN1oxTFA5L01uK05kMzhQdmpOclBpQy9TMzhPNnhmYXJPRHpiU1J5Uy9nUTQ0SDByelA0SmZ0WWF2OFNMSFZMclV2QkhnbTNudFpVUkh0TktkYzVCSkozU0huaXZTcjM0NytMTGkxK3oyazlycE1IVFpZV3lwajZFNUkvQ3ZqOE53RFhvVFZTR09uRnIrVzkvek9TbkRGUmwrOG5GcnlUL3pQcWJTOVZNeTJscmUrVkJxOGxzSjVyV050MnpvR1AwM0hINTljVnBWODVmczEzMXpxWGpiV3JtN3VKYnE0a3NzdkxNNWRtL2VMMUpyNk5yOWVqRndpb3QzdDFmVTlBS0tLS29Bb29vb0FLS0tLQUNpaWlnQW9vb29BS0tLS0FQeSsvNEtoLzhBSmUvRC93RDJMVUgvQUtWWFZmSHRmZmYvQUFVTzhEMmZpcjR1Nk5OTEpKQmNSNkZDZ2tUa0ZmdEZ3Y0VINm12bTNTZmhwcEdtMjg4Y3l0ZXZNdXhubDQyai9aQTZIMzYxOUZoY2l4ZUtqR3BHeWpKWHZmOEFwbncyWWNZWmJsOVNkR3B6T3BCMmFTL0crMzRuVWZzby93RElGOFFmOWZFWC9vSnIzZXZJL2czb01YZ3V5MWFLMWxlWkxpVkhIbTR5dUFSampyWG9VT3B5eFpEZnZBVG5tci9zREdLTGJTdXVsOXpKOGFaVnp4VVhKeGU3dHQrdjNYUG9IOWw3L2tiTlcvNjhmL2FpMTlLVjh1L3NvWGozWGpMV1F3Q3FMRGdEL3JvdGZVVmVMaXNOVXd0VDJWVGMrc3kvSDBjeW9MRVlmNFcydGROZ29vb3JrUFNDaWlpZ0Fvb29vQUtLS0tBQ2lpaWdBb29vb0ErSC93QnVhMW1UNG9hTmN0RXd0NU5IU05KU1BsWmxtbUxBSDFBWmYrK2hYempYNnFlTFBCbWgrT3RMYlR0ZTB5MzFPekp5STUxNVUvM2xZY3FmY0VHdkRkZi9BR0gvQUFicUVyeWFYcWVxYVNXUEVSZEo0MStnWUJ2elkxK2c1WG4yR29ZZUZDdW1uSHJ1djh6OFU0aDROeCtMeHRUR1lScVNtNzJiczE5K240bnlSNE0vMUZ6L0FMeS95TmRIWDBOby93Q3hQYTZSNW9IaTJhVkhJT0RZQUVZOS9NcnJkRi9aUThMV01peVg5N3FHcGtkWXk2eFJuNmhSdS9KcTc2dWZZRk51TW0vay93QmJIaFVPRGM0bGFNNmFqNnlYNk5uRGZzaTI4cmVLdGNuRWJHRmJJSTBtUGxER1FFRFByZ0g4cStwcXpkQThPYVo0VzA1TEhTYkdHd3RGNTh1RmNaUHFUMUo5enpXbFh3R1lZcFl6RVNySldUUDJ2Sk10bGxPQmhoWlM1bXJ0djFkd29vb3J6ajNRb29vb0FLS0tLQVAvMlE9PSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgaWQ9ImltZzEzIi8+DQogICAgPGNsaXBQYXRoIGlkPSJjbGlwMTQiPg0KICAgICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwOTYxNTYiIGhlaWdodD0iNDk1MzAwIi8+DQogICAgPC9jbGlwUGF0aD4NCiAgICA8Y2xpcFBhdGggaWQ9ImNsaXAxNSI+DQogICAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNzMzNDI1IiBoZWlnaHQ9IjQwOTU3NSIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGltYWdlIHdpZHRoPSIxNTAiIGhlaWdodD0iODQiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvanBlZztiYXNlNjQsLzlqLzRBQVFTa1pKUmdBQkFRRUFZQUJnQUFELzJ3QkRBQU1DQWdNQ0FnTURBd01FQXdNRUJRZ0ZCUVFFQlFvSEJ3WUlEQW9NREFzS0N3c05EaElRRFE0UkRnc0xFQllRRVJNVUZSVVZEQThYR0JZVUdCSVVGUlQvMndCREFRTUVCQVVFQlFrRkJRa1VEUXNORkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCVC93QUFSQ0FCVUFKWURBU0lBQWhFQkF4RUIvOFFBSHdBQUFRVUJBUUVCQVFFQUFBQUFBQUFBQUFFQ0F3UUZCZ2NJQ1FvTC84UUF0UkFBQWdFREF3SUVBd1VGQkFRQUFBRjlBUUlEQUFRUkJSSWhNVUVHRTFGaEJ5SnhGREtCa2FFSUkwS3h3UlZTMGZBa00ySnlnZ2tLRmhjWUdSb2xKaWNvS1NvME5UWTNPRGs2UTBSRlJrZElTVXBUVkZWV1YxaFpXbU5rWldabmFHbHFjM1IxZG5kNGVYcURoSVdHaDRpSmlwS1RsSldXbDVpWm1xS2pwS1dtcDZpcHFyS3p0TFcydDdpNXVzTER4TVhHeDhqSnl0TFQxTlhXMTlqWjJ1SGk0K1RsNXVmbzZlcng4dlAwOWZiMytQbjYvOFFBSHdFQUF3RUJBUUVCQVFFQkFRQUFBQUFBQUFFQ0F3UUZCZ2NJQ1FvTC84UUF0UkVBQWdFQ0JBUURCQWNGQkFRQUFRSjNBQUVDQXhFRUJTRXhCaEpCVVFkaGNSTWlNb0VJRkVLUm9iSEJDU016VXZBVlluTFJDaFlrTk9FbDhSY1lHUm9tSnlncEtqVTJOemc1T2tORVJVWkhTRWxLVTFSVlZsZFlXVnBqWkdWbVoyaHBhbk4wZFhaM2VIbDZnb09FaFlhSGlJbUtrcE9VbFphWG1KbWFvcU9rcGFhbnFLbXFzck8wdGJhM3VMbTZ3c1BFeGNiSHlNbkswdFBVMWRiWDJObmE0dVBrNWVibjZPbnE4dlAwOWZiMytQbjYvOW9BREFNQkFBSVJBeEVBUHdEOVU2S0tLQU1ueFI0a3RmQ3VqeTM5MGNxdnlwR3A1a2M5RkgrZWdOZVRXOTU0MytKVXp6MmM3MkZodUlVeHltR0llMlI4ei9yK0ZYUGoxZFN0ZWFSYWcvdWdqeWJmVmlRUDZmcWE5WjB2VDRkSjA2MnNyZFFzTUVZalVBZWc2L1d2eWJGVThSeFZubUp5MmRhVlBEWVpSNWxCMmM1VFY5WDJWbnA1ZWVuMWRLVlBLOEZUeEtncFZLbDdONnFLV20zYzhsLzRWZjQyL3dDaGdqLzhEWi8vQUltai9oVi9qZjhBNkdDUC93QURaLzhBNG12WktLOUQvVURLZjU2di9neVJ6LzI5aSswZi9BVWVOLzhBQ3IvRy93RDBNRWYvQUlHei93RHhOSC9Dci9HLy9Rd1Ivd0RnYlA4QS9FMTdKUlIvcUJsUDg5WC9BTUdTRCszc1gyai9BT0FvOGIvNFZmNDMvd0NoZ2ovOERaLy9BSW1qL2hWL2pmOEE2R0NQL3dBRFovOEE0bXZaS0tQOVFNcC9ucS8rREpCL2IyTDdSLzhBQVVlTi93RENyL0czL1F3Ui93RGdiUDhBL0UwZjhLdjhiLzhBUXdSLytCcy8vd0FUWHNsRkgrb0dVL3oxZi9Ca2cvdDdGOW8vK0FvOGIvNFZmNDMvQU9oZ2ovOEFBMmYvQU9Kby93Q0ZYK052K2hnai93REEyZjhBK0pyMlNpai9BRkF5bitlci93Q0RKQi9iMkw3Ui93REFVZU5mOEt4OGJ4L011dkp1SFRiZlRBLytnMG1rK1BmRVBnWFYwMDd4T2t0eGF0L3kwaytaMUg5NVdIM3g2ZzgvVHBYczFjVDhYOUxndnZCVjFQSW1aclJsa2lmdUNXQ2tmUWcveTlLOG5NK0ZYa2VFcVpua3VKcVFxMGs1V2xKeWpKUlYycEorUzAvcHJyd3VhZlhxc2NOaktjWEdidGRLelRlelRPeWduanVvWTVvbkVrVWloMGRUa01DTWdpcEs0MzRSM2ozbmdXeERrczBMUEZrK2dZNC9JRUQ4SzdLdjB2Szhhc3l3TkRHcFc5cEdNcmRycTl2a2ZONHFqOVdyem8veXRyN2dvb29yMURsQ2lpaWdEeGo0N2Y4QUlhMGovcmszL29RcjJldkd2anYvQU1oYlJ2OEFybS8vQUtFSzlscjh5NGQwNGp6cjFvLytrU1BwTXcvNUYyRDlKL21nb29vcjlOUG13b29vb0FLS0tLQUNpaWlnRGtmR1B4SzB6d2ZjSmJTcEpkWGpMdU1NT1BsSFlzVDB6NlZONE4rSVdtK016TEZickpiM1VhN21nbXhrcjAzQWpxT1JYaWZ4TWRwUEhXcmxqaytZQitBUlFLdi9BQWRZcjQ3dEFEZ05ISUQ3L0lUWDg3ME9QY3pxY1UvMmUxSDJEcSt6NWJhMjV1Vzk5NzllM1N4K2d6eUxEUnl6NndyOC9MelgrVjdXUG9XdVUrS1gvSWhhdC91Si93Q2pGcnE2NVQ0cGY4aUZxMys0bi9veGEvYWVJUDhBa1Q0ei9yMVUvd0RTV2ZHNWYvdmxIL0ZIODBaL3dYLzVFaVAvQUs3eWZ6RmQzWENmQmY4QTVFaVAvcnZKL01WM2RjZkNmL0lod1gvWHVQNUcyYS83OVcveE1LS0tLK3JQS0NpaWlnRHhyNDcvQVBJVzBiL3JtLzhBNkVLOWxyeHI0Ny84aGJSdit1Yi9BUG9RcjJXdnpQaDMva3BNNjlhUC9wRWo2VE1QK1JkZy9TZjVvS0tLSy9URDVzSzVmeDE0OHR2Qk5uQzd3dGRYVTVJaWhWdHZBeGtrNE9CeU8xZFJYaW54NVA4QXhPdE1IYjdPMy9vUnI0ampQTnNUa3VTMXNaaEhhb3VWSjcydTByMmVtM2M5cko4TFR4bU5oUnEvRHJmNUkzdkN2eG9pMXJWNExDK3NSWi9hR0NSelJ5Ymh1UFFFRWR6eG12VGErVU5IL3dDUXRZLzlkMC85Q0ZmVnNraXd4czdzRVJSdVptT0FBT3BOZkwrSFhFV1B6M0M0aiswWjgwcWJWcFdTMGFlanNrdExmaWVueERsOURBMWFmMWRXVWs5UFFkUlhuZHo4Y05DaHZqQ2tOM1BDcmJUY0lpN1Q3Z0U1eFhlYWZxRnZxbGxEZDJzb210NWwzbzY5eFg2SGwrZVpibXRTZExBMTQxSlEzU2Y0K2E4MW9mUDRqQTRuQ3hVcTBIRlBhNTg1ZkVyL0FKSHJWLzhBcnFQL0FFRVZmK0QzL0krV1gvWE9YLzBBMVErSlgvSTlhdjhBOWRSLzZDS3YvQjcvQUpIeXkvNjV5LzhBb0JyK1NNSC9BTWxuSC9zSi93RGNoK3NWZitSTS93RHIzLzdhZlExY3A4VXYrUkMxYi9jVC93QkdMWFYxeW54Uy93Q1JDMWIvQUhFLzlHTFg5YWNRZjhpZkdmOEFYcXAvNlN6OHB5Ly9BSHlqL2lqK2FNLzRMLzhBSWtSLzlkNVA1aXU3cmhQZ3YveUpFZjhBMTNrL21LN3V1UGhQL2tRNEwvcjNIOGpiTmY4QWZxMytKaFJSUlgxWjVRVVVVVUFlTWZIYi9rTmFSLzF5Yi8wSVY3UFhqZng2aGROUTBlNHg4aGpkUWZjRUgrdGV2V2QzRmYyY0Z6QzIrR1pGa1JoM0JHUlg1anc2K1hpWE9ZUzBiZEYvTGxldjRvK2x6RFhMY0cxdDcvNW9tb29yNSs4VmZGVFc3L1dMZ1dWNDlqWnh5TXNVY09BU0FjWlk5U1QrVmU5eEp4UmcrR0tNS3VLVGs1dXlVYlgwM2VyU3N0UHZPSExzc3JabE9VYVRTdHUyZlFOZUovSG4va09hWi8xN24vMEkxMXZ3bThiWGZpcXh1N2JVR0VsM2FsU0pnQU42dG5HUU80SS9VVnlmeDYvNURXbWY5ZTdmK2hWOFJ4bG1tSHpyZzZXUHd0K1NianZ1clRTYWZtbWoyc253dFRCNXVxRlhkWC9JODYwai9rTFdYL1hkUC9RaFgwZDhRNUdqOEU2eVZKVS9aeU9QUThIOURYempwSC9JV3N2K3U2ZitoQ3ZvejRqbkhnZldQK3VQOVJYeFBoNjJza3pkcitUL0FOc21lM3hCL3Z1RTlmMWlmTkZmUUh3WGtadkE4UUp5Rm5rQyt3em4rWk5mUDllLy9CWC9BSkVsUCt2aVQrbGVMNFdmOGo2WC9YdVg1eE96aWY4QTNGZjRsK3A1TjhTditSNjFmL3JxUC9RUlYvNFBmOGo1WmY4QVhPWC9BTkFOVVBpVi93QWoxcS8vQUYxSC9vSXEvd0RCNy9rZkxML3JuTC82QWE4UEIvOEFKWngvN0NmL0FISWR0WC9rVFA4QTY5LysybjBOWEsvRkhud0hxMys0bi9vYTExVmNkOFdyNkt5OEMzeXVRSHVDa1VhK3JiZ2Y1QW44Sy9yTGlLY2FlVFl5VTNaZXpuLzZTejhxeTVPV01vcGZ6Ui9NcS9CZi9rU0kvd0RydkovTVYzZGNSOEhiZDRmQXRxempBa2xrZGZwdXgvU3Uzcm00Vmk0NURnazEvd0F1NGZralROR25qcTF2NW4rWVVVVVY5VWVXRkZGRkFHRDQwOEp3ZU1ORmtzcEc4cVZUNWtNMk03SEg5RDBOZVUyUGlieFY4TGxPbjN0bjU5aXJIeS9PQktEbitCeDJQb2ZYb0s5MHBLK0p6bmhsWmppbzVoZ3E4c1BpRXJjOGRicnRLT2lmMyt0N0szdFlQTXZxOUo0ZXRUVlNtOWJQby9KOURuL0EzaWgvR0doTHFEMnd0Vzh4bzlpdHVCeGprSEE5YSthYmc3cmlVLzdSL25YMXNBRkdBTUN2a3kramFHK3VJMkJWa2taU0QySUpyOGk4VXFOZWpnOHVwNGlwN1NjZWRPVnJYZG9hMldpdjJQcmVHSnduV3hFcWNlVk8xbGU5dCtwNmY4QS8rUDhBMWovcmxIL05xaCtQWC9JYTB6L3IzYi8wS3JId0RqYjdYck1tUGtDUkxuM0piL0NvZmoxR3cxYlNuSU94b0dBYnNTRzUvbVB6ckdhZi9FTm82ZmEvOXlzcE5mNnh2MC85dFBPTkgvNUMxbC8xM1QvMElWOUdmRWZud1BySC9YSCtvcjUxME9OcHRhMDlFRzUydUkxQUhjbGhYMFo4UTQyazhFNnlGQlkvWjJiajBISi9RVkhoN0Z2STgyc3Q0LzhBdGt5cy9hK3U0VDEvVkh6Tlh2OEE4RmYrUkpUL0FLK0pQNlY0QlgwRDhHSTJUd1BFV0JBZWVSbDl4bkg4d2E4VHdzVC9BTGVsL3dCZTVmbkU3ZUovOXhYK0pmcWVTZkVyL2tldFgvNjZqLzBFVmUrRC93RHlQbGovQUxrdi9vQnFuOFRvMmk4ZGFzR0dDWkZZZlFvcEZYL2czRTBuanEyWlJrUnhTTTNzTnBIOHlLOFRDUmwvcnBGVzErcy8rNURzcXRmMk0zLzA3LzhBYlQwbjRpZkVhZndWZVd0dkRZeDNKbmpMNzVISUE1eGpBSDlhNGVMU2ZFL3hZMVNDZlVVYXowMk04UHNLUm92ZllEeXhQcno5YTl5S2c0SkdTT2xMWDlKWm53dFh6ckZ5bGo4WktXR2JUVkpKUldsdEpTVHZKWDEyOUdmbldHelNHRHBKVUtLVlQrZHUvd0J5NkZmVDdHSFRMR0MwdDA4dUNGQkdpK2dBeFZpaWl2dllRalRpb1FWa3RFandaU2NtMjl3b29vcXhCUlJSUUFVVVVVQUZjRjR3K0dPamF6ZmZiMkU5dGNUT0JKOW5jQlhKL2lJSVBQMG9vcjRyaS9EMGNSbFV2YlFVck5OWFNkdGVsejJzb3FUcDRwY2ttcjMyT284TitHYkR3cnA0czdDTXBIbmN6c2N1N2VwTk04VGVGZFA4V2FmOWx2NDJLcWR5U1JuRG9mVUgvSGlpaXZUbmhNUC9BR084UDdPUHMvWi9EWlcydnR0dWNzYXRUNjU3VG1mTnpiMzEzN25PZUMvaHJvK2lYWDlvSUpybTVqWWlNM0RBaFBjQUFjL1d1NWRGa1JrZFE2TU1GV0dRUjZVVVY1dkNPR29ZZktZS2pCUlRiYnNrcnU5dGJiNkhUbTFTYzhYSnprM2F4NXZlZkIzUUpOYlFLMTNGREo4NWhTVWJSN0RLazQvR3ZRN0d4ZzAyemh0YldKWWJlRlFpUnIwQUZGRmVmd3Jnc0xoc1RqWlVLVVl2bnRva3ROZE5GdDVIVG1sYXJVcDBWT1RlblZtRDRyK0gra2VMMlNXOWpranVVRzBUMjdCWDIraHlDQ1BxS2w4SytCOUw4SHh5Q3hqZHBwQmg1NW0zT3c5TTRBQStnb29yc2hnTUl1SXBWMVJqejhsK2JsVjc3WHZhOTdhWDdHTHIxZjdQVU9kMnZhMTNZNkNpaWl2dUR3d29vb29BS0tLS0FQL1oiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIGlkPSJpbWcxNiIvPg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDE3Ij4NCiAgICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI3MzEzODQiIGhlaWdodD0iNDA5NTc1Ii8+DQogICAgPC9jbGlwUGF0aD4NCiAgICA8Y2xpcFBhdGggaWQ9ImNsaXAxOCI+DQogICAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNDI4NjI1IiBoZWlnaHQ9IjQyODYyNSIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGltYWdlIHdpZHRoPSI1NiIgaGVpZ2h0PSI1NiIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9qcGVnO2Jhc2U2NCwvOWovNEFBUVNrWkpSZ0FCQVFFQVlBQmdBQUQvMndCREFBTUNBZ01DQWdNREF3TUVBd01FQlFnRkJRUUVCUW9IQndZSURBb01EQXNLQ3dzTkRoSVFEUTRSRGdzTEVCWVFFUk1VRlJVVkRBOFhHQllVR0JJVUZSVC8yd0JEQVFNRUJBVUVCUWtGQlFrVURRc05GQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJUL3dBQVJDQUE0QURnREFTSUFBaEVCQXhFQi84UUFId0FBQVFVQkFRRUJBUUVBQUFBQUFBQUFBQUVDQXdRRkJnY0lDUW9MLzhRQXRSQUFBZ0VEQXdJRUF3VUZCQVFBQUFGOUFRSURBQVFSQlJJaE1VRUdFMUZoQnlKeEZES0JrYUVJSTBLeHdSVlMwZkFrTTJKeWdna0tGaGNZR1JvbEppY29LU28wTlRZM09EazZRMFJGUmtkSVNVcFRWRlZXVjFoWldtTmtaV1puYUdscWMzUjFkbmQ0ZVhxRGhJV0doNGlKaXBLVGxKV1dsNWlabXFLanBLV21wNmlwcXJLenRMVzJ0N2k1dXNMRHhNWEd4OGpKeXRMVDFOWFcxOWpaMnVIaTQrVGw1dWZvNmVyeDh2UDA5ZmIzK1BuNi84UUFId0VBQXdFQkFRRUJBUUVCQVFBQUFBQUFBQUVDQXdRRkJnY0lDUW9MLzhRQXRSRUFBZ0VDQkFRREJBY0ZCQVFBQVFKM0FBRUNBeEVFQlNFeEJoSkJVUWRoY1JNaU1vRUlGRUtSb2JIQkNTTXpVdkFWWW5MUkNoWWtOT0VsOFJjWUdSb21KeWdwS2pVMk56ZzVPa05FUlVaSFNFbEtVMVJWVmxkWVdWcGpaR1ZtWjJocGFuTjBkWFozZUhsNmdvT0VoWWFIaUltS2twT1VsWmFYbUptYW9xT2twYWFucUttcXNyTzB0YmEzdUxtNndzUEV4Y2JIeU1uSzB0UFUxZGJYMk5uYTR1UGs1ZWJuNk9ucTh2UDA5ZmIzK1BuNi85b0FEQU1CQUFJUkF4RUFQd0Q5VTY4NStMbng1OEsvQm5UeE5ybDBaTDZWYzIrbTJ1SHVKdmNEb3EvN1RFRDZuaXVnOGY4QWpTMzhFNkdicVFxMTFLZkx0WVdQK3NreG44Z01rK3dyOHZmaVZjYXByWHhGMTY3MWk1bHZiMTd1UW1XVTVPelB5QURzQXVNQWNBVjlsdzdrVWMycXVWZVZxY2Z2ZnA1ZDMvUytNNGt6NldVVWxHaEc4NWQ5bC93ZXlQclh4NSswbDR1OFhmQytQeFI0Q2VIU2pHUzExQTBLM0UwYWpoeGxodHl2Qis3eXB6WHpwL3cxSDhXMW04My9BSVRHNTM1emcyMEJYOHZMeCtsYlA3T3VwNnBwdmladE90N2FTOTB1OEFGMGdIeXc5aEtjOEQwUHFQVWdWN0ZxSDdOZmhUdzdlWEdzM0svYWJDUnZORVVrbTIzdDg4NDdaWFBUSnhqakZmY1JwNVprOVdlRnhGR01yNnhmS20ybjBkKzNTNThKS3BtbWRVb1l2RDE1UmEwa3VacEpycXJkSDF0c2NSOFAvd0J1THgvWVhzVnRyZWwyM2lxQW41L3M4UGtYT1BVRkJ0L0RaK0lyN0wrRy93QVRkTStKbWlyZjJNRjVZU2dmdmJMVWJkb1o0ejdnakJIKzBwSTk2K1RkVytMbmc3d2JFMXBwTnI5cTI4ZVhwOEN4eEEvNzNBUDFBTmNUSisxWnEyajM2WGVsYUpEYXlSSEt0TGNNK2ZZZ0tPRDZWNXVPeUZabXVmQjRYMlQ3M3NuL0FOdS81SHFZSFBubFQ1TVppdmFydGE3WC9iMytaK2k5RmVmL0FBUCtMRmw4WlBBTnByOXFnZ3VjK1JlMm9iSmduVURjdjBPUXdQb3dvcjh0clVhbUhxU28xVmFVWFpvL1U2RmFuaWFVYTFKM2pKWFRQblQ0NitLTlU4WmZ0WWVHdkNXbEsxeEhwa0lnYUZUOG9lYVB6SlpEN0xINVpQOEF1SDFyMUM2L1kvOEFCZXRYa3QvcTB0L2M2aE1xaVNTR1lSSmtER1F1RDJBNms5SzhqOE02N0JvZjdjbmpBMzVDVFhTU1c5c3o4WWN4eE12NW9oSDQxOVFmOEpMNnYrdGZZWnBqSytYUnd0SEN0d1hzb3U2MHZ6YXY4VDQzSzhIaDh5bGlxMktTbS9heVZucmJsc2wrQjVUNHE4RDZSOEEvQ3FTNmRCSmNhZVhFYWtnR1dTVWc0OHhnTWM0NjR3TVlBNkErYStIL0FJdDNHcVhVOWo0bGpqbTBXNitSWWdtVWdCNHdSL0V2cm5uK1ZldmZIanhMYlA4QURYVUxhZDFMM01rTWNLazhsaElyY2ZnclY4dDE5RmtkTlpsZzVWY1VyemJhNXV2VFZlWjVtYk41ZmlvMHNNN1FTK0hwMTBma2FQeFMrRHNtZ3h2cXVqWnZkRmNiL3dCMmR6UWc4OG51dm8zNStwOHJ2L0FIaUp0R2JWVjBEVTIwcmJ1Tjh0bklZQVBYZnQyNC9HdmUvaEw0MnVOTjhXYWRvMXhLazJsWFV1eG9wdVFqRUVqYjZaYkF4ME9hK3BWOFJxc2V3YlFnR0FvNlk5TVYwNDNpREZaSktPSHF3VlI3cVY3WFgzYm5tNGZoekM1MHBWNlUzVDZXdGV6Ky9ZK1Avd0JoSHh0TG9meFV2dkRieUg3SHJWb3pMR1R4NThJTGdqL2dIbS9wNlVWTDRYOE93ZUcvMjN0TWcwcTFhMDArUzhrbGdWVUtwaHJSbWxDZHRvWm5HQndNWW9yNUxpejJkYkdVOFZTVnZhd2pMODErU1I5TndtcWxIQjFNTFZkM1NxU2orVC9OczZEOXBMNFgzUDhBdzA1NGUxYUZYanN0YVNPNWtuakpHMlMyVUJ4a2REc1dMQjlXcWY0a2ZIaTU4Q2F4WjZiYlcwVjlLOFBtekdSeXUwRTRVY2QrRCtsZldualR3cEI0czByeUhWRnVZaVh0NW1IS1BqSFgwSTROZm1MOFlwdFN0ZmlwNGdoMVcybHM3cUs1TVFqbUdENWFnS2pEMlpRR0JIWE9hK2d5TDJHZktuaDhYRlAyTWJXNzYyWG50WmZJOEhQblh5QjFNUmhKTmUybGUvYlRYeTN2OTU5R3phdnBmeGgwV09kYmtyTkZ5Z0gzN2RpT1FWN2c0L0hIV3Nidy93REEzeGI0bHU1NExSTFdLMWk0KzNYRTIySmo2REFMWjlzY2ZsWHp0b1hpZTgwUzhTNnNibDdhZGVqSWNmZ2ZVZXhyN0krQS93QVpyZnhWNFNoczU3aUdQV2JWbkUwQy9LWEJZa09venlNSEI5Q0QwNHIwODBwNHJJTU01NEpKMDc3Tlg1Yi9BTmZpY1dVNG5EWjlpVlR4YjVhbHQwL2l0MDlUd2o0cGVCdkVId3gxR0dIVm8xajgzTDI5M2F5Rm81Q3VNN1d3Q0NPT0NBZWhyTHUvMmpQR1VPbEcwVFVJdCszYjlxTUlNdVByMHo3NHpYMEI4Y2ZGWGhEeFZZMi9oL1d0VnRZN21HY1hHMzdRRWVMNVdYazlzN3VoOUI3VjR4cDN3VjhMZUx0V2gwN1J0Y3VMNjh1RGlPM3Q3dUdSajZuaGVnSEpQYXRzRGpzTmo4SkN0bWxIVlhkM0hUMVYrajY5RGt6REI0ckE0eWRISzYranNyS1d2bzdmaDFQUy93QmpIeEZyUHhFOFlYMTVxMXZIY1E2TER1WFVNWWN6U0FvRkk2WktlWWNqSFRwelJYMGg4RmZoSHBud1o4RnhhSHB4YVdSM054ZFhNaEJlYVZ1cEpBSEFBQ2pnY0FkODBWK1daMWk2V094czZ1SFZvYkwwWCtiMVAxSEpjSFd3T0NoU3hFcnozZnEvOGxvZDlYblB4ZStBdmhYNDBhZXNXdDJyUlg4U2tXK3AydUZ1SWZiUFJsLzJTQ1BvZWFLSzh5aFhxNGFvcXRHVGpKYk5IclY4UFN4Vk4wcTBWS0w2TStQZkduN0Mzajd3L2NTUDRmdUxMeE5aL3dBQVdWYmFmSHVqbmIrVG11RC9BT0daL2l4NS9sZjhJWmZiODlSSkZ0Lzc2MzQvV2lpdnZzSnhqbVhKeXpVWlc2dE8vd0NEUy9BL1BjWHdibHZNcFFjbzM2SnEzNHB2OFR2UEJmN0Mvajd4QmNSdjRndUxMd3paOVhEU2k1bng3S2gyL200cjdDK0VYd0Y4Sy9CalQyaTBPMWFXL2xVQzQxTzZ3MXhON0U5RlgvWlVBZlU4MFVWODdtWEVHUHpSY2xhZG9meXJSZjV2NXMra3l6aDdMOHJmdEtNTHovbWVyK1hSZkpIbzFGRkZmT0gwcC8vWiIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgaWQ9ImltZzE5Ii8+DQogICAgPGNsaXBQYXRoIGlkPSJjbGlwMjAiPg0KICAgICAgPHJlY3QgeD0iLTAuMjUiIHk9IjAiIHdpZHRoPSI0Mjg2MjUiIGhlaWdodD0iNDI4NjI1Ii8+DQogICAgPC9jbGlwUGF0aD4NCiAgICA8Y2xpcFBhdGggaWQ9ImNsaXAyMSI+DQogICAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNjAwMDc1IiBoZWlnaHQ9IjQxOTEwMCIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGltYWdlIHdpZHRoPSIxMTUiIGhlaWdodD0iODEiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvanBlZztiYXNlNjQsLzlqLzRBQVFTa1pKUmdBQkFRRUFZQUJnQUFELzJ3QkRBQU1DQWdNQ0FnTURBd01FQXdNRUJRZ0ZCUVFFQlFvSEJ3WUlEQW9NREFzS0N3c05EaElRRFE0UkRnc0xFQllRRVJNVUZSVVZEQThYR0JZVUdCSVVGUlQvMndCREFRTUVCQVVFQlFrRkJRa1VEUXNORkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCUVVGQlFVRkJRVUZCVC93QUFSQ0FCUkFITURBU0lBQWhFQkF4RUIvOFFBSHdBQUFRVUJBUUVCQVFFQUFBQUFBQUFBQUFFQ0F3UUZCZ2NJQ1FvTC84UUF0UkFBQWdFREF3SUVBd1VGQkFRQUFBRjlBUUlEQUFRUkJSSWhNVUVHRTFGaEJ5SnhGREtCa2FFSUkwS3h3UlZTMGZBa00ySnlnZ2tLRmhjWUdSb2xKaWNvS1NvME5UWTNPRGs2UTBSRlJrZElTVXBUVkZWV1YxaFpXbU5rWldabmFHbHFjM1IxZG5kNGVYcURoSVdHaDRpSmlwS1RsSldXbDVpWm1xS2pwS1dtcDZpcHFyS3p0TFcydDdpNXVzTER4TVhHeDhqSnl0TFQxTlhXMTlqWjJ1SGk0K1RsNXVmbzZlcng4dlAwOWZiMytQbjYvOFFBSHdFQUF3RUJBUUVCQVFFQkFRQUFBQUFBQUFFQ0F3UUZCZ2NJQ1FvTC84UUF0UkVBQWdFQ0JBUURCQWNGQkFRQUFRSjNBQUVDQXhFRUJTRXhCaEpCVVFkaGNSTWlNb0VJRkVLUm9iSEJDU016VXZBVlluTFJDaFlrTk9FbDhSY1lHUm9tSnlncEtqVTJOemc1T2tORVJVWkhTRWxLVTFSVlZsZFlXVnBqWkdWbVoyaHBhbk4wZFhaM2VIbDZnb09FaFlhSGlJbUtrcE9VbFphWG1KbWFvcU9rcGFhbnFLbXFzck8wdGJhM3VMbTZ3c1BFeGNiSHlNbkswdFBVMWRiWDJObmE0dVBrNWVibjZPbnE4dlAwOWZiMytQbjYvOW9BREFNQkFBSVJBeEVBUHdEOVU2S1N1VzFiVjVMbVpraWNyRXB4OHB4bjNvQTZiN1JIL3dBOUYvNzZGS3NxTWNLNmsreHI1VC9hVitGbDdyL2h1NDhRK0hyMjlzZFlzVTgyV0sydUhSYmlJRDVodEJ4dUE1ejdWOGU2YjQrOFM2Zk1semIrSU5UaW5qSVpYRjNKd2Z6cjYzTGNoam1kRjFhVmF6VzZhMi9FK2R4dWJQQTFmWjFLZDA5bmYvZ0g2NDBWNFYreXI4ZW0rTUhoYWF5MVdSZitFazBzQmJnZ1k4K004TElCNjlqNy9XdmRhK2N4V0dxWU90S2hWV3FQYW9WNFlpbXF0UFpoUlJSWEtkQVVVVmw2NXFac29na1p4Sy82RDFvQTBXa1NQN3pxdjFPS1Q3UkYvd0E5VS83NkZlWGVNZkROcjQ0MFM1MDNVWG5FY3lrQ2FHVm81SXoyWldCeUNLL05uNHBhYjR3K0YvamJVZkQ5NzRnMVJ6YnZtR2I3WkppV0k4bzMzdTR4WHQ1YmxzY3hiZ3FuTEpkTGRQdlBMeHVObGcwcE9GMCt0ejllZ1F3eU9SUzErY0g3SmY3VWV0K0MvR0ZuNGU4VDZwY2FsNGMxR1FRcTkzSVpHdFpHT0ZZTVRuYm5najNyOUhsWU1vSU9RZVFhNTh3eStybDlYMmRUVlBaOXpYQjR5R01oencwYTNRdEZGRmVZZDVTMWk0K3phZkl3T0diNVIrTmVFZkZqeGxkYVBHbGhZVEdDWmwzeVNKOTREc0JYcy9paVhFY01mcVN4cjViK0lGNmIvWEwrWE9SNWhVZlFjQ3ZjeWpEeHIxMjVxNmlqNVBpVEd6d3VGVUtidEtidDh1cDIvd0FJL0hVbmk2MHZkSTFSeGNYY0NaM04xbGlQQno2a1p4K05mRS94UjhKbndSNCsxN1I5cEVkdmNONVdlOForWlQrUkZlOS9ERFdXMGY0cGFUODJFdVdhM1lkanVCeCt1SzViOXNqUmhZL0VhMHYxR0JlMlNsdmRrSkIvVGJYMmVVV3dtYVNveDBqVWpmNXIrbWVCT3JMR1pWQ3JVZDVRZHIrVC9wSHpzdmlMVnZEVTBsenBHbzNXbVhETHRhUzFsTWJGYzlDUjJwdi9BQXVIeHovME51c2YrQmovQU9OVXRXNk5YT1Y5VGlhVUpUdktLWndVWnlqR3laMkgvQzRmSFA4QTBOdXNmK0JqL3dDTkgvQzRmSFAvQUVOdXNmOEFnWS8rTmNmUlhKN0dsL0t2dU52YVQvbVozRnI4WXZIZzNiUEYyc0QvQUxmSC93QWFmSjhXdkhNemJuOFdhdXg5VGRQL0FJMXkya1ErYUpNak9NVm8vWkI2VjBRd2xLU3Z5TDdrWnZFVkl1M00vdlBYZmdUKzBkNG84SStPTENMVzlZdXRWME83bEVOekRkU0Y5Z1k0M3FUMElPUHJYc0g3YzNncU8rMGJRZkZWdW01NFgreHpTS001allGa0pQb0RrZjhBQXErUXhhN1NDQmdpdnV2eFJJUGlQK3lUOXFtSmVaZE1qbk9PVDVrUkJ4K2ExODVtR0hoZ2NiaDhWVFZrM3l2NS93Qk05dkIxcFlyQzFzUE4zc3JyNUh3WXNKUmd5a3F3T1FSMUZmckgremo0NmY0aC9Cdnc1cXM4dm0zZ3R4YlhMZHpMSDhyRS9YR2Z4cjhyL3M0OUsrN3YrQ2ZPdW00OEQrSk5IWThXZDZrNkEra2lFSDlZL3dCYTI0bndxbmd2YTlZdGZjOVA4alBJNjdqaXZaOUpMOHRUNnVvb29yOG5QMEU1ZnhkSnRrSCt6RVQvQURyNVUxNS9Na21iKzh6SCtkZlUvakRQbVNmOWNUajlhK1ZkWSs2LzQxOWJrSy9pUDAvVS9PT0xtK2FndjhYNkhDUVhScy9HT2l6QTRLM3NYNnVCWFYvdHZXb3o0WHVmNGdKNC93QTloL3BYRlhuL0FDTVdsNC81L0l2L0FFTVY2QisyeVYvc1h3eUNQbjgyVDh0b3IzcVdtYllacis5K1J5WURYSzhRdk9QNW54bHF2ZXVkYjd4cm90VjcxenJmZU5mWllqNGprcDdDVVVVVnltcHUrR1kvTVdmNml0ejdPS3lQQ3JiVm4rb3JmODBlbGV2UVM5bWpocU44eksvMmNWOXEvQVBicW43TTk1YVNqY3NjTjdHYyttV1lmenI0eTgwZWxmWkg3TlpQL0RQK3NuSEgrbDQvNzROZk5jU3BmVTROZEp4L1U5dkpHL3JNbDNpejR6OHF2ckgvQUlKKzNiUitLL0ZObi9BOWtrcCtva0EvOW1yNVM4d2VsZlVIN0FyTTN4SDhRYmZ1L3dCbC9OLzM5U3U3UG9wNWJXOVAxUnk1UzJzYlQ5ZjBQdXFpaWl2d3cvVlRtZkZrVzZSZjlxTXIvT3ZsUHhCSDVVczZIK0YySDZtdnJieFJGdWhoay91bkg1MTh2ZkVheE9uNjlmeDR3ck9YWDZIbXZxTWluYWM0ZDBmQWNXMG02ZEdxdWphKy93RDRZOHVzN002aDQxMFNCUmt2ZXhjRDJZSCtsZEwrMjdlRHp2QzlvUHZiSjVEN2NvQi9XclB3bjBSdFkrS0dueWJjeDJlNjRadlRBd1AxSXJpZjJ3dGJHby9FMk95VnNyWVdTSVI2TXhMSDlDdGZUWVJlMXppa2w5bUxmMzZIbTRWZXp5aXBKL2FrbDkycDgyNnIzcm5XKzhhNkxWdWpWemxmWFlqNGpqcDdCUlJSWE1hbTE0Zms4dFp2cUsyUHRGYzVwc25saDZ1L2FmZXZRcFR0Qkk1cHh2SzVyZmFLKzJ2Z1V5NkwreS9kWHMzeUI3ZThsYlBvUzRCL0xGZkNNY3pTU0tpQXN6SEFVZHpYM2g4UTR4OE5mMlRmN09kY1ROcDBObVIwTytRZ01mMUpyNW5QNm50WTBNT3Q1VFg0ZjhPZTVsTWZadXJXNlJpLzYvQStLUE9yNjMvNEo4V1R5K0p2RmQ5L0JIWnh3SDZzKzcvMld2am43UjcxOTgvOEUrZkQ3V2Z3NzE3V1hYQjFDK1dKU2U2eEwxL056K1ZkWEVWWlF5Nm91OWwrSmhrOUxteHNIMnUvd1BxcWlpaXZ4Zy9UQ3BxbHQ5cXNaVUF5Mk1qNml2RXZpYjRIbjhTd1IzTmlxbThqR3dveHh2WDYrb3IzaXViMWJSSkZtYVczVGVqY2xWNmcxMFVLODhQVVZTbnVqanhlRXBZMmk2RlZhTThsK0czZ2RmaC9wTjlxR29zaTNrcUY1bUI0aWpVWnhuOVRYd2o4UVBGRCtNL0dXdDZ5L3dEeTkzTHVvem5DNXdvL0FZcjdGL2FTMVR4cmVhRE40WThKZUY5WXZaYnNiTHUvaHRYOHRJKzZJMk9TZTVIQUZmTHVtL3M3L0VlK21qdGw4SWFuRzhoQ2hwb1NpajNMSGdDdjBqaDNraDdURzRxYVVwN1hhMi9yOGo0ck5LZkpDbmdzTkJ1TVBMcWNONGErR1BpbjRwWDF6cC9oWFNKZFh1NFkvTmtTTjBUWXVjWkpZZ2ZyWFFmOE1hL0dQL29Tcmovd0x0Ly9BSTVYNkMvczQvQW1ENEorRTNpbmFPNTE2K0lrdmJoQndNZEkxOWgrcHIxMnZMeC9Fay9yRWxoa25CYk4zMS9FOVRDWkhEMktkZHRTZlJXL3lQeWQvd0NHTmZqSC93QkNWY2YrQmR2L0FQSEtQK0dOZmpIL0FOQ1ZjZjhBZ1hiL0FQeHl2MWlvcnovOVpNVi9KSDhmOHpyL0FMRHcvd0RNL3dBUDhqOHByUDhBWXgrTVVnYlBoRjRmK3VsNUJ6K1RtbTNYN0lIeFpzNU5rdmh2YTJNLzhmY1gvd0FWWDZ0MW42eHB2OW9RamJnU3I5MCt2dFQvQU5aY1gvTEg3bi9tUCt3OFAvTS93L3lQenY4QWdqK3lGNHFYeHhZNmg0d3M0OVAwaXhrRTVoODVYYWRnY3FvQ2s0R2VwTmROKzNaNDZqVWFENFVnaytkU2I2NVZmNGVDc1kvVmpqNlY5VitNdFF2dkNlaVhGN0ZvdW9hdmNvcDhxenNJR2tlUnV3NDZEM05mbmo0KytGWHhoK0lmaTNVZGYxUHdScmpYVjVKdTIvWkh3aTlGVWNkQU1EOEs3Y3V4TTh3eGF4ZUxra29iTGJYK3YwT1RHMFlZUER2RFlkTnVXL29lVndtUzRtamlpVnBKWkdDcXE4a2tuQUFyOWNmZ0w0RmI0Y2ZDWHczb2NpQkxxRzJFbHhqL0FKNnY4ei9xVCtWZkpYN0ovd0N4N3JxK0tiVHhaNDUwOXROc3JCL050ZE11Qis5bWtIM1dkZjRWQjV3ZVNSWDNyV1hFV1pReExqaDZUdWxxL1UxeWJCU29xVmFvck42TDBDaWlpdmlqNmNLS0tLQUNpaWlnQW9vb29BS0tLS0FDaWlpZ0Fvb29vQUtLS0tBQ2lpaWdELy9aIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBpZD0iaW1nMjIiLz4NCiAgICA8Y2xpcFBhdGggaWQ9ImNsaXAyMyI+DQogICAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTk1MDE4IiBoZWlnaHQ9IjQxOTEwMCIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGNsaXBQYXRoIGlkPSJjbGlwMjQiPg0KICAgICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjUzMzQwMCIgaGVpZ2h0PSI0Mjg2MjUiLz4NCiAgICA8L2NsaXBQYXRoPg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDI1Ij4NCiAgICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI0Njc1OTEiIGhlaWdodD0iNDI4NjI1Ii8+DQogICAgPC9jbGlwUGF0aD4NCiAgICA8bGluZWFyR3JhZGllbnQgeDE9IjYuMjE1MjIiIHkxPSI5OS4zNjQxIiB4Mj0iNi4yMTUyMiIgeTI9IjEwNS42NDUiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiBzcHJlYWRNZXRob2Q9InBhZCIgaWQ9ImZpbGwyNiI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNDNjlBRUIiLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzZGNEJCMiIvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IHgxPSI2LjIxNTIyIiB5MT0iOTkuMzY0MSIgeDI9IjYuMjE1MjIiIHkyPSIxMDUuNjQ1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgc3ByZWFkTWV0aG9kPSJwYWQiIGlkPSJmaWxsMjciPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjQzY5QUVCIi8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM2RjRCQjIiLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDI4Ij4NCiAgICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxODU3Mzc1IiBoZWlnaHQ9Ijk3MTU1MCIvPg0KICAgIDwvY2xpcFBhdGg+DQogICAgPGltYWdlIHdpZHRoPSIyMTMiIGhlaWdodD0iMTEzIiB4bGluazpocmVmPSJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1FQUFBQm1DQVlBQUFCeVcvWEtBQUFBQVhOU1IwSUFyczRjNlFBQUFBUm5RVTFCQUFDeGp3djhZUVVBQUFBSmNFaFpjd0FBRHNNQUFBN0RBY2R2cUdRQUFBOEFTVVJCVkhoZTdaMEpsQlhGRllaN0ZBVVVYRkFFSlFpREM0S2dFUldDVVJFMFVRTEN5S0xScU9neG91ejdyb3lDUnowR2paRzQ0QjVBeEJIRkdCVUdSREFvU1BDZ3dhaTRoRVNOb2dJendJQzR3RXkrdjZuM3ptTUdac2dqQVI3NXYzUCtVOVczcXJwN2VQZDJWMVYzTlpFeHhoaGpqREhHR0dPTU1jWVlZNHd4eGhoampESEdHR09NTWNZWVk0d3h4aGhqakRIR0dHT01NY1lZWTR3eHhoaGpqREhHR0dPTU1jWVlZNHd4NmRDdlg3OURoZzRkMm1qQWdBRk4rL1RwYzFBd20rMVJmTUd4bFRkMGFIalV4azdITlVoSGhSMGIxbC9ab1dIMTNMbFJsYkV6bzdxNXM2TUc2V3JDbTlGKzRiVEtJNHNmdHVhZ1FZUHFTWDM3OXEzVnRXdlgvVU5aR1NqYkYyZW9rYWl2dG5sNWVmdXFqSHpqZ1FNSDVnd1pNdVNvdUhLR00ySENoUDM0Rzl1Z0I5SEwvRzF6VWZ0UWJMYkh1ZzVITjE2YmsvM0F1cHdHQzlQVXJQVVhaYmNiTXpzNkpYZG1sRGM2UDFxWXJzYk9pZXFGMDlvdXVibTVsZmlCYjBHdkIwM215dGNpRkpjQko2aExFTnlacU0vMnJhUkhEQjgrL0ZEc2I1RC9pUFMrVnExYVZRcE5NcGJCZ3dlM2xPUHpOMzFMdWhFVmtyOCtGTWNYaEpBMXFhekp5VzYrdG1QMmZKeTVKRTBWck8vVTRLcWJaMFd0Q0lJUGMyZEZKZW5xaGxsUm8zQmEyNlY3OSs3NzhlTSt6WTliSXBGZlQ5cFh3UkdxSkNrcEtjbWlyQTExdms3VVI5UG9LdnlvZi8vK1IrTDhQMUMyR2IycXEyaG9scEh3ZHgySWhxSHYwU2VvbSs1MFBYdjJySzJMQkFFeUR0dUQrdmNMVFV5Q1RBK0NvS2s0ZFlOUUpjbXdZY01PcHV3MlZKeFNOdzRDZ21ZZjlwTkRJUHlHdHFlRkpoa0xUbDZiditkZS9ZMmtlYW4vSHRpbW9PL1FBdjd1N1hZZC8yL0oxQ0JBdW9LdlFXdlJ2L2lCMjRZcVNYRHdZN0V2QzNWV2tVOEdnY3E1VWxidTFxMWJsZEpYUndXSW5BWDdBYVFIb1dxcUs3dnVMaXBUTzlKS0VzZXBxcm8welVxMFYzMk9kU0RqamVwS0UrMVZub0wyRmJkWFBmTFZVQlhadHhUSHhIVms1NnBlVGZWMHJOUnpWamVIcTMxOWp2TlErQnNuNjIvWE9Vb0V5UFJnWDhSNUhLUnpjZGNvaFF3T2drMzgwRytRdnNDUFcweitKbDM1UTdYRTJPRnF5aFVzQzhpL0dCd2hHUVRrLzRSbTRVREQ0a1pBdXdQWVYydmFQSTRVWE4renZZNzhTNlEvWVN6UmdQdzRwTDUzZHh4c0ZQWjMwZWM2UHUycllXOUwrVk5xajc2aGJDWHBEQnc0aDdJRHczSDIwWGxnSDRyK2h2MGJWRVQrTDRtQnV1cGdxMGY3L3FRTFNSWDAzNkNQMFhqYU42TE8vcFMxUlJydmZFNnFPOEVLdEFCcFlLenpUSFFIZFRHWXh6ay9SYjZOam1FZ3c0TmdLbEkvV0k0aFIyOGNxc1ZkSVd4elVBRzZDMDBJanBBYUJJWFl2Mk1majJtYnRDcTJidWdqN0p0SnZ5QjlCNzByRzdvR0J6cUo3ZG5rNVd6TFNMOGtsZk90SGpseTVKSGtleW1QdmtYcW04dkJsWDVQMlhkb3FCeVhZOVVnZnp1U1hVNjZoUFN2NkN0MFBLZVRwUzROK1R5MENTa0FkRmQ3ajdxclNZdVJndUVNZ3FZcnFZNnhGdW04aWtpMS9YZUpiWTJiOUxkcndMeWNWSk1FRitwdk5wRGhRZkFZUDZZR3ZtK2hqZVF2VG5RVDJENFQ2VWQvQ3lmNUJXbUZRWUNEYTNaRndTUUhld043VDlRYyswK1Z4OTRtTlFpUXJxeVBrMTVEcWl2Nm1lUVZGRHFYZk5wY0Z2WjVLZEpWK1Fmc0c3anp0RVNheDM4Zm0rNDA5MkZ2Z3RNM0krMnRhZC93ZCtZaW5jc0s2dHhKK1htVW44MzJLTkl2a0J4K05qcUIvTlZvWnJETnBmNjFwRGxCQzJWSEg2QXViSitmK0Rjd2tPbEJRSG80UCt5RHBKcnBtZGlyVjYvRFZJKzhuRk5COENpcWk4b05BdldkMlI2QWRGZjVIRnRuWGJGVkw1Q2xZNWNLQW5WeGpndmx1cE5vNmpiaGJPMkNPWVkyUDhOV0VNcnZ4dEdiWUZ1dTQ2T0gwUW1KQUJicXU2dWN1cHJ0bWFyQUNFWHFKcWtMcEw5WlhUMU5nNTVPZ09ndTlBQjU3ZjhQNU91RzZqcjJNOEcrc05UZlpFU21Cd0dtTFBKWDhRTi9TcnBDVGtvK0c2bkxvQ3RvWi9KSGtDODNDT1JrYlA5ZWRiQzloTlFsS1VOcUVKQ081WXArU0NpU3MrVUgrenoyV1NPWVl6anZBN0IvRnNybnlHbkp5MW5WN1lySERLVEQxQVhTNEpzZ09FWmxTT2M0S3V3bUNYVi9pVjJCdjU1enV0SkJzQlBzQlVFUXlYSDRnV2NoRFpDSG9ac29WMzZCbkJGN2hVSEFHT0pvOGhORG5TbmFWcDNTbEFxQ29hVHhRRmV3dlNpMHo4Zlp5ankzb0Z4WGRwVy9ybkxTVTdFOVRMb3kyRmR6THZrY1F3RndpbXlrWDJQckczYVJoRElOaGpXZTJFRGEzVUd3RSt3TlFhRFhJTmkrR1dsZytCNTJEVlMvSlIyaGN2SVZCa0dxRTVIT1VaOWRkVXFUR2dSb0NFb05BbDNOWlorZm1PRkpvQ2ZVMkJQOStHZGswM216clhNN2wzT1lRcW9CclFiQnQzUDgrcVFhRDZ5amJFeThreFNvcDNHSTdnU2FVY3B4RU93RWUwTVFDSnl6SlQveWU5alZ2WkR6cVA4ZHY0WkJXbUVReURuWUI1dGJ1aGlVNllsclpkVVRsTytEWTFjdkx3all6dzJ5VTY1dVQ3ZGdqbUZiMDdYclNQWGdycmZ1QktpYXlzTDdUWFd3djRhMDN4ZVJuZ0IvUUJ2VlYzQmx4enVDTUg2WnFUTDA1WWdSSTJwVkVBVFRnbjB4LzM3SmFXUVQyRnVDUUU2S0kwekRyaG1ZRXZKUGhxSWRDZ0p0a3piSE5oL0o4VFpRZGo5TzN4bm4velhiZjBSYlRaR2kwbmNDdmFlMFFtWGtQMEczb3E1c2E4QWN6OVZUL2crMUlXMktYa1dhNGoySC9WNUxxaWxON2ZkdUJRbHBUOXJMMFJXWWMxV0g5RmZvQmFRQnRjckc2dGpsQllIMkYreWF1bFgrWXRRa0ZKc01EWUluVUJFT05DR1lZOEtQK3hsbEczRGMxc0dzbVphYTJNWlRwZ2RTVTJoWFIzYnllZzZ3SnJFZkJSTGJlcUMxbUhROVV0ZEVnMU01NFdmVXU1d3l6ZXJvQVozMk5ZQTJlbEljRTdvMzdTai9FQ21JVXR2cmdkdFNuUFZFMVEzN2lXZC9RaDNWMVIxb0NZcnZZRDE2OURpVStyOWpXMCs3TmRPbGVyclQ2Um1FeGcrUDZOOURkUW1RMnRqdVFUcXZoeEtCTHZpM09JMjZHbmNranFYalhoeUtUYVlGZ2JvTy9PQ1hvOXRMLzVDYXFjRTJnaDk1Yk9wckFYcmRBQ2ZvalAwT3lxOUlQRmxtKzJhMmI4UFJ0dG9QdGlicy8wYktueU92cS80MHRnZXpqenE2NHBMVkZma09qbmNPUWJCVkgxdkhWWHZxamlIVjZ3cXpxS3VueDRQVk5sVFRHT0V3NnVoSnNNWUNlcVl3SFkzbTNPcFRuSHh0UWwwd3l2V08wd1RTR1VFUHlKYjZONm9lKytxRS9RNTBTZXFzRldnR3JRUG4vU1IxTlBBZVQvMW1vY3dVWG5STXMzVWRzMTlBcTlMVXgwVTVEUzRsQU00WW5SOHRRcXZTRlVHUW5IUGZROGpTZEdYSXA4VU90dC9SWSt6VXVRVCtHL3ZZdXlpNk1Mdld1ZzdaWGRaMnFOODNIYTNwV1ArNlZSMk9iWHpMeTFFZEF1SEszUHlvYjdxNmJYNTBhRGd0WTNZaEQ2K3NIazBzT0RtYVZIQldXbnBpZGN0b1NsR3RrdG5Sd2NXem90T0taMFJucGF1UzU2TmsvOXFZWGNlVW9oT2p5UVdQNE5CTDB0TGt3bm1rSFVyeW8xTTN6NHllSzU0WkxVbGIrVkZ5R3RDWVhjY1RhNXJqeVBOUlNWcWFWRkJBZWhWM2dWWUV3WWNFUTBtNlloOFZEb3kzaFdaQ0dPaWRpOXByd0tkWm5sQmt6QTZRNFVFZ2h4K3daYTVkNy82dkl2K21IaWFGWW1OMmdBd1BBaHcvZStEQWdjK1M2bUZRTEFJaCtZekFtSXJKN0NESXd1RXZJZ2owcEZXdkZPdUJsSjcyVGxIWmxpcTdIQjIzekxGMXgzSTNiVThsZzROQUQ0Z0lnbHR3ZkQwRmZRWk5JZ0QwUWxuUjRNR0RhNGRxTVhxeVNsazk3Q2R0Uyt5bktXbHR2VktOVG1MZkRWTWZoQ1hlNzFGZDdZZnRlQTF5djM3OUdvYjJXaWxXbDdJV3BLZXdYVlZPVC83d3NPL3ordmZ2ZjU3cWpoZ3hvbWJZcmRranlPQWd3TGxPeHVsZVFWcWQxUitITzVlOHhnYnFGZzBJMVdKdzZxTW9uMFE5dlNaUlJwUnBPZUlBMHVGSWF4RVdzNTJjcmRKVFp1cmRHZXJHNytaUXJsZWhGOGxHZmpUU21tVzltckE0QkVaVDhyOUZlcUZPcjBYb0xyV0s5RjZDNXovdStwbi9GUmthQkZ4bDlaV0d5M0FxZFlNK3dNbGJzMTBWQjlNeVJyMVl0a2hYNmxBOThacUNYcWw0UGlIYWFRM0NKb250aFZ5cHo2S08xaUpvZTVrV3RvVG04U3NabEdrWnBGNk9lMXJyRGRodVRsNXJmalVPK1NlcFhwWFdDM2lUc2JmSHBsUXIxYlIyV0t2SHRCcE03eFhwOHllVEU2dmd6TzRtUTRNQUo5S2JvZkYzZHBDNlFmRkxaMXlCTVc5NVlRMG5UQTZRRlRSaDlaaFduV1hqOEZyRXJ2ZVA1UEJhVG5sMUNLeTBnZ0N0NU5oYTRYWTZOcTAxSGtaYVNKMzMwV1Y2ZjRuOVY4RjJDV1hhdjk0eTlTY1M5d2d5TkFod0lQVzd0WmEzaUx0QVB4d3M3ci9qaU1kZzArSWFkVXZ1anl0dkE5cTJvbHpkRkYycHh5VmVxc09lVmhDUVRreTgwRFp5NUVpTkhSNE5kdDExMnBOdkllbHV3N2E2VDl0Y05tbDJCeGtZQkhvT2dBTmVoeE5wN2NCYThzL2pYT01rOG5mSndaRDYzMHR4WHIyVnVSVzAwOEw3UDFNdUozMEZaMCsrZGt6N2RJT2dUNmlxdW8yd3ZTdzcrbHAxa0Q3ZEVndGJ2Q3dTalF0TnpHNGxBNE1BNTZ5SkErcWRmamxmL0g1OWNLcUVaSXU3S0toN2FCWVRWbVhwcTgwYnFhZnV5c21oS0thOElLQk5lV09DYTBKVkxYQTVFZnM4MlpHK082UUJzeGJscENvUEpkdVkzVW5tQlVFV1hZMGY0MlJ5ZkgzZlIxOWUwNEJ6SzJGWE4wZk8vS3ltTTBOYjNRVjZvYThvMTUxQzZ3aTJtdE5uM3pkaTE1WDZFOFlReVZlNzJkYW5YYWFpQ29NZ2RNbmlUeDlTUGs1akVRS3FjbWxwREJLYW1OMUtoZ1ZCR0x6RzMvZkJ3ZDdCNFg0ZWlyYUNPdm9JYlh3bHB0Nlo0UXZWWjZPM1phZmQ0NW85S2lVOVMraU40aSs4a1hiaGVQb2VxUWEwWjZENGU2YWs1UVlCWlpwT0hVT1pubDhzcFZ5TGIrSnZucEx1VHdBYzFMdDNiNzhzdU1lUVlVRWdCOEt4Tk0yb0xzOTB0cmY1NElteWRraDNBczNyNitxdS82UkRWM0pOaWNxUk5aWDZYSXFlSmpDdXhIazFZTlkzVHVYQTZzK1BSeHBuNkttMHZnWlJZUkFJN1FlOVNibk9RY3NaNzJGYnp6TDBWWXc1NUtlSHFtYTNzMlV0UVY0MHVXQjVlaXA4TzVwVTJLVTRQMnF4ZVViMFN2SE1hSG5hbWhNbCsrRGJBMmZTRTFsOXVlMGRIR2xRTUpjaDlPRVhxaTcxN2lmVjl6cjF5VUsxM1phV0VRVDZUcWpHREZyZ3JtOElhYjJ5UG02cmI0QnFpYVRtK2xYM1hqMThZNzk2V0tmbGsyWFc3S3E3UTdtV2RHcDU1cWRJMzBUVnJOQ1hhQ241ZUlHODJSTjRhazBOSExrMWQ0U3VhV255dW83Ums0WDFpMStLYXVMSUYyeWFFWFZOVjhXdlJkWERXVzBYemJ6Z1FITG85dVRMelB3a3dKa3JoZW5JcmpoamF3MVdTUzhJYmNzSXgreEVlVk8xRGQwaXpmZHIzdjk2MURZc2VtK211Z1JMUy9hdnIxZnJWWW56US9zeTNSdnE2TFdKNHltN2dsUlBva2ZSdG9mT2h5Q3E4RzgxeGhoampESEdHR09NTWNZWVk0d3h4aGhqakRIR0dHT01NY1lZWTR3eHhoaGpqREhHR0dPTU1jWVlZNHd4eGhoampESEdHR09NTWNZWVk0d3h4bVE4VWZSdjAwNUZDN3I2UWhZQUFBQUFTVVZPUks1Q1lJST0iIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIGlkPSJpbWcyOSIvPg0KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDMwIj4NCiAgICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxODMxMzI5IiBoZWlnaHQ9Ijk3MTU1MCIvPg0KICAgIDwvY2xpcFBhdGg+DQogIDwvZGVmcz4NCiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAxKSI+DQogICAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk2MCIgaGVpZ2h0PSI1NDAiIGZpbGw9IiNGRkZGRkYiLz4NCiAgICA8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDQpIj4NCiAgICAgIDx1c2Ugd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgeGxpbms6aHJlZj0iI2ltZzMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEuNDMwNTFlLTA1IDguMDQ2NjNlLTA2KSIvPg0KICAgIDwvZz4NCiAgICA8ZyBmaWxsPSJub25lIiBjbGlwLXBhdGg9InVybCgjY2xpcDIpIi8+DQogICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXA1KSI+DQogICAgICA8ZyBmaWx0ZXI9InVybCgjZngwKSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDQzIDk5KSI+DQogICAgICAgIDxnPg0KICAgICAgICAgIDxwYXRoIGQ9Ik03LjUwMDA2IDQ0LjMzNDFDNy41MDAwNiAyMy45OTEyIDIzLjk5MTIgNy41MDAwNSA0NC4zMzQgNy41MDAwNUwyNTQuNjY2IDcuNTAwMDVDMjc1LjAwOSA3LjUwMDA1IDI5MS41IDIzLjk5MTIgMjkxLjUgNDQuMzM0MUwyOTEuNSAxOTEuNjY2QzI5MS41IDIxMi4wMDkgMjc1LjAwOSAyMjguNSAyNTQuNjY2IDIyOC41TDQ0LjMzNCAyMjguNUMyMy45OTEyIDIyOC41IDcuNTAwMDYgMjEyLjAwOSA3LjUwMDA2IDE5MS42NjZaIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJldmVub2RkIi8+DQogICAgICAgIDwvZz4NCiAgICAgIDwvZz4NCiAgICA8L2c+DQogICAgPHBhdGggZD0iTTQ1MC41IDE0MS4zMzRDNDUwLjUgMTIwLjk5MSA0NjYuOTkxIDEwNC41IDQ4Ny4zMzQgMTA0LjVMNjk3LjY2NiAxMDQuNUM3MTguMDA5IDEwNC41IDczNC41IDEyMC45OTEgNzM0LjUgMTQxLjMzNEw3MzQuNSAyODguNjY2QzczNC41IDMwOS4wMDkgNzE4LjAwOSAzMjUuNSA2OTcuNjY2IDMyNS41TDQ4Ny4zMzQgMzI1LjVDNDY2Ljk5MSAzMjUuNSA0NTAuNSAzMDkuMDA5IDQ1MC41IDI4OC42NjZaIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJldmVub2RkIi8+DQogICAgPHBhdGggZD0iTTIyMy4wMiAxNDQgMjY0LjA5NSAxNDQuODE0IDI2NC4wNTUgMTQ2LjgxNCAyMjIuOTggMTQ2Wk0yNjIuODIxIDE0MS43ODggMjcwLjc0IDE0NS45NDYgMjYyLjY2MiAxNDkuNzg3WiIvPg0KICAgIDxyZWN0IHg9IjI4LjUwMDEiIHk9IjIxLjUwMDEiIHdpZHRoPSIxOTUiIGhlaWdodD0iMjQ3IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgZmlsbD0ibm9uZSIvPg0KICAgIDx0ZXh0IGZpbGw9IiMzQzQwNDMiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDU5LjQ4MjYgMTE4KSI+RG9jdW1lbnQgZGF0YSBtb2RlbDwvdGV4dD4NCiAgICA8dGV4dCBmaWxsPSIjM0M0MDQzIiBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2Ny44MTU5IDE1MCkiPkRpc3RyaWJ1dGVkIHN5c3RlbXM8L3RleHQ+DQogICAgPHRleHQgZmlsbD0iIzNDNDA0MyIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOTAuNjQ5MiAxNjYpIj5hcmNoaXRlY3R1cmU8L3RleHQ+DQogICAgPHRleHQgZmlsbD0iIzNDNDA0MyIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjUuMjM1OSAxOTgpIj5DbG91ZCB8IE9uPC90ZXh0Pg0KICAgIDx0ZXh0IGZpbGw9IiMzQzQwNDMiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyNy45MDMgMTk4KSI+LTwvdGV4dD4NCiAgICA8dGV4dCBmaWxsPSIjM0M0MDQzIiBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMzMuMjM2IDE5OCkiPnByZW1pc2VzPC90ZXh0Pg0KICAgIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwNikiIHRyYW5zZm9ybT0ibWF0cml4KDAuMDAwMTA0OTg3IDAgMCAwLjAwMDEwNDk4NyAzNSAzMykiPg0KICAgICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXA4KSIgdHJhbnNmb3JtPSJtYXRyaXgoMS4xNjY2NyAwIDAgMSAtMC4wMzEyNSAwKSI+DQogICAgICAgIDx1c2Ugd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgeGxpbms6aHJlZj0iI2ltZzciIHRyYW5zZm9ybT0ic2NhbGUoNjM1MCA2MzUwKSIvPg0KICAgICAgPC9nPg0KICAgIDwvZz4NCiAgICA8cmVjdCB4PSIyNzEuNSIgeT0iNjUuNSIgd2lkdGg9IjM4IiBoZWlnaHQ9IjE2MSIgc3Ryb2tlPSIjMjEzMTNDIiBzdHJva2Utd2lkdGg9IjEuMzMzMzMiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgZmlsbD0ibm9uZSIvPg0KICAgIDx0ZXh0IGZpbGw9IiMyMTMxM0MiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtc2l6ZT0iMTUiIHRyYW5zZm9ybT0ibWF0cml4KC0xLjgzNjk3ZS0xNiAtMSAxIC0xLjgzNjk3ZS0xNiAyOTQuMjcyIDIxMSkiPkNoYW5nZSBzdHJlYW0gQVBJPC90ZXh0Pg0KICAgIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwOSkiIHRyYW5zZm9ybT0ibWF0cml4KDAuMDAwMTA0OTg3IDAgMCAwLjAwMDEwNDk4NyA2NjAgMTczKSI+DQogICAgICA8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDExKSIgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMS4wMDA3NSAtMC41IC0wLjEyNSkiPg0KICAgICAgICA8dXNlIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHhsaW5rOmhyZWY9IiNpbWcxMCIgdHJhbnNmb3JtPSJzY2FsZSg5MzM4LjI0IDkzMzguMjQpIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICAgIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMTIpIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjAwMDEwNDk4NyAwIDAgMC4wMDAxMDQ5ODcgNDU3IDE3MykiPg0KICAgICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAxNCkiIHRyYW5zZm9ybT0ibWF0cml4KDEuMDA3OTggMCAwIDEgMCAtMC4xMjUpIj4NCiAgICAgICAgPHVzZSB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bGluazpocmVmPSIjaW1nMTMiIHRyYW5zZm9ybT0ic2NhbGUoODExOS42NyA4MTE5LjY3KSIvPg0KICAgICAgPC9nPg0KICAgIDwvZz4NCiAgICA8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDE1KSIgdHJhbnNmb3JtPSJtYXRyaXgoMC4wMDAxMDQ5ODcgMCAwIDAuMDAwMTA0OTg3IDc1NyAxMzIpIj4NCiAgICAgIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMTcpIiB0cmFuc2Zvcm09InNjYWxlKDEuMDAyNzkgMSkiPg0KICAgICAgICA8dXNlIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHhsaW5rOmhyZWY9IiNpbWcxNiIgdHJhbnNmb3JtPSJzY2FsZSg0ODc1Ljg5IDQ4NzUuODkpIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICAgIDxwYXRoIGQ9Ik0wLjAxNTA3NTQtMC45OTk4ODYgNTUuOTc3Mi0wLjE1NjEzNyA1NS45NDcxIDEuODQzNjQtMC4wMTUwNzU0IDAuOTk5ODg2Wk01NC42ODkyLTMuMTc1OSA2Mi42MjggMC45NDQyNTIgNTQuNTY4NiA0LjgyMzE5WiIgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgMzA5IDE0NS45NDQpIi8+DQogICAgPHBhdGggZD0iTTQxNy41OTUgMTQ0LjE5NiA0ODkuOTM3IDE5Ny43NDIgNDg4Ljc0NyAxOTkuMzQ5IDQxNi40MDUgMTQ1LjgwNFpNNDkwLjY1IDE5NC41MzcgNDk0LjcwMSAyMDIuNTEyIDQ4NS44OTEgMjAwLjk2N1oiLz4NCiAgICA8cGF0aCBkPSJNMC42OTY0MjEtMC43MTc2MzMgNjUuMTcyIDYxLjg1MjEgNjMuNzc5MSA2My4yODc0LTAuNjk2NDIxIDAuNzE3NjMzWk02Ni4zMDQ1IDU4Ljc3MDcgNjkuMjU5OCA2Ny4yMTI2IDYwLjczMzEgNjQuNTExOFoiIHRyYW5zZm9ybT0ibWF0cml4KDEgLTEuMjI0NjVlLTE2IC0xLjIyNDY1ZS0xNiAtMSA0MTcgMTQ0LjIxMykiLz4NCiAgICA8dGV4dCBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNzkuNTI3IDE4OCkiPkV2ZW50PC90ZXh0Pg0KICAgIDx0ZXh0IGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2OS40NDcgMjAyKSI+cHVibGlzaGVyPC90ZXh0Pg0KICAgIDx0ZXh0IGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ1NC4xNjIgNDUpIj5NZXRhZGF0YSBvZiB0aGUgY2hhbmdlPC90ZXh0Pg0KICAgIDx0ZXh0IGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQ4OS4yODYgMjQ2KSI+RGVsdGEgZGF0YTwvdGV4dD4NCiAgICA8cGF0aCBkPSJNNTMwIDc2IDYwNC4yNjggNzZDNjA0LjgyIDc2IDYwNS4yNjggNzYuNDQ3NyA2MDUuMjY4IDc3TDYwNS4yNjggMTcyLjc1OSA2MDMuMjY4IDE3Mi43NTkgNjAzLjI2OCA3NyA2MDQuMjY4IDc4IDUzMCA3OFpNNjA4LjI2OCAxNzEuNDI1IDYwNC4yNjggMTc5LjQyNSA2MDAuMjY4IDE3MS40MjVaIi8+DQogICAgPHBhdGggZD0iTTUzMi4wMDQgMjA4IDU2NC4yOTggMjA4LjEzMSA1NjQuMjkgMjEwLjEzMSA1MzEuOTk2IDIxMFpNNTYyLjk3NyAyMDUuMTI1IDU3MC45NjEgMjA5LjE1NyA1NjIuOTQ1IDIxMy4xMjVaIi8+DQogICAgPHBhdGggZD0iTTYyNi4wMTUgMjAzIDY2My43NTggMjAzLjU2MiA2NjMuNzI5IDIwNS41NjIgNjI1Ljk4NSAyMDVaTTY2Mi40NyAyMDAuNTQzIDY3MC40MDkgMjA0LjY2MSA2NjIuMzUxIDIwOC41NDJaIi8+DQogICAgPHRleHQgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTkyLjMyNSAyMzUpIj5BenVyZTwvdGV4dD4NCiAgICA8dGV4dCBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1ODUuNzQ1IDI0OSkiPlN5bmFwc2U8L3RleHQ+DQogICAgPHRleHQgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTg0LjE1OSAyNjMpIj5BbmFseXRpY3M8L3RleHQ+DQogICAgPHRleHQgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTg2LjU3OSAyNzgpIj5waXBlbGluZTwvdGV4dD4NCiAgICA8dGV4dCBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NTIuNDIgMjM1KSI+U1FMIHBvb2xzLzwvdGV4dD4NCiAgICA8dGV4dCBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2NTIuNDIgMjQ5KSI+U3BhcmsgcG9vbHM8L3RleHQ+DQogICAgPHRleHQgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxOSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTM0LjUxOCAzNTQpIj5TeW5hcHNlIFN0dWRpbzwvdGV4dD4NCiAgICA8dGV4dCBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MTIuMjQyIDEyOCkiPkN1c3RvbTwvdGV4dD4NCiAgICA8dGV4dCBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MTQuOTA5IDE0MikiPnRyaWdnZXI8L3RleHQ+DQogICAgPHRleHQgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTMxLjg0OCAxODIpIj5TdG9yYWdlPC90ZXh0Pg0KICAgIDx0ZXh0IGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUzNC41OTUgMTk2KSI+dHJpZ2dlcjwvdGV4dD4NCiAgICA8cGF0aCBkPSJNMC43NTc2MzQtMC42NTI2OCAyNy43NDUgMzAuNjc0NCAyNi4yMjk3IDMxLjk3OTctMC43NTc2MzQgMC42NTI2OFpNMjkuMTQ3NyAyNy43MDYyIDMxLjMzODYgMzYuMzc4IDIzLjA4NjYgMzIuOTI3NloiIHRyYW5zZm9ybT0ibWF0cml4KDEgLTEuMjI0NjVlLTE2IC0xLjIyNDY1ZS0xNiAtMSA3MzQgMTg3LjM3OCkiLz4NCiAgICA8cGF0aCBkPSJNNzM0LjY3OSAxODkuMjY2IDc2My4wNzQgMjE1LjUxMiA3NjEuNzE3IDIxNi45ODEgNzMzLjMyMSAxOTAuNzM0Wk03NjQuMTMyIDIxMi40MDQgNzY3LjI5MSAyMjAuNzcyIDc1OC43MDEgMjE4LjI3OVoiLz4NCiAgICA8dGV4dCBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NzcuMTk5IDEyNCkiPkJJIHRvb2xzPC90ZXh0Pg0KICAgIDx0ZXh0IGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc3Mi4yNTYgMjcxKSI+QXRsYXMgYXMgc2luazwvdGV4dD4NCiAgICA8cGF0aCBkPSJNMC4wMDc2OTk0OC0wLjk5OTk3IDI2LjA2NTYtMC43OTkzMzIgMjYuMDUwMiAxLjIwMDYxLTAuMDA3Njk5NDggMC45OTk5N1pNMjQuNzU1NC0zLjgwOTUxIDMyLjcyNDQgMC4yNTE5NjkgMjQuNjkzOCA0LjE5MDI1WiIgdHJhbnNmb3JtPSJtYXRyaXgoMSAtMS4yMjQ2NWUtMTYgLTEuMjI0NjVlLTE2IC0xIDgyNSAyMjcuMjUyKSIvPg0KICAgIDxyZWN0IHg9Ijg2MS41IiB5PSIyMTMuNSIgd2lkdGg9IjE2IiBoZWlnaHQ9IjI0IiBzdHJva2U9IiM1OTU5NTkiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgZmlsbD0iI0VFRUVFRSIvPg0KICAgIDxyZWN0IHg9Ijg3NS41IiB5PSIyMDMuNSIgd2lkdGg9IjE3IiBoZWlnaHQ9IjI0IiBzdHJva2U9IiM1OTU5NTkiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgZmlsbD0iI0VFRUVFRSIvPg0KICAgIDxwYXRoIGQ9Ik04NzQuNSAyMjQuNSA4OTEuMTkzIDIyNC41IiBzdHJva2U9IiM1OTU5NTkiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIi8+DQogICAgPHBhdGggZD0iTTg4Mi41IDIyNS41Qzg4Mi41IDIyNC4zOTUgODgzLjM5NiAyMjMuNSA4ODQuNSAyMjMuNSA4ODUuNjA1IDIyMy41IDg4Ni41IDIyNC4zOTUgODg2LjUgMjI1LjUgODg2LjUgMjI2LjYwNSA4ODUuNjA1IDIyNy41IDg4NC41IDIyNy41IDg4My4zOTYgMjI3LjUgODgyLjUgMjI2LjYwNSA4ODIuNSAyMjUuNVoiIHN0cm9rZT0iIzU5NTk1OSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBmaWxsPSIjRUVFRUVFIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4NCiAgICA8dGV4dCBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjEyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NTAuNzIxIDI3MSkiPlJlYWw8L3RleHQ+DQogICAgPHRleHQgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODczLjIyMSAyNzEpIj4tPC90ZXh0Pg0KICAgIDx0ZXh0IGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg3OC4wNTUgMjcxKSI+dGltZSBhcHBzPC90ZXh0Pg0KICAgIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMTgpIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjAwMDEwNDk4NyAwIDAgMC4wMDAxMDQ5ODcgMzcxIDEyMikiPg0KICAgICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAyMCkiPg0KICAgICAgICA8dXNlIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHhsaW5rOmhyZWY9IiNpbWcxOSIgdHJhbnNmb3JtPSJtYXRyaXgoNzY1NC4wMiAwIDAgNzY1NC4wMiAtMC4yNSAwKSIvPg0KICAgICAgPC9nPg0KICAgIDwvZz4NCiAgICA8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDIxKSIgdHJhbnNmb3JtPSJtYXRyaXgoMC4wMDAxMDQ5ODcgMCAwIDAuMDAwMTA0OTg3IDU3MyAxODApIj4NCiAgICAgIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMjMpIiB0cmFuc2Zvcm09Im1hdHJpeCgxLjAwODUgMCAwIDEgMCAtMC4xMjUpIj4NCiAgICAgICAgPHVzZSB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bGluazpocmVmPSIjaW1nMjIiIHRyYW5zZm9ybT0ic2NhbGUoNTE3NC4wNyA1MTc0LjA3KSIvPg0KICAgICAgPC9nPg0KICAgIDwvZz4NCiAgICA8cGF0aCBkPSJNMjczIDM5LjVDMjczIDMwLjM4NzMgMjgwLjM4NyAyMyAyODkuNSAyMyAyOTguNjEzIDIzIDMwNiAzMC4zODczIDMwNiAzOS41IDMwNiA0OC42MTI3IDI5OC42MTMgNTYgMjg5LjUgNTYgMjgwLjM4NyA1NiAyNzMgNDguNjEyNyAyNzMgMzkuNVoiIGZpbGw9IiMxMDdDMTAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPg0KICAgIDx0ZXh0IGZpbGw9IiNGRkZGRkYiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4NS43NTIgNDUpIj4xPC90ZXh0Pg0KICAgIDxwYXRoIGQ9Ik01OTIgMjk3LjVDNTkyIDI4OC4zODcgNTk5LjYxMSAyODEgNjA5IDI4MSA2MTguMzg5IDI4MSA2MjYgMjg4LjM4NyA2MjYgMjk3LjUgNjI2IDMwNi42MTMgNjE4LjM4OSAzMTQgNjA5IDMxNCA1OTkuNjExIDMxNCA1OTIgMzA2LjYxMyA1OTIgMjk3LjVaIiBmaWxsPSIjMTA3QzEwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4NCiAgICA8dGV4dCBmaWxsPSIjRkZGRkZGIiBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjE1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MDUuMTY5IDMwMykiPjQ8L3RleHQ+DQogICAgPHBhdGggZD0iTTY3MSAyNjguNUM2NzEgMjU5LjM4NyA2NzguNjExIDI1MiA2ODggMjUyIDY5Ny4zODkgMjUyIDcwNSAyNTkuMzg3IDcwNSAyNjguNSA3MDUgMjc3LjYxMyA2OTcuMzg5IDI4NSA2ODggMjg1IDY3OC42MTEgMjg1IDY3MSAyNzcuNjEzIDY3MSAyNjguNVoiIGZpbGw9IiMxMDdDMTAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPg0KICAgIDx0ZXh0IGZpbGw9IiNGRkZGRkYiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY4My45MzYgMjc0KSI+NTwvdGV4dD4NCiAgICA8cGF0aCBkPSJNNzM2IDEyMS41QzczNiAxMTIuMzg3IDc0My42MTEgMTA1IDc1MyAxMDUgNzYyLjM4OSAxMDUgNzcwIDExMi4zODcgNzcwIDEyMS41IDc3MCAxMzAuNjEzIDc2Mi4zODkgMTM4IDc1MyAxMzggNzQzLjYxMSAxMzggNzM2IDEzMC42MTMgNzM2IDEyMS41WiIgZmlsbD0iIzEwN0MxMCIgZmlsbC1ydWxlPSJldmVub2RkIi8+DQogICAgPHRleHQgZmlsbD0iI0ZGRkZGRiIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzQ5LjIwMyAxMjcpIj42PC90ZXh0Pg0KICAgIDxwYXRoIGQ9Ik00MzQgODIuNUM0MzQgNzMuMzg3MyA0NDEuNjExIDY2IDQ1MSA2NiA0NjAuMzg5IDY2IDQ2OCA3My4zODczIDQ2OCA4Mi41IDQ2OCA5MS42MTI3IDQ2MC4zODkgOTkgNDUxIDk5IDQ0MS42MTEgOTkgNDM0IDkxLjYxMjcgNDM0IDgyLjVaIiBmaWxsPSIjMTA3QzEwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4NCiAgICA8dGV4dCBmaWxsPSIjRkZGRkZGIiBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNDAwIiBmb250LXNpemU9IjE1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NDMuNTQ5IDg4KSI+M2E8L3RleHQ+DQogICAgPHBhdGggZD0iTTczNiAyNTUuNUM3MzYgMjQ2LjM4NyA3NDMuNjExIDIzOSA3NTMgMjM5IDc2Mi4zODkgMjM5IDc3MCAyNDYuMzg3IDc3MCAyNTUuNSA3NzAgMjY0LjYxMyA3NjIuMzg5IDI3MiA3NTMgMjcyIDc0My42MTEgMjcyIDczNiAyNjQuNjEzIDczNiAyNTUuNVoiIGZpbGw9IiMxMDdDMTAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPg0KICAgIDx0ZXh0IGZpbGw9IiNGRkZGRkYiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc0OS4xMTUgMjYxKSI+NjwvdGV4dD4NCiAgICA8cGF0aCBkPSJNMzc3IDk4QzM3NyA4OC42MTEyIDM4NC4zODcgODEgMzkzLjUgODEgNDAyLjYxMyA4MSA0MTAgODguNjExMiA0MTAgOTggNDEwIDEwNy4zODkgNDAyLjYxMyAxMTUgMzkzLjUgMTE1IDM4NC4zODcgMTE1IDM3NyAxMDcuMzg5IDM3NyA5OFoiIGZpbGw9IiMxMDdDMTAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPg0KICAgIDx0ZXh0IGZpbGw9IiNGRkZGRkYiIGZvbnQtZmFtaWx5PSJTZWdvZSBVSSxTZWdvZSBVSV9NU0ZvbnRTZXJ2aWNlLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI0MDAiIGZvbnQtc2l6ZT0iMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4OS42ODcgMTAzKSI+MjwvdGV4dD4NCiAgICA8cGF0aCBkPSJNNDQ0IDIwMS41QzQ0NCAxOTIuMzg3IDQ1MS42MTEgMTg1IDQ2MSAxODUgNDcwLjM4OSAxODUgNDc4IDE5Mi4zODcgNDc4IDIwMS41IDQ3OCAyMTAuNjEzIDQ3MC4zODkgMjE4IDQ2MSAyMTggNDUxLjYxMSAyMTggNDQ0IDIxMC42MTMgNDQ0IDIwMS41WiIgZmlsbD0iIzEwN0MxMCIgZmlsbC1ydWxlPSJldmVub2RkIi8+DQogICAgPHRleHQgZmlsbD0iI0ZGRkZGRiIgZm9udC1mYW1pbHk9IlNlZ29lIFVJLFNlZ29lIFVJX01TRm9udFNlcnZpY2Usc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjQwMCIgZm9udC1zaXplPSIxNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDUyLjY3MiAyMDcpIj4zYjwvdGV4dD4NCiAgICA8dGV4dCBmaWxsPSIjM0M0MDQzIiBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNzAwIiBmb250LXNpemU9IjEzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg5NC4yODI5IDU1KSI+TW9uZ29EQiBBdGxhcyBvbjwvdGV4dD4NCiAgICA8dGV4dCBmaWxsPSIjM0M0MDQzIiBmb250LWZhbWlseT0iU2Vnb2UgVUksU2Vnb2UgVUlfTVNGb250U2VydmljZSxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNzAwIiBmb250LXNpemU9IjEzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMDQuOTUgNzEpIj5BenVyZSBhcyBzb3VyY2U8L3RleHQ+DQogICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAyNCkiIHRyYW5zZm9ybT0ibWF0cml4KDAuMDAwMTA0OTg3IDAgMCAwLjAwMDEwNDk4NyA3NzAgMTk5KSI+DQogICAgICA8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDI1KSIgdHJhbnNmb3JtPSJtYXRyaXgoMS4xNDA3NCAwIDAgMSAtMC41IDApIj4NCiAgICAgICAgPHVzZSB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bGluazpocmVmPSIjaW1nNyIgdHJhbnNmb3JtPSJzY2FsZSg2NDk0LjMyIDY0OTQuMzIpIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICAgIDxnPg0KICAgICAgPGc+DQogICAgICAgIDxwYXRoIGQ9Ik0yOC41NTkgOTMuMDI1NCAyOC41NTkgOTEuMjMyNyAxNS4xODQ3IDkxLjIzMjcgOC45MTAyNyA5Ny41NDI2IDQuMjk1MzkgOTcuNTQyNiAxNS4wMDcyIDg2LjU5MTIgMjIuMzExMiA4Ni41OTEyIDIyLjMxMTIgODQuODg3MiAxNC4yNjE4IDg0Ljg4NzIgMS43NzQ5NSA5Ny41NDI2IDAgOTcuNTQyNiAwIDk5LjMzNTQgNS4zNjAzNiA5OS4zMzU0IDExLjY4ODEgMTA1LjY0NSAyNi43ODQxIDEwNS42NDUgMjYuNzg0MSAxMDMuODUzIDEyLjM0NDggMTAzLjg1MyA3Ljg3MTkyIDk5LjMzNTQgMTguNzM0NiA5OS4zMzU0IDE4LjczNDYgOTcuNTQyNiAxMS40NTczIDk3LjU0MjYgMTUuODk0NyA5My4wMjU0IDI4LjU1OSA5My4wMjU0WiIgZmlsbD0iIzMyQkVERCIgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09Im1hdHJpeCgxLjAwMzAxIDAgMCAxIDQ5MS44NCAtMTguNTcyMikiLz4NCiAgICAgICAgPHBhdGggZD0iTTUuMTQ5NzUgMTAzLjA0MkM1LjE0OTc1IDEwNC40NzkgMy45OTY5NCAxMDUuNjQ0IDIuNTc0ODcgMTA1LjY0NCAxLjE1MjgxIDEwNS42NDQgNi45MDYzM2UtMDkgMTA0LjQ3OSA2LjkwNjMzZS0wOSAxMDMuMDQyIDYuOTA2MzNlLTA5IDEwMS42MDUgMS4xNTI4MSAxMDAuNDQgMi41NzQ4NyAxMDAuNDQgMy45OTY5NCAxMDAuNDQgNS4xNDk3NSAxMDEuNjA1IDUuMTQ5NzUgMTAzLjA0MloiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgdHJhbnNmb3JtPSJtYXRyaXgoMS4wMDMwMSAwIDAgMSA1MDkuODI5IC0yMy4xNzgyKSIvPg0KICAgICAgICA8cGF0aCBkPSJNNS4xNDk3NSAxMDMuMDQyQzUuMTQ5NzUgMTA0LjQ3OSAzLjk5Njk0IDEwNS42NDQgMi41NzQ4NyAxMDUuNjQ0IDEuMTUyODEgMTA1LjY0NCA2LjkwNjMzZS0wOSAxMDQuNDc5IDYuOTA2MzNlLTA5IDEwMy4wNDIgNi45MDYzM2UtMDkgMTAxLjYwNSAxLjE1MjgxIDEwMC40NCAyLjU3NDg3IDEwMC40NCAzLjk5Njk0IDEwMC40NCA1LjE0OTc1IDEwMS42MDUgNS4xNDk3NSAxMDMuMDQyWiIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09Im1hdHJpeCgxLjAwMzAxIDAgMCAxIDUxMi41MyAtMzUuNzk5OCkiLz4NCiAgICAgICAgPHBhdGggZD0iTTUuMTQ5NzUgMTAzLjA0MkM1LjE0OTc1IDEwNC40NzkgMy45OTY5NCAxMDUuNjQ0IDIuNTc0ODcgMTA1LjY0NCAxLjE1MjgxIDEwNS42NDQgNi45MDYzM2UtMDkgMTA0LjQ3OSA2LjkwNjMzZS0wOSAxMDMuMDQyIDYuOTA2MzNlLTA5IDEwMS42MDUgMS4xNTI4MSAxMDAuNDQgMi41NzQ4NyAxMDAuNDQgMy45OTY5NCAxMDAuNDQgNS4xNDk3NSAxMDEuNjA1IDUuMTQ5NzUgMTAzLjA0MloiIGZpbGw9IiNGRkZGRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgdHJhbnNmb3JtPSJtYXRyaXgoMS4wMDMwMSAwIDAgMSA1MTguNzk0IC0yOS40ODkpIi8+DQogICAgICAgIDxwYXRoIGQ9Ik01LjE0OTc1IDEwMy4wNDJDNS4xNDk3NSAxMDQuNDc5IDMuOTk2OTQgMTA1LjY0NCAyLjU3NDg3IDEwNS42NDQgMS4xNTI4MSAxMDUuNjQ0IDYuOTA2MzNlLTA5IDEwNC40NzkgNi45MDYzM2UtMDkgMTAzLjA0MiA2LjkwNjMzZS0wOSAxMDEuNjA1IDEuMTUyODEgMTAwLjQ0IDIuNTc0ODcgMTAwLjQ0IDMuOTk2OTQgMTAwLjQ0IDUuMTQ5NzUgMTAxLjYwNSA1LjE0OTc1IDEwMy4wNDJaIiBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDEuMDAzMDEgMCAwIDEgNTE2LjEyMiAtMTYuODY3MykiLz4NCiAgICAgICAgPHBhdGggZD0iTTYuMjE1MjIgMTAyLjUwNUM2LjIxNTIyIDEwNC4yMzkgNC44MjM4OSAxMDUuNjQ1IDMuMTA3NjEgMTA1LjY0NSAxLjM5MTMyIDEwNS42NDUgNC44MTQxMmUtMDggMTA0LjIzOSA0LjgxNDEyZS0wOCAxMDIuNTA1IDQuODE0MTJlLTA4IDEwMC43NyAxLjM5MTMyIDk5LjM2NDEgMy4xMDc2MSA5OS4zNjQxIDQuODIzODkgOTkuMzY0MSA2LjIxNTIyIDEwMC43NyA2LjIxNTIyIDEwMi41MDVaIiBmaWxsPSIjNTBFNkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDEuMDAzMDEgMCAwIDEgNTExLjkwNyAtMzUuMjYxNSkiLz4NCiAgICAgICAgPHBhdGggZD0iTTYuMjE1MjIgMTAyLjUwNUM2LjIxNTIyIDEwNC4yMzkgNC44MjM4OSAxMDUuNjQ1IDMuMTA3NjEgMTA1LjY0NSAxLjM5MTMyIDEwNS42NDUgNC44MTQxMmUtMDggMTA0LjIzOSA0LjgxNDEyZS0wOCAxMDIuNTA1IDQuODE0MTJlLTA4IDEwMC43NyAxLjM5MTMyIDk5LjM2NDEgMy4xMDc2MSA5OS4zNjQxIDQuODIzODkgOTkuMzY0MSA2LjIxNTIyIDEwMC43NyA2LjIxNTIyIDEwMi41MDVaIiBmaWxsPSJ1cmwoI2ZpbGwyNikiIGZpbGwtcnVsZT0iZXZlbm9kZCIgdHJhbnNmb3JtPSJtYXRyaXgoMS4wMDMwMSAwIDAgMSA1MTguMTcxIC0yOC45NTA2KSIvPg0KICAgICAgICA8cGF0aCBkPSJNNi4yMTUyMiAxMDIuNTA1QzYuMjE1MjIgMTA0LjIzOSA0LjgyMzg5IDEwNS42NDUgMy4xMDc2MSAxMDUuNjQ1IDEuMzkxMzIgMTA1LjY0NSA0LjgxNDEyZS0wOCAxMDQuMjM5IDQuODE0MTJlLTA4IDEwMi41MDUgNC44MTQxMmUtMDggMTAwLjc3IDEuMzkxMzIgOTkuMzY0MSAzLjEwNzYxIDk5LjM2NDEgNC44MjM4OSA5OS4zNjQxIDYuMjE1MjIgMTAwLjc3IDYuMjE1MjIgMTAyLjUwNVoiIGZpbGw9InVybCgjZmlsbDI3KSIgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09Im1hdHJpeCgxLjAwMzAxIDAgMCAxIDUxNS41ODggLTE2LjMyOSkiLz4NCiAgICAgICAgPHBhdGggZD0iTTYuMjE1MjIgMTAyLjUwNUM2LjIxNTIyIDEwNC4yMzkgNC44MjM4OSAxMDUuNjQ1IDMuMTA3NjEgMTA1LjY0NSAxLjM5MTMyIDEwNS42NDUgNC44MTQxMmUtMDggMTA0LjIzOSA0LjgxNDEyZS0wOCAxMDIuNTA1IDQuODE0MTJlLTA4IDEwMC43NyAxLjM5MTMyIDk5LjM2NDEgMy4xMDc2MSA5OS4zNjQxIDQuODIzODkgOTkuMzY0MSA2LjIxNTIyIDEwMC43NyA2LjIxNTIyIDEwMi41MDVaIiBmaWxsPSIjNTBFNkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDEuMDAzMDEgMCAwIDEgNTA5LjI5NSAtMjIuNjM5OCkiLz4NCiAgICAgICAgPHBhdGggZD0iTTEuNjg2MjEgOTQuMDk5MiA1LjUwMjM2IDk0LjA5OTIgNS41MDIzNiAxMDQuNzc2QzUuNTAyMzYgMTA1LjI1NSA1LjExODA5IDEwNS42NDMgNC42NDQwNyAxMDUuNjQzTDAuODYwODUzIDEwNS42NDVDMC4zODY4MzIgMTA1LjY0NSAwLjAwMjU2MTI5IDEwNS4yNTcgMC4wMDI1NjEyOSAxMDQuNzc4TDAgOTUuODAzMkMwLjAwMDQ3MDA0MiA5NC44NjI1IDAuNzU1MTQ3IDk0LjA5OTIgMS42ODYyMSA5NC4wOTkyWiIgZmlsbD0iIzk5OTk5OSIgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09Im1hdHJpeCgxLjAwMzAxIDAgMCAxIDQ4NC4yNyAtMzkuNzQ3OCkiLz4NCiAgICAgICAgPHBhdGggZD0iTTEuNjg2MjEgOTQuMDk5MiA1LjUwMjM2IDk0LjA5OTIgNS41MDIzNiAxMDQuNzc2QzUuNTAyMzYgMTA1LjI1NSA1LjExODA5IDEwNS42NDMgNC42NDQwNyAxMDUuNjQzTDAuODYwODUzIDEwNS42NDVDMC4zODY4MzIgMTA1LjY0NSAwLjAwMjU2MTI5IDEwNS4yNTcgMC4wMDI1NjEyOSAxMDQuNzc4TDAgOTUuODAzMkMwLjAwMDQ3MDA0MiA5NC44NjI1IDAuNzU1MTQ3IDk0LjA5OTIgMS42ODYyMSA5NC4wOTkyWiIgZmlsbD0iIzk5OTk5OSIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjAuNSIgdHJhbnNmb3JtPSJtYXRyaXgoMS4wMDMwMSAwIDAgMSA0ODQuMjcgLTM5Ljc0NzgpIi8+DQogICAgICAgIDxwYXRoIGQ9Ik0wIDk0LjA5OTIgMy44MTYxNSA5NC4wOTkyQzQuNzQ3MjEgOTQuMDk5MiA1LjUwMTg5IDk0Ljg2MjUgNS41MDIzNiA5NS44MDMyTDUuNTAyMzYgMTA0Ljc3NkM1LjUwMjM2IDEwNS4yNTUgNS4xMTgwOSAxMDUuNjQzIDQuNjQ0MDcgMTA1LjY0M0wwLjgyNTM1NCAxMDUuNjQ1QzAuMzYyOTI5IDEwNS42MjktMC4wMDM2MTczOSAxMDUuMjQ2LTAuMDAzMzQyMjMgMTA0Ljc3OEwwIDk0LjA5OTJaIiBmaWxsPSIjOTk5OTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDEuMDAzMDEgMCAwIDEgNTI5LjIxMyAtMzkuNzQ3OCkiLz4NCiAgICAgICAgPHBhdGggZD0iTTAgOTQuMDk5MiAzLjgxNjE1IDk0LjA5OTJDNC43NDcyMSA5NC4wOTkyIDUuNTAxODkgOTQuODYyNSA1LjUwMjM2IDk1LjgwMzJMNS41MDIzNiAxMDQuNzc2QzUuNTAyMzYgMTA1LjI1NSA1LjExODA5IDEwNS42NDMgNC42NDQwNyAxMDUuNjQzTDAuODI1MzU0IDEwNS42NDVDMC4zNjI5MjkgMTA1LjYyOS0wLjAwMzYxNzM5IDEwNS4yNDYtMC4wMDMzNDIyMyAxMDQuNzc4TDAgOTQuMDk5MloiIGZpbGw9IiM5OTk5OTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIwLjUiIHRyYW5zZm9ybT0ibWF0cml4KDEuMDAzMDEgMCAwIDEgNTI5LjIxMyAtMzkuNzQ3OCkiLz4NCiAgICAgICAgPHBhdGggZD0iTTUwLjMxMTEgMTAxLjkwOSA1MC4zMTExIDEwNS42NDUgMCAxMDUuNjQ1IDAgMTAxLjkwOUMwLjAwMDQ3MDA0MiAxMDAuOTY4IDAuNzU1MTQ3IDEwMC4yMDUgMS42ODYyMSAxMDAuMjA1TDQ4LjY2MDQgMTAwLjIwNUM0OS41Nzc2IDEwMC4yMjUgNTAuMzEwOCAxMDAuOTgyIDUwLjMxMTEgMTAxLjkwOVoiIGZpbGw9IiM5NDk0OTQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgdHJhbnNmb3JtPSJtYXRyaXgoMS4wMDMwMSAwIDAgMSA0ODQuMjcgLTQ1Ljg0OTIpIi8+DQogICAgICAgIDxwYXRoIGQ9Ik0wLjg2MDg1MyA5NC4wMTA1IDQuNjc3MDEgOTQuMDEwNUM1LjE1MTAzIDk0LjAxMDUgNS41MzUyOSA5NC4zOTkyIDUuNTM1MjkgOTQuODc3NUw1LjUzNzg2IDEwNS42NDUgMS42ODYyMSAxMDUuNjQ1QzAuNzU1MTQ3IDEwNS42NDUgMC4wMDA0NzAwMjEgMTA0Ljg4Mi0yLjExNTkxZS0wOCAxMDMuOTQxTDAgOTQuOTY5Qy0wLjA0OTA0NDIgOTQuNDkyNCAwLjI5MzQwNSA5NC4wNjY0IDAuNzY0ODgzIDk0LjAxNjcgMC43OTU5MTMgOTQuMDEzMSAwLjgyNzA5NSA5NC4wMTE0IDAuODU4MjkyIDk0LjAxMjNaIiBmaWxsPSIjOTk5OTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0ibWF0cml4KDEuMDAzMDEgMCAwIDEgNDg0LjI3IC02LjAxMDM4KSIvPg0KICAgICAgICA8cGF0aCBkPSJNMC44NjA4NTMgOTQuMDEwNSA0LjY3NzAxIDk0LjAxMDVDNS4xNTEwMyA5NC4wMTA1IDUuNTM1MjkgOTQuMzk5MiA1LjUzNTI5IDk0Ljg3NzVMNS41Mzc4NiAxMDUuNjQ1IDEuNjg2MjEgMTA1LjY0NUMwLjc1NTE0NyAxMDUuNjQ1IDAuMDAwNDcwMDIxIDEwNC44ODItMi4xMTU5MWUtMDggMTAzLjk0MUwwIDk0Ljk2OUMtMC4wNDkwNDQyIDk0LjQ5MjQgMC4yOTM0MDUgOTQuMDY2NCAwLjc2NDg4MyA5NC4wMTY3IDAuNzk1OTEzIDk0LjAxMzEgMC44MjcwOTUgOTQuMDExNCAwLjg1ODI5MiA5NC4wMTIzWiIgZmlsbD0iIzk5OTk5OSIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjAuNSIgdHJhbnNmb3JtPSJtYXRyaXgoMS4wMDMwMSAwIDAgMSA0ODQuMjcgLTYuMDEwMzgpIi8+DQogICAgICAgIDxwYXRoIGQ9Ik0wLjgyNTM1NCA5NC4wOTkyIDQuNjUwMzggOTQuMDk5MkM1LjEyNDQgOTQuMDk5MiA1LjUwODY3IDk0LjQ4OCA1LjUwODY3IDk0Ljk2NjNMNS41MDIzNiAxMDMuOTQxQzUuNTAxODkgMTA0Ljg4MiA0Ljc0NzIxIDEwNS42NDUgMy44MTYxNSAxMDUuNjQ1TDAgMTA1LjY0NSAwIDk1LjA1NzdDLTAuMDQ5MjM3OCA5NC41ODExIDAuMjkzMDM5IDk0LjE1NDMgMC43NjQ0OTYgOTQuMTA0NiAwLjc4NTgzNiA5NC4xMDI4IDAuODA3MjUgOTQuMTAxIDAuODI4Njk2IDk0LjEwMVoiIGZpbGw9IiM5OTk5OTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgdHJhbnNmb3JtPSJtYXRyaXgoMS4wMDMwMSAwIDAgMSA1MjkuMjEzIC02LjEwMDExKSIvPg0KICAgICAgICA8cGF0aCBkPSJNMC44MjUzNTQgOTQuMDk5MiA0LjY1MDM4IDk0LjA5OTJDNS4xMjQ0IDk0LjA5OTIgNS41MDg2NyA5NC40ODggNS41MDg2NyA5NC45NjYzTDUuNTAyMzYgMTAzLjk0MUM1LjUwMTg5IDEwNC44ODIgNC43NDcyMSAxMDUuNjQ1IDMuODE2MTUgMTA1LjY0NUwwIDEwNS42NDUgMCA5NS4wNTc3Qy0wLjA0OTIzNzggOTQuNTgxMSAwLjI5MzAzOSA5NC4xNTQzIDAuNzY0NDk2IDk0LjEwNDYgMC43ODU4MzYgOTQuMTAyOCAwLjgwNzI1IDk0LjEwMSAwLjgyODY5NiA5NC4xMDFaIiBmaWxsPSIjOTk5OTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMC41IiB0cmFuc2Zvcm09Im1hdHJpeCgxLjAwMzAxIDAgMCAxIDUyOS4yMTMgLTYuMTAwMTEpIi8+DQogICAgICAgIDxwYXRoIGQ9Ik0wIDEwMy45NDEgMCAxMDAuMjA1IDUwLjMxMTEgMTAwLjIwNSA1MC4zMTExIDEwMy45NDFDNTAuMzEwNyAxMDQuODgyIDQ5LjU1NTkgMTA1LjY0NSA0OC42MjQ5IDEwNS42NDVMMS42ODYyMSAxMDUuNjQ1QzAuNzU1MTQ3IDEwNS42NDUgMC4wMDA0NzAwMjEgMTA0Ljg4Mi0yLjExNTkxZS0wOCAxMDMuOTQxWiIgZmlsbD0iIzk0OTQ5NCIgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09Im1hdHJpeCgxLjAwMzAxIDAgMCAxIDQ4NC4yNyAtNi4wMTAzOCkiLz4NCiAgICAgIDwvZz4NCiAgICA8L2c+DQogICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAyOCkiIHRyYW5zZm9ybT0ibWF0cml4KDAuMDAwMTA0OTg3IDAgMCAwLjAwMDEwNDk4NyAtNiAzMjcpIj4NCiAgICAgIDxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMzApIiB0cmFuc2Zvcm09InNjYWxlKDEuMDA5MDIgMSkiPg0KICAgICAgICA8dXNlIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHhsaW5rOmhyZWY9IiNpbWcyOSIgdHJhbnNmb3JtPSJzY2FsZSg4NTk3Ljc5IDg1OTcuNzkpIi8+DQogICAgICA8L2c+DQogICAgPC9nPg0KICA8L2c+DQo8L3N2Zz4NCg==)
+<strong>Aprenderemos a:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Configurar el entorno:</strong> Iniciar una sesión de Spark con el conector oficial de MongoDB.</p></li>
+<li><p><strong>Conectar con MongoDB Atlas:</strong> Usaremos una base de datos en la nube para un ejemplo realista.</p></li>
+<li><p><strong>Poblar MongoDB:</strong> Insertaremos datos de ejemplo directamente desde el notebook.</p></li>
+<li><p><strong>Leer datos:</strong> Cargar una colección de MongoDB en un DataFrame de Spark.</p></li>
+<li><p><strong>Analizar datos:</strong> Utilizar el poder de Spark SQL y las operaciones de DataFrame para procesar la información.</p></li>
+<li><p><strong>Escribir datos:</strong> Guardar los resultados de nuestro análisis de vuelta en una nueva colección en MongoDB.</p></li>
+</ol>
+<section id="configuracion-del-entorno">
+<h2>1. Configuración del Entorno<a class="headerlink" href="#configuracion-del-entorno" title="Link to this heading">#</a></h2>
+<p>Esta es la parte más importante. Necesitamos tres cosas:</p>
+<ol class="arabic simple">
+<li><p><strong>Una base de datos MongoDB:</strong> Usaremos el servicio gratuito de <strong>MongoDB Atlas</strong>.</p></li>
+<li><p><strong>Las librerías necesarias:</strong> <code class="docutils literal notranslate"><span class="pre">pyspark</span></code> para Spark y <code class="docutils literal notranslate"><span class="pre">pymongo</span></code> para interactuar con MongoDB.</p></li>
+<li><p><strong>El Conector de Spark para MongoDB:</strong> Un paquete que le permite a Spark comunicarse con MongoDB.</p></li>
+</ol>
+<section id="pasos-para-configurar-mongodb-atlas-accion-requerida">
+<h3>1.1. Pasos para Configurar MongoDB Atlas (¡Acción Requerida!)<a class="headerlink" href="#pasos-para-configurar-mongodb-atlas-accion-requerida" title="Link to this heading">#</a></h3>
+<p>Si no tienes una cuenta, sigue estos pasos (toma 5-10 minutos):</p>
+<ol class="arabic simple">
+<li><p><strong>Ve a <a class="reference external" href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a> y regístrate.</strong></p></li>
+<li><p><strong>Crea un clúster gratuito (Tier M0).</strong> Puedes elegir cualquier proveedor de nube y región.</p></li>
+<li><p><strong>Crea un usuario de base de datos:</strong> En la sección «Database Access», crea un usuario. <strong>Guarda bien el nombre de usuario y la contraseña.</strong></p></li>
+<li><p><strong>Configura el acceso de red:</strong> En la sección «Network Access», agrega tu dirección IP actual o permite el acceso desde cualquier lugar (<code class="docutils literal notranslate"><span class="pre">0.0.0.0/0</span></code> - <strong>solo para este tutorial, no es seguro para producción</strong>).</p></li>
+<li><p><strong>Obtén la cadena de conexión:</strong> Ve a «Database», haz clic en «Connect» en tu clúster, selecciona «Connect your application» y copia la cadena de conexión. <strong>Se verá algo así:</strong> <code class="docutils literal notranslate"><span class="pre">mongodb+srv://&lt;username&gt;:&lt;password&gt;&#64;clustername.mongodb.net/</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># =================================================================</span>
+<span class="c1"># 1.2. Instalar las dependencias</span>
+<span class="c1"># =================================================================</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyspark</span> <span class="n">pymongo</span> <span class="o">-</span><span class="n">q</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/1.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.1/1.7 MB</span> <span class=" -Color -Color-Red">3.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.6/1.7 MB</span> <span class=" -Color -Color-Red">8.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">1.7/1.7 MB</span> <span class=" -Color -Color-Red">16.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.7/1.7 MB</span> <span class=" -Color -Color-Red">14.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/331.1 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">331.1/331.1 kB</span> <span class=" -Color -Color-Red">22.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># =================================================================</span>
+<span class="c1"># 1.3. Iniciar la Sesión de Spark con el Conector de MongoDB</span>
+<span class="c1"># =================================================================</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="c1"># Reemplaza esta versión si es necesario. Búscala en el repositorio de Maven.</span>
+<span class="n">mongo_spark_connector_version</span> <span class="o">=</span> <span class="s2">"3.0.1"</span>
+<span class="n">mongo_spark_connector</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"org.mongodb.spark:mongo-spark-connector_2.12:</span><span class="si">{</span><span class="n">mongo_spark_connector_version</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span>\
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"SparkMongoDBIntegration"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.jars.packages"</span><span class="p">,</span> <span class="n">mongo_spark_connector</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"SparkSession iniciada con el conector de MongoDB."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SparkSession iniciada con el conector de MongoDB.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="poblando-mongodb-con-datos-de-ejemplo">
+<h2>2. Poblando MongoDB con Datos de Ejemplo<a class="headerlink" href="#poblando-mongodb-con-datos-de-ejemplo" title="Link to this heading">#</a></h2>
+<p>Para que nuestro notebook sea autocontenido, vamos a insertar algunos datos en nuestra base de datos de Atlas usando la librería <code class="docutils literal notranslate"><span class="pre">pymongo</span></code>. Esto también nos sirve para verificar que nuestra cadena de conexión es correcta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pymongo</span>
+
+<span class="c1"># =================================================================</span>
+<span class="c1"># ¡ACCIÓN REQUERIDA!</span>
+<span class="c1"># Reemplaza la cadena de conexión con la tuya de MongoDB Atlas.</span>
+<span class="c1"># Asegúrate de poner tu usuario y contraseña.</span>
+<span class="c1"># =================================================================</span>
+<span class="c1"># =================================================================</span>
+<span class="c1"># ¡ACCIÓN REQUERIDA!</span>
+<span class="c1"># Reemplaza la cadena de conexión con la tuya de MongoDB Atlas.</span>
+<span class="c1"># =================================================================</span>
+<span class="n">MONGO_URI</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="c1"># Definimos el nombre de nuestra base de datos y colección</span>
+<span class="n">DB_NAME</span> <span class="o">=</span> <span class="s2">"universidad"</span>
+<span class="n">COLLECTION_NAME</span> <span class="o">=</span> <span class="s2">"cientificos"</span>
+
+<span class="c1"># Datos de ejemplo que vamos a insertar</span>
+<span class="n">cientificos_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"Albert"</span><span class="p">,</span> <span class="s2">"apellido"</span><span class="p">:</span> <span class="s2">"Einstein"</span><span class="p">,</span> <span class="s2">"campo"</span><span class="p">:</span> <span class="s2">"Física"</span><span class="p">,</span> <span class="s2">"nacimiento"</span><span class="p">:</span> <span class="mi">1879</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"Marie"</span><span class="p">,</span> <span class="s2">"apellido"</span><span class="p">:</span> <span class="s2">"Curie"</span><span class="p">,</span> <span class="s2">"campo"</span><span class="p">:</span> <span class="s2">"Química"</span><span class="p">,</span> <span class="s2">"nacimiento"</span><span class="p">:</span> <span class="mi">1867</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"Isaac"</span><span class="p">,</span> <span class="s2">"apellido"</span><span class="p">:</span> <span class="s2">"Newton"</span><span class="p">,</span> <span class="s2">"campo"</span><span class="p">:</span> <span class="s2">"Física"</span><span class="p">,</span> <span class="s2">"nacimiento"</span><span class="p">:</span> <span class="mi">1643</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"Charles"</span><span class="p">,</span> <span class="s2">"apellido"</span><span class="p">:</span> <span class="s2">"Darwin"</span><span class="p">,</span> <span class="s2">"campo"</span><span class="p">:</span> <span class="s2">"Biología"</span><span class="p">,</span> <span class="s2">"nacimiento"</span><span class="p">:</span> <span class="mi">1809</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"Rosalind"</span><span class="p">,</span> <span class="s2">"apellido"</span><span class="p">:</span> <span class="s2">"Franklin"</span><span class="p">,</span> <span class="s2">"campo"</span><span class="p">:</span> <span class="s2">"Química"</span><span class="p">,</span> <span class="s2">"nacimiento"</span><span class="p">:</span> <span class="mi">1920</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1"># Conectamos a MongoDB y poblamos la colección</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="n">MONGO_URI</span><span class="p">)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">DB_NAME</span><span class="p">]</span>
+    <span class="n">collection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">COLLECTION_NAME</span><span class="p">]</span>
+
+    <span class="c1"># Limpiamos la colección por si ya existían datos</span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">delete_many</span><span class="p">({})</span>
+
+    <span class="c1"># Insertamos los nuevos datos</span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">insert_many</span><span class="p">(</span><span class="n">cientificos_data</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Datos insertados correctamente en la colección '</span><span class="si">{</span><span class="n">COLLECTION_NAME</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ Error al conectar o insertar datos: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Datos insertados correctamente en la colección 'cientificos'.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="leer-datos-de-mongodb-con-spark">
+<h2>3. Leer Datos de MongoDB con Spark<a class="headerlink" href="#leer-datos-de-mongodb-con-spark" title="Link to this heading">#</a></h2>
+<p>Ahora que tenemos datos en MongoDB, vamos a usar Spark para leerlos y cargarlos en un DataFrame. Un DataFrame es una tabla de datos distribuida con columnas nombradas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Leemos los datos desde MongoDB a un DataFrame de Spark</span>
+<span class="n">df_cientificos</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"mongo"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"uri"</span><span class="p">,</span> <span class="n">MONGO_URI</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"database"</span><span class="p">,</span> <span class="n">DB_NAME</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"collection"</span><span class="p">,</span> <span class="n">COLLECTION_NAME</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="c1"># Mostramos el esquema inferido por Spark</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Esquema del DataFrame:"</span><span class="p">)</span>
+<span class="n">df_cientificos</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+
+<span class="c1"># Mostramos los datos cargados</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Datos cargados desde MongoDB:"</span><span class="p">)</span>
+<span class="n">df_cientificos</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Esquema del DataFrame:
+root
+ |-- _id: struct (nullable = true)
+ |    |-- oid: string (nullable = true)
+ |-- apellido: string (nullable = true)
+ |-- campo: string (nullable = true)
+ |-- nacimiento: integer (nullable = true)
+ |-- nombre: string (nullable = true)
+
+
+Datos cargados desde MongoDB:
++--------------------+--------+--------+----------+--------+
+|                 _id|apellido|   campo|nacimiento|  nombre|
++--------------------+--------+--------+----------+--------+
+|{68ccb513e7510f01...|Einstein|  Física|      1879|  Albert|
+|{68ccb513e7510f01...|   Curie| Química|      1867|   Marie|
+|{68ccb513e7510f01...|  Newton|  Física|      1643|   Isaac|
+|{68ccb513e7510f01...|  Darwin|Biología|      1809| Charles|
+|{68ccb513e7510f01...|Franklin| Química|      1920|Rosalind|
++--------------------+--------+--------+----------+--------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analizar-los-datos-con-spark">
+<h2>4. Analizar los Datos con Spark<a class="headerlink" href="#analizar-los-datos-con-spark" title="Link to this heading">#</a></h2>
+<p>Una vez que los datos están en un DataFrame de Spark, podemos usar todo su poder para el análisis. Realizaremos un análisis simple: <strong>encontrar a los científicos nacidos en el siglo XIX y agruparlos por campo.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">count</span>
+
+<span class="c1"># Filtramos los científicos nacidos en el siglo XIX (entre 1801 y 1900)</span>
+<span class="n">df_siglo_xix</span> <span class="o">=</span> <span class="n">df_cientificos</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">df_cientificos</span><span class="o">.</span><span class="n">nacimiento</span> <span class="o">&gt;</span> <span class="mi">1800</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_cientificos</span><span class="o">.</span><span class="n">nacimiento</span> <span class="o">&lt;=</span> <span class="mi">1900</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Científicos nacidos en el siglo XIX:"</span><span class="p">)</span>
+<span class="n">df_siglo_xix</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Agrupamos por campo y contamos cuántos hay en cada uno</span>
+<span class="n">df_conteo_por_campo</span> <span class="o">=</span> <span class="n">df_siglo_xix</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"campo"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"numero_de_cientificos"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Conteo de científicos del siglo XIX por campo:"</span><span class="p">)</span>
+<span class="n">df_conteo_por_campo</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Científicos nacidos en el siglo XIX:
++--------------------+--------+--------+----------+-------+
+|                 _id|apellido|   campo|nacimiento| nombre|
++--------------------+--------+--------+----------+-------+
+|{68ccb513e7510f01...|Einstein|  Física|      1879| Albert|
+|{68ccb513e7510f01...|   Curie| Química|      1867|  Marie|
+|{68ccb513e7510f01...|  Darwin|Biología|      1809|Charles|
++--------------------+--------+--------+----------+-------+
+
+
+Conteo de científicos del siglo XIX por campo:
++--------+---------------------+
+|   campo|numero_de_cientificos|
++--------+---------------------+
+|  Física|                    1|
+| Química|                    1|
+|Biología|                    1|
++--------+---------------------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="escribir-los-resultados-de-vuelta-a-mongodb">
+<h2>5. Escribir los Resultados de Vuelta a MongoDB<a class="headerlink" href="#escribir-los-resultados-de-vuelta-a-mongodb" title="Link to this heading">#</a></h2>
+<p>Finalmente, guardaremos el resultado de nuestro análisis (el DataFrame <code class="docutils literal notranslate"><span class="pre">df_conteo_por_campo</span></code>) en una nueva colección en MongoDB.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definimos el nombre de la nueva colección para los resultados</span>
+<span class="n">RESULTS_COLLECTION_NAME</span> <span class="o">=</span> <span class="s2">"conteo_por_campo"</span>
+
+<span class="c1"># Escribimos el DataFrame de resultados en MongoDB</span>
+<span class="c1"># El modo "overwrite" borrará la colección si ya existe y la creará de nuevo.</span>
+<span class="n">df_conteo_por_campo</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"mongo"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"uri"</span><span class="p">,</span> <span class="n">MONGO_URI</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"database"</span><span class="p">,</span> <span class="n">DB_NAME</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"collection"</span><span class="p">,</span> <span class="n">RESULTS_COLLECTION_NAME</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Resultados guardados en la colección '</span><span class="si">{</span><span class="n">RESULTS_COLLECTION_NAME</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+
+<span class="c1"># Verificación final usando pymongo para confirmar que los datos se escribieron</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="n">MONGO_URI</span><span class="p">)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">DB_NAME</span><span class="p">]</span>
+    <span class="n">results_collection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">RESULTS_COLLECTION_NAME</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Verificando los datos escritos en MongoDB:"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">results_collection</span><span class="o">.</span><span class="n">find</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ Error al verificar los datos: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Detenemos la sesión de Spark</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Resultados guardados en la colección 'conteo_por_campo'.
+
+Verificando los datos escritos en MongoDB:
+{'_id': ObjectId('68ccb54c98f4a667c551597b'), 'campo': 'Física', 'numero_de_cientificos': 1}
+{'_id': ObjectId('68ccb54c98f4a667c551597c'), 'campo': 'Química', 'numero_de_cientificos': 1}
+{'_id': ObjectId('68ccb54c98f4a667c551597d'), 'campo': 'Biología', 'numero_de_cientificos': 1}
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Ejemplo con datos reales</p>
+<p>Vamos a reemplazar los datos de los científicos con un conjunto de datos público muy popular: Títulos de Netflix. Este dataset contiene información sobre películas y shows de TV, su tipo, país de origen, año de lanzamiento, etc. Es perfecto para realizar agregaciones y filtros realistas.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="integracion-de-apache-spark-y-mongodb-con-pyspark-caso-practico-con-datos-de-netflix">
+<h1>Integración de Apache Spark y MongoDB con PySpark: Caso Práctico con Datos de Netflix<a class="headerlink" href="#integracion-de-apache-spark-y-mongodb-con-pyspark-caso-practico-con-datos-de-netflix" title="Link to this heading">#</a></h1>
+<p><strong>Objetivo del Notebook:</strong> Aprender a conectar Apache Spark con una base de datos MongoDB para realizar operaciones de lectura, análisis y escritura. Este es un patrón muy común en arquitecturas de Big Data, donde MongoDB se utiliza como un sistema de almacenamiento flexible y Spark se usa para el procesamiento a gran escala.</p>
+<p><strong>Aprenderemos a:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Configurar el entorno:</strong> Iniciar una sesión de Spark con el conector oficial de MongoDB.</p></li>
+<li><p><strong>Conectar con MongoDB Atlas:</strong> Usaremos una base de datos en la nube para un ejemplo realista.</p></li>
+<li><p><strong>Poblar MongoDB:</strong> Descargaremos un dataset real (Títulos de Netflix) y lo insertaremos en nuestra base de datos.</p></li>
+<li><p><strong>Leer datos:</strong> Cargar la colección de Netflix en un DataFrame de Spark.</p></li>
+<li><p><strong>Analizar datos:</strong> Utilizar el poder de Spark para realizar agregaciones y filtros sobre los datos.</p></li>
+<li><p><strong>Escribir datos:</strong> Guardar los resultados de nuestro análisis de vuelta en una nueva colección en MongoDB.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># =================================================================</span>
+<span class="c1"># Paso 1: Instalar las dependencias</span>
+<span class="c1"># =================================================================</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyspark</span> <span class="n">pymongo</span> <span class="n">pandas</span> <span class="o">-</span><span class="n">q</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># =================================================================</span>
+<span class="c1"># Paso 2: Iniciar la Sesión de Spark con el Conector de MongoDB</span>
+<span class="c1"># =================================================================</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+
+<span class="c1"># Versión del conector de Spark para MongoDB</span>
+<span class="n">mongo_spark_connector_version</span> <span class="o">=</span> <span class="s2">"3.0.1"</span>
+<span class="n">mongo_spark_connector</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"org.mongodb.spark:mongo-spark-connector_2.12:</span><span class="si">{</span><span class="n">mongo_spark_connector_version</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span>\
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"SparkMongoDBNetflix"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.jars.packages"</span><span class="p">,</span> <span class="n">mongo_spark_connector</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"✅ SparkSession iniciada con el conector de MongoDB."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ SparkSession iniciada con el conector de MongoDB.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="poblando-mongodb-con-el-dataset-de-netflix">
+<h2>3. Poblando MongoDB con el Dataset de Netflix<a class="headerlink" href="#poblando-mongodb-con-el-dataset-de-netflix" title="Link to this heading">#</a></h2>
+<p>Ahora, vamos a descargar el dataset de Netflix, procesarlo con la librería Pandas y subirlo a nuestra base de datos en MongoDB Atlas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pymongo</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="c1"># =================================================================</span>
+<span class="c1"># ¡ACCIÓN REQUERIDA!</span>
+<span class="c1"># Reemplaza la cadena de conexión con la tuya de MongoDB Atlas.</span>
+<span class="c1"># Asegúrate de poner tu usuario y contraseña.</span>
+<span class="c1"># =================================================================</span>
+<span class="n">MONGO_URI</span> <span class="o">=</span> <span class="s2">""</span>
+
+<span class="c1"># Definimos el nombre de nuestra base de datos y colección</span>
+<span class="n">DB_NAME</span> <span class="o">=</span> <span class="s2">"netflix"</span>
+<span class="n">COLLECTION_NAME</span> <span class="o">=</span> <span class="s2">"titles"</span>
+
+<span class="c1"># URL del dataset de Netflix en formato CSV</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-20/netflix_titles.csv"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📥 Descargando el dataset de Netflix..."</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Descargar el contenido del archivo CSV</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span> <span class="c1"># Lanza un error si la descarga falla</span>
+
+    <span class="c1"># Leer el CSV en un DataFrame de Pandas</span>
+    <span class="n">csv_data</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">df_pandas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_data</span><span class="p">)</span>
+
+    <span class="c1"># Limpieza básica: Reemplazar valores nulos (NaN) para evitar errores en MongoDB</span>
+    <span class="n">df_pandas</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Convertir el DataFrame a una lista de diccionarios (formato JSON)</span>
+    <span class="n">data_to_insert</span> <span class="o">=</span> <span class="n">df_pandas</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">'records'</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📄 Se leyeron </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_to_insert</span><span class="p">)</span><span class="si">}</span><span class="s2"> documentos del archivo."</span><span class="p">)</span>
+
+    <span class="c1"># Conectar a MongoDB y poblar la colección</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"⏳ Conectando a MongoDB Atlas y poblando la colección..."</span><span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="n">MONGO_URI</span><span class="p">)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">DB_NAME</span><span class="p">]</span>
+    <span class="n">collection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">COLLECTION_NAME</span><span class="p">]</span>
+
+    <span class="c1"># Limpiamos la colección por si ya existían datos</span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">delete_many</span><span class="p">({})</span>
+
+    <span class="c1"># Insertamos los nuevos datos</span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">insert_many</span><span class="p">(</span><span class="n">data_to_insert</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ ¡Éxito! </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_to_insert</span><span class="p">)</span><span class="si">}</span><span class="s2"> documentos insertados en la colección '</span><span class="si">{</span><span class="n">COLLECTION_NAME</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ Ocurrió un error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📥 Descargando el dataset de Netflix...
+📄 Se leyeron 7787 documentos del archivo.
+⏳ Conectando a MongoDB Atlas y poblando la colección...
+✅ ¡Éxito! 7787 documentos insertados en la colección 'titles'.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>4. Leer Datos de MongoDB con Spark<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Con los datos ya en MongoDB, usaremos Spark para leer la colección completa y cargarla en un DataFrame distribuido.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Leemos los datos desde la colección de Netflix</span>
+<span class="n">df_netflix</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"mongo"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"uri"</span><span class="p">,</span> <span class="n">MONGO_URI</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"database"</span><span class="p">,</span> <span class="n">DB_NAME</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"collection"</span><span class="p">,</span> <span class="n">COLLECTION_NAME</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📝 Esquema del DataFrame de Netflix:"</span><span class="p">)</span>
+<span class="n">df_netflix</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🎬 Algunos datos cargados desde la colección de Netflix:"</span><span class="p">)</span>
+<span class="n">df_netflix</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📝 Esquema del DataFrame de Netflix:
+root
+ |-- _id: struct (nullable = true)
+ |    |-- oid: string (nullable = true)
+ |-- cast: string (nullable = true)
+ |-- country: string (nullable = true)
+ |-- date_added: string (nullable = true)
+ |-- description: string (nullable = true)
+ |-- director: string (nullable = true)
+ |-- duration: string (nullable = true)
+ |-- listed_in: string (nullable = true)
+ |-- rating: string (nullable = true)
+ |-- release_year: integer (nullable = true)
+ |-- show_id: string (nullable = true)
+ |-- title: string (nullable = true)
+ |-- type: string (nullable = true)
+
+
+🎬 Algunos datos cargados desde la colección de Netflix:
++--------------------+--------------------+-------------+-----------------+--------------------+-----------------+---------+--------------------+------+------------+-------+-----+-------+
+|                 _id|                cast|      country|       date_added|         description|         director| duration|           listed_in|rating|release_year|show_id|title|   type|
++--------------------+--------------------+-------------+-----------------+--------------------+-----------------+---------+--------------------+------+------------+-------+-----+-------+
+|{68ccb6974b8b31bd...|João Miguel, Bian...|       Brazil|  August 14, 2020|In a future where...|                 |4 Seasons|International TV ...| TV-MA|        2020|     s1|   3%|TV Show|
+|{68ccb6974b8b31bd...|Demián Bichir, Hé...|       Mexico|December 23, 2016|After a devastati...|Jorge Michel Grau|   93 min|Dramas, Internati...| TV-MA|        2016|     s2| 7:19|  Movie|
+|{68ccb6974b8b31bd...|Tedd Chan, Stella...|    Singapore|December 20, 2018|When an army recr...|     Gilbert Chan|   78 min|Horror Movies, In...|     R|        2011|     s3|23:59|  Movie|
+|{68ccb6974b8b31bd...|Elijah Wood, John...|United States|November 16, 2017|In a postapocalyp...|      Shane Acker|   80 min|Action &amp; Adventur...| PG-13|        2009|     s4|    9|  Movie|
+|{68ccb6974b8b31bd...|Jim Sturgess, Kev...|United States|  January 1, 2020|A brilliant group...|   Robert Luketic|  123 min|              Dramas| PG-13|        2008|     s5|   21|  Movie|
++--------------------+--------------------+-------------+-----------------+--------------------+-----------------+---------+--------------------+------+------------+-------+-----+-------+
+only showing top 5 rows
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>5. Analizar los Datos con Spark<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>Ahora realizaremos un análisis sobre el DataFrame:</p>
+<ol class="arabic simple">
+<li><p>Contar cuántas producciones son <strong>Películas (Movie)</strong> vs. <strong>Shows de TV (TV Show)</strong>.</p></li>
+<li><p>Encontrar el <strong>Top 5 de países</strong> con la mayor cantidad de producciones en Netflix.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">desc</span>
+
+<span class="c1"># 1. Conteo por tipo (Movie vs. TV Show)</span>
+<span class="n">df_conteo_tipo</span> <span class="o">=</span> <span class="n">df_netflix</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📊 Conteo de producciones por tipo:"</span><span class="p">)</span>
+<span class="n">df_conteo_tipo</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># 2. Top 5 países con más producciones</span>
+<span class="c1"># Filtramos para excluir registros donde el país no está especificado</span>
+<span class="n">df_conteo_pais</span> <span class="o">=</span> <span class="n">df_netflix</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"country"</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"country"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">count</span><span class="p">()</span>\
+    <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="s2">"count"</span><span class="p">))</span>\
+    <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🏆 Top 5 países con más producciones en Netflix:"</span><span class="p">)</span>
+<span class="n">df_conteo_pais</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📊 Conteo de producciones por tipo:
++-------+-----+
+|   type|count|
++-------+-----+
+|TV Show| 2410|
+|  Movie| 5377|
++-------+-----+
+
+
+🏆 Top 5 países con más producciones en Netflix:
++--------------+-----+
+|       country|count|
++--------------+-----+
+| United States| 2555|
+|         India|  923|
+|United Kingdom|  397|
+|         Japan|  226|
+|   South Korea|  183|
++--------------+-----+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="escribir-resultados-de-vuelta-a-mongodb">
+<h2>6. Escribir Resultados de Vuelta a MongoDB<a class="headerlink" href="#escribir-resultados-de-vuelta-a-mongodb" title="Link to this heading">#</a></h2>
+<p>Finalmente, guardaremos el resultado de nuestro análisis (el Top 5 de países) en una <strong>nueva colección</strong> en MongoDB para que pueda ser consultado por otras aplicaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definimos el nombre de la nueva colección para los resultados</span>
+<span class="n">RESULTS_COLLECTION_NAME</span> <span class="o">=</span> <span class="s2">"top_paises_productores"</span>
+
+<span class="c1"># Escribimos el DataFrame de resultados en MongoDB</span>
+<span class="c1"># El modo "overwrite" borrará la colección si ya existe y la creará de nuevo.</span>
+<span class="n">df_conteo_pais</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"mongo"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"uri"</span><span class="p">,</span> <span class="n">MONGO_URI</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"database"</span><span class="p">,</span> <span class="n">DB_NAME</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"collection"</span><span class="p">,</span> <span class="n">RESULTS_COLLECTION_NAME</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span>\
+    <span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Resultados guardados en la colección '</span><span class="si">{</span><span class="n">RESULTS_COLLECTION_NAME</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+
+<span class="c1"># Verificación final usando pymongo para confirmar que los datos se escribieron</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="n">MONGO_URI</span><span class="p">)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">DB_NAME</span><span class="p">]</span>
+    <span class="n">results_collection</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">RESULTS_COLLECTION_NAME</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🧐 Verificando los datos escritos en MongoDB:"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">results_collection</span><span class="o">.</span><span class="n">find</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ Error al verificar los datos: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Detenemos la sesión de Spark para liberar recursos</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Resultados guardados en la colección 'top_paises_productores'.
+
+🧐 Verificando los datos escritos en MongoDB:
+{'_id': ObjectId('68ccb6b9a0f4ab6fc60db1ae'), 'country': 'United States', 'count': 2555}
+{'_id': ObjectId('68ccb6b9a0f4ab6fc60db1af'), 'country': 'India', 'count': 923}
+{'_id': ObjectId('68ccb6b9a0f4ab6fc60db1b0'), 'country': 'United Kingdom', 'count': 397}
+{'_id': ObjectId('68ccb6b9a0f4ab6fc60db1b1'), 'country': 'Japan', 'count': 226}
+{'_id': ObjectId('68ccb6b9a0f4ab6fc60db1b2'), 'country': 'South Korea', 'count': 183}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\UnidadBigData"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Integración de Apache Spark y MongoDB con PySpark</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-entorno">1. Configuración del Entorno</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-para-configurar-mongodb-atlas-accion-requerida">1.1. Pasos para Configurar MongoDB Atlas (¡Acción Requerida!)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poblando-mongodb-con-datos-de-ejemplo">2. Poblando MongoDB con Datos de Ejemplo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leer-datos-de-mongodb-con-spark">3. Leer Datos de MongoDB con Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analizar-los-datos-con-spark">4. Analizar los Datos con Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escribir-los-resultados-de-vuelta-a-mongodb">5. Escribir los Resultados de Vuelta a MongoDB</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#integracion-de-apache-spark-y-mongodb-con-pyspark-caso-practico-con-datos-de-netflix">Integración de Apache Spark y MongoDB con PySpark: Caso Práctico con Datos de Netflix</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poblando-mongodb-con-el-dataset-de-netflix">3. Poblando MongoDB con el Dataset de Netflix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4. Leer Datos de MongoDB con Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5. Analizar los Datos con Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escribir-resultados-de-vuelta-a-mongodb">6. Escribir Resultados de Vuelta a MongoDB</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1586 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Aprendizaje de Máquina con Big Data y Apache Spark &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/UnidadBigData/Exploración y preparación de datos';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/UnidadBigData/Exploración y preparación de datos.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/UnidadBigData/Exploración y preparación de datos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/UnidadBigData/Exploración y preparación de datos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Aprendizaje de Máquina con Big Data y Apache Spark</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-y-preparacion-de-los-datos">Exploración y preparación de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-problema">Descripción del problema</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-ambiente-de-google-colaboratory">Configuración del ambiente de Google Colaboratory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-sesion-de-spark-e-importar-los-datos">Crear Sesión de Spark e importar los datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#division-en-el-conjunto-de-entrenamiento-y-conjunto-de-evaluacion">División en el conjunto de entrenamiento y conjunto de evaluación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-los-datos">Exploración de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-geoespaciales">Datos geoespaciales</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correlaciones">Correlaciones</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-nuevos-atributos">Creación de nuevos atributos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparacion-de-los-datos">Preparación de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#separacion-de-caracteristicas-predictores-y-etiquetas">Separación de características/predictores y etiquetas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-datos-nulos">Tratamiento de datos nulos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-categoricas">Características categóricas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion">Normalización</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-pipeline-secuencia-de-operaciones">Creación del Pipeline (Secuencia de operaciones)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="aprendizaje-de-maquina-con-big-data-y-apache-spark">
+<h1>Aprendizaje de Máquina con Big Data y Apache Spark<a class="headerlink" href="#aprendizaje-de-maquina-con-big-data-y-apache-spark" title="Link to this heading">#</a></h1>
+<section id="exploracion-y-preparacion-de-los-datos">
+<h2>Exploración y preparación de los datos<a class="headerlink" href="#exploracion-y-preparacion-de-los-datos" title="Link to this heading">#</a></h2>
+<p><img alt="Spark Logo" src="http://spark-mooc.github.io/web-assets/images/ta_Spark-logo-small.png" /> + <img alt="Python Logo" src="http://spark-mooc.github.io/web-assets/images/python-logo-master-v3-TM-flattened_small.png" /></p>
+<p>Para el procesamiento de Big Data utilizando Ciencia de Datos/Analítica de Datos/Aprendizaje de Máquina, existe una metodología ampliamente utilizada en la industria conocida como CRISP-DM creada por IBM, el siguiente diagrama representa la secuencia de pasos correspondientes a esta metodología:</p>
+<p><img alt="CRISP-DM" src="https://www.ibm.com/docs/es/SS3RA7_sub/modeler_crispdm_ddita/clementine/images/crisp_process.jpg" /></p>
+<p>En este diagrama se identifican las siguientes etapas:</p>
+<ol class="arabic simple">
+<li><p>Entendimiento del negocio (objetivos)</p></li>
+<li><p>Exploración de los datos</p></li>
+<li><p>Preparación de los datos</p></li>
+<li><p>Modelado</p></li>
+<li><p>Evaluación</p></li>
+<li><p>Despliegue</p></li>
+</ol>
+<p>El cual representa un proceso iterativo, que comienza con el entendimiento del negocio y termina, y vuelve a comenzar, con la evaluación de resultados.</p>
+<p>Este notebook está inspirado en el capítulo 2 del libro <a class="reference external" href="https://github.com/ageron/handson-ml3/blob/main/02_end_to_end_machine_learning_project.ipynb">Hands-on Machine Learning with Scikit-Learn, Keras and TensorFlow</a></p>
+</section>
+<section id="descripcion-del-problema">
+<h2>Descripción del problema<a class="headerlink" href="#descripcion-del-problema" title="Link to this heading">#</a></h2>
+<p>Usted es el científico de datos de una empresa de bienes raíces en el estado de California de los Estados Unidos de América. Desde hace un tiempo, se ha identificado una gran dificultad a la hora de asignar un precio acertado a una propiedad para ponerla en el mercado, aumentando en gran medida el tiempo que le toma a un agente concretar la venta de la propiedad. En la mayoría de los casos, se ha evidenciado que el precio inicial está por encima del precio real de mercado, lo que hace la propiedad poco atractiva para los compradores; aunque tampoco se descarta que para algunas propiedades se haya listado un precio menor al del mercado, reduciendo el beneficio económico de la compañia y los agentes de venta.</p>
+<p>En este panorama, se le ha asignado la tarea de predecir el valor promedio de las propiedades en el estado de California a partir de un <a class="reference external" href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">conjunto de datos</a> con características relevantes.</p>
+<section id="configuracion-del-ambiente-de-google-colaboratory">
+<h3>Configuración del ambiente de Google Colaboratory<a class="headerlink" href="#configuracion-del-ambiente-de-google-colaboratory" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Descargar Java</span>
+<span class="err">!</span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">openjdk</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">jdk</span><span class="o">-</span><span class="n">headless</span> <span class="o">-</span><span class="n">qq</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
+<span class="c1"># A continuación, instalaremos Apache Spark 3.0.1 con Hadoop 2.7 desde aquí.</span>
+<span class="err">!</span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dlcdn</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">spark</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="mf">3.5.1</span><span class="o">/</span><span class="n">spark</span><span class="o">-</span><span class="mf">3.5.1</span><span class="o">-</span><span class="nb">bin</span><span class="o">-</span><span class="n">hadoop3</span><span class="o">.</span><span class="n">tgz</span>
+<span class="c1"># Ahora, sólo tenemos que descomprimir esa carpeta.</span>
+<span class="err">!</span><span class="n">tar</span> <span class="n">xf</span> <span class="n">spark</span><span class="o">-</span><span class="mf">3.5.1</span><span class="o">-</span><span class="nb">bin</span><span class="o">-</span><span class="n">hadoop3</span><span class="o">.</span><span class="n">tgz</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"JAVA_HOME"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"/usr/lib/jvm/java-8-openjdk-amd64"</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"SPARK_HOME"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"/content/spark-3.5.1-bin-hadoop3"</span>
+<span class="c1"># Instalación de los paquetes necesarios</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyspark</span><span class="o">==</span><span class="mf">3.5.1</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">findspark</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2024-07-31 23:30:08--  https://dlcdn.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
+Resolving dlcdn.apache.org (dlcdn.apache.org)... 151.101.2.132, 2a04:4e42::644
+Connecting to dlcdn.apache.org (dlcdn.apache.org)|151.101.2.132|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 400446614 (382M) [application/x-gzip]
+Saving to: ‘spark-3.5.1-bin-hadoop3.tgz’
+
+spark-3.5.1-bin-had 100%[===================&gt;] 381.90M   230MB/s    in 1.7s    
+
+2024-07-31 23:30:10 (230 MB/s) - ‘spark-3.5.1-bin-hadoop3.tgz’ saved [400446614/400446614]
+
+Collecting pyspark==3.5.1
+  Downloading pyspark-3.5.1.tar.gz (317.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">317.0/317.0 MB</span> <span class=" -Color -Color-Red">4.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h  Preparing metadata (setup.py) ... ?25l?25hdone
+Requirement already satisfied: py4j==0.10.9.7 in /usr/local/lib/python3.10/dist-packages (from pyspark==3.5.1) (0.10.9.7)
+Building wheels for collected packages: pyspark
+  Building wheel for pyspark (setup.py) ... ?25l?25hdone
+  Created wheel for pyspark: filename=pyspark-3.5.1-py2.py3-none-any.whl size=317488490 sha256=2bfdb48ab300adfb5d4748203931805cc9ac666f8b9ecd23ffc87c749d4e3b01
+  Stored in directory: /root/.cache/pip/wheels/80/1d/60/2c256ed38dddce2fdd93be545214a63e02fbd8d74fb0b7f3a6
+Successfully built pyspark
+Installing collected packages: pyspark
+Successfully installed pyspark-3.5.1
+Collecting findspark
+  Downloading findspark-2.0.1-py2.py3-none-any.whl.metadata (352 bytes)
+Downloading findspark-2.0.1-py2.py3-none-any.whl (4.4 kB)
+Installing collected packages: findspark
+Successfully installed findspark-2.0.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tarfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch_housing_data</span><span class="p">():</span>
+    <span class="n">tarball_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"datasets/housing.tgz"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tarball_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">"datasets"</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://github.com/ageron/data/raw/main/housing.tgz"</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">tarball_path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">tarball_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">housing_tarball</span><span class="p">:</span>
+            <span class="n">housing_tarball</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"datasets"</span><span class="p">)</span>
+
+<span class="n">fetch_housing_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">findspark</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyspark.ml</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">fct</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegerType</span><span class="p">,</span> <span class="n">StringType</span>
+
+<span class="n">findspark</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="crear-sesion-de-spark-e-importar-los-datos">
+<h3>Crear Sesión de Spark e importar los datos<a class="headerlink" href="#crear-sesion-de-spark-e-importar-los-datos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ss</span> <span class="o">=</span> <span class="p">(</span><span class="n">SparkSession</span>
+      <span class="o">.</span><span class="n">builder</span>
+      <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"data_exploration_preparation"</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">getOrCreate</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s2">"/content/datasets/housing/housing.csv"</span>
+<span class="n">housing_data</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+--------+------------------+-----------+--------------+----------+----------+-------------+------------------+---------------+
+|longitude|latitude|housing_median_age|total_rooms|total_bedrooms|population|households|median_income|median_house_value|ocean_proximity|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+------------------+---------------+
+|  -122.23|   37.88|              41.0|      880.0|         129.0|     322.0|     126.0|       8.3252|          452600.0|       NEAR BAY|
+|  -122.22|   37.86|              21.0|     7099.0|        1106.0|    2401.0|    1138.0|       8.3014|          358500.0|       NEAR BAY|
+|  -122.24|   37.85|              52.0|     1467.0|         190.0|     496.0|     177.0|       7.2574|          352100.0|       NEAR BAY|
+|  -122.25|   37.85|              52.0|     1274.0|         235.0|     558.0|     219.0|       5.6431|          341300.0|       NEAR BAY|
+|  -122.25|   37.85|              52.0|     1627.0|         280.0|     565.0|     259.0|       3.8462|          342200.0|       NEAR BAY|
+|  -122.25|   37.85|              52.0|      919.0|         213.0|     413.0|     193.0|       4.0368|          269700.0|       NEAR BAY|
+|  -122.25|   37.84|              52.0|     2535.0|         489.0|    1094.0|     514.0|       3.6591|          299200.0|       NEAR BAY|
+|  -122.25|   37.84|              52.0|     3104.0|         687.0|    1157.0|     647.0|         3.12|          241400.0|       NEAR BAY|
+|  -122.26|   37.84|              42.0|     2555.0|         665.0|    1206.0|     595.0|       2.0804|          226700.0|       NEAR BAY|
+|  -122.25|   37.84|              52.0|     3549.0|         707.0|    1551.0|     714.0|       3.6912|          261100.0|       NEAR BAY|
+|  -122.26|   37.85|              52.0|     2202.0|         434.0|     910.0|     402.0|       3.2031|          281500.0|       NEAR BAY|
+|  -122.26|   37.85|              52.0|     3503.0|         752.0|    1504.0|     734.0|       3.2705|          241800.0|       NEAR BAY|
+|  -122.26|   37.85|              52.0|     2491.0|         474.0|    1098.0|     468.0|        3.075|          213500.0|       NEAR BAY|
+|  -122.26|   37.84|              52.0|      696.0|         191.0|     345.0|     174.0|       2.6736|          191300.0|       NEAR BAY|
+|  -122.26|   37.85|              52.0|     2643.0|         626.0|    1212.0|     620.0|       1.9167|          159200.0|       NEAR BAY|
+|  -122.26|   37.85|              50.0|     1120.0|         283.0|     697.0|     264.0|        2.125|          140000.0|       NEAR BAY|
+|  -122.27|   37.85|              52.0|     1966.0|         347.0|     793.0|     331.0|        2.775|          152500.0|       NEAR BAY|
+|  -122.27|   37.85|              52.0|     1228.0|         293.0|     648.0|     303.0|       2.1202|          155500.0|       NEAR BAY|
+|  -122.26|   37.84|              50.0|     2239.0|         455.0|     990.0|     419.0|       1.9911|          158700.0|       NEAR BAY|
+|  -122.27|   37.84|              52.0|     1503.0|         298.0|     690.0|     275.0|       2.6033|          162900.0|       NEAR BAY|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+------------------+---------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="division-en-el-conjunto-de-entrenamiento-y-conjunto-de-evaluacion">
+<h3>División en el conjunto de entrenamiento y conjunto de evaluación<a class="headerlink" href="#division-en-el-conjunto-de-entrenamiento-y-conjunto-de-evaluacion" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_size</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="c1"># Tamaño del conjunto de entrenamiento: 70%</span>
+<span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="c1"># Tamaño del conjunto de evaluación: 30%</span>
+<span class="n">housing_data_train</span><span class="p">,</span> <span class="n">housing_data_test</span> <span class="o">=</span> <span class="n">housing_data</span><span class="o">.</span><span class="n">randomSplit</span><span class="p">([</span><span class="n">train_size</span><span class="p">,</span> <span class="n">test_size</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">housing_data_pd</span> <span class="o">=</span> <span class="n">housing_data_train</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span> <span class="c1"># Convertirlo a un DataFrame de pandas para generar visualizaciones</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exploracion-de-los-datos">
+<h3>Exploración de los datos<a class="headerlink" href="#exploracion-de-los-datos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_train</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span> <span class="c1"># Esquema relacional del conjunto de datos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>root
+ |-- longitude: double (nullable = true)
+ |-- latitude: double (nullable = true)
+ |-- housing_median_age: double (nullable = true)
+ |-- total_rooms: double (nullable = true)
+ |-- total_bedrooms: double (nullable = true)
+ |-- population: double (nullable = true)
+ |-- households: double (nullable = true)
+ |-- median_income: double (nullable = true)
+ |-- median_house_value: double (nullable = true)
+ |-- ocean_proximity: string (nullable = true)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_train</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># Primeros 10 registros del conjunto de datos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+--------+------------------+-----------+--------------+----------+----------+-------------+------------------+---------------+
+|longitude|latitude|housing_median_age|total_rooms|total_bedrooms|population|households|median_income|median_house_value|ocean_proximity|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+------------------+---------------+
+|  -124.35|   40.54|              52.0|     1820.0|         300.0|     806.0|     270.0|       3.0147|           94600.0|     NEAR OCEAN|
+|   -124.3|    41.8|              19.0|     2672.0|         552.0|    1298.0|     478.0|       1.9797|           85800.0|     NEAR OCEAN|
+|  -124.27|   40.69|              36.0|     2349.0|         528.0|    1194.0|     465.0|       2.5179|           79000.0|     NEAR OCEAN|
+|  -124.26|   40.58|              52.0|     2217.0|         394.0|     907.0|     369.0|       2.3571|          111400.0|     NEAR OCEAN|
+|  -124.25|   40.28|              32.0|     1430.0|         419.0|     434.0|     187.0|       1.9417|           76100.0|     NEAR OCEAN|
+|  -124.23|   40.81|              52.0|     1112.0|         209.0|     544.0|     172.0|       3.3462|           50800.0|     NEAR OCEAN|
+|  -124.21|   40.75|              32.0|     1218.0|         331.0|     620.0|     268.0|       1.6528|           58100.0|     NEAR OCEAN|
+|  -124.21|   41.75|              20.0|     3810.0|         787.0|    1993.0|     721.0|       2.0074|           66900.0|     NEAR OCEAN|
+|  -124.21|   41.77|              17.0|     3461.0|         722.0|    1947.0|     647.0|       2.5795|           68400.0|     NEAR OCEAN|
+|  -124.19|   41.78|              15.0|     3140.0|         714.0|    1645.0|     640.0|       1.6654|           74600.0|     NEAR OCEAN|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+------------------+---------------+
+only showing top 10 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">housing_data_train</span>
+ <span class="o">.</span><span class="n">describe</span><span class="p">()</span> <span class="c1"># Características estadísticas básicas</span>
+ <span class="o">.</span><span class="n">show</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------+-------------------+------------------+------------------+-----------------+-----------------+------------------+------------------+------------------+------------------+---------------+
+|summary|          longitude|          latitude|housing_median_age|      total_rooms|   total_bedrooms|        population|        households|     median_income|median_house_value|ocean_proximity|
++-------+-------------------+------------------+------------------+-----------------+-----------------+------------------+------------------+------------------+------------------+---------------+
+|  count|              14509|             14509|             14509|            14509|            14368|             14509|             14509|             14509|             14509|          14509|
+|   mean|-119.59274932800152|35.660388724240136|28.668137018402373|2615.102212419877|534.5634047884187|1415.5490385278104|496.75215383555036|3.8453705562065017|205580.80998001242|           NULL|
+| stddev| 2.0101381627905033|2.1443786967346115|12.563856962511244|2142.945353240265|415.2139447434203|1081.0649459905821| 377.2009098367398|1.8912964263124747|115026.89848308219|           NULL|
+|    min|            -124.35|             32.54|               1.0|              2.0|              1.0|               3.0|               1.0|            0.4999|           14999.0|      &lt;1H OCEAN|
+|    max|            -114.31|             41.95|              52.0|          39320.0|           6210.0|           16305.0|            5358.0|           15.0001|          500001.0|     NEAR OCEAN|
++-------+-------------------+------------------+------------------+-----------------+-----------------+------------------+------------------+------------------+------------------+---------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_train</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1"># Número de registros</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14509
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_pd</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="c1"># Calcular y graficar el histograma de cada característica</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8bddfc48fc214c7bb4f1bc38517076f0452f250c5fe0e1a053f6480bc5f4b6bc.png" src="../../_images/8bddfc48fc214c7bb4f1bc38517076f0452f250c5fe0e1a053f6480bc5f4b6bc.png" />
+</div>
+</div>
+<p>Acerca del histograma:</p>
+<ul class="simple">
+<li><p>Los ingresos no están representados en dólares (USD), están representados como un valor flotante entre ≃0.5 y ≃15. Al consultar con el equipo que recolectó los datos, este valor está expresado en decenas de miles de dólares, es decir, 3 corresponde a ingresos de aproximadamente $30.000 USD.</p></li>
+<li><p>Los precios de las propiedades tienen un límite artificial de $500.000 USD, lo cual puede generar comportamientos indeseados en el modelo, que podría «entender» este comportamiento como que no hay propiedades de un mayor valor.</p></li>
+<li><p>Las distribuciones de la mayoría de las características son asimétricas y no corresponden con una distribución Gaussiana, lo que puede tener un impacto negativo en el desempeño de algunos modelos.</p></li>
+<li><p>Las características están representadas en escalas y rangos muy diferentes.</p></li>
+</ul>
+<section id="datos-geoespaciales">
+<h4>Datos geoespaciales<a class="headerlink" href="#datos-geoespaciales" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_pd</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"scatter"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"longitude"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"latitude"</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/890841c157124a57d453ad6d71ed5cfed56df3629ae304b85260aec906f42d59.png" src="../../_images/890841c157124a57d453ad6d71ed5cfed56df3629ae304b85260aec906f42d59.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_pd</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"scatter"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"longitude"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"latitude"</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9f69c82251c6c542af4fc92762c6b9755df18494601191e2bcadc52e2cdacfa3.png" src="../../_images/9f69c82251c6c542af4fc92762c6b9755df18494601191e2bcadc52e2cdacfa3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_pd</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"scatter"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"longitude"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"latitude"</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">s</span><span class="o">=</span><span class="n">housing_data_pd</span><span class="p">[</span><span class="s2">"population"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"population"</span><span class="p">,</span>
+                     <span class="n">c</span><span class="o">=</span><span class="s2">"median_house_value"</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"jet"</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f597c5968eb011443f945fbbd030830024e0b6221dc4d09dc1042f40b4f5198a.png" src="../../_images/f597c5968eb011443f945fbbd030830024e0b6221dc4d09dc1042f40b4f5198a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">"california.png"</span>
+<span class="n">homl3_root</span> <span class="o">=</span> <span class="s2">"https://github.com/ageron/handson-ml3/raw/main/"</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">homl3_root</span> <span class="o">+</span> <span class="s2">"images/end_to_end_project/"</span> <span class="o">+</span> <span class="n">filename</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Downloading"</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="n">housing_renamed</span> <span class="o">=</span> <span class="n">housing_data_pd</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"latitude"</span><span class="p">:</span> <span class="s2">"Latitude"</span><span class="p">,</span> <span class="s2">"longitude"</span><span class="p">:</span> <span class="s2">"Longitude"</span><span class="p">,</span>
+                                                  <span class="s2">"population"</span><span class="p">:</span> <span class="s2">"Population"</span><span class="p">,</span>
+                                                  <span class="s2">"median_house_value"</span><span class="p">:</span> <span class="s2">"Median house value (ᴜsᴅ)"</span><span class="p">})</span>
+
+<span class="n">housing_renamed</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"scatter"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"Longitude"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Latitude"</span><span class="p">,</span>
+                     <span class="n">s</span><span class="o">=</span><span class="n">housing_renamed</span><span class="p">[</span><span class="s2">"Population"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Population"</span><span class="p">,</span>
+                     <span class="n">c</span><span class="o">=</span><span class="s2">"Median house value (ᴜsᴅ)"</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"jet"</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">california_img</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">axis</span> <span class="o">=</span> <span class="o">-</span><span class="mf">124.55</span><span class="p">,</span> <span class="o">-</span><span class="mf">113.95</span><span class="p">,</span> <span class="mf">32.45</span><span class="p">,</span> <span class="mf">42.05</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">california_img</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading california.png
+</pre></div>
+</div>
+<img alt="../../_images/a4f7623c7da3fc29d530108405567c142b2a2f6f5a5f6cf737326dc4b02e506e.png" src="../../_images/a4f7623c7da3fc29d530108405567c142b2a2f6f5a5f6cf737326dc4b02e506e.png" />
+</div>
+</div>
+</section>
+<section id="correlaciones">
+<h4>Correlaciones<a class="headerlink" href="#correlaciones" title="Link to this heading">#</a></h4>
+<p>La correlación es una medida estadística que expresa hasta qué punto dos variables están relacionadas linealmente (esto es, cambian conjuntamente a una tasa constante). Es una herramienta común para describir relaciones simples sin hacer afirmaciones sobre causa y efecto [<a class="reference external" href="https://www.jmp.com/es_co/statistics-knowledge-portal/what-is-correlation.html">ref</a>].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="n">housing_data_train</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">target_col</span> <span class="o">=</span> <span class="s2">"median_house_value"</span>
+<span class="n">cols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"ocean_proximity"</span><span class="p">)</span>
+<span class="n">cols</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">target_col</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Correlación entre las variables: "</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">target_col</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">housing_data_train</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">target_col</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlación entre las variables: 
+median_house_value - longitude: -0.048734489520877715
+median_house_value - latitude: -0.14166014521476414
+median_house_value - housing_median_age: 0.10585697542376424
+median_house_value - total_rooms: 0.13932642838983347
+median_house_value - total_bedrooms: 0.056133897510110844
+median_house_value - population: -0.02148680786679524
+median_house_value - households: 0.07041591413437558
+median_house_value - median_income: 0.6836796788520056
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">caracteristicas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"median_house_value"</span><span class="p">,</span> <span class="s2">"median_income"</span><span class="p">,</span> <span class="s2">"total_rooms"</span><span class="p">,</span> <span class="s2">"housing_median_age"</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">housing_data_pd</span><span class="p">[</span><span class="n">caracteristicas</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/899d205a906225c1bcabc7cd40c54475a5a0714df9ad1e85dcfd673f1d9040e2.png" src="../../_images/899d205a906225c1bcabc7cd40c54475a5a0714df9ad1e85dcfd673f1d9040e2.png" />
+</div>
+</div>
+<p>La variable de mayor correlación con nuestra caractarística objetivo (<em>median_house_value</em>) es <em>median_income</em>. Fijándonos en el gráfico entre estas dos características evidenciamos una tendencia clara «hacia arriba» y poca dispersión entre los puntos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_pd</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"scatter"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"median_income"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"median_house_value"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2611e0fcce8e738cc3a84d1821d48a6982ce7f6557d2b82050946edc7c2b88e2.png" src="../../_images/2611e0fcce8e738cc3a84d1821d48a6982ce7f6557d2b82050946edc7c2b88e2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="creacion-de-nuevos-atributos">
+<h3>Creación de nuevos atributos<a class="headerlink" href="#creacion-de-nuevos-atributos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">housing_data_train2</span> <span class="o">=</span> <span class="p">(</span><span class="n">housing_data_train</span>
+                      <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"rooms_per_household"</span><span class="p">,</span> <span class="n">housing_data_train</span><span class="p">[</span><span class="s2">"total_rooms"</span><span class="p">]</span><span class="o">/</span><span class="n">housing_data_train</span><span class="p">[</span><span class="s2">"households"</span><span class="p">])</span>
+                      <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"bedrooms_per_room"</span><span class="p">,</span> <span class="n">housing_data_train</span><span class="p">[</span><span class="s2">"total_bedrooms"</span><span class="p">]</span><span class="o">/</span><span class="n">housing_data_train</span><span class="p">[</span><span class="s2">"total_rooms"</span><span class="p">])</span>
+                      <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"population_per_household"</span><span class="p">,</span> <span class="n">housing_data_train</span><span class="p">[</span><span class="s2">"population"</span><span class="p">]</span><span class="o">/</span><span class="n">housing_data_train</span><span class="p">[</span><span class="s2">"households"</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"rooms_per_household"</span><span class="p">,</span> <span class="s2">"bedrooms_per_room"</span><span class="p">,</span> <span class="s2">"population_per_household"</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">new_cols</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">target_col</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">housing_data_train2</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">target_col</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value - rooms_per_household: 0.14836664719672774
+median_house_value - bedrooms_per_room: -0.23387759463876323
+median_house_value - population_per_household: -0.03004164488595351
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preparacion-de-los-datos">
+<h3>Preparación de los datos<a class="headerlink" href="#preparacion-de-los-datos" title="Link to this heading">#</a></h3>
+<section id="separacion-de-caracteristicas-predictores-y-etiquetas">
+<h4>Separación de características/predictores y etiquetas<a class="headerlink" href="#separacion-de-caracteristicas-predictores-y-etiquetas" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span> <span class="o">=</span> <span class="n">housing_data_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"median_house_value"</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">housing_data_train</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"median_house_value"</span><span class="p">)</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">housing_data_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"median_house_value"</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">housing_data_test</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"median_house_value"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tratamiento-de-datos-nulos">
+<h4>Tratamiento de datos nulos<a class="headerlink" href="#tratamiento-de-datos-nulos" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">X_train</span>
+ <span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+ <span class="o">.</span><span class="n">show</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+-------+-------------------+------------------+------------------+-----------------+-----------------+------------------+------------------+------------------+---------------+
+|summary|          longitude|          latitude|housing_median_age|      total_rooms|   total_bedrooms|        population|        households|     median_income|ocean_proximity|
++-------+-------------------+------------------+------------------+-----------------+-----------------+------------------+------------------+------------------+---------------+
+|  count|              14509|             14509|             14509|            14509|            14368|             14509|             14509|             14509|          14509|
+|   mean|-119.59274932800152|35.660388724240136|28.668137018402373|2615.102212419877|534.5634047884187|1415.5490385278104|496.75215383555036|3.8453705562065017|           NULL|
+| stddev| 2.0101381627905033|2.1443786967346115|12.563856962511244|2142.945353240265|415.2139447434203|1081.0649459905821| 377.2009098367398|1.8912964263124747|           NULL|
+|    min|            -124.35|             32.54|               1.0|              2.0|              1.0|               3.0|               1.0|            0.4999|      &lt;1H OCEAN|
+|    max|            -114.31|             41.95|              52.0|          39320.0|           6210.0|           16305.0|            5358.0|           15.0001|     NEAR OCEAN|
++-------+-------------------+------------------+------------------+-----------------+-----------------+------------------+------------------+------------------+---------------+
+</pre></div>
+</div>
+</div>
+</div>
+<p>Opción 1: descartar los registros con datos nulos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_valid</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span> <span class="o">=</span> <span class="s2">"any"</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"total_bedrooms"</span><span class="p">])</span>
+<span class="n">X_train_valid</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14368
+</pre></div>
+</div>
+</div>
+</div>
+<p>Opción 2: descartar el atributo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"total_bedrooms"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train_</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14509
+['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income', 'ocean_proximity']
+</pre></div>
+</div>
+</div>
+</div>
+<p>Opción 3: al ser una característica numérica, se pueden reemplazar los valores faltantes con alguna medida estadística de esa característica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">imputer</span> <span class="o">=</span> <span class="p">(</span><span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">Imputer</span><span class="p">()</span>
+<span class="o">.</span><span class="n">setStrategy</span><span class="p">(</span><span class="s2">"median"</span><span class="p">)</span>
+<span class="o">.</span><span class="n">setInputCols</span><span class="p">([</span><span class="s2">"total_bedrooms"</span><span class="p">])</span>
+<span class="o">.</span><span class="n">setOutputCols</span><span class="p">([</span><span class="s2">"total_bedrooms_complete"</span><span class="p">]))</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">imputer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">surrogateDF</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------------+
+|total_bedrooms|
++--------------+
+|         433.0|
++--------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_median</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_train_median</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14509
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="caracteristicas-categoricas">
+<h4>Características categóricas<a class="headerlink" href="#caracteristicas-categoricas" title="Link to this heading">#</a></h4>
+<p>De manera general, los modelos o algoritmos de aprendizaje de máquina solo pueden ser entrenados con características numéricas. Las características de texto o categóricas deben ser convertidas a una representación numérica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"ocean_proximity"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------------+
+|ocean_proximity|
++---------------+
+|     NEAR OCEAN|
+|     NEAR OCEAN|
+|     NEAR OCEAN|
+|     NEAR OCEAN|
+|     NEAR OCEAN|
++---------------+
+only showing top 5 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">unique_ocean_prox</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_train</span>
+                     <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"ocean_proximity"</span><span class="p">)</span>
+                     <span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span>
+                     <span class="o">.</span><span class="n">collect</span><span class="p">())</span>
+<span class="n">unique_ocean_prox</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">ocean_proximity</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">unique_ocean_prox</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unique_ocean_prox</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['ISLAND', 'NEAR OCEAN', 'NEAR BAY', '&lt;1H OCEAN', 'INLAND']
+</pre></div>
+</div>
+</div>
+</div>
+<p>Opción 1: reemplazar los valores con un número entero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">map_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">item</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_ocean_prox</span><span class="p">)}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">map_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'ISLAND': 0, 'NEAR OCEAN': 1, 'NEAR BAY': 2, '&lt;1H OCEAN': 3, 'INLAND': 4}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stringIndexer</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">StringIndexer</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">"ocean_proximity"</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">"ordinal_ocean_proximity"</span><span class="p">,</span> <span class="n">stringOrderType</span><span class="o">=</span><span class="s2">"frequencyDesc"</span><span class="p">)</span>
+<span class="n">stringIndexer</span><span class="o">.</span><span class="n">setHandleInvalid</span><span class="p">(</span><span class="s2">"error"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">stringIndexer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_ordinal</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"ocean_proximity"</span><span class="p">)</span>
+<span class="n">X_train_ordinal</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+--------+------------------+-----------+--------------+----------+----------+-------------+-----------------------+
+|longitude|latitude|housing_median_age|total_rooms|total_bedrooms|population|households|median_income|ordinal_ocean_proximity|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+-----------------------+
+|  -124.35|   40.54|              52.0|     1820.0|         300.0|     806.0|     270.0|       3.0147|                    2.0|
+|   -124.3|    41.8|              19.0|     2672.0|         552.0|    1298.0|     478.0|       1.9797|                    2.0|
+|  -124.27|   40.69|              36.0|     2349.0|         528.0|    1194.0|     465.0|       2.5179|                    2.0|
+|  -124.26|   40.58|              52.0|     2217.0|         394.0|     907.0|     369.0|       2.3571|                    2.0|
+|  -124.25|   40.28|              32.0|     1430.0|         419.0|     434.0|     187.0|       1.9417|                    2.0|
+|  -124.23|   40.81|              52.0|     1112.0|         209.0|     544.0|     172.0|       3.3462|                    2.0|
+|  -124.21|   40.75|              32.0|     1218.0|         331.0|     620.0|     268.0|       1.6528|                    2.0|
+|  -124.21|   41.75|              20.0|     3810.0|         787.0|    1993.0|     721.0|       2.0074|                    2.0|
+|  -124.21|   41.77|              17.0|     3461.0|         722.0|    1947.0|     647.0|       2.5795|                    2.0|
+|  -124.19|   41.78|              15.0|     3140.0|         714.0|    1645.0|     640.0|       1.6654|                    2.0|
+|  -124.18|   40.62|              35.0|      952.0|         178.0|     480.0|     179.0|       3.0536|                    2.0|
+|  -124.18|   40.78|              33.0|     1076.0|         222.0|     656.0|     236.0|       2.5096|                    2.0|
+|  -124.18|   40.78|              37.0|     1453.0|         293.0|     867.0|     310.0|       2.5536|                    2.0|
+|  -124.18|   40.79|              40.0|     1398.0|         311.0|     788.0|     279.0|       1.4668|                    2.0|
+|  -124.17|   40.75|              13.0|     2171.0|         339.0|     951.0|     353.0|       4.8516|                    2.0|
+|  -124.17|   40.76|              26.0|     1776.0|         361.0|     992.0|     380.0|       2.8056|                    2.0|
+|  -124.17|   40.77|              30.0|     1895.0|         366.0|     990.0|     359.0|       2.2227|                    2.0|
+|  -124.17|    40.8|              52.0|     1557.0|         344.0|     758.0|     319.0|       1.8529|                    2.0|
+|  -124.17|   41.76|              20.0|     2673.0|         538.0|    1282.0|     514.0|       2.4605|                    2.0|
+|  -124.16|   40.77|              35.0|     2141.0|         438.0|    1053.0|     434.0|       2.8529|                    2.0|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+-----------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<p>Opción 2: One-hot encoding</p>
+<p>Esta segunda opción busca evitar un problema que se presenta con la opción 1 que es la de asignar implícitamente una jerarquía u orden a nuestra variable categórica, lo que en muchas ocasiones no representa la realidad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@fct</span><span class="o">.</span><span class="n">udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">StringType</span><span class="p">())</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">one_hot_encoding</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">map_dict</span> <span class="o">=</span> <span class="n">map_dict</span><span class="p">):</span>
+  <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">map_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+  <span class="n">one_hot_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+  <span class="n">one_hot_vector</span><span class="p">[</span><span class="n">map_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="s1">','</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">one_hot_vector</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">X_train</span>
+ <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="n">one_hot_encoding</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">ocean_proximity</span><span class="p">))</span>
+ <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_ISLAND"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+ <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_NEAR_OCEAN"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+ <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_NEAR_BAY"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+ <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_1H_OCEAN"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+ <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_INLAND"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+ <span class="c1">#.where("ocean_proximity = 'NEAR BAY'")</span>
+ <span class="o">.</span><span class="n">show</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+----------------------+-------------------+-----------------------+---------------------+---------------------+-------------------+
+|longitude|latitude|housing_median_age|total_rooms|total_bedrooms|population|households|median_income|ocean_proximity|onehot_ocean_proximity|onehot_ocean_ISLAND|onehot_ocean_NEAR_OCEAN|onehot_ocean_NEAR_BAY|onehot_ocean_1H_OCEAN|onehot_ocean_INLAND|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+----------------------+-------------------+-----------------------+---------------------+---------------------+-------------------+
+|  -124.35|   40.54|              52.0|     1820.0|         300.0|     806.0|     270.0|       3.0147|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|   -124.3|    41.8|              19.0|     2672.0|         552.0|    1298.0|     478.0|       1.9797|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.27|   40.69|              36.0|     2349.0|         528.0|    1194.0|     465.0|       2.5179|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.26|   40.58|              52.0|     2217.0|         394.0|     907.0|     369.0|       2.3571|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.25|   40.28|              32.0|     1430.0|         419.0|     434.0|     187.0|       1.9417|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.23|   40.81|              52.0|     1112.0|         209.0|     544.0|     172.0|       3.3462|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.21|   40.75|              32.0|     1218.0|         331.0|     620.0|     268.0|       1.6528|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.21|   41.75|              20.0|     3810.0|         787.0|    1993.0|     721.0|       2.0074|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.21|   41.77|              17.0|     3461.0|         722.0|    1947.0|     647.0|       2.5795|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.19|   41.78|              15.0|     3140.0|         714.0|    1645.0|     640.0|       1.6654|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.18|   40.62|              35.0|      952.0|         178.0|     480.0|     179.0|       3.0536|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.18|   40.78|              33.0|     1076.0|         222.0|     656.0|     236.0|       2.5096|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.18|   40.78|              37.0|     1453.0|         293.0|     867.0|     310.0|       2.5536|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.18|   40.79|              40.0|     1398.0|         311.0|     788.0|     279.0|       1.4668|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|   40.75|              13.0|     2171.0|         339.0|     951.0|     353.0|       4.8516|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|   40.76|              26.0|     1776.0|         361.0|     992.0|     380.0|       2.8056|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|   40.77|              30.0|     1895.0|         366.0|     990.0|     359.0|       2.2227|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|    40.8|              52.0|     1557.0|         344.0|     758.0|     319.0|       1.8529|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|   41.76|              20.0|     2673.0|         538.0|    1282.0|     514.0|       2.4605|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
+|  -124.16|   40.77|              35.0|     2141.0|         438.0|    1053.0|     434.0|       2.8529|     NEAR OCEAN|             0,1,0,0,0|                  0|                      1|                    0|                    0|                  0|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+----------------------+-------------------+-----------------------+---------------------+---------------------+-------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">onehotencoder</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">"ordinal_ocean_proximity"</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">)</span>
+<span class="n">onehotencoder</span><span class="o">.</span><span class="n">setHandleInvalid</span><span class="p">(</span><span class="s2">"error"</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">onehotencoder</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_ordinal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_onehot</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_ordinal</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"ordinal_ocean_proximity"</span><span class="p">)</span>
+<span class="n">X_train_onehot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+--------+------------------+-----------+--------------+----------+----------+-------------+----------------------+
+|longitude|latitude|housing_median_age|total_rooms|total_bedrooms|population|households|median_income|onehot_ocean_proximity|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+----------------------+
+|  -124.35|   40.54|              52.0|     1820.0|         300.0|     806.0|     270.0|       3.0147|         (4,[2],[1.0])|
+|   -124.3|    41.8|              19.0|     2672.0|         552.0|    1298.0|     478.0|       1.9797|         (4,[2],[1.0])|
+|  -124.27|   40.69|              36.0|     2349.0|         528.0|    1194.0|     465.0|       2.5179|         (4,[2],[1.0])|
+|  -124.26|   40.58|              52.0|     2217.0|         394.0|     907.0|     369.0|       2.3571|         (4,[2],[1.0])|
+|  -124.25|   40.28|              32.0|     1430.0|         419.0|     434.0|     187.0|       1.9417|         (4,[2],[1.0])|
+|  -124.23|   40.81|              52.0|     1112.0|         209.0|     544.0|     172.0|       3.3462|         (4,[2],[1.0])|
+|  -124.21|   40.75|              32.0|     1218.0|         331.0|     620.0|     268.0|       1.6528|         (4,[2],[1.0])|
+|  -124.21|   41.75|              20.0|     3810.0|         787.0|    1993.0|     721.0|       2.0074|         (4,[2],[1.0])|
+|  -124.21|   41.77|              17.0|     3461.0|         722.0|    1947.0|     647.0|       2.5795|         (4,[2],[1.0])|
+|  -124.19|   41.78|              15.0|     3140.0|         714.0|    1645.0|     640.0|       1.6654|         (4,[2],[1.0])|
+|  -124.18|   40.62|              35.0|      952.0|         178.0|     480.0|     179.0|       3.0536|         (4,[2],[1.0])|
+|  -124.18|   40.78|              33.0|     1076.0|         222.0|     656.0|     236.0|       2.5096|         (4,[2],[1.0])|
+|  -124.18|   40.78|              37.0|     1453.0|         293.0|     867.0|     310.0|       2.5536|         (4,[2],[1.0])|
+|  -124.18|   40.79|              40.0|     1398.0|         311.0|     788.0|     279.0|       1.4668|         (4,[2],[1.0])|
+|  -124.17|   40.75|              13.0|     2171.0|         339.0|     951.0|     353.0|       4.8516|         (4,[2],[1.0])|
+|  -124.17|   40.76|              26.0|     1776.0|         361.0|     992.0|     380.0|       2.8056|         (4,[2],[1.0])|
+|  -124.17|   40.77|              30.0|     1895.0|         366.0|     990.0|     359.0|       2.2227|         (4,[2],[1.0])|
+|  -124.17|    40.8|              52.0|     1557.0|         344.0|     758.0|     319.0|       1.8529|         (4,[2],[1.0])|
+|  -124.17|   41.76|              20.0|     2673.0|         538.0|    1282.0|     514.0|       2.4605|         (4,[2],[1.0])|
+|  -124.16|   40.77|              35.0|     2141.0|         438.0|    1053.0|     434.0|       2.8529|         (4,[2],[1.0])|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+----------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_onehot</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_train</span>
+                  <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="n">one_hot_encoding</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">ocean_proximity</span><span class="p">))</span>
+                  <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_ISLAND"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+                  <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_NEAR_OCEAN"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+                  <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_NEAR_BAY"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+                  <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_1H_OCEAN"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+                  <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"onehot_ocean_INLAND"</span><span class="p">,</span> <span class="n">fct</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">,</span> <span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">getItem</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+                  <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"ocean_proximity"</span><span class="p">)</span>
+                  <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">))</span>
+<span class="n">X_train_onehot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+--------+------------------+-----------+--------------+----------+----------+-------------+-------------------+-----------------------+---------------------+---------------------+-------------------+
+|longitude|latitude|housing_median_age|total_rooms|total_bedrooms|population|households|median_income|onehot_ocean_ISLAND|onehot_ocean_NEAR_OCEAN|onehot_ocean_NEAR_BAY|onehot_ocean_1H_OCEAN|onehot_ocean_INLAND|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+-------------------+-----------------------+---------------------+---------------------+-------------------+
+|  -124.35|   40.54|              52.0|     1820.0|         300.0|     806.0|     270.0|       3.0147|                  0|                      1|                    0|                    0|                  0|
+|   -124.3|    41.8|              19.0|     2672.0|         552.0|    1298.0|     478.0|       1.9797|                  0|                      1|                    0|                    0|                  0|
+|  -124.27|   40.69|              36.0|     2349.0|         528.0|    1194.0|     465.0|       2.5179|                  0|                      1|                    0|                    0|                  0|
+|  -124.26|   40.58|              52.0|     2217.0|         394.0|     907.0|     369.0|       2.3571|                  0|                      1|                    0|                    0|                  0|
+|  -124.25|   40.28|              32.0|     1430.0|         419.0|     434.0|     187.0|       1.9417|                  0|                      1|                    0|                    0|                  0|
+|  -124.23|   40.81|              52.0|     1112.0|         209.0|     544.0|     172.0|       3.3462|                  0|                      1|                    0|                    0|                  0|
+|  -124.21|   40.75|              32.0|     1218.0|         331.0|     620.0|     268.0|       1.6528|                  0|                      1|                    0|                    0|                  0|
+|  -124.21|   41.75|              20.0|     3810.0|         787.0|    1993.0|     721.0|       2.0074|                  0|                      1|                    0|                    0|                  0|
+|  -124.21|   41.77|              17.0|     3461.0|         722.0|    1947.0|     647.0|       2.5795|                  0|                      1|                    0|                    0|                  0|
+|  -124.19|   41.78|              15.0|     3140.0|         714.0|    1645.0|     640.0|       1.6654|                  0|                      1|                    0|                    0|                  0|
+|  -124.18|   40.62|              35.0|      952.0|         178.0|     480.0|     179.0|       3.0536|                  0|                      1|                    0|                    0|                  0|
+|  -124.18|   40.78|              33.0|     1076.0|         222.0|     656.0|     236.0|       2.5096|                  0|                      1|                    0|                    0|                  0|
+|  -124.18|   40.78|              37.0|     1453.0|         293.0|     867.0|     310.0|       2.5536|                  0|                      1|                    0|                    0|                  0|
+|  -124.18|   40.79|              40.0|     1398.0|         311.0|     788.0|     279.0|       1.4668|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|   40.75|              13.0|     2171.0|         339.0|     951.0|     353.0|       4.8516|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|   40.76|              26.0|     1776.0|         361.0|     992.0|     380.0|       2.8056|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|   40.77|              30.0|     1895.0|         366.0|     990.0|     359.0|       2.2227|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|    40.8|              52.0|     1557.0|         344.0|     758.0|     319.0|       1.8529|                  0|                      1|                    0|                    0|                  0|
+|  -124.17|   41.76|              20.0|     2673.0|         538.0|    1282.0|     514.0|       2.4605|                  0|                      1|                    0|                    0|                  0|
+|  -124.16|   40.77|              35.0|     2141.0|         438.0|    1053.0|     434.0|       2.8529|                  0|                      1|                    0|                    0|                  0|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+-------------------+-----------------------+---------------------+---------------------+-------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normalizacion">
+<h4>Normalización<a class="headerlink" href="#normalizacion" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_minmax_scaled</span> <span class="o">=</span> <span class="n">X_train_valid</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"X_train_minmax_scaled"</span><span class="p">)</span>
+<span class="n">numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"longitude"</span><span class="p">,</span><span class="s2">"latitude"</span><span class="p">,</span><span class="s2">"housing_median_age"</span><span class="p">,</span><span class="s2">"total_rooms"</span><span class="p">,</span><span class="s2">"total_bedrooms"</span><span class="p">,</span><span class="s2">"population"</span><span class="p">,</span><span class="s2">"households"</span><span class="p">,</span><span class="s2">"median_income"</span><span class="p">]</span>
+<span class="n">vec_numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"vec_"</span><span class="o">+</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">]</span>
+<span class="n">vecsAssembler</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">in_col</span><span class="p">,</span> <span class="n">out_col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">,</span> <span class="n">vec_numeric_cols</span><span class="p">):</span>
+  <span class="n">vecAssembler</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">VectorAssembler</span><span class="p">(</span><span class="n">outputCol</span><span class="o">=</span><span class="n">out_col</span><span class="p">,</span> <span class="n">inputCols</span><span class="o">=</span><span class="p">[</span><span class="n">in_col</span><span class="p">])</span>
+  <span class="n">X_train_minmax_scaled</span> <span class="o">=</span> <span class="n">vecAssembler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_minmax_scaled</span><span class="p">)</span>
+  <span class="n">vecsAssembler</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vecAssembler</span><span class="p">)</span>
+<span class="n">X_train_minmax_scaled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+-------------+------------+----------------------+---------------+------------------+--------------+--------------+-----------------+
+|longitude|latitude|housing_median_age|total_rooms|total_bedrooms|population|households|median_income|ocean_proximity|vec_longitude|vec_latitude|vec_housing_median_age|vec_total_rooms|vec_total_bedrooms|vec_population|vec_households|vec_median_income|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+-------------+------------+----------------------+---------------+------------------+--------------+--------------+-----------------+
+|  -124.35|   40.54|              52.0|     1820.0|         300.0|     806.0|     270.0|       3.0147|     NEAR OCEAN|    [-124.35]|     [40.54]|                [52.0]|       [1820.0]|           [300.0]|       [806.0]|       [270.0]|         [3.0147]|
+|   -124.3|    41.8|              19.0|     2672.0|         552.0|    1298.0|     478.0|       1.9797|     NEAR OCEAN|     [-124.3]|      [41.8]|                [19.0]|       [2672.0]|           [552.0]|      [1298.0]|       [478.0]|         [1.9797]|
+|  -124.27|   40.69|              36.0|     2349.0|         528.0|    1194.0|     465.0|       2.5179|     NEAR OCEAN|    [-124.27]|     [40.69]|                [36.0]|       [2349.0]|           [528.0]|      [1194.0]|       [465.0]|         [2.5179]|
+|  -124.26|   40.58|              52.0|     2217.0|         394.0|     907.0|     369.0|       2.3571|     NEAR OCEAN|    [-124.26]|     [40.58]|                [52.0]|       [2217.0]|           [394.0]|       [907.0]|       [369.0]|         [2.3571]|
+|  -124.25|   40.28|              32.0|     1430.0|         419.0|     434.0|     187.0|       1.9417|     NEAR OCEAN|    [-124.25]|     [40.28]|                [32.0]|       [1430.0]|           [419.0]|       [434.0]|       [187.0]|         [1.9417]|
+|  -124.23|   40.81|              52.0|     1112.0|         209.0|     544.0|     172.0|       3.3462|     NEAR OCEAN|    [-124.23]|     [40.81]|                [52.0]|       [1112.0]|           [209.0]|       [544.0]|       [172.0]|         [3.3462]|
+|  -124.21|   40.75|              32.0|     1218.0|         331.0|     620.0|     268.0|       1.6528|     NEAR OCEAN|    [-124.21]|     [40.75]|                [32.0]|       [1218.0]|           [331.0]|       [620.0]|       [268.0]|         [1.6528]|
+|  -124.21|   41.75|              20.0|     3810.0|         787.0|    1993.0|     721.0|       2.0074|     NEAR OCEAN|    [-124.21]|     [41.75]|                [20.0]|       [3810.0]|           [787.0]|      [1993.0]|       [721.0]|         [2.0074]|
+|  -124.21|   41.77|              17.0|     3461.0|         722.0|    1947.0|     647.0|       2.5795|     NEAR OCEAN|    [-124.21]|     [41.77]|                [17.0]|       [3461.0]|           [722.0]|      [1947.0]|       [647.0]|         [2.5795]|
+|  -124.19|   41.78|              15.0|     3140.0|         714.0|    1645.0|     640.0|       1.6654|     NEAR OCEAN|    [-124.19]|     [41.78]|                [15.0]|       [3140.0]|           [714.0]|      [1645.0]|       [640.0]|         [1.6654]|
+|  -124.18|   40.62|              35.0|      952.0|         178.0|     480.0|     179.0|       3.0536|     NEAR OCEAN|    [-124.18]|     [40.62]|                [35.0]|        [952.0]|           [178.0]|       [480.0]|       [179.0]|         [3.0536]|
+|  -124.18|   40.78|              33.0|     1076.0|         222.0|     656.0|     236.0|       2.5096|     NEAR OCEAN|    [-124.18]|     [40.78]|                [33.0]|       [1076.0]|           [222.0]|       [656.0]|       [236.0]|         [2.5096]|
+|  -124.18|   40.78|              37.0|     1453.0|         293.0|     867.0|     310.0|       2.5536|     NEAR OCEAN|    [-124.18]|     [40.78]|                [37.0]|       [1453.0]|           [293.0]|       [867.0]|       [310.0]|         [2.5536]|
+|  -124.18|   40.79|              40.0|     1398.0|         311.0|     788.0|     279.0|       1.4668|     NEAR OCEAN|    [-124.18]|     [40.79]|                [40.0]|       [1398.0]|           [311.0]|       [788.0]|       [279.0]|         [1.4668]|
+|  -124.17|   40.75|              13.0|     2171.0|         339.0|     951.0|     353.0|       4.8516|     NEAR OCEAN|    [-124.17]|     [40.75]|                [13.0]|       [2171.0]|           [339.0]|       [951.0]|       [353.0]|         [4.8516]|
+|  -124.17|   40.76|              26.0|     1776.0|         361.0|     992.0|     380.0|       2.8056|     NEAR OCEAN|    [-124.17]|     [40.76]|                [26.0]|       [1776.0]|           [361.0]|       [992.0]|       [380.0]|         [2.8056]|
+|  -124.17|   40.77|              30.0|     1895.0|         366.0|     990.0|     359.0|       2.2227|     NEAR OCEAN|    [-124.17]|     [40.77]|                [30.0]|       [1895.0]|           [366.0]|       [990.0]|       [359.0]|         [2.2227]|
+|  -124.17|    40.8|              52.0|     1557.0|         344.0|     758.0|     319.0|       1.8529|     NEAR OCEAN|    [-124.17]|      [40.8]|                [52.0]|       [1557.0]|           [344.0]|       [758.0]|       [319.0]|         [1.8529]|
+|  -124.17|   41.76|              20.0|     2673.0|         538.0|    1282.0|     514.0|       2.4605|     NEAR OCEAN|    [-124.17]|     [41.76]|                [20.0]|       [2673.0]|           [538.0]|      [1282.0]|       [514.0]|         [2.4605]|
+|  -124.16|   40.77|              35.0|     2141.0|         438.0|    1053.0|     434.0|       2.8529|     NEAR OCEAN|    [-124.16]|     [40.77]|                [35.0]|       [2141.0]|           [438.0]|      [1053.0]|       [434.0]|         [2.8529]|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+-------------+------------+----------------------+---------------+------------------+--------------+--------------+-----------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"scaled_"</span><span class="o">+</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">numeric_cols</span><span class="p">]</span>
+<span class="n">minmaxScalers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">in_col</span><span class="p">,</span> <span class="n">out_col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vec_numeric_cols</span><span class="p">,</span> <span class="n">out_numeric_cols</span><span class="p">):</span>
+  <span class="n">minmaxscaler</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">(</span><span class="n">outputCol</span><span class="o">=</span><span class="n">out_col</span><span class="p">,</span> <span class="n">inputCol</span><span class="o">=</span><span class="n">in_col</span><span class="p">)</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">minmaxscaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_minmax_scaled</span><span class="p">)</span>
+  <span class="n">minmaxScalers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+  <span class="n">X_train_minmax_scaled</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_minmax_scaled</span><span class="p">)</span>
+<span class="n">X_train_minmax_scaled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+-------------+------------+----------------------+---------------+------------------+--------------+--------------+-----------------+--------------------+--------------------+-------------------------+--------------------+---------------------+--------------------+--------------------+--------------------+
+|longitude|latitude|housing_median_age|total_rooms|total_bedrooms|population|households|median_income|ocean_proximity|vec_longitude|vec_latitude|vec_housing_median_age|vec_total_rooms|vec_total_bedrooms|vec_population|vec_households|vec_median_income|    scaled_longitude|     scaled_latitude|scaled_housing_median_age|  scaled_total_rooms|scaled_total_bedrooms|   scaled_population|   scaled_households|scaled_median_income|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+-------------+------------+----------------------+---------------+------------------+--------------+--------------+-----------------+--------------------+--------------------+-------------------------+--------------------+---------------------+--------------------+--------------------+--------------------+
+|  -124.35|   40.54|              52.0|     1820.0|         300.0|     806.0|     270.0|       3.0147|     NEAR OCEAN|    [-124.35]|     [40.54]|                [52.0]|       [1820.0]|           [300.0]|       [806.0]|       [270.0]|         [3.0147]|               [0.0]|[0.8501594048884162]|                    [1.0]|[0.04623836410804...| [0.04815590272185...|[0.04925775978407...|[0.05021467239126...|[0.17343209059185...|
+|   -124.3|    41.8|              19.0|     2672.0|         552.0|    1298.0|     478.0|       1.9797|     NEAR OCEAN|     [-124.3]|      [41.8]|                [19.0]|       [2672.0]|           [552.0]|      [1298.0]|       [478.0]|         [1.9797]|[0.00498007968127...|[0.9840595111583416]|     [0.3529411764705882]|[0.0679078284755074]| [0.08874214849412...|[0.07943810575389...|[0.08904237446331...|[0.10205376477565...|
+|  -124.27|   40.69|              36.0|     2349.0|         528.0|    1194.0|     465.0|       2.5179|     NEAR OCEAN|    [-124.27]|     [40.69]|                [36.0]|       [2349.0]|           [528.0]|      [1194.0]|       [465.0]|         [2.5179]|[0.00796812749003...|[0.8660998937300739]|     [0.6862745098039216]|[0.05969276158502...| [0.08487679175390...|[0.07305852042694...|[0.08661564308381...|  [0.13917049420008]|
+|  -124.26|   40.58|              52.0|     2217.0|         394.0|     907.0|     369.0|       2.3571|     NEAR OCEAN|    [-124.26]|     [40.58]|                [52.0]|       [2217.0]|           [394.0]|       [907.0]|       [369.0]|         [2.3571]|[0.00896414342629...|[0.8544102019128582]|                    [1.0]|[0.05633552062668...| [0.06329521662103...|[0.05545331861121...|[0.06869516520440...|[0.12808099198631...|
+|  -124.25|   40.28|              32.0|     1430.0|         419.0|     434.0|     187.0|       1.9417|     NEAR OCEAN|    [-124.25]|     [40.28]|                [32.0]|       [1430.0]|           [419.0]|       [434.0]|       [187.0]|         [1.9417]|[0.00996015936254...|[0.8225292242295429]|     [0.6078431372549019]|[0.03631924309476...| [0.06732162989209...|[0.02643847380689...|[0.03472092589135...|[0.0994331112674308]|
+|  -124.23|   40.81|              52.0|     1112.0|         209.0|     544.0|     172.0|       3.3462|     NEAR OCEAN|    [-124.23]|     [40.81]|                [52.0]|       [1112.0]|           [209.0]|       [544.0]|       [172.0]|         [3.3462]|[0.01195219123505...|[0.8788522848034006]|                    [1.0]|[0.02823134442240...| [0.03349975841520...|[0.03318611213348...|[0.03192085122269...|[0.19629384422283...|
+|  -124.21|   40.75|              32.0|     1218.0|         331.0|     620.0|     268.0|       1.6528|     NEAR OCEAN|    [-124.21]|     [40.75]|                [32.0]|       [1218.0]|           [331.0]|       [620.0]|       [268.0]|         [1.6528]|[0.01394422310756...|[0.8724760892667373]|     [0.6078431372549019]|[0.03092731064652...| [0.05314865517796...|[0.03784811679548...|[0.04984132910210...|[0.07950924814830...|
+|  -124.21|   41.75|              20.0|     3810.0|         787.0|    1993.0|     721.0|       2.0074|     NEAR OCEAN|    [-124.21]|     [41.75]|                [20.0]|       [3810.0]|           [787.0]|      [1993.0]|       [721.0]|         [2.0074]|[0.01394422310756...|[0.9787460148777893]|     [0.37254901960784...|[0.09685131491937...| [0.12659043324206...|[0.12207091154459...|[0.1344035840955759]|[0.1039640832540241]|
+|  -124.21|   41.77|              17.0|     3461.0|         722.0|    1947.0|     647.0|       2.5795|     NEAR OCEAN|    [-124.21]|     [41.77]|                [17.0]|       [3461.0]|           [722.0]|      [1947.0]|       [647.0]|         [2.5795]|[0.01394422310756...|[0.9808714133900106]|     [0.3137254901960784]|[0.0879749732946742]| [0.1161217587373168]|[0.11924917188075...|[0.12058988239686...|[0.14341871146604...|
+|  -124.19|   41.78|              15.0|     3140.0|         714.0|    1645.0|     640.0|       1.6654|     NEAR OCEAN|    [-124.19]|     [41.78]|                [15.0]|       [3140.0]|           [714.0]|      [1645.0]|       [640.0]|         [1.6654]|[0.01593625498007...| [0.981934112646121]|     [0.27450980392156...|[0.07981077369143...| [0.1148333064905782]|[0.10072383756594...|[0.1192831808848236]|[0.08037820167997...|
+|  -124.18|   40.62|              35.0|      952.0|         178.0|     480.0|     179.0|       3.0536|     NEAR OCEAN|    [-124.18]|     [40.62]|                [35.0]|        [952.0]|           [178.0]|       [480.0]|       [179.0]|         [3.0536]|[0.01693227091633...|[0.8586609989373002]|     [0.6666666666666666]|[0.02416196144259...| [0.02850700595909...|[0.02926021347073...|[0.03322755273473...|[0.1761148122094868]|
+|  -124.18|   40.78|              33.0|     1076.0|         222.0|     656.0|     236.0|       2.5096|     NEAR OCEAN|    [-124.18]|     [40.78]|                [33.0]|       [1076.0]|           [222.0]|       [656.0]|       [236.0]|         [2.5096]|[0.01693227091633...| [0.875664187035069]|     [0.6274509803921569]|[0.02731573325194...| [0.03559349331615...|[0.0400564347932769]|[0.04386783647563...|[0.1385980883022303]|
+|  -124.18|   40.78|              37.0|     1453.0|         293.0|     867.0|     310.0|       2.5536|     NEAR OCEAN|    [-124.18]|     [40.78]|                [37.0]|       [1453.0]|           [293.0]|       [867.0]|       [310.0]|         [2.5536]|[0.01693227091633...| [0.875664187035069]|     [0.7058823529411764]|[0.03690421689811...| [0.04702850700595...|[0.05299963194700...|[0.05768153817435...|[0.14163252920649...|
+|  -124.18|   40.79|              40.0|     1398.0|         311.0|     788.0|     279.0|       1.4668|     NEAR OCEAN|    [-124.18]|     [40.79]|                [40.0]|       [1398.0]|           [311.0]|       [788.0]|       [279.0]|         [1.4668]|[0.01693227091633...|[0.8767268862911792]|     [0.7647058823529411]|[0.03550536649880...| [0.04992752456112...|[0.04815360078517...|[0.05189471719245...| [0.066681838871188]|
+|  -124.17|   40.75|              13.0|     2171.0|         339.0|     951.0|     353.0|       4.8516|     NEAR OCEAN|    [-124.17]|     [40.75]|                [13.0]|       [2171.0]|           [339.0]|       [951.0]|       [353.0]|         [4.8516]|[0.01792828685258...|[0.8724760892667373]|     [0.23529411764705...|[0.05516557301999...| [0.05443710742470...|[0.05815237394184...|[0.06570841889117...|[0.30011310188824...|
+|  -124.17|   40.76|              26.0|     1776.0|         361.0|     992.0|     380.0|       2.8056|     NEAR OCEAN|    [-124.17]|     [40.76]|                [26.0]|       [1776.0]|           [361.0]|       [992.0]|       [380.0]|         [2.8056]|[0.01792828685258...|[0.8735387885228476]|     [0.49019607843137...|[0.04511928378859...| [0.05798035110323...|[0.06066740277266...|[0.07074855329475...|[0.1590115998400022]|
+|  -124.17|   40.77|              30.0|     1895.0|         366.0|     990.0|     359.0|       2.2227|     NEAR OCEAN|    [-124.17]|     [40.77]|                [30.0]|       [1895.0]|           [366.0]|       [990.0]|       [359.0]|         [2.2227]|[0.01792828685258...|[0.8746014877789586]|     [0.5686274509803921]|[0.04814588737982...| [0.05878563375744...|[0.06054471843945...|[0.06682844875863...|[0.11881215431511...|
+|  -124.17|    40.8|              52.0|     1557.0|         344.0|     758.0|     319.0|       1.8529|     NEAR OCEAN|    [-124.17]|      [40.8]|                [52.0]|       [1557.0]|           [344.0]|       [758.0]|       [319.0]|         [1.8529]|[0.01792828685258...|[0.8777895855472896]|                    [1.0]|[0.03954931583498...| [0.0552423900789177]|  [0.04631333578702]|[0.05936158297554...|[0.09330905780609...|
+|  -124.17|   41.76|              20.0|     2673.0|         538.0|    1282.0|     514.0|       2.4605|     NEAR OCEAN|    [-124.17]|     [41.76]|                [20.0]|       [2673.0]|           [538.0]|      [1282.0]|       [514.0]|         [2.4605]|[0.01792828685258...|[0.9798087141338996]|     [0.37254901960784...|[0.06793326211913...| [0.08648735706232...|[0.07845663108821...|[0.09576255366809...|[0.13521192811133...|
+|  -124.16|   40.77|              35.0|     2141.0|         438.0|    1053.0|     434.0|       2.8529|     NEAR OCEAN|    [-124.16]|     [40.77]|                [35.0]|       [2141.0]|           [438.0]|      [1053.0]|       [434.0]|         [2.8529]|[0.01892430278884...|[0.8746014877789586]|     [0.6666666666666666]|[0.05440256371127...| [0.07038170397809...|[0.06440927493559...|[0.08082882210192...|[0.16227362381208...|
++---------+--------+------------------+-----------+--------------+----------+----------+-------------+---------------+-------------+------------+----------------------+---------------+------------------+--------------+--------------+-----------------+--------------------+--------------------+-------------------------+--------------------+---------------------+--------------------+--------------------+--------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train_minmax_scaled</span> <span class="o">=</span> <span class="n">X_train_minmax_scaled</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'scaled_longitude'</span><span class="p">,</span> <span class="s1">'scaled_latitude'</span><span class="p">,</span> <span class="s1">'scaled_housing_median_age'</span><span class="p">,</span>
+                                              <span class="s1">'scaled_total_rooms'</span><span class="p">,</span> <span class="s1">'scaled_total_bedrooms'</span><span class="p">,</span> <span class="s1">'scaled_population'</span><span class="p">,</span>
+                                              <span class="s1">'scaled_households'</span><span class="p">,</span> <span class="s1">'scaled_median_income'</span><span class="p">)</span>
+<span class="n">X_train_minmax_scaled</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+--------------------+--------------------+-------------------------+--------------------+---------------------+--------------------+--------------------+--------------------+
+|    scaled_longitude|     scaled_latitude|scaled_housing_median_age|  scaled_total_rooms|scaled_total_bedrooms|   scaled_population|   scaled_households|scaled_median_income|
++--------------------+--------------------+-------------------------+--------------------+---------------------+--------------------+--------------------+--------------------+
+|               [0.0]|[0.8501594048884162]|                    [1.0]|[0.04623836410804...| [0.04815590272185...|[0.04925775978407...|[0.05021467239126...|[0.17343209059185...|
+|[0.00498007968127...|[0.9840595111583416]|     [0.3529411764705882]|[0.0679078284755074]| [0.08874214849412...|[0.07943810575389...|[0.08904237446331...|[0.10205376477565...|
+|[0.00796812749003...|[0.8660998937300739]|     [0.6862745098039216]|[0.05969276158502...| [0.08487679175390...|[0.07305852042694...|[0.08661564308381...|  [0.13917049420008]|
+|[0.00896414342629...|[0.8544102019128582]|                    [1.0]|[0.05633552062668...| [0.06329521662103...|[0.05545331861121...|[0.06869516520440...|[0.12808099198631...|
+|[0.00996015936254...|[0.8225292242295429]|     [0.6078431372549019]|[0.03631924309476...| [0.06732162989209...|[0.02643847380689...|[0.03472092589135...|[0.0994331112674308]|
+|[0.01195219123505...|[0.8788522848034006]|                    [1.0]|[0.02823134442240...| [0.03349975841520...|[0.03318611213348...|[0.03192085122269...|[0.19629384422283...|
+|[0.01394422310756...|[0.8724760892667373]|     [0.6078431372549019]|[0.03092731064652...| [0.05314865517796...|[0.03784811679548...|[0.04984132910210...|[0.07950924814830...|
+|[0.01394422310756...|[0.9787460148777893]|     [0.37254901960784...|[0.09685131491937...| [0.12659043324206...|[0.12207091154459...|[0.1344035840955759]|[0.1039640832540241]|
+|[0.01394422310756...|[0.9808714133900106]|     [0.3137254901960784]|[0.0879749732946742]| [0.1161217587373168]|[0.11924917188075...|[0.12058988239686...|[0.14341871146604...|
+|[0.01593625498007...| [0.981934112646121]|     [0.27450980392156...|[0.07981077369143...| [0.1148333064905782]|[0.10072383756594...|[0.1192831808848236]|[0.08037820167997...|
+|[0.01693227091633...|[0.8586609989373002]|     [0.6666666666666666]|[0.02416196144259...| [0.02850700595909...|[0.02926021347073...|[0.03322755273473...|[0.1761148122094868]|
+|[0.01693227091633...| [0.875664187035069]|     [0.6274509803921569]|[0.02731573325194...| [0.03559349331615...|[0.0400564347932769]|[0.04386783647563...|[0.1385980883022303]|
+|[0.01693227091633...| [0.875664187035069]|     [0.7058823529411764]|[0.03690421689811...| [0.04702850700595...|[0.05299963194700...|[0.05768153817435...|[0.14163252920649...|
+|[0.01693227091633...|[0.8767268862911792]|     [0.7647058823529411]|[0.03550536649880...| [0.04992752456112...|[0.04815360078517...|[0.05189471719245...| [0.066681838871188]|
+|[0.01792828685258...|[0.8724760892667373]|     [0.23529411764705...|[0.05516557301999...| [0.05443710742470...|[0.05815237394184...|[0.06570841889117...|[0.30011310188824...|
+|[0.01792828685258...|[0.8735387885228476]|     [0.49019607843137...|[0.04511928378859...| [0.05798035110323...|[0.06066740277266...|[0.07074855329475...|[0.1590115998400022]|
+|[0.01792828685258...|[0.8746014877789586]|     [0.5686274509803921]|[0.04814588737982...| [0.05878563375744...|[0.06054471843945...|[0.06682844875863...|[0.11881215431511...|
+|[0.01792828685258...|[0.8777895855472896]|                    [1.0]|[0.03954931583498...| [0.0552423900789177]|  [0.04631333578702]|[0.05936158297554...|[0.09330905780609...|
+|[0.01792828685258...|[0.9798087141338996]|     [0.37254901960784...|[0.06793326211913...| [0.08648735706232...|[0.07845663108821...|[0.09576255366809...|[0.13521192811133...|
+|[0.01892430278884...|[0.8746014877789586]|     [0.6666666666666666]|[0.05440256371127...| [0.07038170397809...|[0.06440927493559...|[0.08082882210192...|[0.16227362381208...|
++--------------------+--------------------+-------------------------+--------------------+---------------------+--------------------+--------------------+--------------------+
+only showing top 20 rows
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creacion-del-pipeline-secuencia-de-operaciones">
+<h4>Creación del Pipeline (Secuencia de operaciones)<a class="headerlink" href="#creacion-del-pipeline-secuencia-de-operaciones" title="Link to this heading">#</a></h4>
+<!--
+
+sqlTrans = ml.feature.SQLTransformer(statement="SELECT scaled_longitude AS longitude, \
+                                                       scaled_latitude AS latitude, \
+                                                       scaled_housing_median_age AS housing_median_age, \
+                                                       scaled_total_rooms AS total_rooms, \
+                                                       scaled_total_bedrooms_complete AS total_bedrooms, \
+                                                       scaled_population AS population, \
+                                                       scaled_households AS households, \
+                                                       scaled_median_income AS median_income, \
+                                                       onehot_ocean_proximity AS ocean_proximity, \
+                                                       features, \
+                                                       median_house_value AS label FROM __THIS__")
+
+
+--><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">imputer</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">Imputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">"median"</span><span class="p">,</span><span class="n">inputCols</span><span class="o">=</span><span class="p">[</span><span class="s2">"total_bedrooms"</span><span class="p">],</span><span class="n">outputCols</span><span class="o">=</span><span class="p">[</span><span class="s2">"total_bedrooms_complete"</span><span class="p">])</span>
+
+<span class="n">stringIndexer</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">StringIndexer</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">"ocean_proximity"</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">"ordinal_ocean_proximity"</span><span class="p">,</span> <span class="n">stringOrderType</span><span class="o">=</span><span class="s2">"frequencyDesc"</span><span class="p">)</span>
+
+<span class="n">onehotencoder</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">"ordinal_ocean_proximity"</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">)</span>
+
+<span class="n">columns_to_scale</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"longitude"</span><span class="p">,</span><span class="s2">"latitude"</span><span class="p">,</span><span class="s2">"housing_median_age"</span><span class="p">,</span><span class="s2">"total_rooms"</span><span class="p">,</span><span class="s2">"total_bedrooms_complete"</span><span class="p">,</span><span class="s2">"population"</span><span class="p">,</span><span class="s2">"households"</span><span class="p">,</span><span class="s2">"median_income"</span><span class="p">]</span>
+
+<span class="n">assemblers</span> <span class="o">=</span> <span class="p">[</span><span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">outputCol</span><span class="o">=</span><span class="n">col</span> <span class="o">+</span> <span class="s2">"_vec"</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns_to_scale</span><span class="o">+</span><span class="p">[</span><span class="s2">"median_house_value"</span><span class="p">]]</span>
+
+<span class="n">scalers</span> <span class="o">=</span> <span class="p">[</span><span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">MinMaxScaler</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="n">col</span> <span class="o">+</span> <span class="s2">"_vec"</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">"scaled_"</span> <span class="o">+</span> <span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns_to_scale</span><span class="p">]</span>
+
+<span class="n">feature_assembler</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="p">[</span><span class="s2">"scaled_"</span> <span class="o">+</span> <span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns_to_scale</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="s2">"onehot_ocean_proximity"</span><span class="p">],</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">"features"</span><span class="p">)</span>
+
+<span class="n">sqlTrans</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">SQLTransformer</span><span class="p">(</span><span class="n">statement</span><span class="o">=</span><span class="s2">"SELECT features, median_house_value_vec AS label FROM __THIS__"</span><span class="p">)</span>
+
+<span class="n">preprocess_pipeline</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span><span class="o">=</span><span class="p">[</span><span class="n">imputer</span><span class="p">,</span> <span class="n">stringIndexer</span><span class="p">,</span> <span class="n">onehotencoder</span><span class="p">]</span><span class="o">+</span><span class="n">assemblers</span><span class="o">+</span><span class="n">scalers</span><span class="o">+</span><span class="p">[</span><span class="n">feature_assembler</span><span class="p">,</span> <span class="n">sqlTrans</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline_model</span> <span class="o">=</span> <span class="n">preprocess_pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">housing_data_train</span><span class="p">)</span>
+<span class="n">pipeline_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">housing_data_train</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\UnidadBigData"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-y-preparacion-de-los-datos">Exploración y preparación de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-del-problema">Descripción del problema</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-ambiente-de-google-colaboratory">Configuración del ambiente de Google Colaboratory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-sesion-de-spark-e-importar-los-datos">Crear Sesión de Spark e importar los datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#division-en-el-conjunto-de-entrenamiento-y-conjunto-de-evaluacion">División en el conjunto de entrenamiento y conjunto de evaluación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-los-datos">Exploración de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-geoespaciales">Datos geoespaciales</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correlaciones">Correlaciones</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-nuevos-atributos">Creación de nuevos atributos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparacion-de-los-datos">Preparación de los datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#separacion-de-caracteristicas-predictores-y-etiquetas">Separación de características/predictores y etiquetas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tratamiento-de-datos-nulos">Tratamiento de datos nulos</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#caracteristicas-categoricas">Características categóricas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion">Normalización</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-pipeline-secuencia-de-operaciones">Creación del Pipeline (Secuencia de operaciones)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

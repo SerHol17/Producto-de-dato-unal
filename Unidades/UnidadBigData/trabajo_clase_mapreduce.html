@@ -1,0 +1,901 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Trabajo en clase - MapReduce &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/UnidadBigData/trabajo_clase_mapreduce';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/UnidadBigData/trabajo_clase_mapreduce.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/UnidadBigData/trabajo_clase_mapreduce.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/UnidadBigData/trabajo_clase_mapreduce.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Trabajo en clase - MapReduce</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Trabajo en clase - MapReduce</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-1-estadisticas-de-texto">Ejercicio 1: Estadísticas de Texto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-2-numero-medio-de-palabras-por-linea">Ejercicio 2: Número medio de palabras por línea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-3-indice-invertido">Ejercicio 3: Índice invertido</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-4-suma-de-matrices">Ejercicio 4: Suma de Matrices</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="trabajo-en-clase-mapreduce">
+<h1>Trabajo en clase - MapReduce<a class="headerlink" href="#trabajo-en-clase-mapreduce" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://drive.google.com/file/d/16QktQoLSM81WJsjADSDnc-QPIMROBFhb/view?usp=drive_link">https://drive.google.com/file/d/16QktQoLSM81WJsjADSDnc-QPIMROBFhb/view?usp=drive_link</a>
+<a class="reference external" href="https://drive.google.com/file/d/1VGRQAvytiDTQT2GALQVu81C9u99Cj0ju/view?usp=drive_link">https://drive.google.com/file/d/1VGRQAvytiDTQT2GALQVu81C9u99Cj0ju/view?usp=drive_link</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>pip install mrjob
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting mrjob
+  Downloading mrjob-0.7.4-py2.py3-none-any.whl.metadata (7.3 kB)
+Requirement already satisfied: PyYAML&gt;=3.10 in /usr/local/lib/python3.12/dist-packages (from mrjob) (6.0.2)
+Downloading mrjob-0.7.4-py2.py3-none-any.whl (439 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">439.6/439.6 kB</span> <span class=" -Color -Color-Red">6.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hInstalling collected packages: mrjob
+Successfully installed mrjob-0.7.4
+</pre></div>
+</div>
+</div>
+</div>
+<section id="ejercicio-1-estadisticas-de-texto">
+<h2>Ejercicio 1: Estadísticas de Texto<a class="headerlink" href="#ejercicio-1-estadisticas-de-texto" title="Link to this heading">#</a></h2>
+<p>Completa la clase <code class="docutils literal notranslate"><span class="pre">TextStats</span></code> implementando un programa map-reduce que, dado un texto de entrada, cuente:</p>
+<ul class="simple">
+<li><p>El número de caracteres</p></li>
+<li><p>El número de líneas</p></li>
+<li><p>El número de palabras</p></li>
+</ul>
+<p>y emita como resultado tres tuplas como en el ejemplo siguiente.</p>
+<p><em>Ejemplo de ejecución</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Ancient influences have helped spawn variant interpretations
+of the nature of history which have evolved over the centuries
+and continue to change today. The modern study of history is
+wide-ranging, and includes the study of specific regions and
+the study of certain topical or thematical elements of
+historical investigation. Often history is taught as part of
+primary and secondary education, and the academic study of
+history is a major discipline in University studies
+</pre></div>
+</div>
+<p><em>Resultado</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>"chars"	472
+"lines"	8
+"words"	73
+</pre></div>
+</div>
+<p>Nota: Dado un string <code class="docutils literal notranslate"><span class="pre">s</span></code> usa la función <code class="docutils literal notranslate"><span class="pre">s.split()</span></code> para obtener obtener una lista con los conjuntos de caracteres del string que están separados por espacios en blanco o usa la búsqueda por expresiones regulares vista en clase. Usa la función <code class="docutils literal notranslate"><span class="pre">len</span></code> para obtener la longitud de un string o de una lista.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%writefile /content/TextStats.py
+from mrjob.job import MRJob
+
+class TextStats(MRJob):
+
+    def mapper(self, _, line):
+        tokens = line.split()
+
+        yield "Palabras", len(tokens)
+        yield "Caracter", len(line)
+        yield "Lineas", 1
+
+
+    def reducer(self, key, values):
+        # TU CODIGO AQUI
+        yield key, sum(values)
+
+if __name__ == '__main__':
+    TextStats.run()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting /content/TextStats.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%script python TextStats.py --quiet
+Ancient influences have helped spawn variant interpretations
+of the nature of history which have evolved over the centuries
+and continue to change today. The modern study of history is
+wide-ranging, and includes the study of specific regions and
+the study of certain topical or thematical elements of
+historical investigation. Often history is taught as part of
+primary and secondary education, and the academic study of
+history is a major discipline in University studies
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>"Lineas"	8
+"Palabras"	73
+"Caracter"	465
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-2-numero-medio-de-palabras-por-linea">
+<h2>Ejercicio 2: Número medio de palabras por línea<a class="headerlink" href="#ejercicio-2-numero-medio-de-palabras-por-linea" title="Link to this heading">#</a></h2>
+<p>Completa la clase <code class="docutils literal notranslate"><span class="pre">LineAverage</span></code> para que como resultado final emita únicamente un par <em>clave, valor</em> con el número medio de palabras por línea en el texto de entrada.</p>
+<p>Para el mismo texto anterior, la salida debería de ser:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>"avg"	9.125
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%writefile LineAverage.py
+from mrjob.job import MRJob
+import numpy as np
+
+class LineAverage(MRJob):
+
+    def mapper(self, _, line):
+        tokens = line.split()
+        yield "avg", len(tokens)
+
+
+    def reducer(self, key, values):
+
+
+        yield key, np.average(list(values))
+
+if __name__ == '__main__':
+    LineAverage.run()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing LineAverage.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>verifica que la salida es la esperada y prueba con nuevos valores. <font style="color: red"><em>Elimina la opción</em> <code class="docutils literal notranslate"><span class="pre">--quiet</span></code> <em>para ver los mensajes de error de tu código si no produce la salida esperada</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%script python LineAverage.py -q
+Ancient influences have helped spawn variant interpretations
+of the nature of history which have evolved over the centuries
+and continue to change today. The modern study of history is
+wide-ranging, and includes the study of specific regions and
+the study of certain topical or thematical elements of
+historical investigation. Often history is taught as part of
+primary and secondary education, and the academic study of
+history is a major discipline in University studies
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>"avg"	9.125
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-3-indice-invertido">
+<h2>Ejercicio 3: Índice invertido<a class="headerlink" href="#ejercicio-3-indice-invertido" title="Link to this heading">#</a></h2>
+<p>Completa la clase <code class="docutils literal notranslate"><span class="pre">InvertedIndex</span></code> implementando un programa map-reduce que cree un indice invertido para una lista de documentos. Es decir, para cada palabra en nuestra colección de documentos el índice invertido no da en qué documentos aparece. Estos índices se usan posteriormente para responder a queries:</p>
+<p><em>Ejemplo de ejecución</em> (entrada es en formato <strong>json</strong>)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>["001", "the car is nice"]
+["002", "that car is mine"]
+["003", "that shirt is nice"]  
+["004", "the car is the best"]
+</pre></div>
+</div>
+<p><em>Resultado</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>"best"  ["004"]
+"car"   ["001", "002", "004"]
+"is"    ["001", "002", "003", "004"]
+"mine"  ["002"]
+"nice"  ["001", "003"]
+"shirt" ["003"]
+"that"  ["002", "003"]
+"the"   ["001", "004"]
+</pre></div>
+</div>
+<p><em>Nota: usa la linea:</em></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>key, text = json.loads(line)
+</pre></div>
+</div>
+<p>_para obtener extraer el id del documento y el texto del mismo del formato <strong>json</strong> _</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%writefile InvertedIndex.py
+from mrjob.job import MRJob
+import json
+
+class InvertedIndex(MRJob):
+
+    def mapper(self, _, line):
+        Ind, text = json.loads(line)
+        # TU CODIGO AQUI
+
+
+    def reducer(self, key, values):
+        # TU CODIGO AQUI
+
+if __name__ == '__main__':
+    InvertedIndex.run()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing InvertedIndex.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>Verifica que la salida es la esperada y prueba con nuevos valores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%script python InvertedIndex.py -q
+["001", "the car is nice"]
+["002", "that car is mine"]
+["003", "that shirt is nice"]
+["004", "the car is the best"]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>"mine"	["002"]
+"nice"	["001", "003"]
+"shirt"	["003"]
+"that"	["002", "003"]
+"the"	["001", "004", "004"]
+"best"	["004"]
+"car"	["001", "002", "004"]
+"is"	["001", "002", "003", "004"]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%script python InvertedIndex.py -q
+["001", "War is a state of armed conflict between autonomous organizations (such as states and non-state actors) or coalitions of such organizations. It is generally characterized by extreme collective aggression, destruction, and usually high mortality. The set of techniques used by a group to carry out war is known as warfare. An absence of war is usually called peace."]
+["032", "War must entail some degree of confrontation using weapons and other military technology and equipment by armed forces employing military tactics and operational art within a broad military strategy subject to military logistics."]
+["105", "While some scholars see warfare as a universal and ancestral aspect of human nature, others argue that it is only a result of specific socio-cultural or ecological circumstances"]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>"KEY"	"VALUE"
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ejercicio-4-suma-de-matrices">
+<h1>Ejercicio 4: Suma de Matrices<a class="headerlink" href="#ejercicio-4-suma-de-matrices" title="Link to this heading">#</a></h1>
+<p>Representamos dos matrices <strong>a</strong> y <strong>b</strong> de 2x2 de la siguiente forma:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>["a", 0, 0, 32]
+["a", 0, 1, 69]
+["a", 1, 0, 18]
+["a", 1, 1, 28]
+["b", 0, 0, 18]
+["b", 0, 1, 69]
+["b", 1, 0, 28]
+["b", 1, 1, 32]
+</pre></div>
+</div>
+<p>es decir</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>a = [32 69]     b = [18 69]    a + b = [50 138]
+    [18 28]         [28 32]            [46  60]
+</pre></div>
+</div>
+<p>tienes que implementar un programa map-reduce que acepte como entrada las dos matrices y realice la suma</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%writefile MatrixSum.py
+from mrjob.job import MRJob
+import json
+
+class MatrixSum(MRJob):
+
+    def mapper(self, _, line):
+
+
+    def reducer(self, key, values):
+
+
+
+if __name__ == '__main__':
+    MatrixSum.run()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing MatrixSum.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%script python MatrixSum.py -q
+["a", 0, 0, 32]
+["a", 0, 1, 69]
+["a", 1, 0, 18]
+["a", 1, 1, 28]
+["b", 0, 0, 18]
+["b", 0, 1, 69]
+["b", 1, 0, 28]
+["b", 1, 1, 32]
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>"KEY"	"VALUE"
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\UnidadBigData"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Trabajo en clase - MapReduce</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-1-estadisticas-de-texto">Ejercicio 1: Estadísticas de Texto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-2-numero-medio-de-palabras-por-linea">Ejercicio 2: Número medio de palabras por línea</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-3-indice-invertido">Ejercicio 3: Índice invertido</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-4-suma-de-matrices">Ejercicio 4: Suma de Matrices</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

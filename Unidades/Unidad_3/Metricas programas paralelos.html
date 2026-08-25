@@ -1,0 +1,1072 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Medidas de desempeño &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_3/Metricas programas paralelos';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_3/Metricas programas paralelos.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_3/Metricas programas paralelos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_3/Metricas programas paralelos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Medidas de desempeño</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#en-esta-clase-vamos-a-repasar-de-manera-practica-los-conceptos-de-medidas-de-desempeno">En esta Clase vamos a repasar, de manera práctica, los conceptos de medidas de desempeño</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiempos-de-ejecucion">Tiempos de ejecución</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aceleracion">Aceleración</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eficiencia">Eficiencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-amdahl">Ley de Amdahl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-gustafson">Ley de Gustafson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-de-aceleraciones">Ejercicio de Aceleraciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Ejercicio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-de-punto-flotante-a-binario-con-precision-simple-y-doble">Conversión de punto flotante a binario con precisión simple y doble.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Ejercicio</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="medidas-de-desempeno">
+<h1>Medidas de desempeño<a class="headerlink" href="#medidas-de-desempeno" title="Link to this heading">#</a></h1>
+<section id="en-esta-clase-vamos-a-repasar-de-manera-practica-los-conceptos-de-medidas-de-desempeno">
+<h2>En esta Clase vamos a repasar, de manera práctica, los conceptos de medidas de desempeño<a class="headerlink" href="#en-esta-clase-vamos-a-repasar-de-manera-practica-los-conceptos-de-medidas-de-desempeno" title="Link to this heading">#</a></h2>
+<section id="tiempos-de-ejecucion">
+<h3>Tiempos de ejecución<a class="headerlink" href="#tiempos-de-ejecucion" title="Link to this heading">#</a></h3>
+<p>Es la métrica más sencilla, solo tenemos que calcular el tiempo desde que empieza a correr el programa hasta que termina.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">funcion</span><span class="p">(</span><span class="n">tiempo</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">tiempo</span><span class="p">)</span>
+
+
+<span class="n">inicio</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">funcion</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">fin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"El tiempo de ejecución del código es de </span><span class="si">{</span><span class="n">fin</span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># Podemos notar que el tiempo de ejecución es diferente a los que podríamos suponer.</span>
+<span class="c1"># Aunque la funcion se va a dormir por 10 segundos, el programa tarda un tiempo más en enviar las instrucciones a la ALU para hacer el proceso.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El tiempo de ejecución del código es de 10.00997519493103
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="aceleracion">
+<h3>Aceleración<a class="headerlink" href="#aceleracion" title="Link to this heading">#</a></h3>
+<p>Esta métrica mide la rapidéz con la que se ejecuta un algoritmo paralelo respecto a como se haría en  (1 procesador).</p>
+<p>Si tenemos un algoritmo que emplea 60 segundos en completar su ejecución con un solo procesador, cuanto es la aceleración del algoritmo si con 4 procesadores la realiza en 20 segundos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_1</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">t_4</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">Aceleracion</span> <span class="o">=</span> <span class="mi">60</span><span class="o">/</span><span class="mi">20</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">" La aceleración es de </span><span class="si">{</span><span class="n">Aceleracion</span><span class="si">}</span><span class="s2"> veces"</span><span class="p">)</span>
+<span class="c1">#La aceleración de un algoritmo es adimensional</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> La aceleración es de 3.0 veces
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Si tenemos los tiempos del algoritmo, ejecutado con diferentes procesadores</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">'ggplot'</span><span class="p">)</span>
+
+<span class="n">n_cores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">128</span><span class="p">])</span>
+<span class="n">t_paralelo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">45</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mf">5.11</span><span class="p">,</span><span class="mf">2.3</span><span class="p">,</span><span class="mf">0.8</span><span class="p">])</span>
+
+<span class="c1"># Miremos gráficamente el comportamiento.</span>
+
+<span class="n">acel</span> <span class="o">=</span> <span class="n">t_1</span> <span class="o">/</span> <span class="n">t_paralelo</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_cores</span><span class="p">,</span> <span class="n">acel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">n_cores</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Aceleración [X]"</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Número de procesadores [n]"</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_cores</span><span class="p">,</span> <span class="n">t_paralelo</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">n_cores</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"tiempo"</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Número de procesadores [n]"</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/eea7239ed9b7d732214540c5d10411f26fdc5218170cac941d7889a1f041bc30.png" src="../../_images/eea7239ed9b7d732214540c5d10411f26fdc5218170cac941d7889a1f041bc30.png" />
+<img alt="../../_images/1b671f0092685bd551f2e8c2f2a2cf271c41b011a4be64b125c53d71d095c58c.png" src="../../_images/1b671f0092685bd551f2e8c2f2a2cf271c41b011a4be64b125c53d71d095c58c.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="eficiencia">
+<h2>Eficiencia<a class="headerlink" href="#eficiencia" title="Link to this heading">#</a></h2>
+<p>Supongamos que tenemos un problema que se puede resolver en 100 segundos con un algoritmo secuencial. Queremos resolver el mismo problema utilizando un algoritmo paralelo en una computadora con 4 procesadores. Ejecutamos el algoritmo paralelo y medimos que tarda 25 segundos en completar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">t_secuencial</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">t_para</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="n">proc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">64</span><span class="p">])</span>
+
+<span class="n">eficiencia</span> <span class="o">=</span> <span class="n">t_secuencial</span> <span class="o">/</span><span class="p">(</span><span class="n">proc</span> <span class="o">*</span> <span class="n">t_para</span><span class="p">)</span> <span class="c1">## Esta se deduce de la ecn de aceleración y eficiencia.</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span><span class="n">eficiencia</span><span class="p">,</span><span class="s1">'-o'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Número de procesadores'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Eficiencia'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Eficiencia de un algoritmo paralelo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b2d18bce1ea4d6e3c2733e3f4e31c150cd17f90ddf1723fe9f07d6b728fe8f03.png" src="../../_images/b2d18bce1ea4d6e3c2733e3f4e31c150cd17f90ddf1723fe9f07d6b728fe8f03.png" />
+</div>
+</div>
+</section>
+<section id="ley-de-amdahl">
+<h2>Ley de Amdahl<a class="headerlink" href="#ley-de-amdahl" title="Link to this heading">#</a></h2>
+<p>supongamos que tenemos un programa secuencial que tarda 1 hora en completarse, y que podemos paralelizar el 50% del código. Es decir, la mitad del programa se puede ejecutar en paralelo, mientras que la otra mitad sigue siendo secuencial. Si tenemos 8 procesadores disponibles para ejecutar el programa en paralelo, ¿cuál sería el tiempo de ejecución?</p>
+<p>Para responder a esta pregunta, podemos utilizar la Ley de Amdahl y la siguiente fórmula:</p>
+<p>\begin{align}{
+{\huge Acel = \frac{1}{f_s + (\frac{f_p}{N})}}
+}\end{align}</p>
+<ul class="simple">
+<li><p>Acá <span class="math notranslate nohighlight">\(f_s\)</span> es la fracción secuencial</p></li>
+<li><p>Acá <span class="math notranslate nohighlight">\(f_p\)</span> es la fracción paralela</p></li>
+<li><p>Acá <span class="math notranslate nohighlight">\(N\)</span> es la cantidad de procesadores</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">frac_ser</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">frac_par</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">frac_ser</span>
+
+<span class="n">acel</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">frac_ser</span> <span class="o">+</span><span class="p">(</span><span class="n">frac_par</span><span class="o">/</span><span class="n">N</span><span class="p">))</span>
+<span class="n">acel</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7777777777777777
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#s=ts/tp;</span>
+<span class="c1">#tp=ts/s</span>
+<span class="n">tp</span><span class="o">=</span><span class="mi">60</span><span class="o">/</span><span class="mf">1.7777</span>
+<span class="n">tp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33.751476627102434
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Ahora miremos el desempeño del algoritmo variando el número de procesadores</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">frac_ser</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">frac_par</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">frac_ser</span>
+
+
+<span class="n">acel</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">frac_ser</span> <span class="o">+</span><span class="p">(</span><span class="n">frac_par</span><span class="o">/</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">acel</span><span class="p">,</span><span class="s1">'-o'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Número de procesadores'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Aceleración'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Aceleración de un algoritmo paralelo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e9dd2626c9cbdafe48aaf8a1bd14f1516d926bd3521955faeb4e8c7f4804c95d.png" src="../../_images/e9dd2626c9cbdafe48aaf8a1bd14f1516d926bd3521955faeb4e8c7f4804c95d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Miremos ahora si también se modifica el porcentaje de paralelización</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">64</span><span class="p">])</span>
+<span class="n">frac_sers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">frac_ser</span> <span class="ow">in</span> <span class="n">frac_sers</span><span class="p">:</span>
+  <span class="n">frac_par</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">frac_ser</span>
+  <span class="n">acel</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">frac_ser</span> <span class="o">+</span><span class="p">(</span><span class="n">frac_par</span><span class="o">/</span><span class="n">N</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">acel</span><span class="p">,</span><span class="s1">'-o'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">' </span><span class="si">{:.0f}</span><span class="s1">% '</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_par</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Número de procesadores'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Aceleración'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Eficiencia de un algoritmo paralelo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3bd04a338185df754792c7213d90fe6392a6b39b6c0a0c13380c99732c09a7d5.png" src="../../_images/3bd04a338185df754792c7213d90fe6392a6b39b6c0a0c13380c99732c09a7d5.png" />
+</div>
+</div>
+</section>
+<section id="ley-de-gustafson">
+<h2>Ley de Gustafson<a class="headerlink" href="#ley-de-gustafson" title="Link to this heading">#</a></h2>
+<p>Establece que cualquier problema suficientemente grande puede ser eficientemente paralelizado, ofrece un nuevo punto de vista y así una visión positiva de las ventajas del procesamiento paralelo.
+La ecuación <span class="math notranslate nohighlight">\(s\)</span> se define de la siguiente manera:</p>
+<div class="math notranslate nohighlight">
+\[
+s = f + N(1 - f) = N - fx(N - 1)
+\]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> es el porcentaje en decimales de la parte secuencial.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> es la cantidad de procesadores.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Valores de N (número de procesadores) de 1 a 120</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">121</span><span class="p">)</span>
+
+<span class="c1"># Valores de f (fracción secuencial) desde 0.1 hasta 0.9</span>
+<span class="n">f_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+<span class="c1"># Crear un gráfico para cada valor de f</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">f_values</span><span class="p">:</span>
+    <span class="n">speedup</span> <span class="o">=</span> <span class="n">N</span> <span class="o">-</span> <span class="n">f</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">speedup</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'f=</span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="c1"># Configurar el gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Número de Procesadores (N)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Speedup (s)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Ley de Gustafson'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Mostrar el gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2011526685976145c90c767b30a3c88d208d664494b6fc989de8596fa9b9b8e8.png" src="../../_images/2011526685976145c90c767b30a3c88d208d664494b6fc989de8596fa9b9b8e8.png" />
+</div>
+</div>
+</section>
+<section id="ejercicio">
+<h2>Ejercicio<a class="headerlink" href="#ejercicio" title="Link to this heading">#</a></h2>
+<p>Establezca el porcentaje de paralelización de un algoritmo que tiene:</p>
+<ul class="simple">
+<li><p>Aceleración = 2.3 X</p></li>
+<li><p>Procesadores = 12</p></li>
+</ul>
+<p>Pista: Utilice la Ley de Amdahl</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### TU CÓDIGO VA AQUÍ</span>
+
+<span class="c1">### HASTA AQUÍ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-de-aceleraciones">
+<h2>Ejercicio de Aceleraciones<a class="headerlink" href="#ejercicio-de-aceleraciones" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Ejecute la siguente celda para importar los insumos del ejercicio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">t_secuencial</span> <span class="o">=</span> <span class="mi">60</span> <span class="c1">#@param</span>
+<span class="n">t_paralelo</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#@param</span>
+<span class="n">t_exportdata</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">#@param</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">leerdata</span><span class="p">():</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">asignarMemoria</span><span class="p">():</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">copiarDatos</span><span class="p">():</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kernelSecuencial</span><span class="p">(</span><span class="n">t</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="n">t_secuencial</span><span class="p">):</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">kernelParalelo</span><span class="p">(</span><span class="n">t</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="n">t_paralelo</span><span class="p">):</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">exportarDatos</span><span class="p">(</span><span class="n">t</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="n">t_exportdata</span><span class="p">):</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">liberarMemoria</span><span class="p">():</span>
+  <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Un proceso a bajo nivel de paralelización de un proceso consta de varias etapas en el siguiente orden:</p>
+<ul class="simple">
+<li><p>Leer data en RAM de CPU</p></li>
+<li><p>Asignar memoria en la GPU</p></li>
+<li><p>Copiar datos de la RAM de CPU a RAM de GPU y cache</p></li>
+<li><p>Ejecución de la tarea (paralelo o serial)</p></li>
+<li><p>Exportar datos de la GPU a la CPU</p></li>
+<li><p>Liberar memoria</p></li>
+</ul>
+<p>Simulemos un proceso secuencial y un programa paralelizado</p>
+<p>para eso pueden usar las siguientes funciones:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">leerdata</span><span class="p">()</span>
+<span class="o">*</span> <span class="n">asignarMemoria</span><span class="p">()</span>
+<span class="o">*</span> <span class="n">copiarDatos</span><span class="p">()</span>
+<span class="o">*</span> <span class="n">kernelSecuencial</span><span class="p">()</span>
+<span class="o">*</span> <span class="n">kernelParalelo</span><span class="p">()</span>
+<span class="o">*</span> <span class="n">exportarDatos</span><span class="p">()</span>
+<span class="o">*</span> <span class="n">liberarMemoria</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Teniendo estas funciones, arme dos casos, un proceso secuencial y un proceso paralelizado; luego realice la medición de los «<em>breakdowns</em>» y tiempos de ejecución del kernel.</p>
+<ol class="arabic simple">
+<li><p>Calcule la aceleración del programa paralelizado respecto al secuencial.</p></li>
+<li><p>Calcule la fracción de código paralelo y no paralelo con respecto al tiempo.</p></li>
+<li><p>Analice el comportamiento de la aceleración de todo el programa o de solo la parte de kernel. ¿Vale la pena la paralelización?</p></li>
+<li><p>Vaya al formulario y multiplique el «<em>t_exportdata</em>» por 60. Realice los pasos anteriores en otra celda, analice los cambios y concluya sobre los resultados</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### parte 1,2,3 - TU CÓDIGO VA ACÁ</span>
+
+
+<span class="c1">### TU CÓDIGO TERMINA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### parte 1,2,3 - TU CÓDIGO VA ACÁ</span>
+
+<span class="c1">### TU CÓDIGO TERMINA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"La aceleracion de todo el codigo paralelo vs secuencial es:"</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"La fracción de codigo paralelo respecto al total:"</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"La fracción de codigo No paralelo respecto al total:"</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"La aceleracion de todo el codigo paralelo vs secuencial solo en el kernel es:"</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### parte 4 - TU CÓDIGO VA ACÁ</span>
+
+
+
+<span class="c1">### TU CÓDIGO TERMINA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Ejercicio<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Usted ha sido contratado en una empresa de tecnología, y encuentra poca documentación sobre la infraestructura del cluster. Para un proceso de renovación usted debe conocer  la operaciones x ciclo que tienen dos de sus computadores ya que debe dar de baja al de menor número de operaciones. Solo tiene la siguiente información:</p>
+<p>Computador 1:</p>
+<ul class="simple">
+<li><p>Vel_cpu = 3 GHz</p></li>
+<li><p>n_cpus = 128 cores</p></li>
+<li><p>Precisión de punto flotante = 32</p></li>
+<li><p>TFlops = 49.152</p></li>
+</ul>
+<p>Computador 2:</p>
+<ul class="simple">
+<li><p>Vel_cpu = 3.5 GHz</p></li>
+<li><p>n_cpus = 12 cores</p></li>
+<li><p>Precisión de punto flotante = 64</p></li>
+<li><p>TFlops = 5.376</p></li>
+</ul>
+<p>Computador 3:</p>
+<ul class="simple">
+<li><p>Vel_cpu = 2.5 GHz</p></li>
+<li><p>n_cpus = 128 cores</p></li>
+<li><p>Precisión de punto flotante = 64</p></li>
+<li><p>TFlops = 40.96</p></li>
+</ul>
+<p>Computador 4:</p>
+<ul class="simple">
+<li><p>Vel_cpu = 3.5 GHz</p></li>
+<li><p>n_cpus = 24 cores</p></li>
+<li><p>Precisión de punto flotante = 32</p></li>
+<li><p>TFlops = 10.752</p></li>
+</ul>
+<p>programe una función para definir el computador con la menor cantidad de operaciones y menor potencia</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### TU CÓDIGO VA AQUÍ</span>
+
+<span class="c1">### HASTA AQUÍ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conversion-de-punto-flotante-a-binario-con-precision-simple-y-doble">
+<h2>Conversión de punto flotante a binario con precisión simple y doble.<a class="headerlink" href="#conversion-de-punto-flotante-a-binario-con-precision-simple-y-doble" title="Link to this heading">#</a></h2>
+<p>Veamos un par de funciones usando librerias para la transformación de flotante a binario.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Conversión a binario en precisión simple.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">float_to_binary32</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="c1"># Estructura IEEE 754 para float de 32 bits</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">'&gt;f'</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+    <span class="c1"># Convierte los 4 bytes a una secuencia binaria de 32 bits</span>
+    <span class="n">bits</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'</span><span class="si">{0:08b}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">bits</span>
+
+
+<span class="n">float_to_binary32</span><span class="p">(</span><span class="o">-</span><span class="mf">3.6245</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'11000000011001111111011111001111'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Conversión a binario en precisión doble.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">float_to_binary64</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="c1"># Estructura IEEE 754 para float de 64 bits</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">'&gt;d'</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+    <span class="c1"># Convierte los 8 bytes a una secuencia binaria de 64 bits</span>
+    <span class="n">bits</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'</span><span class="si">{0:08b}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">bits</span>
+
+<span class="n">float_to_binary64</span><span class="p">(</span><span class="o">-</span><span class="mf">3.6245</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'1100000000001100111111101111100111011011001000101101000011100101'
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>Ejercicio<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>Teniendo en cuenta el procedimiento visto en clase para convertir de punto flotante a binario, realice un script que implemente cada uno de los pasos a pedal, sin utilizar funciones como las vistas anteriormente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### TU CODIGO VA AQUÍ</span>
+
+
+<span class="c1">### HASTA AQUÍ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#en-esta-clase-vamos-a-repasar-de-manera-practica-los-conceptos-de-medidas-de-desempeno">En esta Clase vamos a repasar, de manera práctica, los conceptos de medidas de desempeño</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tiempos-de-ejecucion">Tiempos de ejecución</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aceleracion">Aceleración</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eficiencia">Eficiencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-amdahl">Ley de Amdahl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-gustafson">Ley de Gustafson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-de-aceleraciones">Ejercicio de Aceleraciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Ejercicio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-de-punto-flotante-a-binario-con-precision-simple-y-doble">Conversión de punto flotante a binario con precisión simple y doble.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Ejercicio</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,653 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Unidad 5 Big Data &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'BigData';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Unidades/Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FBigData.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/BigData.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Unidad 5 Big Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#origenes-el-camino-hacia-el-diluvio-de-datos">Orígenes: El Camino Hacia el Diluvio de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#las-5-v-s-del-big-data-las-dimensiones-de-la-complejidad">Las 5 V’s del Big Data: Las Dimensiones de la Complejidad</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#volumen-volume">1. <strong>Volumen (Volume)</strong> 📊</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocidad-velocity">2. <strong>Velocidad (Velocity)</strong> ⚡</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variedad-variety">3. <strong>Variedad (Variety)</strong> 🎭</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#veracidad-veracity">4. <strong>Veracidad (Veracity)</strong> 🤔</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valor-value">5. <strong>Valor (Value)</strong> 💎</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-en-el-mundo-real">Aplicaciones en el Mundo Real</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-grandes-retos-del-big-data">Los Grandes Retos del Big Data</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="unidad-5-big-data">
+<h1>Unidad 5 Big Data<a class="headerlink" href="#unidad-5-big-data" title="Link to this heading">#</a></h1>
+<p><strong>Big Data</strong> no es simplemente una palabra de moda para «muchos datos». Es un campo de la tecnología y una revolución estratégica que se ocupa de los <strong>métodos, herramientas y marcos</strong> para capturar, almacenar, procesar y, lo más importante, analizar conjuntos de datos que son tan masivos y complejos que superan las capacidades del software tradicional. 🌊</p>
+<p>El verdadero poder del Big Data no reside en la cantidad de información, sino en la capacidad de <strong>descubrir patrones, tendencias, correlaciones y conocimientos ocultos</strong> que antes eran invisibles. Estos conocimientos permiten a las organizaciones tomar decisiones más inteligentes, optimizar operaciones, predecir comportamientos y crear nuevas oportunidades de negocio.</p>
+<hr class="docutils" />
+<section id="origenes-el-camino-hacia-el-diluvio-de-datos">
+<h2>Orígenes: El Camino Hacia el Diluvio de Datos<a class="headerlink" href="#origenes-el-camino-hacia-el-diluvio-de-datos" title="Link to this heading">#</a></h2>
+<p>El concepto no surgió de la noche a la mañana. Es el resultado de una evolución tecnológica que comenzó hace décadas.</p>
+<ol class="arabic simple">
+<li><p><strong>La Era Digital (1990s):</strong> Con la popularización de internet y los ordenadores personales, las empresas comenzaron a acumular datos de clientes y transacciones en bases de datos relacionales. Nació el concepto de <em>Data Warehousing</em> (almacenamiento de datos) para centralizar esta información.</p></li>
+<li><p><strong>La Explosión de la Web (2000s):</strong> El auge de las redes sociales, los blogs y el comercio electrónico provocó una avalancha de datos no estructurados (texto, imágenes, clics). Las bases de datos tradicionales no estaban diseñadas para manejar esta variedad y volumen.</p></li>
+<li><p><strong>La Solución de Google (2003-2004):</strong> Google se enfrentaba a un problema monumental: cómo indexar toda la World Wide Web. Para resolverlo, desarrollaron y publicaron dos documentos revolucionarios: uno sobre un sistema de archivos distribuido (<strong>Google File System - GFS</strong>) y otro sobre un modelo de programación paralela (<strong>MapReduce</strong>). Estas tecnologías permitían dividir una tarea masiva entre miles de ordenadores económicos.</p></li>
+<li><p><strong>El Nacimiento de Hadoop (2006):</strong> Inspirados por los documentos de Google, los ingenieros Doug Cutting y Mike Cafarella crearon <strong>Apache Hadoop</strong>, un proyecto de código abierto que implementaba los conceptos de GFS y MapReduce. Esto democratizó el poder del procesamiento distribuido, permitiendo a cualquier empresa (no solo a Google) construir sus propias plataformas de Big Data.</p></li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="las-5-v-s-del-big-data-las-dimensiones-de-la-complejidad">
+<h2>Las 5 V’s del Big Data: Las Dimensiones de la Complejidad<a class="headerlink" href="#las-5-v-s-del-big-data-las-dimensiones-de-la-complejidad" title="Link to this heading">#</a></h2>
+<p>Para comprender la naturaleza del Big Data, el modelo de las 5 V’s es fundamental. Cada “V” representa un desafío y una dimensión única.</p>
+<img src="_static\images\5vsBigdata.png"/>
+<section id="volumen-volume">
+<h3>1. <strong>Volumen (Volume)</strong> 📊<a class="headerlink" href="#volumen-volume" title="Link to this heading">#</a></h3>
+<p>Se refiere a la <strong>escala monumental</strong> de los datos. Ya no hablamos de Megabytes o Gigabytes, sino de <strong>Terabytes, Petabytes, Exabytes</strong> y más allá.</p>
+<ul class="simple">
+<li><p><strong>Fuentes:</strong> Datos de sensores de la «Internet de las Cosas» (IoT), transacciones financieras globales, registros de actividad de redes sociales, datos genómicos, videos de alta definición, etc.</p></li>
+<li><p><strong>Desafío:</strong> ¿Cómo almacenamos de forma económica y accesible esta cantidad masiva de información? Los sistemas de almacenamiento distribuido como HDFS (Hadoop Distributed File System) o servicios en la nube son la respuesta.</p></li>
+</ul>
+</section>
+<section id="velocidad-velocity">
+<h3>2. <strong>Velocidad (Velocity)</strong> ⚡<a class="headerlink" href="#velocidad-velocity" title="Link to this heading">#</a></h3>
+<p>Mide la <strong>rapidez con la que se generan y se deben procesar los datos</strong>. El análisis en tiempo real es crucial para muchas aplicaciones modernas.</p>
+<ul class="simple">
+<li><p><strong>Fuentes:</strong> Transmisiones de datos de mercados bursátiles, detección de fraudes en transacciones con tarjetas de crédito, análisis de clics en un sitio web, monitoreo de redes sociales para tendencias virales.</p></li>
+<li><p><strong>Desafío:</strong> Se necesitan tecnologías de <em>streaming</em> como <strong>Apache Kafka, Spark Streaming o Flink</strong> para ingerir y procesar datos «al vuelo» a medida que llegan, en lugar de esperar a almacenarlos primero.</p></li>
+</ul>
+</section>
+<section id="variedad-variety">
+<h3>3. <strong>Variedad (Variety)</strong> 🎭<a class="headerlink" href="#variedad-variety" title="Link to this heading">#</a></h3>
+<p>Describe la <strong>diversidad de formatos de datos</strong>. El Big Data abarca mucho más que simples tablas numéricas.</p>
+<blockquote>
+<div><p><img alt="Ejemplo de la Variedad de Datos" src="https://www.altexsoft.com/static/content-image/2024/12/62bfa363-b579-429e-940d-937b8a62b99e.webp" /></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>Datos Estructurados:</strong> Altamente organizados en filas y columnas, como una hoja de cálculo o una base de datos SQL.</p></li>
+<li><p><strong>Datos Semi-estructurados:</strong> No se ajustan a un modelo de datos formal pero contienen etiquetas o marcadores para separar elementos, como archivos <strong>JSON, XML o correos electrónicos</strong>.</p></li>
+<li><p><strong>Datos No Estructurados:</strong> Forman más del 80% de los datos del mundo. No tienen una estructura interna predefinida. Incluyen <strong>texto libre, imágenes, videos, archivos de audio y publicaciones en redes sociales</strong>.</p></li>
+<li><p><strong>Desafío:</strong> Se requieren herramientas flexibles como las bases de datos <strong>NoSQL</strong> (por ejemplo, MongoDB para documentos o Cassandra para columnas anchas) y técnicas de procesamiento de lenguaje natural (NLP) o visión por computadora para extraer significado de estos formatos.</p></li>
+</ul>
+</section>
+<section id="veracidad-veracity">
+<h3>4. <strong>Veracidad (Veracity)</strong> 🤔<a class="headerlink" href="#veracidad-veracity" title="Link to this heading">#</a></h3>
+<p>Se refiere a la <strong>calidad, fiabilidad y precisión</strong> de los datos. La información puede ser ruidosa, incompleta, ambigua o inconsistente. «Basura entra, basura sale»: si los datos no son fiables, los análisis tampoco lo serán.</p>
+<ul class="simple">
+<li><p><strong>Fuentes de Incertidumbre:</strong> Errores humanos en la entrada de datos, fallos en sensores, datos faltantes, sarcasmo o noticias falsas en redes sociales.</p></li>
+<li><p><strong>Desafío:</strong> Requiere procesos robustos de <strong>limpieza de datos (Data Cleaning), gobernanza de datos (Data Governance) y validación</strong> para asegurar que se está trabajando con información de alta calidad.</p></li>
+</ul>
+</section>
+<section id="valor-value">
+<h3>5. <strong>Valor (Value)</strong> 💎<a class="headerlink" href="#valor-value" title="Link to this heading">#</a></h3>
+<p>Esta es la V más crítica. El objetivo final de recolectar, almacenar y analizar Big Data es <strong>extraer valor tangible</strong>. El valor puede ser económico, social, estratégico o científico.</p>
+<ul class="simple">
+<li><p><strong>Ejemplos de Valor:</strong></p>
+<ul>
+<li><p><strong>Comercial:</strong> Aumentar las ventas a través de recomendaciones personalizadas (Amazon, Netflix).</p></li>
+<li><p><strong>Operacional:</strong> Optimizar rutas de entrega para ahorrar combustible (UPS, FedEx).</p></li>
+<li><p><strong>Científico:</strong> Acelerar la investigación genómica para descubrir curas para enfermedades.</p></li>
+<li><p><strong>Social:</strong> Predecir brotes de enfermedades analizando búsquedas en internet o publicaciones en redes sociales.</p></li>
+</ul>
+</li>
+<li><p><strong>Desafío:</strong> No se trata solo de tener la tecnología, sino de hacer las preguntas correctas y tener la experiencia analítica (científicos de datos) para convertir los datos brutos en conocimiento accionable.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+<section id="aplicaciones-en-el-mundo-real">
+<h2>Aplicaciones en el Mundo Real<a class="headerlink" href="#aplicaciones-en-el-mundo-real" title="Link to this heading">#</a></h2>
+<p>El Big Data está transformando prácticamente todas las industrias:</p>
+<ul class="simple">
+<li><p><strong>Comercio y Marketing:</strong> Análisis del comportamiento del cliente para crear campañas publicitarias personalizadas, optimizar precios y gestionar inventarios.</p></li>
+<li><p><strong>Salud y Medicina:</strong> Medicina de precisión basada en el genoma del paciente, predicción de epidemias, análisis de imágenes médicas para diagnósticos más rápidos y precisos.</p></li>
+<li><p><strong>Finanzas:</strong> Detección de fraudes en tiempo real, análisis de riesgo crediticio, trading algorítmico de alta frecuencia.</p></li>
+<li><p><strong>Ciudades Inteligentes (Smart Cities):</strong> Optimización del tráfico mediante el análisis de datos de sensores y GPS, gestión eficiente de la energía y los residuos, mejora de la seguridad pública.</p></li>
+<li><p><strong>Industria y Manufactura (Industria 4.0):</strong> Mantenimiento predictivo de maquinaria analizando datos de sensores para prever fallos antes de que ocurran.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="los-grandes-retos-del-big-data">
+<h2>Los Grandes Retos del Big Data<a class="headerlink" href="#los-grandes-retos-del-big-data" title="Link to this heading">#</a></h2>
+<p>A pesar de sus beneficios, trabajar con Big Data presenta desafíos significativos:</p>
+<ol class="arabic simple">
+<li><p><strong>Almacenamiento e Infraestructura:</strong> El costo y la complejidad de mantener la infraestructura física o en la nube para almacenar y procesar petabytes de datos son altos.</p></li>
+<li><p><strong>Seguridad y Privacidad:</strong> Proteger grandes volúmenes de datos sensibles (personales, financieros, de salud) contra ciberataques y garantizar el cumplimiento de regulaciones como GDPR es un desafío monumental.</p></li>
+<li><p><strong>Calidad y Gobernanza de Datos:</strong> Asegurar la veracidad y consistencia de los datos a través de toda la organización es una tarea continua y compleja.</p></li>
+<li><p><strong>Escasez de Talento:</strong> Existe una alta demanda de profesionales con las habilidades necesarias (científicos de datos, ingenieros de datos, analistas) para construir y gestionar sistemas de Big Data y extraer valor de ellos.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#origenes-el-camino-hacia-el-diluvio-de-datos">Orígenes: El Camino Hacia el Diluvio de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#las-5-v-s-del-big-data-las-dimensiones-de-la-complejidad">Las 5 V’s del Big Data: Las Dimensiones de la Complejidad</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#volumen-volume">1. <strong>Volumen (Volume)</strong> 📊</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocidad-velocity">2. <strong>Velocidad (Velocity)</strong> ⚡</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variedad-variety">3. <strong>Variedad (Variety)</strong> 🎭</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#veracidad-veracity">4. <strong>Veracidad (Veracity)</strong> 🤔</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valor-value">5. <strong>Valor (Value)</strong> 💎</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-en-el-mundo-real">Aplicaciones en el Mundo Real</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-grandes-retos-del-big-data">Los Grandes Retos del Big Data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

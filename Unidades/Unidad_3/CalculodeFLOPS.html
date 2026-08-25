@@ -1,0 +1,914 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Precisión Simple Vs Precisión Doble y TFlops &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_3/CalculodeFLOPS';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_3/CalculodeFLOPS.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_3/CalculodeFLOPS.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Precisión Simple Vs Precisión Doble y TFlops</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-de-numeros-en-punto-flotante-a-binario-precision-simple">Conversión de números en punto flotante a binario: Precisión simple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-de-numeros-en-punto-flotante-a-binario-precision-doble">Conversión de números en punto flotante a binario: Precisión doble</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-teraflops-tflops">Cálculo de Teraflops (TFlops)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identificar-la-arquitectura-de-la-cpu-gpu">1. Identificar la arquitectura de la CPU/GPU</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conseguir-el-numero-de-nucleos-y-la-frecuencia-del-reloj-ghz">2. Conseguir el número de núcleos y la frecuencia del reloj (GHz)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determinar-el-numero-de-operaciones-por-ciclo">3. Determinar el número de operaciones por ciclo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-los-teraflops">4. Calcular los teraflops</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-teraflops-en-mi-pc">Cálculo de Teraflops en mi PC</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cpu-intel-core-i7-8750h">CPU (Intel Core i7-8750H)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-nvidia-gtx-1070-max-q">GPU (NVIDIA GTX 1070 Max-Q)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#donde">Donde:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-paso-a-paso">Cálculo paso a paso:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-de-nucleos">1. <strong>Número de núcleos</strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frecuencia-del-nucleo">2. <strong>Frecuencia del núcleo</strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-por-ciclo">3. <strong>Operaciones por ciclo</strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-calculo-para-fp32">Ejemplo de cálculo para FP32:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#total-flops-estimados-cpu-gpu">Total FLOPS estimados (CPU + GPU):</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#realmente-esta-bien-calculado">¿Realmente está bien calculado?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="precision-simple-vs-precision-doble-y-tflops">
+<h1>Precisión Simple Vs Precisión Doble y TFlops<a class="headerlink" href="#precision-simple-vs-precision-doble-y-tflops" title="Link to this heading">#</a></h1>
+<p>Enlaces de interés:</p>
+<div class="admonition tip">
+<p class="admonition-title">Truco</p>
+<p><a href="https://barcelonageeks.com/diferencia-entre-precision-simple-y-precision-doble/" target="_blank">Diferencia entre precisión simple y precisión doble – Barcelona Geeks</a></p>
+<p><a href="https://barcelonageeks.com/introduccion-de-la-representacion-de-punto-flotante-1/" target="_blank">Introducción a la Representación de Punto Flotante – Part 1 – Barcelona Geeks</a></p>
+</div>
+<p>A continuación encuentras una tabla comparando la precisión simple contra la precisión doble.</p>
+<style>
+  table {
+    width: 100%;
+    background-color: #f2f2f2; /* Color de fondo gris claro */
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border-bottom: 2px solid #dddddd; /* Línea horizontal entre filas */
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #4CAF50; /* Color de fondo verde pastel para la primera fila */
+    color: white; /* Color del texto en la primera fila */
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo para filas pares */
+  }
+
+  tr:nth-child(odd) {
+    background-color: #e6e6e6; /* Color de fondo para filas impares */
+  }
+</style>
+<table>
+  <tr>
+    <th>PRECISIÓN SIMPLE</th>
+    <th>PRECISIÓN DOBLE</th>
+  </tr>
+  <tr>
+    <td>En precisión simple, se utilizan 32 bits para representar el número de coma flotante.</td>
+    <td>En doble precisión, se utilizan 64 bits para representar números de coma flotante.</td>
+  </tr>
+  <tr>
+    <td>Utiliza 8 bits para el exponente.</td>
+    <td>Utiliza 11 bits para exponente.</td>
+  </tr>
+  <tr>
+    <td>En precisión simple, se utilizan 23 bits para mantisa.</td>
+    <td>En doble precisión, se utilizan 52 bits para mantisa.</td>
+  </tr>
+  <tr>
+    <td>El número de sesgo es 127.</td>
+    <td>El número de sesgo es 1023.</td>
+  </tr>
+  <tr>
+    <td>Rango de números en precisión simple: 2<sup>-126</sup> a 2<sup>+127</sup>.</td>
+    <td>Rango de números en doble precisión: 2<sup>-1022</sup> a 2<sup>+1023</sup>.</td>
+  </tr>
+  <tr>
+    <td>Esto se usa cuando la precisión importa menos.</td>
+    <td>Esto se usa cuando la precisión es más importante.</td>
+  </tr>
+  <tr>
+    <td>Se utiliza para una amplia representación.</td>
+    <td>Se utiliza para la minimización de la aproximación.</td>
+  </tr>
+  <tr>
+    <td>Se utiliza en programas simples como juegos.</td>
+    <td>Se utiliza en programas complejos como calculadora científica.</td>
+  </tr>
+  <tr>
+    <td>Esto se llama binary32.</td>
+    <td>Esto se llama binary64.</td>
+  </tr>
+</table>
+<section id="conversion-de-numeros-en-punto-flotante-a-binario-precision-simple">
+<h2>Conversión de números en punto flotante a binario: Precisión simple<a class="headerlink" href="#conversion-de-numeros-en-punto-flotante-a-binario-precision-simple" title="Link to this heading">#</a></h2>
+<p>Algoritmo para convertir un número flotante a binario:</p>
+<ul class="simple">
+<li><p>Se establece el bit del signo: negativo(1); positivo (0)</p></li>
+<li><p>Convertir la parte entera a binario.</p></li>
+<li><p>Convertir la parte fraccionaria (mantissa) de 23 bits</p></li>
+<li><p>Escribir el número en notación científica</p></li>
+<li><p>Reescribir el estándar IEEE754 32 bits</p></li>
+</ul>
+<img src="../../_static/images/U2_33.jpg"/>
+<p>Vamos a convertir -3.6245 a binario en precisión simple:</p>
+<div class="admonition tip">
+<p class="admonition-title">Truco</p>
+<p><a href="https://www.youtube.com/watch?v=7XvqkAK4Xc8" target="_blank">Representación de números en Coma Flotante | Ejemplo con Binario Periódico</a></p>
+<p><a href="https://www.binaryconvert.com/result_float.html?hexadecimal=C067F7CE" target="_blank">Float (IEEE754 Single precision 32-bit)</a></p>
+</div>
+<p><strong>1.</strong> El signo negativo se representa con un bit <span class="math notranslate nohighlight">\(1_{(2)}\)</span>.</p>
+<img src="../../_static/images/U2_34.jpg"/>
+<p><strong>2.</strong> La parte entera es 3, que se representa <span class="math notranslate nohighlight">\(11_{(2)}\)</span> que se representa con 2 bits.</p>
+<p><strong>3.</strong> Convertimos parte fraccionaria: 0.6245 a binario</p>
+<ul class="simple">
+<li><p>0.6245 x 2 = 1.2490 -&gt; 1</p></li>
+<li><p>0.2490 x 2 = 0.4980 -&gt; 0</p></li>
+<li><p>0.4980 x 2 = 0.9960 -&gt; 0</p></li>
+<li><p>0.9960 x 2 = 1.9920 -&gt; 1</p></li>
+<li><p>0.9920 x 2 = 1.9840 -&gt; 1</p></li>
+<li><p>0.9840 x 2 = 1.9680 -&gt; 1</p></li>
+<li><p>0.9680 x 2 = 1.9360 -&gt; 1</p></li>
+<li><p>0.9360 x 2 = 1.8720 -&gt; 1</p></li>
+<li><p>0.8720 x 2 = 1.7440 -&gt; 1</p></li>
+<li><p>0.7440 x 2 = 1.4880 -&gt; 1   … Hasta tener 23 bits</p></li>
+<li><p>R/ <strong>1 0 0 1 1 1 1 1 1 1 0 1 1 1 1 1 0 0 1 1 1 0 1 <span class="math notranslate nohighlight">\(_{(2)}\)</span></strong></p></li>
+</ul>
+<p><strong>4.</strong> Convertimos el número a notación científica</p>
+<img src="../../_static/images/U2_36.jpg"/>
+<p><strong>5.</strong> Tomamos el exponente y le sumamos 127 del exceso</p>
+<p>127 +1 = 128 = 10000000<span class="math notranslate nohighlight">\(_{(2)}\)</span></p>
+<img src="../../_static/images/U2_37.jpg"/>
+</section>
+<section id="conversion-de-numeros-en-punto-flotante-a-binario-precision-doble">
+<h2>Conversión de números en punto flotante a binario: Precisión doble<a class="headerlink" href="#conversion-de-numeros-en-punto-flotante-a-binario-precision-doble" title="Link to this heading">#</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Un nuevo ejercicio</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Calcular la representación en precisión doble del mismo número (-3.6245) …</p>
+<img src="../../_static/images/U2_38.jpg"/>
+<p class="sd-card-text">La entrega debe anexarse al final de la entrega del Ejercicio de esta sección.</p>
+</div>
+</details><div class="admonition tip">
+<p class="admonition-title">Truco</p>
+<p><a href="https://www.zator.com/Cpp/E2_2_4a1.htm" target="_blank">Calculadora precisión simple y doble</a></p>
+</div>
+</section>
+<section id="calculo-de-teraflops-tflops">
+<h2>Cálculo de Teraflops (TFlops)<a class="headerlink" href="#calculo-de-teraflops-tflops" title="Link to this heading">#</a></h2>
+<p>Los <strong>FLOPS</strong> (Floating Point Operations Per Second) son una medida del rendimiento de una computadora, y te permiten evaluar la capacidad de procesamiento de operaciones de punto flotante. Para calcular los FLOPS teóricos de una computadora portátil, generalmente puedes seguir los siguientes pasos, dependiendo de los componentes principales de la misma, especialmente la CPU y la GPU:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">FLOPS en unidades</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<img src="../../_static/images/U2_39.jpg"/>
+</div>
+</details><section id="identificar-la-arquitectura-de-la-cpu-gpu">
+<h3>1. Identificar la arquitectura de la CPU/GPU<a class="headerlink" href="#identificar-la-arquitectura-de-la-cpu-gpu" title="Link to this heading">#</a></h3>
+<p>Cada procesador tiene una arquitectura específica (por ejemplo, x86, ARM, etc.), lo que afecta la cantidad de operaciones que puede realizar en un ciclo de reloj.</p>
+</section>
+<section id="conseguir-el-numero-de-nucleos-y-la-frecuencia-del-reloj-ghz">
+<h3>2. Conseguir el número de núcleos y la frecuencia del reloj (GHz)<a class="headerlink" href="#conseguir-el-numero-de-nucleos-y-la-frecuencia-del-reloj-ghz" title="Link to this heading">#</a></h3>
+<p>Debes conocer cuántos núcleos físicos y lógicos tiene el procesador, así como su frecuencia de reloj. Puedes obtener esta información con programas como <strong>CPU-Z</strong> o con herramientas integradas en el sistema operativo (por ejemplo, en Windows mediante el «Administrador de tareas»).</p>
+</section>
+<section id="determinar-el-numero-de-operaciones-por-ciclo">
+<h3>3. Determinar el número de operaciones por ciclo<a class="headerlink" href="#determinar-el-numero-de-operaciones-por-ciclo" title="Link to this heading">#</a></h3>
+<p>Para esto, necesitas saber cuántas operaciones de punto flotante puede realizar el procesador por ciclo de reloj en cada núcleo. Esto dependerá de la arquitectura del procesador y si soporta instrucciones vectoriales avanzadas como AVX o AVX-512.</p>
+</section>
+<section id="calcular-los-teraflops">
+<h3>4. Calcular los teraflops<a class="headerlink" href="#calcular-los-teraflops" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\text{Tflops} = \frac{{\text{Frecuencia de reloj de la CPU} \times \text{Número de núcleos de la CPU} \times \text{Cantidad de operaciones por ciclo de reloj}}}{{10^{12}}}
+\]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\text{Frecuencia de reloj de la CPU}\)</span>: es la Frecuencia de reloj de la CPU en hertz (Hz).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Número de núcleos de la CPU}\)</span>: es la cantidad de núcleos de procesamiento de la CPU.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Cantidad de operaciones por ciclo de reloj}\)</span>: es la cantidad de operaciones de punto flotante que se pueden realizar en cada ciclo de reloj.</p></li>
+<li><p><span class="math notranslate nohighlight">\(10^{12}\)</span>: es un factor de escala para convertir los resultados a teraflops.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><strong>Ejemplo 1</strong></p>
+<p>Si una máquina tiene una velocidad de reloj de 3.5 GHz, 16 núcleos de procesamiento, 2 operaciones de punto flotante por ciclo de reloj y utiliza precisión doble, el cálculo de los teraflops sería?</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solución Ejemplo 1</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">TFLOPS = (3.5x10^9 x 16 x 2 ) / 10^12 = 0.112 TFLOPS</p>
+</div>
+</details><div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><strong>Ejemplo 2</strong></p>
+<p>Tres dispositivos tienen la misma frecuencia de reloj (2 GHz) y 4 núcleos de procesamiento cada uno. ¿Será que los dispositivos son igual de potentes?. Acá hay algunos datos para poder determinarlo…</p>
+<img src="../../_static/images/U2_40.jpg"/>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solución Ejemplo 2</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">Celular [2 GHz * 4 núcleos * (4*2 operaciones por ciclo)]/ (10^12) = 0.064 TFlops</p></li>
+<li><p class="sd-card-text">Xbox [2 GHz * 4 núcleos * 6 operaciones por ciclo]/ (10^12) = 0.048 TFlops</p></li>
+<li><p class="sd-card-text">Computador [2 GHz * 4 núcleos * (8*2 operaciones por ciclo)]/ (10^12) = 0.128 Tflops</p></li>
+</ul>
+</div>
+</details></section>
+</section>
+<section id="calculo-de-teraflops-en-mi-pc">
+<h2>Cálculo de Teraflops en mi PC<a class="headerlink" href="#calculo-de-teraflops-en-mi-pc" title="Link to this heading">#</a></h2>
+<p>Vamos a calcular teóricamente los teraflops de una computadora portatil, usemos como ejemplo la siguiente computadora:</p>
+<p><a href="https://es.msi.com/Laptop/GS65-Stealth-Thin-8RF/Specification" target="_blank">Computador portátil MSI GS65 Stealth Thin 8RF </a></p>
+<p>Para calcular los FLOPS de la <strong>MSI GS65 Stealth Thin 8RF</strong>, necesitamos considerar tanto la CPU como la GPU.</p>
+<section id="cpu-intel-core-i7-8750h">
+<h3>CPU (Intel Core i7-8750H)<a class="headerlink" href="#cpu-intel-core-i7-8750h" title="Link to this heading">#</a></h3>
+<p>La laptop utiliza un procesador <strong>Intel Core i7-8750H</strong> que tiene 6 núcleos y 12 hilos, con una frecuencia base de 2.2 GHz y un turbo de hasta 4.1 GHz. Este procesador es capaz de realizar varias operaciones de punto flotante por ciclo, gracias a tecnologías como <strong>AVX</strong>.</p>
+<p>Usaremos la frecuencia turbo de 4.1 GHz para el cálculo:</p>
+<ul class="simple">
+<li><p><strong>Núcleos</strong>: 6</p></li>
+<li><p><strong>Frecuencia</strong>: 4.1 GHz (4.1 x 10⁹ Hz)</p></li>
+<li><p><strong>Operaciones por ciclo (AVX2)</strong>: Suponemos 16 operaciones de punto flotante por ciclo por núcleo, basándonos en las instrucciones AVX2.</p></li>
+</ul>
+<p>Cálculo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FLOPS_CPU = 6 núcleos × 4.1 × 10^9 Hz × 16 operaciones por ciclo = 393.6 GFLOPS
+</pre></div>
+</div>
+</section>
+<section id="gpu-nvidia-gtx-1070-max-q">
+<h3>GPU (NVIDIA GTX 1070 Max-Q)<a class="headerlink" href="#gpu-nvidia-gtx-1070-max-q" title="Link to this heading">#</a></h3>
+<p>Para calcular los FLOPS (Floating Point Operations Per Second) de una GPU, puedes seguir una fórmula similar a la que se utiliza para calcular los FLOPS en una CPU, pero con algunos ajustes específicos para las GPUs, ya que suelen tener múltiples núcleos (shaders o CUDA cores en el caso de NVIDIA, o Stream Processors en AMD) y pueden ejecutar varias operaciones de punto flotante simultáneamente.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FLOPS = Número de núcleos × Frecuencia del núcleo (en GHz) × Operaciones por ciclo
+</pre></div>
+</div>
+<section id="donde">
+<h4>Donde:<a class="headerlink" href="#donde" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Número de núcleos</strong>: Es el número de núcleos de procesamiento en la GPU. Estos son los llamados CUDA cores (NVIDIA) o Stream Processors (AMD).</p></li>
+<li><p><strong>Frecuencia del núcleo</strong>: La velocidad del reloj a la que operan los núcleos de la GPU. Esta se suele medir en GHz (1 GHz = 10⁹ ciclos por segundo).</p></li>
+<li><p><strong>Operaciones por ciclo</strong>: Cuántas operaciones de punto flotante puede realizar un núcleo en un ciclo de reloj. Esto depende del tipo de operaciones que realiza la GPU y si son de 32 bits (FP32) o de 64 bits (FP64). La mayoría de las GPUs realizan dos operaciones de coma flotante por ciclo en FP32.</p></li>
+</ul>
+</section>
+<section id="calculo-paso-a-paso">
+<h4>Cálculo paso a paso:<a class="headerlink" href="#calculo-paso-a-paso" title="Link to this heading">#</a></h4>
+</section>
+<section id="numero-de-nucleos">
+<h4>1. <strong>Número de núcleos</strong>:<a class="headerlink" href="#numero-de-nucleos" title="Link to this heading">#</a></h4>
+<p>Por ejemplo, una GPU NVIDIA GTX 1070 tiene <strong>2,048 CUDA cores</strong>.</p>
+</section>
+<section id="frecuencia-del-nucleo">
+<h4>2. <strong>Frecuencia del núcleo</strong>:<a class="headerlink" href="#frecuencia-del-nucleo" title="Link to this heading">#</a></h4>
+<p>Supongamos que la GPU tiene una <strong>frecuencia de 1.215 GHz</strong>.</p>
+</section>
+<section id="operaciones-por-ciclo">
+<h4>3. <strong>Operaciones por ciclo</strong>:<a class="headerlink" href="#operaciones-por-ciclo" title="Link to this heading">#</a></h4>
+<p>En el caso de operaciones de punto flotante de 32 bits (FP32), cada núcleo puede realizar <strong>dos operaciones de punto flotante por ciclo</strong>.</p>
+</section>
+<section id="ejemplo-de-calculo-para-fp32">
+<h4>Ejemplo de cálculo para FP32:<a class="headerlink" href="#ejemplo-de-calculo-para-fp32" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FLOPS (FP32) = 2,048 núcleos × 1.215 GHz × 2 operaciones por ciclo
+= 2,048 × 1.215 × 2
+= 4,976.64 GFLOPS
+= 4.976 TFLOPS
+</pre></div>
+</div>
+</section>
+</section>
+<section id="total-flops-estimados-cpu-gpu">
+<h3>Total FLOPS estimados (CPU + GPU):<a class="headerlink" href="#total-flops-estimados-cpu-gpu" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>CPU</strong>: 393.6 GFLOPS</p></li>
+<li><p><strong>GPU</strong>: 4976.64 GFLOPS</p></li>
+<li><p><strong>Total</strong>: Aproximadamente <strong>5370.24 GFLOPS</strong> (5.370 TFLOPS).</p></li>
+</ul>
+<p>Este cálculo da una estimación teórica del rendimiento de la laptop en operaciones de punto flotante, tomando en cuenta tanto la CPU como la GPU.</p>
+</section>
+</section>
+<section id="realmente-esta-bien-calculado">
+<h2>¿Realmente está bien calculado?<a class="headerlink" href="#realmente-esta-bien-calculado" title="Link to this heading">#</a></h2>
+<p>Los cálculos de <strong>FLOPS</strong> generalmente se refieren a la cantidad de <strong>operaciones de punto flotante</strong> por segundo en una arquitectura de 32 bits (FP32) o 64 bits (FP64), dependiendo del tipo de cálculo que se esté realizando.</p>
+<ol class="arabic simple">
+<li><p><strong>FLOPS de CPU</strong>:
+• En el caso de la <strong>Intel Core i7-8750H</strong>, las operaciones de punto flotante suelen realizarse en <strong>64 bits (FP64)</strong> cuando se utilizan instrucciones estándar. Sin embargo, si la CPU usa instrucciones vectoriales como <strong>AVX</strong> o <strong>AVX2</strong>, estas pueden operar con datos de 32 bits (FP32), lo que duplica la cantidad de operaciones de punto flotante por ciclo.</p></li>
+<li><p><strong>FLOPS de GPU</strong>:
+• La <strong>GTX 1070 Max-Q</strong> está optimizada para operaciones de 32 bits (<strong>FP32</strong>), que es el estándar en las GPUs para cálculos en gráficos y muchos cálculos científicos. Aunque las GPUs también pueden realizar operaciones de 64 bits (<strong>FP64</strong>), su rendimiento es significativamente menor en comparación con las operaciones FP32.</p></li>
+</ol>
+<p>En Conclusión:</p>
+<p>• <strong>Los cálculos que hicimos se basan en operaciones de 32 bits (FP32)</strong>, ya que tanto la GPU como las instrucciones AVX de la CPU tienden a realizar más operaciones de este tipo. Si estuviéramos calculando FLOPS para operaciones de 64 bits (FP64), el rendimiento sería menor, especialmente en la GPU.</p>
+<p>Vamos a realizar los cálculos tanto para operaciones de punto flotante en 32 bits (<strong>FP32</strong>) como para 64 bits (<strong>FP64</strong>) en el procesador y la GPU de la <strong>MSI GS65 Stealth Thin 8RF</strong>.</p>
+<p><strong>CPU: Intel Core i7-8750H</strong></p>
+<p>Cálculo para FP32 (32 bits):</p>
+<ul class="simple">
+<li><p><strong>Núcleos</strong>: 6</p></li>
+<li><p><strong>Frecuencia turbo</strong>: 4.1 GHz = 4.1 x 10⁹ Hz</p></li>
+<li><p><strong>Operaciones por ciclo (AVX2)</strong>: 16 operaciones FP32 por ciclo por núcleo.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FLOPS_CPU-FP32 = 6 núcleos × 4.1 × 10^9 Hz × 16 operaciones por ciclo = 393.6 GFLOPS
+</pre></div>
+</div>
+<p>Cálculo para FP64 (64 bits):</p>
+<ul class="simple">
+<li><p><strong>Operaciones por ciclo (AVX2 en FP64)</strong>: Por cada operación de 64 bits, se realizan la mitad de operaciones que en 32 bits, es decir, <strong>8 operaciones por ciclo</strong>.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FLOPS_CPU-FP64 = 6 núcleos × 4.1 × 10^9 Hz × 8 operaciones por ciclo = 196.8 GFLOPS
+</pre></div>
+</div>
+<p><strong>GPU: NVIDIA GTX 1070 Max-Q</strong></p>
+<p>Cálculo para FP32 (32 bits):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FLOPS (FP32) = 2,048 núcleos × 1.215 GHz × 2 operaciones por ciclo
+= 2,048 × 1.215 × 2
+= 4,976.64 GFLOPS
+= 4.976 TFLOPS
+</pre></div>
+</div>
+<p>Cálculo para FP64 (64 bits):
+La mayoría de las GPUs orientadas a gráficos, como la GTX 1070 Max-Q, tienen un rendimiento mucho menor en FP64. El ratio típico para esta tarjeta es de <strong>1/32</strong> del rendimiento de FP32. Por lo tanto:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FLOPS (FP64) = 2,048 núcleos × 1.215 GHz × 2/32 operaciones por ciclo
+= 2,048 × 1.215 × 0.0625
+= 155.52 GFLOPS
+= 0.155 TFLOPS
+</pre></div>
+</div>
+<p><strong>Resumen de los resultados</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tipo de operación</p></th>
+<th class="head"><p>CPU (GFLOPS)</p></th>
+<th class="head"><p>GPU (GFLOPS)</p></th>
+<th class="head"><p>Total (GFLOPS)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FP32 (32 bits)</p></td>
+<td><p>393.6</p></td>
+<td><p>4,976.64</p></td>
+<td><p>5370.24</p></td>
+</tr>
+<tr class="row-odd"><td><p>FP64 (64 bits)</p></td>
+<td><p>196.8</p></td>
+<td><p>155.52</p></td>
+<td><p>352.32</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>De esta forma, el rendimiento máximo teórico en operaciones de punto flotante de 32 bits (FP32) es aproximadamente <strong>5370.24 GFLOPS</strong>, mientras que para operaciones de 64 bits (FP64) sería de <strong>352.32 GFLOPS</strong>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-de-numeros-en-punto-flotante-a-binario-precision-simple">Conversión de números en punto flotante a binario: Precisión simple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conversion-de-numeros-en-punto-flotante-a-binario-precision-doble">Conversión de números en punto flotante a binario: Precisión doble</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-teraflops-tflops">Cálculo de Teraflops (TFlops)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identificar-la-arquitectura-de-la-cpu-gpu">1. Identificar la arquitectura de la CPU/GPU</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conseguir-el-numero-de-nucleos-y-la-frecuencia-del-reloj-ghz">2. Conseguir el número de núcleos y la frecuencia del reloj (GHz)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determinar-el-numero-de-operaciones-por-ciclo">3. Determinar el número de operaciones por ciclo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-los-teraflops">4. Calcular los teraflops</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-teraflops-en-mi-pc">Cálculo de Teraflops en mi PC</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cpu-intel-core-i7-8750h">CPU (Intel Core i7-8750H)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gpu-nvidia-gtx-1070-max-q">GPU (NVIDIA GTX 1070 Max-Q)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#donde">Donde:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-paso-a-paso">Cálculo paso a paso:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#numero-de-nucleos">1. <strong>Número de núcleos</strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frecuencia-del-nucleo">2. <strong>Frecuencia del núcleo</strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-por-ciclo">3. <strong>Operaciones por ciclo</strong>:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-calculo-para-fp32">Ejemplo de cálculo para FP32:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#total-flops-estimados-cpu-gpu">Total FLOPS estimados (CPU + GPU):</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#realmente-esta-bien-calculado">¿Realmente está bien calculado?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
