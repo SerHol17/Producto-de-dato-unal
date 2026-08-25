@@ -22,7 +22,7 @@ launch_buttons:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/BioAITeamLearning/ProgCD_2025_02_Ucaldas  # Online location of your book
+  url: https://github.com/SerHol17/Producto-de-dato-unal  # Online location of your book
   branch: main  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book

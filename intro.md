@@ -69,7 +69,7 @@ Comprender qué es un producto de datos y las características que lo hacen fiab
 
 Diseñar e implementar soluciones de datos centradas en dominio, aplicando principios de calidad, modularidad y reutilización.
 
-Construir pipelines de datos, dashboards y reportes automatizados utilizando herramientas como Python, R y frameworks web.
+Construir pipelines de datos, dashboards y reportes automatizados utilizando herramientas como Python y frameworks web.
 
 Aplicar técnicas avanzadas de contenerización, CI/CD y microservicios para el despliegue de productos de datos en producción.
 
@@ -92,7 +92,7 @@ Diseñar infraestructuras de datos escalables que soporten la estrategia analít
 ^^^
 
 **Introducción a Productos de Datos**
-Revisión de conceptos de programación (R y/o Python). Desarrollo de reportes automáticos.
+Revisión de conceptos de programación (Python). Desarrollo de reportes automáticos.
 :::
 
 :::{grid-item-card}
