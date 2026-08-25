@@ -1,4 +1,4 @@
 # Info
-Curso de Programación Concurrente y Distribuida dictado en la Universidad de caldas 2026-01
+Curso de Producto de dato UNAL 2026-02
 
-<a href="https://bioaiteamlearning.github.io/ProgCD_2026_01_Ucaldas/intro.html" target="_blank">Enlace del curso</a>
+<a href="https://serhol17.github.io/Producto-de-dato-unal/intro.html" target="_blank">Enlace del curso</a>
