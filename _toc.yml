@@ -4,3 +4,23 @@ chapters:
   - file: Unidad1
     sections:
     - file: "Unidades/Unidad_1/U1_S1_python_datos"
+    - file: "Unidades/Unidad_1/U1_S2_limpieza_normalizacion"
+    - file: "Unidades/Unidad_1/unidad13"
+    
+    - file: "Unidades/Unidad_1/Matplotlib.md"
+    - file: "Unidades/Unidad_1/01_matplotlib_intro"
+    - file: "Unidades/Unidad_1/02_matplotlib_avanzado"
+    - file: "Unidades/Unidad_1/Seaborn"
+    - file: "Unidades/Unidad_1/03_seaborn_intro"
+    - file: "Unidades/Unidad_1/04_seaborn_avanzado"
+    - file: "Unidades/Unidad_1/plotly"
+    - file: "Unidades/Unidad_1/05_plotly_intro"
+    - file: "Unidades/Unidad_1/06_plotly_avanzado"
+    - file: "Unidades/Unidad_1/07_comparativa_y_casos"
+    - file: "Unidades/Unidad_1/Buenas_Practicas"
+    - file: "Unidades/Unidad_1/buenas_practicas_visualizacion"
+    - file: "Unidades/Unidad_1/Que_Escoger"
+    - file: "Unidades/Unidad_1/Que Grafica escoger"
+    - file: "Unidades/Unidad_1/caso_practico_fifa23"
+    - file: "Unidades/Unidad_1/U1_S4_reportes_automaticos"
+

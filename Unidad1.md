@@ -262,41 +262,5 @@ Al finalizar esta unidad, cada estudiante habrá construido un reporte automatiz
 
 ---
 
-## Recursos de la unidad
-
-::::{grid} 1 1 2 2
-:gutter: 3
-
-:::{grid-item-card} 📓 Notebook 1.1
-:link: notebooks/U1_S1_python_datos
-:link-type: doc
-:class-header: bg-light
-
-Python para datos — Pandas y DataFrames
-:::
-
-:::{grid-item-card} 📓 Notebook 1.2
-:link: notebooks/U1_S2_limpieza_normalizacion
-:link-type: doc
-:class-header: bg-light
-
-Limpieza y normalización de datos
-:::
-
-:::{grid-item-card} 📓 Notebook 1.3
-:link: notebooks/U1_S3_visualizacion
-:link-type: doc
-:class-header: bg-light
-
-Visualización con Matplotlib, Seaborn y Plotly
-:::
-
-:::{grid-item-card} 📓 Notebook 1.4
-:link: notebooks/U1_S4_reportes_automaticos
-:link-type: doc
-:class-header: bg-light
-
-Primer reporte automatizado
-:::
 
 ::::
