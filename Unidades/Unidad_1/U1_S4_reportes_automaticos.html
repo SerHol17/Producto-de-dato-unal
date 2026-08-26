@@ -1,0 +1,1858 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.4 — Reportes Automaticos &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_1/U1_S4_reportes_automaticos';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="prev" title="1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23" href="caso_practico_fifa23.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_1/U1_S4_reportes_automaticos.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_1/U1_S4_reportes_automaticos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_1/U1_S4_reportes_automaticos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.4 — Reportes Automaticos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos">Unidad 1: Introduccion a Desarrollo de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks-parametrizados-con-papermill">1. Notebooks parametrizados con Papermill</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-notebook-plantilla">1.1 Crear el notebook plantilla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejecutar-con-papermill">1.2 Ejecutar con Papermill</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plantillas-html-con-jinja2">2. Plantillas HTML con Jinja2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-plantilla-html">2.1 Crear la plantilla HTML</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renderizar-la-plantilla-con-datos">2.2 Renderizar la plantilla con datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usar-filesystemloader-para-plantillas-en-disco">2.3 Usar FileSystemLoader para plantillas en disco</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-a-pdf-con-weasyprint">3. Exportacion a PDF con weasyprint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-generadora-de-reportes">4. Funcion generadora de reportes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatizacion-y-distribucion">5. Automatizacion y distribucion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-script-ejecutable">5.1 Crear el script ejecutable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#programar-ejecucion-con-cron-linux-mac-o-task-scheduler-windows">5.2 Programar ejecucion con cron (Linux/Mac) o Task Scheduler (Windows)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#envio-por-correo">5.3 Envio por correo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-la-subseccion">Resumen de la subseccion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-completo">Flujo completo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reportes-automaticos">
+<h1>1.4 — Reportes Automaticos<a class="headerlink" href="#reportes-automaticos" title="Link to this heading">#</a></h1>
+<section id="unidad-1-introduccion-a-desarrollo-de-productos-de-datos">
+<h2>Unidad 1: Introduccion a Desarrollo de Productos de Datos<a class="headerlink" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos" title="Link to this heading">#</a></h2>
+<p>Un reporte que se genera manualmente cada semana no es un producto de datos — es una tarea repetitiva. En este notebook aprenderemos a construir reportes que se generan solos: desde parametrizar notebooks con Papermill, hasta crear documentos profesionales con Jinja2 y exportarlos a PDF.</p>
+<section id="contenido">
+<h3>Contenido:<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Notebooks parametrizados con Papermill</p></li>
+<li><p>Plantillas HTML con Jinja2</p></li>
+<li><p>Exportacion a PDF con weasyprint</p></li>
+<li><p>Automatizacion del flujo</p></li>
+<li><p>Distribucion por correo</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># INSTALACION DE DEPENDENCIAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Ejecutar solo la primera vez</span>
+<span class="c1"># papermill: ejecuta notebooks con parametros distintos</span>
+<span class="c1"># jinja2: motor de plantillas para generar HTML dinamico</span>
+<span class="c1"># weasyprint: convierte HTML a PDF</span>
+
+<span class="c1"># !pip install papermill jinja2 weasyprint openpyxl matplotlib</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># IMPORTACIONES Y DATOS DE EJEMPLO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># Crear un dataset de ventas para usar en todo el notebook</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="n">productos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Dashboard"</span><span class="p">,</span> <span class="s2">"Reporte"</span><span class="p">,</span> <span class="s2">"API"</span><span class="p">,</span> <span class="s2">"App Web"</span><span class="p">]</span>
+<span class="n">regiones</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Eje Cafetero"</span><span class="p">,</span> <span class="s2">"Bogota"</span><span class="p">,</span> <span class="s2">"Medellin"</span><span class="p">,</span> <span class="s2">"Cali"</span><span class="p">,</span> <span class="s2">"Barranquilla"</span><span class="p">]</span>
+<span class="n">vendedores</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Ana Garcia"</span><span class="p">,</span> <span class="s2">"Carlos Lopez"</span><span class="p">,</span> <span class="s2">"Maria Ruiz"</span><span class="p">,</span> <span class="s2">"Pedro Martin"</span><span class="p">]</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"2024-01-01"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"D"</span><span class="p">),</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">productos</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">regiones</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s2">"vendedor"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">vendedores</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s2">"precio_unitario"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">})</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">"ingreso"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"mes"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"fecha"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">"M"</span><span class="p">)</span>
+
+<span class="c1"># Guardar para que Papermill lo lea despues</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"ventas_completas.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dataset: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="notebooks-parametrizados-con-papermill">
+<h2>1. Notebooks parametrizados con Papermill<a class="headerlink" href="#notebooks-parametrizados-con-papermill" title="Link to this heading">#</a></h2>
+<p>Papermill resuelve un problema concreto: tienes un notebook de analisis que funciona bien, pero necesitas ejecutarlo con datos distintos — otro mes, otra region, otro producto. En lugar de abrir el notebook y cambiar variables a mano, Papermill lo ejecuta desde la terminal inyectando los parametros que necesites.</p>
+<section id="crear-el-notebook-plantilla">
+<h3>1.1 Crear el notebook plantilla<a class="headerlink" href="#crear-el-notebook-plantilla" title="Link to this heading">#</a></h3>
+<p>El primer paso es crear un notebook que funcione como plantilla. La unica diferencia con un notebook normal es que tiene una celda marcada con el tag <code class="docutils literal notranslate"><span class="pre">parameters</span></code> — ahi van las variables que Papermill podra cambiar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CREAR EL NOTEBOOK PLANTILLA PROGRAMATICAMENTE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Vamos a generar el notebook plantilla desde codigo</span>
+<span class="c1"># para que quede completo y funcional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Estructura de un archivo .ipynb: es un JSON con celdas</span>
+<span class="n">notebook_plantilla</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"cells"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="c1"># Celda markdown: titulo</span>
+            <span class="s2">"cell_type"</span><span class="p">:</span> <span class="s2">"markdown"</span><span class="p">,</span>
+            <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"source"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"# Reporte de Ventas</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"Generado automaticamente."</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="c1"># Celda de parametros: esta es la que Papermill busca</span>
+            <span class="c1"># El tag "parameters" va en metadata.tags</span>
+            <span class="s2">"cell_type"</span><span class="p">:</span> <span class="s2">"code"</span><span class="p">,</span>
+            <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"parameters"</span><span class="p">]</span>  <span class="c1"># &lt;-- Esto es lo que Papermill necesita</span>
+            <span class="p">},</span>
+            <span class="s2">"source"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"# Parametros por defecto</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"# Papermill reemplaza estos valores al ejecutar</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"region = 'Bogota'</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"mes_inicio = '2024-01'</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"mes_fin = '2024-03'</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"archivo_datos = 'ventas_completas.csv'"</span>
+            <span class="p">],</span>
+            <span class="s2">"execution_count"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">"outputs"</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="c1"># Celda de carga y filtrado</span>
+            <span class="s2">"cell_type"</span><span class="p">:</span> <span class="s2">"code"</span><span class="p">,</span>
+            <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"source"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"import pandas as pd</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"import matplotlib.pyplot as plt</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"# Cargar datos</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"df = pd.read_csv(archivo_datos, parse_dates=['fecha'])</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"df['mes'] = df['fecha'].dt.to_period('M').astype(str)</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"# Filtrar por region y rango de meses</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"mask = (</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"    (df['region'] == region) &amp;</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"    (df['mes'] &gt;= mes_inicio) &amp;</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"    (df['mes'] &lt;= mes_fin)</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">")</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"df_filtrado = df[mask].copy()</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"print(f'Region: </span><span class="si">{region}</span><span class="s2">')</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"print(f'Periodo: </span><span class="si">{mes_inicio}</span><span class="s2"> a </span><span class="si">{mes_fin}</span><span class="s2">')</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"print(f'Registros: {len(df_filtrado)}')"</span>
+            <span class="p">],</span>
+            <span class="s2">"execution_count"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">"outputs"</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="c1"># Celda de resumen</span>
+            <span class="s2">"cell_type"</span><span class="p">:</span> <span class="s2">"code"</span><span class="p">,</span>
+            <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"source"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"# Resumen por producto</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"resumen = df_filtrado.groupby('producto').agg(</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"    ventas=('ingreso', 'count'),</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"    ingreso_total=('ingreso', 'sum'),</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"    ingreso_promedio=('ingreso', 'mean'),</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"    unidades_total=('unidades', 'sum')</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">").round(2).sort_values('ingreso_total', ascending=False)</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"print(f'Ingreso total: ${df_filtrado[</span><span class="se">\"</span><span class="s2">ingreso</span><span class="se">\"</span><span class="s2">].sum():,.0f}')</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"print(f'Ventas totales: {len(df_filtrado)}')</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"print()</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"resumen"</span>
+            <span class="p">],</span>
+            <span class="s2">"execution_count"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">"outputs"</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="c1"># Celda de grafico</span>
+            <span class="s2">"cell_type"</span><span class="p">:</span> <span class="s2">"code"</span><span class="p">,</span>
+            <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"source"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"# Grafico de ingreso por producto</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"fig, ax = plt.subplots(figsize=(8, 4))</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"resumen['ingreso_total'].plot(kind='barh', ax=ax, color='#2563eb')</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"ax.set_title(f'Ingreso por Producto — </span><span class="si">{region}</span><span class="s2">')</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"ax.set_xlabel('Ingreso Total ($)')</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"plt.tight_layout()</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"plt.savefig(f'grafico_{region.lower().replace(</span><span class="se">\"</span><span class="s2"> </span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">_</span><span class="se">\"</span><span class="s2">)}.png', dpi=150)</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+                <span class="s2">"plt.show()"</span>
+            <span class="p">],</span>
+            <span class="s2">"execution_count"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">"outputs"</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"kernelspec"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Python 3"</span><span class="p">,</span>
+            <span class="s2">"language"</span><span class="p">:</span> <span class="s2">"python"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"python3"</span>
+        <span class="p">},</span>
+        <span class="s2">"language_info"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"python"</span><span class="p">,</span> <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"3.10.0"</span><span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">"nbformat"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"nbformat_minor"</span><span class="p">:</span> <span class="mi">4</span>
+<span class="p">}</span>
+
+<span class="c1"># Guardar el notebook plantilla</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"reporte_plantilla.ipynb"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">notebook_plantilla</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Archivo creado: reporte_plantilla.ipynb"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Este notebook tiene una celda con tag 'parameters' que Papermill puede inyectar."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejecutar-con-papermill">
+<h3>1.2 Ejecutar con Papermill<a class="headerlink" href="#ejecutar-con-papermill" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EJECUTAR EL NOTEBOOK CON PARAMETROS DISTINTOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">papermill</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
+
+<span class="c1"># pm.execute_notebook() toma:</span>
+<span class="c1">#   - input_path: notebook plantilla</span>
+<span class="c1">#   - output_path: donde guardar el resultado ejecutado</span>
+<span class="c1">#   - parameters: diccionario con los valores a inyectar</span>
+
+<span class="c1"># Generar reporte para Bogota, primer trimestre 2024</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">execute_notebook</span><span class="p">(</span>
+    <span class="n">input_path</span><span class="o">=</span><span class="s2">"reporte_plantilla.ipynb"</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">"reporte_bogota_Q1.ipynb"</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"region"</span><span class="p">:</span> <span class="s2">"Bogota"</span><span class="p">,</span>
+        <span class="s2">"mes_inicio"</span><span class="p">:</span> <span class="s2">"2024-01"</span><span class="p">,</span>
+        <span class="s2">"mes_fin"</span><span class="p">:</span> <span class="s2">"2024-03"</span><span class="p">,</span>
+        <span class="s2">"archivo_datos"</span><span class="p">:</span> <span class="s2">"ventas_completas.csv"</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Reporte generado: reporte_bogota_Q1.ipynb"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GENERAR REPORTES EN LOTE — uno por region</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Esto es el poder real de Papermill:</span>
+<span class="c1"># un loop que genera N reportes con una sola plantilla</span>
+
+<span class="n">regiones</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Bogota"</span><span class="p">,</span> <span class="s2">"Medellin"</span><span class="p">,</span> <span class="s2">"Eje Cafetero"</span><span class="p">,</span> <span class="s2">"Cali"</span><span class="p">,</span> <span class="s2">"Barranquilla"</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regiones</span><span class="p">:</span>
+    <span class="c1"># Nombre del archivo de salida limpio</span>
+    <span class="n">nombre_archivo</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"reporte_</span><span class="si">{</span><span class="n">region</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span><span class="w"> </span><span class="s1">'_'</span><span class="p">)</span><span class="si">}</span><span class="s2">_Q1.ipynb"</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pm</span><span class="o">.</span><span class="n">execute_notebook</span><span class="p">(</span>
+            <span class="n">input_path</span><span class="o">=</span><span class="s2">"reporte_plantilla.ipynb"</span><span class="p">,</span>
+            <span class="n">output_path</span><span class="o">=</span><span class="n">nombre_archivo</span><span class="p">,</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">"region"</span><span class="p">:</span> <span class="n">region</span><span class="p">,</span>
+                <span class="s2">"mes_inicio"</span><span class="p">:</span> <span class="s2">"2024-01"</span><span class="p">,</span>
+                <span class="s2">"mes_fin"</span><span class="p">:</span> <span class="s2">"2024-03"</span><span class="p">,</span>
+                <span class="s2">"archivo_datos"</span><span class="p">:</span> <span class="s2">"ventas_completas.csv"</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Generado: </span><span class="si">{</span><span class="n">nombre_archivo</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Error en </span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">regiones</span><span class="p">)</span><span class="si">}</span><span class="s2"> reportes generados"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONVERTIR NOTEBOOK A HTML (alternativa a PDF)</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># nbconvert transforma un notebook ejecutado a HTML, PDF o slides</span>
+<span class="c1"># Se puede usar desde la terminal o desde Python</span>
+
+<span class="c1"># Desde la terminal seria:</span>
+<span class="c1"># jupyter nbconvert --to html reporte_bogota_Q1.ipynb</span>
+
+<span class="c1"># Desde Python:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+
+<span class="n">resultado</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">"jupyter"</span><span class="p">,</span> <span class="s2">"nbconvert"</span><span class="p">,</span> <span class="s2">"--to"</span><span class="p">,</span> <span class="s2">"html"</span><span class="p">,</span> <span class="s2">"reporte_bogota_Q1.ipynb"</span><span class="p">],</span>
+    <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">resultado</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Convertido: reporte_bogota_Q1.html"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">resultado</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="plantillas-html-con-jinja2">
+<h2>2. Plantillas HTML con Jinja2<a class="headerlink" href="#plantillas-html-con-jinja2" title="Link to this heading">#</a></h2>
+<p>Papermill es ideal para reportes tecnicos (notebooks ejecutados). Pero cuando el destinatario es un gerente o un cliente, necesitamos un documento con diseno profesional. Jinja2 nos permite crear plantillas HTML donde inyectamos datos, tablas y graficos dinamicamente.</p>
+<section id="crear-la-plantilla-html">
+<h3>2.1 Crear la plantilla HTML<a class="headerlink" href="#crear-la-plantilla-html" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PLANTILLA HTML CON JINJA2</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Una plantilla Jinja2 es un archivo HTML con marcadores especiales:</span>
+<span class="c1">#   {{ variable }}      -&gt; inserta el valor de una variable</span>
+<span class="c1">#   {% for item in lista %} -&gt; bucle</span>
+<span class="c1">#   {% if condicion %}  -&gt; condicional</span>
+
+<span class="n">plantilla_html</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">&lt;!DOCTYPE html&gt;</span>
+<span class="s2">&lt;html lang="es"&gt;</span>
+<span class="s2">&lt;head&gt;</span>
+<span class="s2">    &lt;meta charset="UTF-8"&gt;</span>
+<span class="s2">    &lt;title&gt;{{ titulo }}&lt;/title&gt;</span>
+<span class="s2">    &lt;style&gt;</span>
+<span class="s2">        /* Estilos del reporte */</span>
+<span class="s2">        body {</span>
+<span class="s2">            font-family: 'Segoe UI', Arial, sans-serif;</span>
+<span class="s2">            margin: 40px;</span>
+<span class="s2">            color: #1a1a1a;</span>
+<span class="s2">            font-size: 14px;</span>
+<span class="s2">            line-height: 1.6;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .header {</span>
+<span class="s2">            border-bottom: 3px solid #2563eb;</span>
+<span class="s2">            padding-bottom: 15px;</span>
+<span class="s2">            margin-bottom: 30px;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .header h1 {</span>
+<span class="s2">            color: #2563eb;</span>
+<span class="s2">            margin-bottom: 5px;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .header .subtitulo {</span>
+<span class="s2">            color: #666;</span>
+<span class="s2">            font-size: 16px;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .metricas {</span>
+<span class="s2">            display: flex;</span>
+<span class="s2">            gap: 20px;</span>
+<span class="s2">            margin: 25px 0;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .metrica-card {</span>
+<span class="s2">            flex: 1;</span>
+<span class="s2">            background: #f0f4ff;</span>
+<span class="s2">            border-radius: 8px;</span>
+<span class="s2">            padding: 20px;</span>
+<span class="s2">            text-align: center;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .metrica-card .valor {</span>
+<span class="s2">            font-size: 28px;</span>
+<span class="s2">            font-weight: bold;</span>
+<span class="s2">            color: #2563eb;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .metrica-card .etiqueta {</span>
+<span class="s2">            color: #666;</span>
+<span class="s2">            font-size: 13px;</span>
+<span class="s2">            margin-top: 5px;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        table {</span>
+<span class="s2">            width: 100%;</span>
+<span class="s2">            border-collapse: collapse;</span>
+<span class="s2">            margin: 20px 0;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        th {</span>
+<span class="s2">            background: #2563eb;</span>
+<span class="s2">            color: white;</span>
+<span class="s2">            padding: 10px 15px;</span>
+<span class="s2">            text-align: left;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        td {</span>
+<span class="s2">            padding: 8px 15px;</span>
+<span class="s2">            border-bottom: 1px solid #e5e7eb;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        tr:nth-child(even) {</span>
+<span class="s2">            background: #f9fafb;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .grafico {</span>
+<span class="s2">            text-align: center;</span>
+<span class="s2">            margin: 30px 0;</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .grafico img {</span>
+<span class="s2">            max-width: 100%;</span>
+<span class="s2">            border-radius: 8px;</span>
+<span class="s2">            box-shadow: 0 2px 8px rgba(0,0,0,0.1);</span>
+<span class="s2">        }</span>
+<span class="s2">        </span>
+<span class="s2">        .footer {</span>
+<span class="s2">            margin-top: 40px;</span>
+<span class="s2">            padding-top: 15px;</span>
+<span class="s2">            border-top: 1px solid #e5e7eb;</span>
+<span class="s2">            color: #999;</span>
+<span class="s2">            font-size: 12px;</span>
+<span class="s2">        }</span>
+<span class="s2">    &lt;/style&gt;</span>
+<span class="s2">&lt;/head&gt;</span>
+<span class="s2">&lt;body&gt;</span>
+
+<span class="s2">    &lt;!-- Cabecera --&gt;</span>
+<span class="s2">    &lt;div class="header"&gt;</span>
+<span class="s2">        &lt;h1&gt;{{ titulo }}&lt;/h1&gt;</span>
+<span class="s2">        &lt;div class="subtitulo"&gt;{{ subtitulo }}&lt;/div&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+
+<span class="s2">    &lt;!-- Tarjetas de metricas --&gt;</span>
+<span class="s2">    &lt;div class="metricas"&gt;</span>
+<span class="s2">        {</span><span class="si">% f</span><span class="s2">or metrica in metricas %}</span>
+<span class="s2">        &lt;div class="metrica-card"&gt;</span>
+<span class="s2">            &lt;div class="valor"&gt;{{ metrica.valor }}&lt;/div&gt;</span>
+<span class="s2">            &lt;div class="etiqueta"&gt;{{ metrica.etiqueta }}&lt;/div&gt;</span>
+<span class="s2">        &lt;/div&gt;</span>
+<span class="s2">        {</span><span class="si">% e</span><span class="s2">ndfor %}</span>
+<span class="s2">    &lt;/div&gt;</span>
+
+<span class="s2">    &lt;!-- Tabla de detalle --&gt;</span>
+<span class="s2">    &lt;h2&gt;Detalle por Producto&lt;/h2&gt;</span>
+<span class="s2">    &lt;table&gt;</span>
+<span class="s2">        &lt;thead&gt;</span>
+<span class="s2">            &lt;tr&gt;</span>
+<span class="s2">                {</span><span class="si">% f</span><span class="s2">or col in columnas_tabla %}</span>
+<span class="s2">                &lt;th&gt;{{ col }}&lt;/th&gt;</span>
+<span class="s2">                {</span><span class="si">% e</span><span class="s2">ndfor %}</span>
+<span class="s2">            &lt;/tr&gt;</span>
+<span class="s2">        &lt;/thead&gt;</span>
+<span class="s2">        &lt;tbody&gt;</span>
+<span class="s2">            {</span><span class="si">% f</span><span class="s2">or fila in filas_tabla %}</span>
+<span class="s2">            &lt;tr&gt;</span>
+<span class="s2">                {</span><span class="si">% f</span><span class="s2">or valor in fila %}</span>
+<span class="s2">                &lt;td&gt;{{ valor }}&lt;/td&gt;</span>
+<span class="s2">                {</span><span class="si">% e</span><span class="s2">ndfor %}</span>
+<span class="s2">            &lt;/tr&gt;</span>
+<span class="s2">            {</span><span class="si">% e</span><span class="s2">ndfor %}</span>
+<span class="s2">        &lt;/tbody&gt;</span>
+<span class="s2">    &lt;/table&gt;</span>
+
+<span class="s2">    &lt;!-- Grafico --&gt;</span>
+<span class="s2">    {</span><span class="si">% i</span><span class="s2">f ruta_grafico %}</span>
+<span class="s2">    &lt;div class="grafico"&gt;</span>
+<span class="s2">        &lt;h2&gt;Distribucion de Ingresos&lt;/h2&gt;</span>
+<span class="s2">        &lt;img src="{{ ruta_grafico }}" alt="Grafico de ingresos"&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    {</span><span class="si">% e</span><span class="s2">ndif %}</span>
+
+<span class="s2">    &lt;!-- Pie de pagina --&gt;</span>
+<span class="s2">    &lt;div class="footer"&gt;</span>
+<span class="s2">        Reporte generado automaticamente el {{ fecha_generacion }}</span>
+<span class="s2">    &lt;/div&gt;</span>
+
+<span class="s2">&lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;</span>
+<span class="s2">"""</span>
+
+<span class="c1"># Guardar la plantilla en disco</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"plantilla_reporte.html"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">plantilla_html</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Plantilla creada: plantilla_reporte.html"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Variables disponibles: titulo, subtitulo, metricas, columnas_tabla, filas_tabla, ruta_grafico, fecha_generacion"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="renderizar-la-plantilla-con-datos">
+<h3>2.2 Renderizar la plantilla con datos<a class="headerlink" href="#renderizar-la-plantilla-con-datos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PREPARAR LOS DATOS PARA LA PLANTILLA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"Agg"</span><span class="p">)</span>  <span class="c1"># Backend sin GUI, para guardar imagenes sin mostrar ventana</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Parametros del reporte</span>
+<span class="n">region_reporte</span> <span class="o">=</span> <span class="s2">"Bogota"</span>
+<span class="n">periodo</span> <span class="o">=</span> <span class="s2">"Enero - Junio 2024"</span>
+
+<span class="c1"># Filtrar datos</span>
+<span class="n">df_region</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">==</span> <span class="n">region_reporte</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># --- Metricas principales ---</span>
+<span class="n">ingreso_total</span> <span class="o">=</span> <span class="n">df_region</span><span class="p">[</span><span class="s2">"ingreso"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">n_ventas</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_region</span><span class="p">)</span>
+<span class="n">ticket_promedio</span> <span class="o">=</span> <span class="n">df_region</span><span class="p">[</span><span class="s2">"ingreso"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">producto_top</span> <span class="o">=</span> <span class="n">df_region</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)[</span><span class="s2">"ingreso"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+
+<span class="n">metricas</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">"valor"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">ingreso_total</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"etiqueta"</span><span class="p">:</span> <span class="s2">"Ingreso Total"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"valor"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n_ventas</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"etiqueta"</span><span class="p">:</span> <span class="s2">"Total Ventas"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"valor"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">ticket_promedio</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"etiqueta"</span><span class="p">:</span> <span class="s2">"Ticket Promedio"</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"valor"</span><span class="p">:</span> <span class="n">producto_top</span><span class="p">,</span> <span class="s2">"etiqueta"</span><span class="p">:</span> <span class="s2">"Producto Lider"</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># --- Tabla resumen ---</span>
+<span class="n">resumen</span> <span class="o">=</span> <span class="n">df_region</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">Ventas</span><span class="o">=</span><span class="p">(</span><span class="s2">"ingreso"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">),</span>
+    <span class="n">Ingreso_Total</span><span class="o">=</span><span class="p">(</span><span class="s2">"ingreso"</span><span class="p">,</span> <span class="s2">"sum"</span><span class="p">),</span>
+    <span class="n">Ingreso_Promedio</span><span class="o">=</span><span class="p">(</span><span class="s2">"ingreso"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span>
+    <span class="n">Unidades</span><span class="o">=</span><span class="p">(</span><span class="s2">"unidades"</span><span class="p">,</span> <span class="s2">"sum"</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"Ingreso_Total"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Formatear numeros para la tabla</span>
+<span class="n">resumen</span><span class="p">[</span><span class="s2">"Ingreso_Total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ingreso_Total"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">resumen</span><span class="p">[</span><span class="s2">"Ingreso_Promedio"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ingreso_Promedio"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">resumen</span><span class="p">[</span><span class="s2">"Unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">"Unidades"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">resumen</span><span class="p">[</span><span class="s2">"Ventas"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ventas"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Convertir el DataFrame a listas (que Jinja2 puede iterar)</span>
+<span class="n">columnas_tabla</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Producto"</span><span class="p">]</span> <span class="o">+</span> <span class="n">resumen</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">filas_tabla</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">producto</span><span class="p">,</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">resumen</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">filas_tabla</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">producto</span><span class="p">]</span> <span class="o">+</span> <span class="n">fila</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Metricas preparadas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">metricas</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas de tabla: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">filas_tabla</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GENERAR EL GRAFICO Y GUARDARLO COMO IMAGEN</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># El grafico se guarda como PNG y se referencia desde el HTML</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ingreso_por_producto</span> <span class="o">=</span> <span class="n">df_region</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)[</span><span class="s2">"ingreso"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#93c5fd"</span><span class="p">,</span> <span class="s2">"#60a5fa"</span><span class="p">,</span> <span class="s2">"#3b82f6"</span><span class="p">,</span> <span class="s2">"#2563eb"</span><span class="p">]</span>
+<span class="n">ingreso_por_producto</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"barh"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colores</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Ingreso por Producto — </span><span class="si">{</span><span class="n">region_reporte</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">"bold"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Ingreso Total ($)"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Quitar bordes superior y derecho</span>
+
+<span class="c1"># Agregar etiquetas de valor en cada barra</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">nombre</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ingreso_por_producto</span><span class="p">,</span> <span class="n">ingreso_por_producto</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">valor</span> <span class="o">+</span> <span class="mi">500</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">valor</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Guardar en la misma carpeta que la plantilla</span>
+<span class="n">ruta_grafico</span> <span class="o">=</span> <span class="s2">"grafico_reporte.png"</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">ruta_grafico</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>  <span class="c1"># Cerrar la figura para liberar memoria</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Grafico guardado: </span><span class="si">{</span><span class="n">ruta_grafico</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># RENDERIZAR LA PLANTILLA CON JINJA2</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">jinja2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span>
+
+<span class="c1"># Leer la plantilla desde disco</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"plantilla_reporte.html"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">contenido_plantilla</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># Crear el objeto Template de Jinja2</span>
+<span class="n">template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">contenido_plantilla</span><span class="p">)</span>
+
+<span class="c1"># .render() reemplaza todas las variables {{ }} con los valores reales</span>
+<span class="n">html_final</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+    <span class="n">titulo</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Reporte de Ventas — </span><span class="si">{</span><span class="n">region_reporte</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="n">subtitulo</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Periodo: </span><span class="si">{</span><span class="n">periodo</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="n">metricas</span><span class="o">=</span><span class="n">metricas</span><span class="p">,</span>
+    <span class="n">columnas_tabla</span><span class="o">=</span><span class="n">columnas_tabla</span><span class="p">,</span>
+    <span class="n">filas_tabla</span><span class="o">=</span><span class="n">filas_tabla</span><span class="p">,</span>
+    <span class="n">ruta_grafico</span><span class="o">=</span><span class="n">ruta_grafico</span><span class="p">,</span>
+    <span class="n">fecha_generacion</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y %H:%M"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Guardar el HTML renderizado</span>
+<span class="n">ruta_html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"reporte_</span><span class="si">{</span><span class="n">region_reporte</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">.html"</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_html</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html_final</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Reporte HTML generado: </span><span class="si">{</span><span class="n">ruta_html</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tamano: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">ruta_html</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> KB"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="usar-filesystemloader-para-plantillas-en-disco">
+<h3>2.3 Usar FileSystemLoader para plantillas en disco<a class="headerlink" href="#usar-filesystemloader-para-plantillas-en-disco" title="Link to this heading">#</a></h3>
+<p>Cuando la plantilla hace referencia a otras plantillas (herencia, includes), es mejor usar <code class="docutils literal notranslate"><span class="pre">FileSystemLoader</span></code> en lugar de cargar el string directamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># JINJA2 CON FILESYSTEM LOADER</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">jinja2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Environment</span><span class="p">,</span> <span class="n">FileSystemLoader</span>
+
+<span class="c1"># Environment configura donde buscar plantillas</span>
+<span class="c1"># "." significa "carpeta actual"</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s2">"."</span><span class="p">))</span>
+
+<span class="c1"># Cargar la plantilla por nombre de archivo</span>
+<span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s2">"plantilla_reporte.html"</span><span class="p">)</span>
+
+<span class="c1"># Renderizar igual que antes</span>
+<span class="n">html_final</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+    <span class="n">titulo</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Reporte de Ventas — Medellin"</span><span class="p">,</span>
+    <span class="n">subtitulo</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Periodo: </span><span class="si">{</span><span class="n">periodo</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="n">metricas</span><span class="o">=</span><span class="n">metricas</span><span class="p">,</span>  <span class="c1"># Reutilizamos las metricas por simplicidad</span>
+    <span class="n">columnas_tabla</span><span class="o">=</span><span class="n">columnas_tabla</span><span class="p">,</span>
+    <span class="n">filas_tabla</span><span class="o">=</span><span class="n">filas_tabla</span><span class="p">,</span>
+    <span class="n">ruta_grafico</span><span class="o">=</span><span class="n">ruta_grafico</span><span class="p">,</span>
+    <span class="n">fecha_generacion</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y %H:%M"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"reporte_medellin.html"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html_final</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Reporte generado: reporte_medellin.html"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ventaja de FileSystemLoader: soporta herencia de plantillas y {</span><span class="si">% i</span><span class="s2">nclude %}"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="exportacion-a-pdf-con-weasyprint">
+<h2>3. Exportacion a PDF con weasyprint<a class="headerlink" href="#exportacion-a-pdf-con-weasyprint" title="Link to this heading">#</a></h2>
+<p>weasyprint toma un HTML con CSS y lo convierte a PDF. El resultado es un documento con el mismo diseno que veriamos en el navegador, listo para imprimir o adjuntar en un correo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># HTML A PDF CON WEASYPRINT</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">weasyprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="c1"># Opcion A: convertir desde un archivo HTML</span>
+<span class="n">ruta_pdf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"reporte_</span><span class="si">{</span><span class="n">region_reporte</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">.pdf"</span>
+
+<span class="n">HTML</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ruta_html</span><span class="p">)</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="n">ruta_pdf</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"PDF generado: </span><span class="si">{</span><span class="n">ruta_pdf</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tamano: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">ruta_pdf</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> KB"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># HTML A PDF DESDE STRING (sin archivo intermedio)</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Si ya tenemos el HTML renderizado en memoria, podemos</span>
+<span class="c1"># convertirlo directamente sin guardarlo primero</span>
+
+<span class="c1"># base_url="." le dice a weasyprint donde buscar imagenes y CSS relativos</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">html_final</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">"."</span><span class="p">)</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="s2">"reporte_directo.pdf"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"PDF generado desde string: reporte_directo.pdf"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EMBEBER IMAGENES EN BASE64</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Problema: cuando enviamos el HTML por correo o lo movemos de carpeta,</span>
+<span class="c1"># las imagenes se pierden porque son referencias a archivos locales.</span>
+<span class="c1"># Solucion: convertir la imagen a base64 y embeberla en el HTML.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">imagen_a_base64</span><span class="p">(</span><span class="n">ruta_imagen</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Lee una imagen y retorna un string base64 listo para usar en &lt;img src="..."&gt;</span>
+<span class="sd">    """</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_imagen</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">datos</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    
+    <span class="c1"># Codificar a base64</span>
+    <span class="n">b64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
+    
+    <span class="c1"># Detectar tipo MIME por extension</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="n">ruta_imagen</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">mime</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"png"</span><span class="p">:</span> <span class="s2">"image/png"</span><span class="p">,</span> <span class="s2">"jpg"</span><span class="p">:</span> <span class="s2">"image/jpeg"</span><span class="p">,</span> <span class="s2">"jpeg"</span><span class="p">:</span> <span class="s2">"image/jpeg"</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">extension</span><span class="p">,</span> <span class="s2">"image/png"</span><span class="p">)</span>
+    
+    <span class="c1"># Retornar el string completo para usar en src=""</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"data:</span><span class="si">{</span><span class="n">mime</span><span class="si">}</span><span class="s2">;base64,</span><span class="si">{</span><span class="n">b64</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="c1"># Generar la version con imagen embebida</span>
+<span class="n">ruta_grafico_b64</span> <span class="o">=</span> <span class="n">imagen_a_base64</span><span class="p">(</span><span class="n">ruta_grafico</span><span class="p">)</span>
+
+<span class="n">html_embebido</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+    <span class="n">titulo</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Reporte de Ventas — </span><span class="si">{</span><span class="n">region_reporte</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="n">subtitulo</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Periodo: </span><span class="si">{</span><span class="n">periodo</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+    <span class="n">metricas</span><span class="o">=</span><span class="n">metricas</span><span class="p">,</span>
+    <span class="n">columnas_tabla</span><span class="o">=</span><span class="n">columnas_tabla</span><span class="p">,</span>
+    <span class="n">filas_tabla</span><span class="o">=</span><span class="n">filas_tabla</span><span class="p">,</span>
+    <span class="n">ruta_grafico</span><span class="o">=</span><span class="n">ruta_grafico_b64</span><span class="p">,</span>  <span class="c1"># &lt;-- Imagen en base64</span>
+    <span class="n">fecha_generacion</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y %H:%M"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Este HTML es autocontenido — no depende de archivos externos</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">html_embebido</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">"."</span><span class="p">)</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="s2">"reporte_autocontenido.pdf"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"PDF autocontenido generado (imagen embebida en base64)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Este archivo se puede enviar por correo sin perder el grafico."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="funcion-generadora-de-reportes">
+<h2>4. Funcion generadora de reportes<a class="headerlink" href="#funcion-generadora-de-reportes" title="Link to this heading">#</a></h2>
+<p>Encapsulamos todo el flujo en una sola funcion reutilizable: recibe parametros, filtra datos, genera metricas, crea el grafico, renderiza la plantilla y exporta a PDF.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUNCION COMPLETA DE GENERACION DE REPORTES</span>
+<span class="c1"># ============================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generar_reporte_pdf</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">region</span><span class="p">,</span>
+    <span class="n">periodo</span><span class="p">,</span>
+    <span class="n">plantilla_path</span><span class="o">=</span><span class="s2">"plantilla_reporte.html"</span><span class="p">,</span>
+    <span class="n">carpeta_salida</span><span class="o">=</span><span class="s2">"reportes"</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Genera un reporte PDF completo para una region.</span>
+<span class="sd">    </span>
+<span class="sd">    Parametros:</span>
+<span class="sd">        df (DataFrame): datos de ventas</span>
+<span class="sd">        region (str): region a reportar</span>
+<span class="sd">        periodo (str): texto descriptivo del periodo</span>
+<span class="sd">        plantilla_path (str): ruta a la plantilla HTML de Jinja2</span>
+<span class="sd">        carpeta_salida (str): carpeta donde guardar los PDFs</span>
+<span class="sd">    </span>
+<span class="sd">    Retorna:</span>
+<span class="sd">        str: ruta del PDF generado</span>
+<span class="sd">    """</span>
+    <span class="c1"># Crear carpeta de salida si no existe</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">carpeta_salida</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># --- 1. Filtrar datos ---</span>
+    <span class="n">df_region</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">==</span> <span class="n">region</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_region</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Sin datos para </span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
+    <span class="c1"># --- 2. Calcular metricas ---</span>
+    <span class="n">metricas</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">"valor"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">df_region</span><span class="p">[</span><span class="s1">'ingreso'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"etiqueta"</span><span class="p">:</span> <span class="s2">"Ingreso Total"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"valor"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_region</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"etiqueta"</span><span class="p">:</span> <span class="s2">"Total Ventas"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"valor"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">df_region</span><span class="p">[</span><span class="s1">'ingreso'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"etiqueta"</span><span class="p">:</span> <span class="s2">"Ticket Promedio"</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"valor"</span><span class="p">:</span> <span class="n">df_region</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'producto'</span><span class="p">)[</span><span class="s1">'ingreso'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(),</span> <span class="s2">"etiqueta"</span><span class="p">:</span> <span class="s2">"Producto Lider"</span><span class="p">},</span>
+    <span class="p">]</span>
+    
+    <span class="c1"># --- 3. Tabla resumen ---</span>
+    <span class="n">resumen</span> <span class="o">=</span> <span class="n">df_region</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">Ventas</span><span class="o">=</span><span class="p">(</span><span class="s2">"ingreso"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">),</span>
+        <span class="n">Ingreso_Total</span><span class="o">=</span><span class="p">(</span><span class="s2">"ingreso"</span><span class="p">,</span> <span class="s2">"sum"</span><span class="p">),</span>
+        <span class="n">Ingreso_Promedio</span><span class="o">=</span><span class="p">(</span><span class="s2">"ingreso"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span>
+        <span class="n">Unidades</span><span class="o">=</span><span class="p">(</span><span class="s2">"unidades"</span><span class="p">,</span> <span class="s2">"sum"</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"Ingreso_Total"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ingreso_Total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ingreso_Total"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ingreso_Promedio"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ingreso_Promedio"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"$</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">resumen</span><span class="p">[</span><span class="s2">"Unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">"Unidades"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ventas"</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen</span><span class="p">[</span><span class="s2">"Ventas"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    
+    <span class="n">columnas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Producto"</span><span class="p">]</span> <span class="o">+</span> <span class="n">resumen</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">filas</span> <span class="o">=</span> <span class="p">[[</span><span class="n">prod</span><span class="p">]</span> <span class="o">+</span> <span class="n">fila</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">prod</span><span class="p">,</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">resumen</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()]</span>
+    
+    <span class="c1"># --- 4. Grafico ---</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">ingreso_prod</span> <span class="o">=</span> <span class="n">df_region</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)[</span><span class="s2">"ingreso"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+    <span class="n">ingreso_prod</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"barh"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#2563eb"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Ingreso por Producto — </span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">"bold"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Ingreso Total ($)"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[[</span><span class="s2">"top"</span><span class="p">,</span> <span class="s2">"right"</span><span class="p">]]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    
+    <span class="c1"># Guardar como temporal y convertir a base64</span>
+    <span class="n">ruta_tmp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">carpeta_salida</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"tmp_grafico_</span><span class="si">{</span><span class="n">region</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">.png"</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">ruta_tmp</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="n">grafico_b64</span> <span class="o">=</span> <span class="n">imagen_a_base64</span><span class="p">(</span><span class="n">ruta_tmp</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">ruta_tmp</span><span class="p">)</span>  <span class="c1"># Limpiar archivo temporal</span>
+    
+    <span class="c1"># --- 5. Renderizar plantilla ---</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s2">"."</span><span class="p">))</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">plantilla_path</span><span class="p">)</span>
+    
+    <span class="n">html</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+        <span class="n">titulo</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Reporte de Ventas — </span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="n">subtitulo</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Periodo: </span><span class="si">{</span><span class="n">periodo</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="n">metricas</span><span class="o">=</span><span class="n">metricas</span><span class="p">,</span>
+        <span class="n">columnas_tabla</span><span class="o">=</span><span class="n">columnas</span><span class="p">,</span>
+        <span class="n">filas_tabla</span><span class="o">=</span><span class="n">filas</span><span class="p">,</span>
+        <span class="n">ruta_grafico</span><span class="o">=</span><span class="n">grafico_b64</span><span class="p">,</span>
+        <span class="n">fecha_generacion</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%Y %H:%M"</span><span class="p">)</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># --- 6. Exportar a PDF ---</span>
+    <span class="n">nombre_pdf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"reporte_</span><span class="si">{</span><span class="n">region</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span><span class="w"> </span><span class="s1">'_'</span><span class="p">)</span><span class="si">}</span><span class="s2">.pdf"</span>
+    <span class="n">ruta_pdf</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">carpeta_salida</span><span class="p">,</span> <span class="n">nombre_pdf</span><span class="p">)</span>
+    <span class="n">HTML</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">html</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">"."</span><span class="p">)</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="n">ruta_pdf</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">ruta_pdf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GENERAR REPORTES EN LOTE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">regiones</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">archivos_generados</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Generando reportes..."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regiones</span><span class="p">:</span>
+    <span class="n">ruta</span> <span class="o">=</span> <span class="n">generar_reporte_pdf</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+        <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span>
+        <span class="n">periodo</span><span class="o">=</span><span class="s2">"Enero - Junio 2024"</span><span class="p">,</span>
+        <span class="n">carpeta_salida</span><span class="o">=</span><span class="s2">"reportes"</span>
+    <span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">ruta</span><span class="p">:</span>
+        <span class="n">tamano</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">ruta</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">tamano</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> KB)"</span><span class="p">)</span>
+        <span class="n">archivos_generados</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">archivos_generados</span><span class="p">)</span><span class="si">}</span><span class="s2"> reportes generados en /reportes"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="automatizacion-y-distribucion">
+<h2>5. Automatizacion y distribucion<a class="headerlink" href="#automatizacion-y-distribucion" title="Link to this heading">#</a></h2>
+<p>Con la funcion lista, el ultimo paso es hacer que se ejecute sola — sin que alguien abra Jupyter y presione «Run All».</p>
+<section id="crear-el-script-ejecutable">
+<h3>5.1 Crear el script ejecutable<a class="headerlink" href="#crear-el-script-ejecutable" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CREAR SCRIPT .py INDEPENDIENTE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Este script se puede ejecutar desde la terminal con:</span>
+<span class="c1"># python generar_reportes.py</span>
+
+<span class="n">script</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">#!/usr/bin/env python3</span>
+<span class="s1">"""</span>
+<span class="s1">Script de generacion automatica de reportes.</span>
+<span class="s1">Uso: python generar_reportes.py</span>
+<span class="s1">"""</span>
+
+<span class="s1">import pandas as pd</span>
+<span class="s1">import numpy as np</span>
+<span class="s1">import matplotlib</span>
+<span class="s1">matplotlib.use("Agg")</span>
+<span class="s1">import matplotlib.pyplot as plt</span>
+<span class="s1">import os</span>
+<span class="s1">import base64</span>
+<span class="s1">from datetime import datetime</span>
+<span class="s1">from jinja2 import Environment, FileSystemLoader</span>
+<span class="s1">from weasyprint import HTML</span>
+
+
+<span class="s1"># --- Configuracion ---</span>
+<span class="s1">ARCHIVO_DATOS = "ventas_completas.csv"</span>
+<span class="s1">PLANTILLA = "plantilla_reporte.html"</span>
+<span class="s1">CARPETA_SALIDA = "reportes"</span>
+<span class="s1">PERIODO = "Enero - Junio 2024"</span>
+
+
+<span class="s1">def imagen_a_base64(ruta):</span>
+<span class="s1">    with open(ruta, "rb") as f:</span>
+<span class="s1">        datos = f.read()</span>
+<span class="s1">    b64 = base64.b64encode(datos).decode("utf-8")</span>
+<span class="s1">    return f"data:image/png;base64,</span><span class="si">{b64}</span><span class="s1">"</span>
+
+
+<span class="s1">def generar_reporte(df, region, periodo, plantilla_path, carpeta_salida):</span>
+<span class="s1">    os.makedirs(carpeta_salida, exist_ok=True)</span>
+<span class="s1">    df_r = df[df["region"] == region].copy()</span>
+<span class="s1">    if len(df_r) == 0:</span>
+<span class="s1">        return None</span>
+
+<span class="s1">    metricas = [</span>
+<span class="s1">        {"valor": f"${df_r['ingreso'].sum():,.0f}", "etiqueta": "Ingreso Total"},</span>
+<span class="s1">        {"valor": f"{len(df_r)}", "etiqueta": "Total Ventas"},</span>
+<span class="s1">        {"valor": f"${df_r['ingreso'].mean():,.0f}", "etiqueta": "Ticket Promedio"},</span>
+<span class="s1">        {"valor": df_r.groupby("producto")["ingreso"].sum().idxmax(), "etiqueta": "Producto Lider"},</span>
+<span class="s1">    ]</span>
+
+<span class="s1">    resumen = df_r.groupby("producto").agg(</span>
+<span class="s1">        Ventas=("ingreso", "count"),</span>
+<span class="s1">        Ingreso_Total=("ingreso", "sum"),</span>
+<span class="s1">        Ingreso_Promedio=("ingreso", "mean"),</span>
+<span class="s1">        Unidades=("unidades", "sum")</span>
+<span class="s1">    ).round(0).sort_values("Ingreso_Total", ascending=False)</span>
+
+<span class="s1">    resumen["Ingreso_Total"] = resumen["Ingreso_Total"].apply(lambda x: f"$</span><span class="si">{x:,.0f}</span><span class="s1">")</span>
+<span class="s1">    resumen["Ingreso_Promedio"] = resumen["Ingreso_Promedio"].apply(lambda x: f"$</span><span class="si">{x:,.0f}</span><span class="s1">")</span>
+<span class="s1">    resumen["Unidades"] = resumen["Unidades"].astype(int)</span>
+<span class="s1">    resumen["Ventas"] = resumen["Ventas"].astype(int)</span>
+
+<span class="s1">    columnas = ["Producto"] + resumen.columns.tolist()</span>
+<span class="s1">    filas = [[p] + f.tolist() for p, f in resumen.iterrows()]</span>
+
+<span class="s1">    fig, ax = plt.subplots(figsize=(8, 4))</span>
+<span class="s1">    df_r.groupby("producto")["ingreso"].sum().sort_values().plot(</span>
+<span class="s1">        kind="barh", ax=ax, color="#2563eb"</span>
+<span class="s1">    )</span>
+<span class="s1">    ax.set_title(f"Ingreso por Producto — </span><span class="si">{region}</span><span class="s1">")</span>
+<span class="s1">    ax.set_xlabel("Ingreso ($)")</span>
+<span class="s1">    ax.spines[["top", "right"]].set_visible(False)</span>
+<span class="s1">    plt.tight_layout()</span>
+<span class="s1">    tmp = os.path.join(carpeta_salida, "tmp.png")</span>
+<span class="s1">    fig.savefig(tmp, dpi=150, bbox_inches="tight")</span>
+<span class="s1">    plt.close(fig)</span>
+<span class="s1">    grafico_b64 = imagen_a_base64(tmp)</span>
+<span class="s1">    os.remove(tmp)</span>
+
+<span class="s1">    env = Environment(loader=FileSystemLoader("."))</span>
+<span class="s1">    html = env.get_template(plantilla_path).render(</span>
+<span class="s1">        titulo=f"Reporte de Ventas — </span><span class="si">{region}</span><span class="s1">",</span>
+<span class="s1">        subtitulo=f"Periodo: </span><span class="si">{periodo}</span><span class="s1">",</span>
+<span class="s1">        metricas=metricas,</span>
+<span class="s1">        columnas_tabla=columnas,</span>
+<span class="s1">        filas_tabla=filas,</span>
+<span class="s1">        ruta_grafico=grafico_b64,</span>
+<span class="s1">        fecha_generacion=datetime.now().strftime("</span><span class="si">%d</span><span class="s1">/%m/%Y %H:%M")</span>
+<span class="s1">    )</span>
+
+<span class="s1">    ruta_pdf = os.path.join(carpeta_salida, f"reporte_{region.lower().replace(' ', '_')}.pdf")</span>
+<span class="s1">    HTML(string=html, base_url=".").write_pdf(ruta_pdf)</span>
+<span class="s1">    return ruta_pdf</span>
+
+
+<span class="s1">if __name__ == "__main__":</span>
+<span class="s1">    print(f"[{datetime.now():%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M}] Iniciando generacion de reportes")</span>
+<span class="s1">    </span>
+<span class="s1">    df = pd.read_csv(ARCHIVO_DATOS, parse_dates=["fecha"])</span>
+<span class="s1">    df["ingreso"] = df["unidades"] * df["precio_unitario"]</span>
+<span class="s1">    </span>
+<span class="s1">    regiones = df["region"].unique()</span>
+<span class="s1">    generados = 0</span>
+<span class="s1">    </span>
+<span class="s1">    for region in regiones:</span>
+<span class="s1">        ruta = generar_reporte(df, region, PERIODO, PLANTILLA, CARPETA_SALIDA)</span>
+<span class="s1">        if ruta:</span>
+<span class="s1">            print(f"  </span><span class="si">{ruta}</span><span class="s1">")</span>
+<span class="s1">            generados += 1</span>
+<span class="s1">    </span>
+<span class="s1">    print(f"[{datetime.now():%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M}] Listo. </span><span class="si">{generados}</span><span class="s1"> reportes en /</span><span class="si">{CARPETA_SALIDA}</span><span class="s1">")</span>
+<span class="s1">'''</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"generar_reportes.py"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Script creado: generar_reportes.py"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ejecutar con: python generar_reportes.py"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="programar-ejecucion-con-cron-linux-mac-o-task-scheduler-windows">
+<h3>5.2 Programar ejecucion con cron (Linux/Mac) o Task Scheduler (Windows)<a class="headerlink" href="#programar-ejecucion-con-cron-linux-mac-o-task-scheduler-windows" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CRON — ejecutar el script automaticamente</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># cron es el programador de tareas de Linux/Mac</span>
+<span class="c1"># Se configura editando el archivo crontab</span>
+
+<span class="c1"># Para abrir el editor de crontab desde la terminal:</span>
+<span class="c1"># crontab -e</span>
+
+<span class="c1"># Formato de una linea cron:</span>
+<span class="c1"># minuto hora dia_mes mes dia_semana comando</span>
+<span class="c1">#   0-59  0-23  1-31  1-12  0-7(0=dom)</span>
+
+<span class="c1"># Ejemplos:</span>
+
+<span class="c1"># Ejecutar todos los lunes a las 7:00 AM</span>
+<span class="n">cron_lunes</span> <span class="o">=</span> <span class="s2">"0 7 * * 1 cd /ruta/al/proyecto &amp;&amp; python generar_reportes.py &gt;&gt; /var/log/reportes.log 2&gt;&amp;1"</span>
+
+<span class="c1"># Ejecutar el primer dia de cada mes a las 6:00 AM</span>
+<span class="n">cron_mensual</span> <span class="o">=</span> <span class="s2">"0 6 1 * * cd /ruta/al/proyecto &amp;&amp; python generar_reportes.py &gt;&gt; /var/log/reportes.log 2&gt;&amp;1"</span>
+
+<span class="c1"># Ejecutar cada 6 horas</span>
+<span class="n">cron_6h</span> <span class="o">=</span> <span class="s2">"0 */6 * * * cd /ruta/al/proyecto &amp;&amp; python generar_reportes.py"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ejemplos de configuracion cron:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lunes 7:00 AM:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">cron_lunes</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Primer dia del mes 6:00 AM:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">cron_mensual</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Cada 6 horas:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">cron_6h</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"NOTA: &gt;&gt; redirige la salida a un archivo de log"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"      2&gt;&amp;1 redirige errores al mismo log"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"      cd ... &amp;&amp; asegura que el script corre en la carpeta correcta"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="envio-por-correo">
+<h3>5.3 Envio por correo<a class="headerlink" href="#envio-por-correo" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ENVIAR REPORTE POR CORREO — smtplib</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># smtplib viene con Python — no requiere instalacion</span>
+<span class="c1"># Este ejemplo muestra la estructura completa</span>
+<span class="c1"># Para que funcione, se necesitan credenciales SMTP reales</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">smtplib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">email.mime.multipart</span><span class="w"> </span><span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">email.mime.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">email.mime.application</span><span class="w"> </span><span class="kn">import</span> <span class="n">MIMEApplication</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">enviar_reporte_por_correo</span><span class="p">(</span>
+    <span class="n">destinatario</span><span class="p">,</span>
+    <span class="n">asunto</span><span class="p">,</span>
+    <span class="n">cuerpo_html</span><span class="p">,</span>
+    <span class="n">ruta_pdf</span><span class="p">,</span>
+    <span class="n">remitente</span><span class="p">,</span>
+    <span class="n">password</span><span class="p">,</span>
+    <span class="n">servidor_smtp</span><span class="o">=</span><span class="s2">"smtp.gmail.com"</span><span class="p">,</span>
+    <span class="n">puerto</span><span class="o">=</span><span class="mi">587</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Envia un correo con el reporte PDF adjunto.</span>
+<span class="sd">    </span>
+<span class="sd">    Parametros:</span>
+<span class="sd">        destinatario (str): correo del destinatario</span>
+<span class="sd">        asunto (str): asunto del correo</span>
+<span class="sd">        cuerpo_html (str): cuerpo del correo en HTML</span>
+<span class="sd">        ruta_pdf (str): ruta al PDF a adjuntar</span>
+<span class="sd">        remitente (str): correo del remitente</span>
+<span class="sd">        password (str): contrasena o app password</span>
+<span class="sd">        servidor_smtp (str): servidor SMTP</span>
+<span class="sd">        puerto (int): puerto SMTP</span>
+<span class="sd">    """</span>
+    <span class="c1"># Crear el mensaje</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s2">"From"</span><span class="p">]</span> <span class="o">=</span> <span class="n">remitente</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s2">"To"</span><span class="p">]</span> <span class="o">=</span> <span class="n">destinatario</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s2">"Subject"</span><span class="p">]</span> <span class="o">=</span> <span class="n">asunto</span>
+    
+    <span class="c1"># Agregar cuerpo HTML</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">cuerpo_html</span><span class="p">,</span> <span class="s2">"html"</span><span class="p">))</span>
+    
+    <span class="c1"># Adjuntar el PDF</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_pdf</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">adjunto</span> <span class="o">=</span> <span class="n">MIMEApplication</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">_subtype</span><span class="o">=</span><span class="s2">"pdf"</span><span class="p">)</span>
+        <span class="n">nombre_archivo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ruta_pdf</span><span class="p">)</span>
+        <span class="n">adjunto</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s2">"Content-Disposition"</span><span class="p">,</span> <span class="s2">"attachment"</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">nombre_archivo</span><span class="p">)</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">adjunto</span><span class="p">)</span>
+    
+    <span class="c1"># Enviar</span>
+    <span class="k">with</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="n">servidor_smtp</span><span class="p">,</span> <span class="n">puerto</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>               <span class="c1"># Iniciar conexion segura</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">remitente</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>  <span class="c1"># Autenticar</span>
+        <span class="n">server</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>         <span class="c1"># Enviar</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Correo enviado a </span><span class="si">{</span><span class="n">destinatario</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
+<span class="c1"># --- Ejemplo de uso (NO ejecutar sin credenciales reales) ---</span>
+
+<span class="c1"># Para Gmail, se necesita un "App Password":</span>
+<span class="c1"># 1. Activar verificacion en 2 pasos en la cuenta de Google</span>
+<span class="c1"># 2. Ir a myaccount.google.com &gt; Seguridad &gt; Contraseñas de aplicacion</span>
+<span class="c1"># 3. Generar una contrasena para "Correo" en "Otro dispositivo"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Funcion enviar_reporte_por_correo() lista."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Requiere credenciales SMTP para ejecutar."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ejemplo de uso:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'''  enviar_reporte_por_correo('''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'''      destinatario="gerente@empresa.com",'''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'''      asunto="Reporte Semanal de Ventas - Bogota",'''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'''      cuerpo_html="&lt;h3&gt;Adjunto el reporte de la semana.&lt;/h3&gt;",'''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'''      ruta_pdf="reportes/reporte_bogota.pdf",'''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'''      remitente="reportes@empresa.com",'''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'''      password="xxxx xxxx xxxx xxxx"'''</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'''  )'''</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="resumen-de-la-subseccion">
+<h2>Resumen de la subseccion<a class="headerlink" href="#resumen-de-la-subseccion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Que hace</p></th>
+<th class="head"><p>Cuando usarla</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Papermill</strong></p></td>
+<td><p>Ejecuta notebooks con parametros distintos</p></td>
+<td><p>Reportes tecnicos, analisis parametrizados, ejecucion en lote</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Jinja2</strong></p></td>
+<td><p>Renderiza plantillas HTML con datos dinamicos</p></td>
+<td><p>Reportes profesionales con diseno personalizado</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>weasyprint</strong></p></td>
+<td><p>Convierte HTML+CSS a PDF</p></td>
+<td><p>Cuando el destinatario necesita un PDF</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>base64</strong></p></td>
+<td><p>Embebe imagenes en el HTML</p></td>
+<td><p>Para que el reporte sea autocontenido</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>cron</strong></p></td>
+<td><p>Programa ejecucion automatica</p></td>
+<td><p>Reportes recurrentes (semanal, mensual)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>smtplib</strong></p></td>
+<td><p>Envia correos con adjuntos</p></td>
+<td><p>Distribucion automatica por correo</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="flujo-completo">
+<h3>Flujo completo<a class="headerlink" href="#flujo-completo" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Datos llegan (CSV, BD, API)</p></li>
+<li><p>Script Python filtra, agrega y genera graficos</p></li>
+<li><p>Jinja2 inyecta los datos en una plantilla HTML</p></li>
+<li><p>weasyprint convierte el HTML a PDF</p></li>
+<li><p>smtplib envia el PDF por correo</p></li>
+<li><p>cron ejecuta todo de forma automatica</p></li>
+</ol>
+</section>
+<section id="siguiente-paso">
+<h3>Siguiente paso<a class="headerlink" href="#siguiente-paso" title="Link to this heading">#</a></h3>
+<p>En la <strong>Unidad 2</strong> analizaremos las caracteristicas que hacen que un producto de datos sea confiable: calidad, exploracion visual con Orange, KPIs y storytelling.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="caso_practico_fifa23.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos">Unidad 1: Introduccion a Desarrollo de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebooks-parametrizados-con-papermill">1. Notebooks parametrizados con Papermill</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-notebook-plantilla">1.1 Crear el notebook plantilla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejecutar-con-papermill">1.2 Ejecutar con Papermill</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plantillas-html-con-jinja2">2. Plantillas HTML con Jinja2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-plantilla-html">2.1 Crear la plantilla HTML</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#renderizar-la-plantilla-con-datos">2.2 Renderizar la plantilla con datos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usar-filesystemloader-para-plantillas-en-disco">2.3 Usar FileSystemLoader para plantillas en disco</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-a-pdf-con-weasyprint">3. Exportacion a PDF con weasyprint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-generadora-de-reportes">4. Funcion generadora de reportes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatizacion-y-distribucion">5. Automatizacion y distribucion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-script-ejecutable">5.1 Crear el script ejecutable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#programar-ejecucion-con-cron-linux-mac-o-task-scheduler-windows">5.2 Programar ejecucion con cron (Linux/Mac) o Task Scheduler (Windows)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#envio-por-correo">5.3 Envio por correo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-la-subseccion">Resumen de la subseccion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-completo">Flujo completo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

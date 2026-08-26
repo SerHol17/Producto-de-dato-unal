@@ -1,0 +1,1809 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.2 — Limpieza y Normalización de Datos &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_1/U1_S2_limpieza_normalizacion';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="1.3: Visualizacion de Datos" href="unidad13.html" />
+    <link rel="prev" title="1.1 — Python para Datos" href="U1_S1_python_datos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_1/U1_S2_limpieza_normalizacion.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_1/U1_S2_limpieza_normalizacion.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_1/U1_S2_limpieza_normalizacion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1.2 — Limpieza y Normalización de Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos">Unidad 1: Introducción a Desarrollo de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-dataset-de-ejemplo">0. Crear el dataset de ejemplo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-inicial">1. Diagnóstico inicial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-nulos-deteccion-y-tratamiento">2. Valores nulos — deteccion y tratamiento</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-1-eliminar-filas-con-nulos">2.1 Estrategia 1: Eliminar filas con nulos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-2-imputar-rellenar-nulos">2.2 Estrategia 2: Imputar (rellenar) nulos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-estrategias-para-nulos">Resumen de estrategias para nulos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados-identificacion-y-eliminacion">3. Duplicados — identificacion y eliminacion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-atipicos-deteccion-y-decision">4. Valores atipicos — deteccion y decision</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-con-iqr-rango-intercuartilico">4.1 Deteccion con IQR (Rango Intercuartilico)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-con-z-score">4.2 Deteccion con Z-Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-hacer-con-los-atipicos">4.3 Que hacer con los atipicos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-y-encoding-de-variables">5. Normalizacion y encoding de variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estandarizacion-de-texto">5.1 Estandarizacion de texto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escalado-de-variables-numericas">5.2 Escalado de variables numericas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-de-variables-categoricas">5.3 Encoding de variables categoricas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-encoding">Resumen de encoding</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-completo-de-limpieza">6. Pipeline completo de limpieza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-la-subseccion">Resumen de la subseccion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="limpieza-y-normalizacion-de-datos">
+<h1>1.2 — Limpieza y Normalización de Datos<a class="headerlink" href="#limpieza-y-normalizacion-de-datos" title="Link to this heading">#</a></h1>
+<section id="unidad-1-introduccion-a-desarrollo-de-productos-de-datos">
+<h2>Unidad 1: Introducción a Desarrollo de Productos de Datos<a class="headerlink" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos" title="Link to this heading">#</a></h2>
+<p>Un producto de datos es tan bueno como los datos que consume. En este notebook trabajaremos con un dataset que tiene los problemas más comunes de la vida real: valores nulos, registros duplicados, valores atípicos y escalas inconsistentes.</p>
+<section id="contenido">
+<h3>Contenido:<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Diagnóstico inicial del dataset</p></li>
+<li><p>Valores nulos — detección y tratamiento</p></li>
+<li><p>Duplicados — identificación y eliminación</p></li>
+<li><p>Valores atípicos — detección y decisión</p></li>
+<li><p>Normalización y encoding de variables</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># IMPORTACIONES</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Configuración de visualización de pandas</span>
+<span class="c1"># max_columns=None muestra todas las columnas sin truncar</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_columns"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="c1"># max_rows limita la cantidad de filas visibles</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.max_rows"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="crear-el-dataset-de-ejemplo">
+<h2>0. Crear el dataset de ejemplo<a class="headerlink" href="#crear-el-dataset-de-ejemplo" title="Link to this heading">#</a></h2>
+<p>Vamos a construir un dataset con problemas intencionales para practicar cada técnica de limpieza. Simula registros de ventas de una empresa con errores típicos de captura manual y fuentes heterogéneas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DATASET CON PROBLEMAS INTENCIONALES</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># Semilla para reproducibilidad</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="c1"># Generar datos base</span>
+<span class="n">datos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"id_venta"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"2025-01-01"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"D"</span><span class="p">),</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">"Dashboard"</span><span class="p">,</span> <span class="s2">"Reporte"</span><span class="p">,</span> <span class="s2">"API"</span><span class="p">,</span> <span class="s2">"App Web"</span><span class="p">,</span> <span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"REPORTE"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">size</span><span class="o">=</span><span class="n">n</span>
+    <span class="p">),</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">"Eje Cafetero"</span><span class="p">,</span> <span class="s2">"Bogota"</span><span class="p">,</span> <span class="s2">"Bogotá"</span><span class="p">,</span> <span class="s2">"Medellín"</span><span class="p">,</span> <span class="s2">"Medellin"</span><span class="p">,</span> <span class="s2">"Cali"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">size</span><span class="o">=</span><span class="n">n</span>
+    <span class="p">),</span>
+    <span class="s2">"vendedor"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">"Ana García"</span><span class="p">,</span> <span class="s2">"Carlos López"</span><span class="p">,</span> <span class="s2">"María Ruiz"</span><span class="p">,</span> <span class="s2">"Pedro Martín"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">size</span><span class="o">=</span><span class="n">n</span>
+    <span class="p">),</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+    <span class="s2">"precio_unitario"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"calificacion"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+
+<span class="c1"># --- Inyectar problemas adicionales ---</span>
+
+<span class="c1"># Nulos dispersos en unidades y precio</span>
+<span class="n">indices_nulos_unidades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices_nulos_unidades</span><span class="p">,</span> <span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="n">indices_nulos_precio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices_nulos_precio</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># Valores atípicos en precio_unitario (errores de captura)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">9500.0</span>    <span class="c1"># Alguien agregó un cero de más</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">200.0</span>   <span class="c1"># Valor negativo imposible</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">12000.0</span>  <span class="c1"># Fuera de rango</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">500.0</span>          <span class="c1"># Cantidad absurda</span>
+
+<span class="c1"># Duplicados exactos (copiar filas existentes)</span>
+<span class="n">filas_duplicadas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">80</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">filas_duplicadas</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Columna de ingreso total (calculada, incluye efecto de nulos)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">"ingreso_total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dataset creado: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="diagnostico-inicial">
+<h2>1. Diagnóstico inicial<a class="headerlink" href="#diagnostico-inicial" title="Link to this heading">#</a></h2>
+<p>Antes de tocar los datos, necesitamos entender qué tenemos. El diagnóstico responde tres preguntas: qué forma tienen los datos, qué tipos tiene cada columna y dónde están los problemas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FORMA Y TIPOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Columnas: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># .info() muestra tipo de dato y conteo de valores no nulos por columna</span>
+<span class="c1"># Si el conteo de non-null es menor que el total de filas, hay nulos</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># RESUMEN DE NULOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># .isnull().sum() cuenta los nulos por columna</span>
+<span class="n">nulos</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Calcular el porcentaje de nulos respecto al total de filas</span>
+<span class="n">porcentaje_nulos</span> <span class="o">=</span> <span class="p">(</span><span class="n">nulos</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Crear un resumen combinando conteo y porcentaje</span>
+<span class="n">resumen_nulos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"nulos"</span><span class="p">:</span> <span class="n">nulos</span><span class="p">,</span>
+    <span class="s2">"porcentaje"</span><span class="p">:</span> <span class="n">porcentaje_nulos</span>
+<span class="p">})</span>
+
+<span class="c1"># Mostrar solo columnas que tienen al menos un nulo</span>
+<span class="n">resumen_nulos</span><span class="p">[</span><span class="n">resumen_nulos</span><span class="p">[</span><span class="s2">"nulos"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"nulos"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># RESUMEN DE DUPLICADOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># .duplicated() retorna True para cada fila que es duplicada de otra anterior</span>
+<span class="n">n_duplicados</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas duplicadas exactas: </span><span class="si">{</span><span class="n">n_duplicados</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Ver cuáles son</span>
+<span class="k">if</span> <span class="n">n_duplicados</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Filas duplicadas:"</span><span class="p">)</span>
+    <span class="c1"># keep=False marca TODAS las ocurrencias (original + copias)</span>
+    <span class="n">duplicados</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"id_venta"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">duplicados</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VALORES UNICOS EN COLUMNAS CATEGORICAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Verificar inconsistencias en texto</span>
+<span class="c1"># Por ejemplo: "Dashboard" vs "dashboard" vs "DASHBOARD"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Valores unicos en 'producto':"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2"> valores distintos"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Valores unicos en 'region':"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2"> valores distintos"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ESTADISTICAS DESCRIPTIVAS — buscar valores sospechosos</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># En min y max podemos detectar valores imposibles</span>
+<span class="c1"># Un precio negativo o unidades en miles son senales de error</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Problemas detectados en el diagnostico:</strong></p>
+<ol class="arabic simple">
+<li><p>Nulos en: producto, region, vendedor, unidades, precio_unitario, calificacion, ingreso_total</p></li>
+<li><p>Duplicados exactos (5 filas)</p></li>
+<li><p>Inconsistencias de texto: «Dashboard» vs «dashboard», «Bogota» vs «Bogota», «Medellin» vs «Medellin»</p></li>
+<li><p>Valores atipicos: precio negativo (-200), precios en miles (9500, 12000), unidades = 500</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="valores-nulos-deteccion-y-tratamiento">
+<h2>2. Valores nulos — deteccion y tratamiento<a class="headerlink" href="#valores-nulos-deteccion-y-tratamiento" title="Link to this heading">#</a></h2>
+<p>No existe una unica forma de tratar nulos. La decision depende del contexto: que representa la columna, que porcentaje de nulos tiene y que impacto tiene en el analisis.</p>
+<section id="estrategia-1-eliminar-filas-con-nulos">
+<h3>2.1 Estrategia 1: Eliminar filas con nulos<a class="headerlink" href="#estrategia-1-eliminar-filas-con-nulos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ELIMINAR FILAS CON NULOS — .dropna()</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Opcion mas agresiva: eliminar CUALQUIER fila que tenga al menos un nulo</span>
+<span class="c1"># Esto puede reducir mucho el dataset</span>
+<span class="n">df_sin_nulos</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas originales: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas despues de dropna(): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_sin_nulos</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas perdidas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df_sin_nulos</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df_sin_nulos</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ELIMINAR FILAS CON NULOS SOLO EN COLUMNAS CRITICAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># subset= define en que columnas buscar nulos</span>
+<span class="c1"># Solo eliminamos si falta el producto o las unidades (columnas criticas)</span>
+<span class="c1"># Dejamos pasar nulos en calificacion (columna no critica)</span>
+<span class="n">df_parcial</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"unidades"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas despues de dropna(subset): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_parcial</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas perdidas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df_parcial</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="estrategia-2-imputar-rellenar-nulos">
+<h3>2.2 Estrategia 2: Imputar (rellenar) nulos<a class="headerlink" href="#estrategia-2-imputar-rellenar-nulos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># IMPUTACION CON VALOR FIJO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Trabajamos sobre una copia para no modificar el original</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Para columnas categoricas: rellenar con un valor explicito</span>
+<span class="c1"># "Desconocido" deja claro que el dato original faltaba</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"vendedor"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"vendedor"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">"Desconocido"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vendedor despues de fillna:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"vendedor"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># IMPUTACION CON MEDIA, MEDIANA O MODA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Para columnas numericas continuas:</span>
+<span class="c1"># - Media: si la distribucion es simetrica (sin atipicos fuertes)</span>
+<span class="c1"># - Mediana: si hay atipicos que distorsionan la media</span>
+
+<span class="c1"># Veamos la diferencia</span>
+<span class="n">media_precio</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mediana_precio</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Media de precio_unitario: </span><span class="si">{</span><span class="n">media_precio</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mediana de precio_unitario: </span><span class="si">{</span><span class="n">mediana_precio</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Diferencia: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">media_precio</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mediana_precio</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="c1"># Si hay mucha diferencia entre media y mediana, hay atipicos</span>
+<span class="c1"># En ese caso, la mediana es mejor opcion</span>
+
+<span class="c1"># Imputar precio con la mediana (mas robusta frente a atipicos)</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">mediana_precio</span><span class="p">)</span>
+
+<span class="c1"># Imputar unidades con la mediana</span>
+<span class="n">mediana_unidades</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">mediana_unidades</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Nulos restantes en precio_unitario: </span><span class="si">{</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">'precio_unitario'</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Nulos restantes en unidades: </span><span class="si">{</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># IMPUTACION CON LA MODA — para variables categoricas</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># .mode() retorna los valores mas frecuentes</span>
+<span class="c1"># [0] toma el primero en caso de empate</span>
+<span class="n">moda_calificacion</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"calificacion"</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Moda de calificacion: </span><span class="si">{</span><span class="n">moda_calificacion</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"calificacion"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"calificacion"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">moda_calificacion</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Nulos restantes en calificacion: </span><span class="si">{</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">'calificacion'</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># IMPUTACION POR INTERPOLACION — para series temporales</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Ejemplo con datos temporales donde la tendencia importa</span>
+<span class="n">serie_ejemplo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">170</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Serie original:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">serie_ejemplo</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="c1"># .interpolate() llena los nulos con valores intermedios</span>
+<span class="c1"># method="linear" asume una progresion lineal entre puntos conocidos</span>
+<span class="n">serie_interpolada</span> <span class="o">=</span> <span class="n">serie_ejemplo</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"linear"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Serie interpolada:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">serie_interpolada</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="c1"># Nota: la interpolacion es ideal para datos temporales (ventas diarias, temperaturas)</span>
+<span class="c1"># No tiene sentido para datos categoricos o sin orden</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># IMPUTACION POR GRUPO — mas precisa que la media global</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># En lugar de imputar con la mediana global, imputamos con</span>
+<span class="c1"># la mediana del grupo al que pertenece la fila</span>
+<span class="c1"># Ejemplo: rellenar el precio con la mediana del mismo producto</span>
+
+<span class="c1"># Primero, veamos la mediana por producto</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Mediana de precio por producto:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+
+<span class="c1"># .transform() aplica la funcion al grupo y retorna un resultado</span>
+<span class="c1"># del mismo tamano que la columna original</span>
+<span class="c1"># Esto permite usarlo directamente con fillna</span>
+<span class="n">mediana_por_producto</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">"median"</span><span class="p">)</span>
+
+<span class="c1"># Rellenar nulos con la mediana de su producto</span>
+<span class="n">df_imputado_grupo</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_imputado_grupo</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_imputado_grupo</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">mediana_por_producto</span><span class="p">)</span>
+
+<span class="c1"># Si despues de imputar por grupo quedan nulos (porque el producto tambien era nulo),</span>
+<span class="c1"># rellenar con la mediana global como respaldo</span>
+<span class="n">df_imputado_grupo</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_imputado_grupo</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Nulos restantes: </span><span class="si">{</span><span class="n">df_imputado_grupo</span><span class="p">[</span><span class="s1">'precio_unitario'</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="resumen-de-estrategias-para-nulos">
+<h3>Resumen de estrategias para nulos<a class="headerlink" href="#resumen-de-estrategias-para-nulos" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Estrategia</p></th>
+<th class="head"><p>Cuando usarla</p></th>
+<th class="head"><p>Riesgo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Eliminar filas</strong></p></td>
+<td><p>Pocos nulos (&lt;5%), datos no criticos</p></td>
+<td><p>Perder informacion valiosa</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Valor fijo</strong></p></td>
+<td><p>Categoricas, cuando «Desconocido» tiene sentido</p></td>
+<td><p>Introduce un valor artificial</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Media</strong></p></td>
+<td><p>Numericas con distribucion simetrica</p></td>
+<td><p>Se distorsiona con atipicos</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Mediana</strong></p></td>
+<td><p>Numericas con atipicos o distribucion asimetrica</p></td>
+<td><p>Menos sensible a la forma real</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Moda</strong></p></td>
+<td><p>Categoricas o discretas con valor dominante claro</p></td>
+<td><p>Sesga hacia el valor mas comun</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Interpolacion</strong></p></td>
+<td><p>Series temporales con tendencia</p></td>
+<td><p>Asume continuidad que puede no existir</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Por grupo</strong></p></td>
+<td><p>Cuando el valor depende de otra variable</p></td>
+<td><p>Requiere que el grupo no tenga nulos</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="duplicados-identificacion-y-eliminacion">
+<h2>3. Duplicados — identificacion y eliminacion<a class="headerlink" href="#duplicados-identificacion-y-eliminacion" title="Link to this heading">#</a></h2>
+<p>Los duplicados pueden venir de cargas dobles, joins mal hechos o errores de integracion. Hay dos tipos: exactos (toda la fila es identica) y parciales (misma entidad con datos ligeramente distintos).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DETECTAR DUPLICADOS EXACTOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># .duplicated() marca True las filas que son copia exacta de una anterior</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Duplicados exactos: </span><span class="si">{</span><span class="n">df_clean</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Ver las filas duplicadas junto con sus originales</span>
+<span class="c1"># keep=False marca TODAS las ocurrencias (tanto la original como las copias)</span>
+<span class="n">mask_duplicados</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="n">mask_duplicados</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"id_venta"</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ELIMINAR DUPLICADOS EXACTOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas antes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_clean</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># .drop_duplicates() elimina filas identicas</span>
+<span class="c1"># keep="first" conserva la primera ocurrencia (por defecto)</span>
+<span class="c1"># keep="last" conservaria la ultima</span>
+<span class="c1"># keep=False eliminaria TODAS las ocurrencias</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s2">"first"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas despues: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_clean</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas eliminadas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df_clean</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DUPLICADOS PARCIALES — por subconjunto de columnas</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># A veces dos filas representan la misma venta pero con datos ligeramente distintos</span>
+<span class="c1"># Ejemplo: misma fecha, producto y region pero diferente vendedor (error de captura)</span>
+
+<span class="c1"># subset= define que columnas considerar para detectar duplicados</span>
+<span class="n">duplicados_parciales</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"fecha"</span><span class="p">,</span> <span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">],</span>
+    <span class="n">keep</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="n">n_parciales</span> <span class="o">=</span> <span class="n">duplicados_parciales</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Duplicados parciales (misma fecha+producto+region): </span><span class="si">{</span><span class="n">n_parciales</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">n_parciales</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Ejemplos:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="n">duplicados_parciales</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">"fecha"</span><span class="p">,</span> <span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="valores-atipicos-deteccion-y-decision">
+<h2>4. Valores atipicos — deteccion y decision<a class="headerlink" href="#valores-atipicos-deteccion-y-decision" title="Link to this heading">#</a></h2>
+<p>Un valor atipico (outlier) no siempre es un error. Puede ser un dato real pero extremo, o puede ser un error de captura. La decision de que hacer con el depende del contexto y del impacto en el analisis.</p>
+<section id="deteccion-con-iqr-rango-intercuartilico">
+<h3>4.1 Deteccion con IQR (Rango Intercuartilico)<a class="headerlink" href="#deteccion-con-iqr-rango-intercuartilico" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># METODO IQR — el mas usado para deteccion de atipicos</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># IQR = Q3 - Q1</span>
+<span class="c1"># Un valor es atipico si esta por debajo de Q1 - 1.5*IQR</span>
+<span class="c1"># o por encima de Q3 + 1.5*IQR</span>
+<span class="c1"># Este es el mismo criterio que usa un boxplot para los "bigotes"</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">detectar_atipicos_iqr</span><span class="p">(</span><span class="n">serie</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Detecta valores atipicos usando el metodo IQR.</span>
+<span class="sd">    </span>
+<span class="sd">    Parametros:</span>
+<span class="sd">        serie (pd.Series): columna numerica</span>
+<span class="sd">        factor (float): multiplicador del IQR (1.5 es estandar, 3.0 para extremos)</span>
+<span class="sd">    </span>
+<span class="sd">    Retorna:</span>
+<span class="sd">        pd.Series: mascara booleana (True = atipico)</span>
+<span class="sd">    """</span>
+    <span class="n">Q1</span> <span class="o">=</span> <span class="n">serie</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>   <span class="c1"># Percentil 25</span>
+    <span class="n">Q3</span> <span class="o">=</span> <span class="n">serie</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>   <span class="c1"># Percentil 75</span>
+    <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>               <span class="c1"># Rango intercuartilico</span>
+    
+    <span class="n">limite_inferior</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">IQR</span>
+    <span class="n">limite_superior</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">IQR</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Q1: </span><span class="si">{</span><span class="n">Q1</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Q3: </span><span class="si">{</span><span class="n">Q3</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  IQR: </span><span class="si">{</span><span class="n">IQR</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Limites: [</span><span class="si">{</span><span class="n">limite_inferior</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">limite_superior</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
+    
+    <span class="c1"># Retornar True donde el valor esta fuera de los limites</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">serie</span> <span class="o">&lt;</span> <span class="n">limite_inferior</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">serie</span> <span class="o">&gt;</span> <span class="n">limite_superior</span><span class="p">)</span>
+
+<span class="c1"># Aplicar a precio_unitario</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Atipicos en precio_unitario:"</span><span class="p">)</span>
+<span class="n">mask_atipicos_precio</span> <span class="o">=</span> <span class="n">detectar_atipicos_iqr</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Encontrados: </span><span class="si">{</span><span class="n">mask_atipicos_precio</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Ver los valores atipicos</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Valores atipicos:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_atipicos_precio</span><span class="p">,</span> <span class="p">[</span><span class="s2">"id_venta"</span><span class="p">,</span> <span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="deteccion-con-z-score">
+<h3>4.2 Deteccion con Z-Score<a class="headerlink" href="#deteccion-con-z-score" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># METODO Z-SCORE — distancia en desviaciones estandar</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Z = (x - media) / desviacion_estandar</span>
+<span class="c1"># Un valor con |Z| &gt; 3 esta a mas de 3 desviaciones de la media</span>
+<span class="c1"># Esto es atipico en una distribucion normal</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">detectar_atipicos_zscore</span><span class="p">(</span><span class="n">serie</span><span class="p">,</span> <span class="n">umbral</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Detecta atipicos usando Z-Score.</span>
+<span class="sd">    </span>
+<span class="sd">    Parametros:</span>
+<span class="sd">        serie (pd.Series): columna numerica</span>
+<span class="sd">        umbral (float): numero de desviaciones estandar (3 es estandar)</span>
+<span class="sd">    </span>
+<span class="sd">    Retorna:</span>
+<span class="sd">        pd.Series: mascara booleana (True = atipico)</span>
+<span class="sd">    """</span>
+    <span class="n">media</span> <span class="o">=</span> <span class="n">serie</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">serie</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    
+    <span class="c1"># Calcular z-score para cada valor</span>
+    <span class="n">z_scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">serie</span> <span class="o">-</span> <span class="n">media</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Media: </span><span class="si">{</span><span class="n">media</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Desviacion estandar: </span><span class="si">{</span><span class="n">std</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Umbral: |Z| &gt; </span><span class="si">{</span><span class="n">umbral</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">z_scores</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">umbral</span>
+
+<span class="c1"># Aplicar a precio_unitario</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Atipicos en precio_unitario (Z-Score):"</span><span class="p">)</span>
+<span class="n">mask_zscore</span> <span class="o">=</span> <span class="n">detectar_atipicos_zscore</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Encontrados: </span><span class="si">{</span><span class="n">mask_zscore</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Atipicos en unidades (Z-Score):"</span><span class="p">)</span>
+<span class="n">mask_zscore_u</span> <span class="o">=</span> <span class="n">detectar_atipicos_zscore</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Encontrados: </span><span class="si">{</span><span class="n">mask_zscore_u</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="que-hacer-con-los-atipicos">
+<h3>4.3 Que hacer con los atipicos<a class="headerlink" href="#que-hacer-con-los-atipicos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># OPCION A: ELIMINAR las filas con atipicos</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Usar cuando estamos seguros de que son errores</span>
+<span class="c1"># El operador ~ invierte la mascara (True -&gt; False y viceversa)</span>
+<span class="n">df_sin_atipicos</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="o">~</span><span class="n">mask_atipicos_precio</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas eliminadas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_clean</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df_sin_atipicos</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas restantes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_sin_atipicos</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># OPCION B: RECORTAR (clipping) a los limites</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Reemplazar atipicos con el valor limite mas cercano</span>
+<span class="c1"># Esto conserva la fila pero limita el valor extremo</span>
+
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+<span class="n">lim_inf</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">lim_sup</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="c1"># .clip() limita los valores al rango [lower, upper]</span>
+<span class="c1"># Los valores por debajo de lower se convierten en lower</span>
+<span class="c1"># Los valores por encima de upper se convierten en upper</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_clipped"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="n">lim_inf</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">lim_sup</span><span class="p">)</span>
+
+<span class="c1"># Comparar original vs clipped en los atipicos</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Comparacion en valores atipicos:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_atipicos_precio</span><span class="p">,</span> <span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">,</span> <span class="s2">"precio_clipped"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># OPCION C: REEMPLAZAR con la mediana</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Similar a la imputacion de nulos, pero para valores atipicos</span>
+<span class="n">mediana</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_corregido"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># np.where(condicion, valor_si_true, valor_si_false)</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_corregido"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+    <span class="n">mask_atipicos_precio</span><span class="p">,</span>   <span class="c1"># Donde hay atipicos</span>
+    <span class="n">mediana</span><span class="p">,</span>                <span class="c1"># Reemplazar con la mediana</span>
+    <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span>  <span class="c1"># Dejar el original si no es atipico</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Comparacion en valores atipicos:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_atipicos_precio</span><span class="p">,</span> <span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">,</span> <span class="s2">"precio_clipped"</span><span class="p">,</span> <span class="s2">"precio_corregido"</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># TRATAR VALORES IMPOSIBLES — reglas de negocio</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Algunos atipicos no necesitan metodos estadisticos,</span>
+<span class="c1"># son simplemente valores imposibles por logica de negocio</span>
+
+<span class="c1"># Precio negativo: imposible -&gt; convertir a nulo</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># Unidades mayores a 200: imposible en este negocio -&gt; convertir a nulo</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># Luego se imputan con la estrategia que prefiramos</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span>
+    <span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span>
+    <span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Rango de precio_unitario despues de limpiar:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Min: </span><span class="si">{</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">'precio_unitario'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Max: </span><span class="si">{</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">'precio_unitario'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Rango de unidades despues de limpiar:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Min: </span><span class="si">{</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Max: </span><span class="si">{</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="normalizacion-y-encoding-de-variables">
+<h2>5. Normalizacion y encoding de variables<a class="headerlink" href="#normalizacion-y-encoding-de-variables" title="Link to this heading">#</a></h2>
+<p>Despues de limpiar, necesitamos estandarizar los datos: unificar texto inconsistente, escalar variables numericas y convertir categorias a numeros para que los algoritmos puedan procesarlos.</p>
+<section id="estandarizacion-de-texto">
+<h3>5.1 Estandarizacion de texto<a class="headerlink" href="#estandarizacion-de-texto" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ESTANDARIZAR COLUMNAS DE TEXTO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Problema: "Dashboard", "dashboard" y "DASHBOARD" son el mismo producto</span>
+<span class="c1"># pero pandas los trata como valores distintos</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ANTES de estandarizar:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+
+<span class="c1"># Paso 1: convertir a minusculas</span>
+<span class="c1"># .str.lower() convierte todos los caracteres a minusculas</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># Paso 2: eliminar espacios al inicio y al final</span>
+<span class="c1"># .str.strip() quita espacios, tabs y saltos de linea sobrantes</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">DESPUES de estandarizar:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CORREGIR TILDES Y VARIANTES — con .replace()</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ANTES — region:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+
+<span class="c1"># Mapeo de correcciones: {valor_incorrecto: valor_correcto}</span>
+<span class="n">correcciones_region</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"Bogota"</span><span class="p">:</span> <span class="s2">"Bogota"</span><span class="p">,</span>     <span class="c1"># Sin tilde -&gt; con tilde (o viceversa, elegir uno)</span>
+    <span class="s2">"Bogotá"</span><span class="p">:</span> <span class="s2">"Bogota"</span><span class="p">,</span>     <span class="c1"># Unificar a una sola forma</span>
+    <span class="s2">"Medellin"</span><span class="p">:</span> <span class="s2">"Medellin"</span><span class="p">,</span>
+    <span class="s2">"Medellín"</span><span class="p">:</span> <span class="s2">"Medellin"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># .replace() busca cada clave y la sustituye por su valor</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">correcciones_region</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">DESPUES — region:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="escalado-de-variables-numericas">
+<h3>5.2 Escalado de variables numericas<a class="headerlink" href="#escalado-de-variables-numericas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># MIN-MAX SCALING — escalar al rango [0, 1]</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Formula: X_norm = (X - X_min) / (X_max - X_min)</span>
+<span class="c1"># El valor minimo se convierte en 0, el maximo en 1</span>
+<span class="c1"># Todos los demas quedan proporcionalmente entre 0 y 1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">min_max_scaling</span><span class="p">(</span><span class="n">serie</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Escala una serie al rango [0, 1]"""</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">serie</span> <span class="o">-</span> <span class="n">serie</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">serie</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">serie</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="c1"># Aplicar a precio_unitario y unidades</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_norm"</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_max_scaling</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">])</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades_norm"</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_max_scaling</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Precio unitario — original vs normalizado:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[[</span><span class="s2">"precio_unitario"</span><span class="p">,</span> <span class="s2">"precio_norm"</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># Z-SCORE STANDARDIZATION — media=0, desviacion=1</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Formula: Z = (X - media) / desviacion_estandar</span>
+<span class="c1"># El resultado tiene media 0 y desviacion estandar 1</span>
+<span class="c1"># Los valores se interpretan como "distancia en desviaciones de la media"</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">z_score_scaling</span><span class="p">(</span><span class="n">serie</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Estandariza una serie a media=0, std=1"""</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">serie</span> <span class="o">-</span> <span class="n">serie</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">serie</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_zscore"</span><span class="p">]</span> <span class="o">=</span> <span class="n">z_score_scaling</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">])</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades_zscore"</span><span class="p">]</span> <span class="o">=</span> <span class="n">z_score_scaling</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Precio unitario — Z-Score:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[[</span><span class="s2">"precio_unitario"</span><span class="p">,</span> <span class="s2">"precio_zscore"</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Cuando usar cada uno:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metodo</p></th>
+<th class="head"><p>Rango resultante</p></th>
+<th class="head"><p>Cuando usarlo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Min-Max</strong></p></td>
+<td><p>[0, 1]</p></td>
+<td><p>Cuando necesitas valores acotados. Redes neuronales, distancias.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Z-Score</strong></p></td>
+<td><p>Sin limite fijo (tipicamente -3 a 3)</p></td>
+<td><p>Cuando importa la distribucion. Regresion, PCA, clustering.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="encoding-de-variables-categoricas">
+<h3>5.3 Encoding de variables categoricas<a class="headerlink" href="#encoding-de-variables-categoricas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># LABEL ENCODING — convertir categorias a numeros enteros</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Cada categoria recibe un numero unico</span>
+<span class="c1"># Util para variables ordinales (donde el orden importa)</span>
+<span class="c1"># Ejemplo: satisfaccion -&gt; bajo=1, medio=2, alto=3</span>
+
+<span class="c1"># Con pandas: .map() con un diccionario</span>
+<span class="n">mapeo_calificacion</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mf">1.0</span><span class="p">:</span> <span class="s2">"Muy mala"</span><span class="p">,</span>
+    <span class="mf">2.0</span><span class="p">:</span> <span class="s2">"Mala"</span><span class="p">,</span>
+    <span class="mf">3.0</span><span class="p">:</span> <span class="s2">"Regular"</span><span class="p">,</span>
+    <span class="mf">4.0</span><span class="p">:</span> <span class="s2">"Buena"</span><span class="p">,</span>
+    <span class="mf">5.0</span><span class="p">:</span> <span class="s2">"Excelente"</span>
+<span class="p">}</span>
+
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"calificacion_texto"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"calificacion"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">mapeo_calificacion</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Calificacion como texto:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"calificacion_texto"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+
+<span class="c1"># El proceso inverso: de texto a numero</span>
+<span class="c1"># Usando .astype("category").cat.codes</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto_code"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Producto como codigo:"</span><span class="p">)</span>
+<span class="c1"># Mostrar el mapeo</span>
+<span class="n">categorias</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">categorias</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">cat</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ONE-HOT ENCODING — una columna binaria por categoria</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Crea una columna nueva por cada valor unico de la variable</span>
+<span class="c1"># Cada columna tiene 1 si la fila pertenece a esa categoria, 0 si no</span>
+<span class="c1"># Necesario para variables nominales (sin orden) en modelos de ML</span>
+
+<span class="c1"># pd.get_dummies() hace todo el trabajo</span>
+<span class="n">df_onehot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span>
+    <span class="n">df_clean</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">],</span>  <span class="c1"># Columnas a codificar</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s2">"prod"</span><span class="p">,</span> <span class="s2">"reg"</span><span class="p">],</span>          <span class="c1"># Prefijo para las nuevas columnas</span>
+    <span class="n">drop_first</span><span class="o">=</span><span class="kc">False</span>                 <span class="c1"># True para evitar multicolinealidad en regresion</span>
+<span class="p">)</span>
+
+<span class="c1"># Mostrar las columnas nuevas</span>
+<span class="n">cols_nuevas</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df_onehot</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"prod_"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">c</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"reg_"</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Columnas creadas por One-Hot Encoding:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols_nuevas</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Dimensiones originales: </span><span class="si">{</span><span class="n">df_clean</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dimensiones con one-hot: </span><span class="si">{</span><span class="n">df_onehot</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Ver un ejemplo</span>
+<span class="n">df_onehot</span><span class="p">[</span><span class="n">cols_nuevas</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ORDINAL ENCODING — para categorias con orden natural</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Cuando la variable tiene un orden logico:</span>
+<span class="c1"># bajo &lt; medio &lt; alto</span>
+<span class="c1"># Le asignamos numeros que respeten ese orden</span>
+
+<span class="n">mapeo_ordinal</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"Muy mala"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"Mala"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"Regular"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"Buena"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"Excelente"</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+
+<span class="n">df_clean</span><span class="p">[</span><span class="s2">"calificacion_ordinal"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s2">"calificacion_texto"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">mapeo_ordinal</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Encoding ordinal:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[[</span><span class="s2">"calificacion_texto"</span><span class="p">,</span> <span class="s2">"calificacion_ordinal"</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+    <span class="s2">"calificacion_ordinal"</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="resumen-de-encoding">
+<h3>Resumen de encoding<a class="headerlink" href="#resumen-de-encoding" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metodo</p></th>
+<th class="head"><p>Que hace</p></th>
+<th class="head"><p>Cuando usarlo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Label Encoding</strong></p></td>
+<td><p>Categoria -&gt; numero entero</p></td>
+<td><p>Variables ordinales o arboles de decision</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>One-Hot Encoding</strong></p></td>
+<td><p>Categoria -&gt; N columnas binarias</p></td>
+<td><p>Variables nominales en modelos lineales</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Ordinal Encoding</strong></p></td>
+<td><p>Categoria -&gt; numero con orden</p></td>
+<td><p>Variables con jerarquia natural</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pipeline-completo-de-limpieza">
+<h2>6. Pipeline completo de limpieza<a class="headerlink" href="#pipeline-completo-de-limpieza" title="Link to this heading">#</a></h2>
+<p>En la practica, todos estos pasos se encapsulan en una funcion que recibe datos crudos y retorna datos limpios. Esto permite reutilizar el proceso cada vez que lleguen datos nuevos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUNCION DE LIMPIEZA COMPLETA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">limpiar_datos_ventas</span><span class="p">(</span><span class="n">df_raw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pipeline de limpieza para el dataset de ventas.</span>
+<span class="sd">    Recibe datos crudos y retorna datos listos para analisis.</span>
+<span class="sd">    </span>
+<span class="sd">    Pasos:</span>
+<span class="sd">        1. Eliminar duplicados exactos</span>
+<span class="sd">        2. Estandarizar texto</span>
+<span class="sd">        3. Corregir valores imposibles</span>
+<span class="sd">        4. Imputar nulos</span>
+<span class="sd">        5. Recalcular columnas derivadas</span>
+<span class="sd">    """</span>
+    <span class="c1"># Trabajar sobre copia</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">filas_inicio</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
+    <span class="c1"># --- Paso 1: Duplicados ---</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s2">"first"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[1] Duplicados eliminados: </span><span class="si">{</span><span class="n">filas_inicio</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    
+    <span class="c1"># --- Paso 2: Estandarizar texto ---</span>
+    <span class="c1"># Producto: minusculas + strip</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    
+    <span class="c1"># Region: unificar variantes</span>
+    <span class="n">correcciones</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"Bogotá"</span><span class="p">:</span> <span class="s2">"Bogota"</span><span class="p">,</span>
+        <span class="s2">"Medellín"</span><span class="p">:</span> <span class="s2">"Medellin"</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">correcciones</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[2] Texto estandarizado"</span><span class="p">)</span>
+    
+    <span class="c1"># --- Paso 3: Valores imposibles ---</span>
+    <span class="c1"># Precio negativo -&gt; nulo</span>
+    <span class="n">n_negativos</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    
+    <span class="c1"># Unidades &gt; 200 -&gt; nulo</span>
+    <span class="n">n_exceso</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[3] Valores imposibles corregidos: </span><span class="si">{</span><span class="n">n_negativos</span><span class="si">}</span><span class="s2"> precios negativos, </span><span class="si">{</span><span class="n">n_exceso</span><span class="si">}</span><span class="s2"> unidades excesivas"</span><span class="p">)</span>
+    
+    <span class="c1"># --- Paso 4: Imputar nulos ---</span>
+    <span class="c1"># Categoricas: "desconocido"</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">,</span> <span class="s2">"vendedor"</span><span class="p">]:</span>
+        <span class="n">n_nulos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">n_nulos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">"desconocido"</span><span class="p">)</span>
+    
+    <span class="c1"># Numericas: mediana</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"unidades"</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">,</span> <span class="s2">"calificacion"</span><span class="p">]:</span>
+        <span class="n">n_nulos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">n_nulos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">mediana</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">mediana</span><span class="p">)</span>
+    
+    <span class="n">nulos_restantes</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[4] Nulos imputados. Restantes: </span><span class="si">{</span><span class="n">nulos_restantes</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    
+    <span class="c1"># --- Paso 5: Recalcular columnas derivadas ---</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"ingreso_total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[5] Columnas recalculadas"</span><span class="p">)</span>
+    
+    <span class="c1"># --- Resetear indice ---</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Resultado: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EJECUTAR EL PIPELINE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Volvemos a cargar los datos crudos originales para demostrar</span>
+<span class="c1"># que el pipeline funciona de principio a fin</span>
+
+<span class="c1"># Re-crear el dataset crudo (reutilizando el codigo de la seccion 0)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">datos_crudos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"id_venta"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"2025-01-01"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"D"</span><span class="p">),</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">"Dashboard"</span><span class="p">,</span> <span class="s2">"Reporte"</span><span class="p">,</span> <span class="s2">"API"</span><span class="p">,</span> <span class="s2">"App Web"</span><span class="p">,</span> <span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"REPORTE"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span>
+    <span class="p">),</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">"Eje Cafetero"</span><span class="p">,</span> <span class="s2">"Bogota"</span><span class="p">,</span> <span class="s2">"Bogotá"</span><span class="p">,</span> <span class="s2">"Medellín"</span><span class="p">,</span> <span class="s2">"Medellin"</span><span class="p">,</span> <span class="s2">"Cali"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span>
+    <span class="p">),</span>
+    <span class="s2">"vendedor"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">"Ana García"</span><span class="p">,</span> <span class="s2">"Carlos López"</span><span class="p">,</span> <span class="s2">"María Ruiz"</span><span class="p">,</span> <span class="s2">"Pedro Martín"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span>
+    <span class="p">),</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+    <span class="s2">"precio_unitario"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"calificacion"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">df_crudo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">datos_crudos</span><span class="p">)</span>
+<span class="n">indices_nulos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_crudo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indices_nulos</span><span class="p">,</span> <span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df_crudo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">9500.0</span>
+<span class="n">df_crudo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="s2">"precio_unitario"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">200.0</span>
+<span class="n">df_crudo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="s2">"unidades"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">500.0</span>
+<span class="n">filas_dup</span> <span class="o">=</span> <span class="n">df_crudo</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_crudo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_crudo</span><span class="p">,</span> <span class="n">filas_dup</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_crudo</span><span class="p">[</span><span class="s2">"ingreso_total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_crudo</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_crudo</span><span class="p">[</span><span class="s2">"precio_unitario"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  EJECUTANDO PIPELINE DE LIMPIEZA"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">df_final</span> <span class="o">=</span> <span class="n">limpiar_datos_ventas</span><span class="p">(</span><span class="n">df_crudo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VERIFICACION FINAL</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== Verificacion post-limpieza ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Nulos totales: </span><span class="si">{</span><span class="n">df_final</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Duplicados: </span><span class="si">{</span><span class="n">df_final</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Valores unicos en producto: </span><span class="si">{</span><span class="n">df_final</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_final</span><span class="p">[</span><span class="s2">"producto"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Valores unicos en region: </span><span class="si">{</span><span class="n">df_final</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_final</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Rango de precio_unitario: [</span><span class="si">{</span><span class="n">df_final</span><span class="p">[</span><span class="s1">'precio_unitario'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">df_final</span><span class="p">[</span><span class="s1">'precio_unitario'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rango de unidades: [</span><span class="si">{</span><span class="n">df_final</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">df_final</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GUARDAR RESULTADO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">df_final</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"ventas_limpias.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Archivo guardado: ventas_limpias.csv"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dimensiones finales: </span><span class="si">{</span><span class="n">df_final</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen-de-la-subseccion">
+<h2>Resumen de la subseccion<a class="headerlink" href="#resumen-de-la-subseccion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tema</p></th>
+<th class="head"><p>Lo esencial</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Diagnostico</strong></p></td>
+<td><p>.info(), .isnull().sum(), .duplicated(), .describe(), .value_counts() para entender el dataset</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Nulos</strong></p></td>
+<td><p>dropna() para eliminar, fillna() para imputar (media, mediana, moda, por grupo, interpolacion)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Duplicados</strong></p></td>
+<td><p>.duplicated() para detectar, .drop_duplicates() para eliminar (exactos o por subset)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Atipicos</strong></p></td>
+<td><p>IQR y Z-Score para detectar. Eliminar, recortar con .clip() o reemplazar segun el contexto</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Normalizacion</strong></p></td>
+<td><p>Min-Max al rango [0,1], Z-Score a media=0 std=1</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Encoding</strong></p></td>
+<td><p>Label encoding para ordinales, One-Hot para nominales, mapeo manual para ordenes especificos</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Pipeline</strong></p></td>
+<td><p>Encapsular todo en una funcion reutilizable que recibe datos crudos y retorna datos limpios</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="siguiente-paso">
+<h3>Siguiente paso<a class="headerlink" href="#siguiente-paso" title="Link to this heading">#</a></h3>
+<p>En el <strong>Notebook 1.3</strong> tomaremos estos datos limpios y los visualizaremos con Matplotlib, Seaborn y Plotly para encontrar patrones y comunicar hallazgos.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="U1_S1_python_datos.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">1.1 — Python para Datos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="unidad13.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.3: Visualizacion de Datos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos">Unidad 1: Introducción a Desarrollo de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-dataset-de-ejemplo">0. Crear el dataset de ejemplo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-inicial">1. Diagnóstico inicial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-nulos-deteccion-y-tratamiento">2. Valores nulos — deteccion y tratamiento</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-1-eliminar-filas-con-nulos">2.1 Estrategia 1: Eliminar filas con nulos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estrategia-2-imputar-rellenar-nulos">2.2 Estrategia 2: Imputar (rellenar) nulos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-estrategias-para-nulos">Resumen de estrategias para nulos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados-identificacion-y-eliminacion">3. Duplicados — identificacion y eliminacion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-atipicos-deteccion-y-decision">4. Valores atipicos — deteccion y decision</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-con-iqr-rango-intercuartilico">4.1 Deteccion con IQR (Rango Intercuartilico)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteccion-con-z-score">4.2 Deteccion con Z-Score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#que-hacer-con-los-atipicos">4.3 Que hacer con los atipicos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizacion-y-encoding-de-variables">5. Normalizacion y encoding de variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estandarizacion-de-texto">5.1 Estandarizacion de texto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escalado-de-variables-numericas">5.2 Escalado de variables numericas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-de-variables-categoricas">5.3 Encoding de variables categoricas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-encoding">Resumen de encoding</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-completo-de-limpieza">6. Pipeline completo de limpieza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-de-la-subseccion">Resumen de la subseccion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
