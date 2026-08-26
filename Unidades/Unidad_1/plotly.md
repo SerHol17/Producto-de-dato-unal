@@ -37,7 +37,7 @@ Plotly.js (JavaScript)      ← Motor de renderizado en el navegador
 A diferencia de Matplotlib (renderizado en Python), Plotly genera una especificacion JSON que renderiza **Plotly.js** en el navegador. Esto da interactividad nativa: zoom, pan, hover, filtros, sin codigo adicional.
 
 
-<img src="/_static/images/plotly1.png" width="600" />
+<img src="../../_static/images/plotly1.png" width="600" />
 ### 1.2 Comparativa con Matplotlib y Seaborn
 
 | Aspecto | Matplotlib | Seaborn | Plotly |
@@ -161,7 +161,7 @@ fig.show()
 
 ## 3. Graficas de Dispersion y Lineas
 
-<img src="/_static/images/plotly2.png" width="600" />
+<img src="../../_static/images/plotly2.png" width="600" />
 
 ### 3.1 `px.scatter()` — Dispersion interactiva
 
@@ -773,7 +773,7 @@ fig.update_layout(
 )
 fig.show()
 ```
-<img src="/_static/images/plotly3.png" width="600" />
+<img src="../../_static/images/plotly3.png" width="600" />
 
 ### 7.2 `px.scatter_geo()` — Puntos en el mapa
 
@@ -1213,7 +1213,7 @@ fig.update_layout(
 )
 fig.show()
 ```
-<img src="/_static/images/plotly4.png" width="600" />
+<img src="../../_static/images/plotly4.png" width="600" />
 ---
 
 ## 11. Animaciones

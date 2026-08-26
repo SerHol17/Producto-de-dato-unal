@@ -117,7 +117,7 @@ print(df_long.head(6))
 
 
 
-<img src="/_static/images/seaborn1.png" width="600" />
+<img src="../../_static/images/seaborn1.png" width="600" />
 
 ## 2. Datasets y Estructura de Datos
 
@@ -866,7 +866,7 @@ plt.show()
 
 ---
 
-<img src="/_static/images/seaborn2.png" width="600" />
+<img src="../../_static/images/seaborn2.png" width="600" />
 ## 7. Matrices y Heatmaps
 
 ### 7.1 `sns.heatmap()` — Mapa de calor avanzado
@@ -999,7 +999,7 @@ plt.show()
 ---
 
 
-<img src="/_static/images/seaborn3.png" width="600" />
+<img src="../../_static/images/seaborn3.png" width="600" />
 ## 9. Temas y Paletas de Color
 
 ### 9.1 Temas (styles)
@@ -1022,7 +1022,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<img src="/_static/images/seaborn4.png" width="600" />
+<img src="../../_static/images/seaborn4.png" width="600" />
 ### 9.2 Contextos (contexts)
 
 Los contextos escalan el tamaño de todos los elementos de texto y lineas para distintos medios.

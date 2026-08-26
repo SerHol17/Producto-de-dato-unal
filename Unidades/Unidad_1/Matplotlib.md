@@ -36,7 +36,8 @@ Figure
     └── Legend
 ```
 
-<img src="/_static/images/Matplotlib1.png" width="600" />
+```{image} /_static/images/Matplotlib1.png  
+```
 
 ### 1.1 Las dos interfaces
 
@@ -99,8 +100,9 @@ with mpl.rc_context({'font.size': 16, 'axes.grid': True}):
 ---
 
 
-<img src="/_static/images/Matplotlib2.png" width="600" />
+```{image} /_static/images/Matplotlib2.png
 
+```
 
 ## 2. Figure y Axes
 
@@ -331,7 +333,8 @@ plt.tight_layout(); plt.show()
 ---
 
 
-<img src="/_static/images/Matplotlib3.png" width="600" />
+<img src="../../_static/images/Matplotlib3.png" width="600" />
+
 
 
 ## 4. Graficas de Dispersion
@@ -684,8 +687,8 @@ plt.tight_layout(); plt.show()
 ## 8. Boxplots y Violin Plots
 
 
-<img src="/_static/images/Matplotlib4.png" width="600" />
-
+``` {image} /_static/images/Matplotlib4.png
+```
 
 ### 8.1 Interpretacion matematica del boxplot
 
