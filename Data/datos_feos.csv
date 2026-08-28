@@ -1,0 +1,363 @@
+id_transaccion,fecha,producto,region,vendedor,unidades,precio_unitario,calificacion_cliente,estado,notas
+1163,24/07/2023,PipelineETL,Manizales (Caldas),Laura Torres,32,-330.31,4,activo,
+1033,06-05-2023,Dashboard,MEDELLIN,Pedro Martin,1,410.98,10,SI,
+1015,2023/10/17,Dashboard,Bogotá DC,"Ruiz, Maria",60,647.49,4,Inactivo,Ref: NC-3599
+1322,03-08-2024,API REST,barranquilla,Pedro Martin,79 unidades,286.58,2,Activo,
+1057,17/07/2023,App Web,Medellin,Carlos Lopez,58,419.09,1.5,True,
+1182,08-24-2023,Dashboard,Medellin,Maria Ruiz,50,788.54,1.0,Activo,
+1076,2024/02/17,Reporte Automatico,Bogotá DC,Maria Ruiz,14,35005.0,N/A,False,
+1119,04 de March de 2024,  Pipeline ETL  ,manizales,pedro.martin,48,337.17,7,Pendiente,
+1267,01-19-2024,API REST,Medellin,carlos.lopez@empresa.com,25,"409,35",3.7,NO,
+1126,01-27-2024,Dashboard,manizales,Pedro Martin,77uds,785.91,3.8,activo,Descuento del 19% aplicado
+1258,"January 01, 2024",Reporte Automatico,Medellin,Ana Garcia,5300,$332,6,ACTIVO,
+1039,"December 10, 2023",,,Maria Ruiz,77 unidades,227.38,,activo,Descuento del 25% aplicado
+TRX-0232,2024-06-15,Dashboard,,Laura Torres,49,-783.38,1.7,Activo,Descuento del 30% aplicado
+1055,07/09/2023,Dashboard,cali,Pedro Martin,2200,569.2,2.4,activo,Pago en transferencia
+1137,fecha_invalida,  Reporte Automatico  ,Santiago de Cali,Ana Garcia,2,67.08,5,1,Ref: FC-7470
+1199,26 de July de 2023,Dashboard,MEDELLIN,Pedro Martin,69,670.96 COP,N/A,activo,
+1255,2023-11-18,PIPELINE ETL,bogota,maria.ruiz,N/A,218.3,2.2,,
+1224,2023/12/04,Reporte Automatico,Manizales (Caldas),Maria Ruiz,-79,797.17,4.4,Activo,
+1326,2023-09-15,['API REST'],CALI,Maria Ruiz,18,665.83,Excelente,ACTIVO,
+1101,16/09/2023,Reporte Automatico,MANIZALES,Ana Garcia,67,536.06,3.2,Activo,Pago en tarjeta
+1009,12/01/2024,DASHBOARD,Santiago de Cali,Ana Garcia,42 unidades,389.5,1,Activo,
+1192,05-20-2024,['Reporte Automatico'],Santiago de Cali,,77,$529.48,1,Inactivo,
+1072,03-05-2024,App Web,B/quilla,Pedro Martin,65,441.18,6,NO,
+1285,"May 20, 2024",Dashboard,Bogota,Pedro Martin,,614.07,3.5,1,
+1336,2024-04-06,App Web,Bogota,"Garcia, Ana",1,367.29 COP,2.1,SI,Pago en transferencia
+1194,2023-08-22,-,CALI,Carlos Lopez,51uds,86.55 COP,1,ACTIVO,
+1218,,  Pipeline ETL  ,Barranquilla,Pedro Martin,,127.06,3,Inactivo,
+1168,2023/08/25,API REST,barranquilla,"Martin, Pedro",80,"618,33",1,Activo,
+1148,07-14-2023,Dashboard,Bog,PEDRO MARTIN,76,188.75,3,Inactivo,
+1126,01-27-2024,Dashboard,manizales,Pedro Martin,77uds,785.91,3.8,activo,Descuento del 19% aplicado
+1025,2024-01-04,App Web,Santiago de Cali,Pedro Martin,47,331.78,1,Inactivo,
+1108,2023-06-03,Dashboard,medellin,Ana Garcia,32,$770,4.1,Si,URGENTE - revisar
+1042,2024-02-18,Pipeline ETL,Medellin,,3,50.64,3,,
+1349,08/02/2024,Reporte Automatico,Barranquilla,Ana Garcia,45,135.17,3,Activo,
+1153,2024-01-31,Reporte Automatico,CALI,ANA GARCIA,79,165.02,5,Pendiente,
+1114,2023-12-08,Reporte Automatico,MEDELLIN,ana.garcia,24 unidades,$401,6,activo,
+1063,02/10/2023,App Web,manizales,Maria Ruiz,76uds,60222.0,4.5,Si,
+1022,,API REST,Bogotá D.C.,Carlos Lopez,60,608.93,3,,
+1298,12/02/2024,ReporteAutomatico,MEDELLIN,Ana Garcia,9,246.64 COP,1,,
+1173,2023-10-07,API REST,manizales,Maria Ruiz,,522.2,4,inactivo,
+1240,2024/06/18,Reporte Automatico,barranquilla,Maria Ruiz,68,$136,3,activo,
+1345,"June 21, 2024",API REST,,CARLOS LOPEZ,62uds,$583.36,2,Si,
+1030,2023-12-02,APP WEB,cali,Pedro Martin,70,685.43,2,Activo,
+1291,2024-03-06,API REST,Bogotá,Laura Torres,57,609.86,4.8,,
+1096,"January 09, 2024",Pipeline ETL,Manizales (Caldas),Pedro Martin,25,700.93,3,1,Pago en transferencia
+1346,11/04/2024,App Web,Bquilla,Ana Garcia,31 unidades,99.93 COP,5,0,
+1090,2023-11-26,Reporte Automatico,Manizales (Caldas),Pedro Martin,75,,2.8,,
+1056,03-05-2024,Pipeline ETL,cali,,47,398.57,3,activo,
+1005,08/12/2023,Dashboard,Manizales,Ana Garcia,1 unidades,308.04,3,False,
+1045,06-27-2023,API REST,Manizales,maria.ruiz,79uds,$105.74,1,SI,URGENTE - revisar
+1233,"September 04, 2023",Reporte Automatico,Manizales,ana.garcia,39 unidades,227.42,Excelente,Pendiente,Contactar al 3139212293
+1158,02/06/2023,"['Dashboard', 'Dashboard']",Manizales (Caldas),carlos.lopez,75,73451.0,2.6,activo,Contactar al 3112645920
+TRX-0280,,Reporte Automatico, ,Carlos Lopez,11,565.78,N/A,inactivo,
+1211,2023/10/12,ReporteAutomatico,barranquilla,Maria Ruiz,54,215.43 COP,1,NO,Pago en transferencia
+1175,01-30-2024,['App Web'],BOGOTA,"Martin, Pedro",2uds,434.0,2.2,inactivo,Pago en tarjeta
+1334,06 de April de 2024,ReporteAutomatico,,Pedro Martin,79,74.75,3.9,True,
+1093,2023/09/26,App Web,cali,Laura Torres,80,720.53,7,0,Contactar al 3153489051
+1003,fecha_invalida,Pipeline ETL,Bog,Pedro Martin,17,667.94,3.8,ACTIVO,
+1284,2024/06/20,dashboard,Medellín,Pedro Martin,66,-275.96,2,ACTIVO,
+1077,02/03/2024,  Pipeline ETL  ,CALI,Laura Torres,15,77.25,,Activo,
+1335,2023-10-21,Reporte Automatico,medellin,Carlos Lopez,45,$269.09,6,Activo,
+1254,12-21-2023,Pipeline ETL,Bogotá D.C.,Maria Ruiz,25,472.68,1,Si,
+1078,fecha_invalida,"['Pipeline ETL', 'Pipeline ETL']",Manizales (Caldas),maria.ruiz,21,$459,4,True,
+1046,"June 15, 2024",APP WEB,Medellín,carlos.lopez,3,500.26,1,activo,Pago en tarjeta
+1272,2023-09-10,AppWeb,Bog,Ana Garcia,48,644.78,Bueno,NO,
+1073,02/07/2023,api rest,Bquilla,Pedro Martin,26,114.41,3.9,Si,Descuento del 20% aplicado
+1222,2023-11-11,Pipeline ETL,cali,,2800,97.31,3.4,NO,Pago en transferencia
+1124,2023-12-22,PipelineETL, ,ANA GARCIA,64,687.72,3,NO,
+1297,2024/03/09,  API REST  ,Cali,Ana Garcia,54,477.59,1,0,
+1082,"December 10, 2023",App Web,medellin,Ana Garcia,66,354.46,4,ACTIVO,Descuento del 13% aplicado
+1094,"January 02, 2024",Reporte Automatico,Santiago de Cali,Maria Ruiz,7,437.09,2.2,Activo,
+1341,12/01/2024,Dashboard,Bogotá D.C.,ana.garcia,1,76799.0,Regular,activo,Descuento del 8% aplicado
+1303,2023/08/20,App Web,MANIZALES,Carlos Lopez,56,180.41,2.2,activo,
+1209,31/01/2024,App Web,Medellin,"Torres, Laura",4,521.82,3,No,
+1337,2024-06-27,  Reporte Automatico  ,barranquilla,Pedro Martin,74,312.17,3,No,
+1056,03-05-2024,Pipeline ETL,cali,,47,398.57,3,activo,
+1075,26/03/2024,,cali,Pedro Martin,16,622.33,Excelente,activo,Pago en transferencia
+1074,30/03/2024,  Reporte Automatico  ,Bogotá,Pedro Martin,35,564.6,2,False,URGENTE - revisar
+1088,"January 24, 2024",API REST,B/quilla,Pedro Martin,-43,"541,41",4.8,Si,
+1016,fecha_invalida,-,,Laura Torres,N/A,197.05,N/A,True,
+1066,"March 01, 2024",dashboard,B/quilla,Ana Garcia,29,147.15,3.2,0,
+1268,07/01/2024,API REST,MANIZALES,carlos.lopez,52,163.49,4,Inactivo,Descuento del 15% aplicado
+1007,2024-03-21,Reporte Automatico,Manizales (Caldas),"Ruiz, Maria",27,81.03 COP,1.1,True,
+1113,2024/04/02,APP WEB,CALI,Ana Garcia,40,649.73 COP,10,inactivo,
+trx116,2023/12/21,API REST,Barranquilla,Ana Garcia,,611.46 COP,Excelente,,Pago en transferencia
+1320,,Pipeline ETL,Manizales (Caldas),"Ruiz, Maria",40,137.03,6,activo,Ref: ND-7880
+1316,2023-10-01,,barranquilla,pedro.martin,73uds,715.52,9,True,Pago en tarjeta
+1310,"May 05, 2024",API REST,Manizales (Caldas),maria.ruiz,11,50.05 COP,3.5,Si,
+1339,2023/12/13,['Dashboard'],CALI,Carlos Lopez,59,574.74,4.1,activo,
+1110,2023-11-20,App Web,Manizales (Caldas),Laura Torres,68,145.89,1.1,SI,
+1295,2024-04-11,AppWeb,Bogota,Maria Ruiz,6100,686.29 COP,4,Inactivo,Contactar al 3183099473
+1060,01/01/2024,API REST,Bogotá,Laura Torres,71,242.81,5,ACTIVO,Contactar al 3149787945
+1195,17 de September de 2023,App Web,B/quilla,Laura Torres,34,$383.40,1,ACTIVO,URGENTE - revisar
+1302,"July 19, 2023",App Web,Cali,Laura Torres,21,570.66,1,True,
+1132,2023-07-07,App Web,Manizales,Carlos Lopez,34 unidades,633.1,1.7,Activo,
+1220,2023-07-16,  Pipeline ETL  ,Santiago de Cali,carlos.lopez,79,238.58,1.3,NO,
+1140,2024-05-18,API REST,medellin,Ana Garcia,59,454.35 COP,Bueno,,Descuento del 26% aplicado
+1007,17/09/2023,Dashboard,Bog,LAURA TORRES,42,$189.06,2,Pendiente,
+1147,2023/06/21,Pipeline ETL,bogota,Carlos Lopez,36,174.91,1.1,activo,
+1024,08-20-2023,API REST,Medellín,Pedro Martin,77,342.19,5,Activo,
+1196,2023/11/15,Pipeline ETL,BOGOTA,maria.ruiz,9,510.42,Excelente,1,
+1317,,Dashboard,Barranquilla,ANA GARCIA,21,581.2,2,False,
+1329,11/11/2023,PIPELINE ETL,Medellin,ANA GARCIA,49,526.91,2.4,Activo,Pago en efectivo
+1210,,PIPELINE ETL,Bogota,Laura Torres,12,571.52,5,Activo,
+TRX-0139,07-15-2023,App Web,Manizales,carlos.lopez,32 unidades,545.86 COP,4.4,NO,
+1157,2023/12/31,App Web,Bquilla,laura.torres,29,459.4,9,Activo,
+1227,2023-06-03,pipeline etl,Bogotá DC,Carlos Lopez,-23,571.53,5,Activo,Contactar al 3192697576
+1018,2023-08-11,Pipeline ETL,manizales,PEDRO MARTIN,15,201.33,4,False,
+1290,30/07/2023,Pipeline ETL,CALI,Laura Torres,37,142.99,3,Pendiente,
+trx177,"August 30, 2023",API REST,MANIZALES,,3,337.87 COP,3,inactivo,
+1266,,App Web,Medellín,"Martin, Pedro",24,733.86,2,0,Pago en transferencia
+1219,"April 06, 2024",DASHBOARD,Bogotá D.C.,Laura Torres,55,345.76,Malo,0,
+1282,fecha_invalida,APP WEB,Medellín (Ant),Pedro Martin,8,-73.23,1.8,ACTIVO,
+1019,21/07/2023,Pipeline ETL,Bogotá,Laura Torres,4,417.04,Malo,Inactivo,Contactar al 3121852273
+1324,02/12/2023,API REST,Bogota,Pedro Martin,-54,131.52,3.9,0,
+1079,"October 25, 2023",App Web,barranquilla,Carlos Lopez,1,643.81,N/A,Inactivo,Ref: NC-8417
+1231,27/07/2023,Reporte Automatico,bogota,Maria Ruiz,29,-420.04,6,Activo,
+1018,2023-08-11,Pipeline ETL,manizales,PEDRO MARTIN,15,201.33,4,False,
+1277,2023-07-12,Dashboard,CALI,"Lopez, Carlos",36,379.53,1,Inactivo,
+1104,2024-02-02,App Web,Desconocida,Maria Ruiz,56,799.0,9,0,Contactar al 3179172817
+1287,19/10/2023,API REST,Medellin,laura.torres,37,,N/A,SI,
+1118,2023-06-29,API REST,medellin,Pedro Martin,54,590.87,1,,Contactar al 3175856422
+1031,2024-01-19,,MANIZALES,Carlos Lopez,51 unidades,32926.0,Regular,inactivo,
+1036,25/06/2023,app web,Manizales,Laura Torres,67,246.66,3,0,
+1155,2023/10/08,App Web,BOGOTA,Laura Torres,46,335.28,4,activo,
+1180,03/07/2024,  Dashboard  ,Bogotá D.C.,Carlos Lopez,11,615.19,3.8,,Pago en transferencia
+1165,2023-07-26,Pipeline ETL,Medellín,"Garcia, Ana",43,482.62,4,,
+1265,16/02/2024,App Web,MEDELLIN,Pedro Martin,43,$589.95,1.8,NO,
+1152,"February 27, 2024",App Web,bogota,Ana Garcia,39,555.6,Regular,False,
+1301,"January 12, 2024",API REST,barranquilla,"Ruiz, Maria",46,,1.2,SI,
+1172,,reporte automatico,Manizales (Caldas),Sin asignar,75,$365.59,Malo,Inactivo,
+1059,12-09-2023,App Web,Bogotá,"Lopez, Carlos",N/A,$271.16,N/A,No,Pago en efectivo
+1111,05 de April de 2024,API REST,Medellín (Ant),Pedro Martin,2uds,316.68,4.8,ACTIVO,Pago en transferencia
+1145,06-25-2023,pipeline etl,Santiago de Cali,"Garcia, Ana",70,$545.41,4.4,1,Pago en transferencia
+trx6,05-12-2024,App Web,Manizales,Maria Ruiz,40,501.65 COP,4,Inactivo,
+1262,12-06-2023,Reporte Automatico,CALI,carlos.lopez,46,175.37,8,Inactivo,URGENTE - revisar
+1244,2023-10-21,App Web,Medellín,Maria Ruiz,N/A,537.35,,Activo,
+1010,2024-05-17,dashboard,Barranquilla,Carlos Lopez,42,695.03,1,True,Ref: ND-6732
+1167,"December 25, 2023",App Web,Manizales,Ana Garcia,43,692.01,4,inactivo,Ref: FC-1449
+1103,2024-01-07,  API REST  ,Bogotá,"Ruiz, Maria",50,$770.23,9,inactivo,Descuento del 21% aplicado
+1081,07-24-2023,App Web,Bog,Carlos Lopez,80,$392.92,5,No,
+1286,,App Web,Barranquilla,Ana Garcia,46,236.89,2.4,Activo,
+1054,2023-08-06,Dashboard,Bogotá D.C.,"Lopez, Carlos",50,183.81,N/A,SI,
+1181,12/07/2023,-,manizales,Laura Torres,48,727.28,4,Activo,
+1185,13 de March de 2024,,manizales,maria.ruiz,53,642.48,N/A,Inactivo,Descuento del 19% aplicado
+trx245,2024/04/15,Reporte Automatico,Manizales,,78,557.35,1.7,,Pago en efectivo
+1197,20 de December de 2023,Dashboard,medellin,Ana Garcia,12,746.72,8,No,
+1092,2024/03/30,App Web,Medellín (Ant),"Martin, Pedro",2100,430.91,1.1,SI,Pago en transferencia
+1069,2024-01-18,API REST,manizales,Carlos Lopez,53,89.26,Malo,ACTIVO,
+1325,fecha_invalida,API REST,Santiago de Cali,Ana Garcia,,620.17,Bueno,inactivo,Descuento del 16% aplicado
+1096,2024-05-26,PIPELINE ETL,cali,maria.ruiz@empresa.com,63,696.73,4.0,activo,Descuento del 18% aplicado
+1143,07 de June de 2024,API REST,Bogota,Ana Garcia,69,372.74,4.8,Activo,
+1275,2024/02/23,ReporteAutomatico,Manizales (Caldas),Maria Ruiz,21,526.42,,inactivo,Ref: NC-6613
+1097,2023-08-01,API REST,Medellin,Carlos Lopez,78uds,537.53,1.6,Activo,
+1198,2023-06-23,Pipeline ETL,Bogotá,Carlos Lopez,25,-565.58,4.2,0,
+1068,"June 21, 2023",Pipeline ETL,Desconocida,Carlos Lopez,68,733.6,3,Pendiente,
+1023,02-09-2024,Pipeline ETL,Bquilla,Laura Torres,39,771.15,2.0,ACTIVO,Contactar al 3127108932
+1037,"November 14, 2023",Reporte Automatico,Bogotá D.C.,"Ruiz, Maria",77,$730.79,6,Inactivo,Contactar al 3198679264
+1144,2024-05-06,api rest,Bog,Maria Ruiz,38,$763,1.9,Activo,
+1122,04-05-2024,Pipeline ETL,MANIZALES,ana.garcia,43,672.65,3,SI,
+1067,"December 24, 2023",Dashboard,Medellín (Ant),Ana Garcia,32,7855.0,9,Activo,Contactar al 3148677470
+1318,04-13-2024,Pipeline ETL,BOGOTA,Ana Garcia,61,113.2,5,No,Contactar al 3102298019
+1223,18/08/2023,App Web,Bog,,15,437.76,5,0,
+1288,2023/06/22,API REST,Desconocida,Maria Ruiz,-35,182.13,3,False,Contactar al 3125006024
+1229,2023-07-25,REPORTE AUTOMATICO,Bogotá,Pedro Martin,3,768.19,2,NO,Pago en transferencia
+1125,02-09-2024,Pipeline ETL,Barranquilla,Maria Ruiz,10,$670.69,N/A,inactivo,
+1146,06-03-2023,Pipeline ETL,Bog,Pedro Martin,5,$394.21,1.5,Inactivo,
+1203,2023-08-02,Dashboard,bogota,Laura Torres,74,166.46,2.5,True,
+1086,2023-11-05,API REST,Bogota,Maria Ruiz,5600,321.86,3,0,
+1304,21/11/2023,pipeline etl,BOGOTA,Carlos Lopez,78,251.79,Malo,Activo,Descuento del 22% aplicado
+TRX-0314,,  App Web  ,manizales,"Ruiz, Maria",69,$240,1,Inactivo,Pago en tarjeta
+1305,,Dashboard,barranquilla,Laura Torres,53,122.74,4.0,Inactivo,
+TRX-0328,2024/04/14,Pipeline ETL,Cali,ANA GARCIA,45,750.21,5,ACTIVO,
+1274,2024-06-28,App Web,bogota,Laura Torres,34,384.31,Excelente,Pendiente,
+1176,2023-11-13,['API REST'],bogota,Ana Garcia,49,582.87,Excelente,inactivo,Ref: NC-2923
+1344,06-06-2023,DASHBOARD,CALI,Carlos Lopez,56,586.48,4,activo,
+1183,2023/09/24,dashboard,Santiago de Cali,"Garcia, Ana",38,"194,84",3.0,1,Pago en tarjeta
+1256,2023/06/11,Dashboard,Bquilla,ana.garcia,33,729.25 COP,3.0,Activo,
+1129,,  Dashboard  ,MANIZALES,"Torres, Laura",57,332.53 COP,,Activo,
+1038,2024/07/03,Pipeline ETL,manizales,Maria Ruiz,62,136.42 COP,5,ACTIVO,
+1011,2023/08/21,Reporte Automatico,Bquilla,Pedro Martin,20,184.21,N/A,Activo,
+1228,2023-11-08,Reporte Automatico,Barranquilla,Laura Torres,13,-713.83,N/A,,
+1193,2023-10-25,N/A,Cali,Sin asignar,25,380.96,2.2,,Descuento del 13% aplicado
+1112,12-05-2023,APIREST,Medellin,laura.torres@empresa.com,80,$704.30,5,False,
+1179,10-28-2023,Reporte Automatico,cali,,56,699.5,1.4,SI,
+1289,2023/09/05,Reporte Automatico,Bogotá D.C.,Maria Ruiz,71,679.32,2,Inactivo,Descuento del 28% aplicado
+1225,2024-01-17,API REST,Santiago de Cali,Laura Torres,,355.87,5,Activo,Descuento del 15% aplicado
+1117,2024-01-02,Reporte Automatico,Santiago de Cali,Laura Torres,75,$619.20,4.3,True,
+1333,12/03/2024,App Web,Manizales (Caldas),Pedro Martin,11,330.68 COP,2,activo,Ref: NC-9925
+1027,02-21-2024,['API REST'],B/quilla,Sin asignar,37,778.19,9,inactivo,Pago en tarjeta
+1261,25 de June de 2023,PIPELINE ETL,Santiago de Cali,Ana Garcia,54,785.39,10,True,
+1327,2023-11-15,App Web,MANIZALES,"Torres, Laura",63,$295,4.8,True,
+1164,"February 25, 2024",['App Web'],medellin,pedro.martin@empresa.com,14,507.2,1,activo,
+TRX-0253,21/06/2023,reporte automatico,Bquilla,carlos.lopez,35,$260.06,Malo,Activo,
+1248,,Dashboard,Barranquilla,"Lopez, Carlos",1,624.89,2,True,Contactar al 3112266969
+1154,,reporte automatico, ,Sin asignar,74,440.14,4.1,NO,
+1250,"October 29, 2023",API REST,barranquilla,Laura Torres,24,22741.0,3.5,Activo,
+1002,01-07-2024,PIPELINE ETL,Medellín,Pedro Martin,54,-373.61,N/A,True,
+1115,08-16-2023,N/A,Medellin,carlos.lopez@empresa.com,7,515.24,2,False,
+1202,22/04/2024,['Reporte Automatico'],Medellín,Laura Torres,6,763.81 COP,1.9,NO,
+1242,2024-05-16,API REST,B/quilla,Laura Torres,25 unidades,562.7,5,Activo,Ref: ND-1079
+1249,2024/04/21,Dashboard,Manizales (Caldas),Maria Ruiz,59,719.11,6,False,URGENTE - revisar
+1120,"December 23, 2023",AppWeb,BOGOTA,Maria Ruiz,1,$752.55,5,,
+1278,"June 29, 2023",App Web,BOGOTA,Laura Torres,36,$422.28,3.5,Activo,
+1208,2024-01-04,API REST,Cali,Maria Ruiz,N/A,568.47,3.0,ACTIVO,
+1311,"October 21, 2023",REPORTE AUTOMATICO,cali,Laura Torres,10,$654.37,1,Pendiente,
+1127,2024-04-12,Dashboard,,Pedro Martin,3,$753,1.9,Activo,
+1074,2023-06-24,  API REST  ,Cali,,19,453.12,2.2,ACTIVO,
+1292,01 de June de 2024,API REST,barranquilla,ana.garcia,13,289.16,,ACTIVO,
+1029,12-28-2023,app web,barranquilla,PEDRO MARTIN,71,$631.09,5,Activo,
+1083,2024/04/18,Pipeline ETL,Manizales,Laura Torres,71,275.74,2.8,,
+1299,"May 27, 2024",APIREST,Santiago de Cali,Pedro Martin,45,394.79 COP,N/A,ACTIVO,Pago en efectivo
+1107,03/12/2023,App Web,Bogota,Maria Ruiz,13,559.49,1,SI,URGENTE - revisar
+1294,10 de May de 2024,App Web,Bog,Pedro Martin,55,$125.76,2,SI,Descuento del 7% aplicado
+1234,2024/05/24,,Bogota,Pedro Martin,10,214.5,6,0,Pago en transferencia
+1133,2023-10-03,"['Pipeline ETL', 'API REST']",medellin,"Torres, Laura",66,265.18,3,Inactivo,
+1184,2023/09/24,Dashboard,cali,Maria Ruiz,36,437.04,5,Activo,
+1338,2024/04/24,APP WEB,medellin,"Martin, Pedro",32,343.26,2,Activo,
+1044,09-30-2023,,Bog,Maria Ruiz,29,501.19,N/A,0,URGENTE - revisar
+1332,2024-01-14,PipelineETL,Manizales (Caldas),Ana Garcia,7,675.7,4.8,,
+1065,"January 28, 2024",app web,Bogotá DC,Pedro Martin,70uds,620.64,Regular,No,
+1296,16/06/2024,Pipeline ETL,Manizales,Maria Ruiz,6,55.10 COP,1,NO,
+1085,2024-01-08,Dashboard,Manizales (Caldas),Pedro Martin,46,$534.21,3,SI,
+1186,2023-11-20,Pipeline ETL,manizales,Maria Ruiz,43,724.06,2,inactivo,Pago en efectivo
+1070,13/12/2023,"['Reporte Automatico', 'Pipeline ETL']", ,Maria Ruiz,65,179.54,2.9,Pendiente,
+1159,2023-12-23,Pipeline ETL,cali,PEDRO MARTIN,63,496.12,3.5,NO,Pago en transferencia
+TRX-0012,"October 05, 2023",['Reporte Automatico'],Medellín (Ant),Pedro Martin,76 unidades,202.52,4.5,Pendiente,
+1035,2024-03-26,API REST,Bogotá D.C.,laura.torres@empresa.com,19,100.21,2.3,SI,
+TRX-0028,"July 29, 2023",Pipeline ETL,B/quilla,Maria Ruiz,67,237.08,6,Pendiente,
+1170,fecha_invalida,,,,,399.73,3,,Pago en transferencia
+1142,2023/12/04,  Pipeline ETL  ,MANIZALES,carlos.lopez,61,635.26,N/A,Activo,
+1238,2023-11-16,API REST,barranquilla,Maria Ruiz,-11,245.99 COP,N/A,ACTIVO,Descuento del 9% aplicado
+TRX-0150,2023/09/10,API REST,Bogotá DC,Maria Ruiz,22,$71.29,3,Activo,Ref: ND-8256
+1228,2023-10-21,App Web,Desconocida,"Garcia, Ana",69 unidades,257.17,,ACTIVO,
+1221,12-12-2023,Pipeline ETL,MANIZALES,"Torres, Laura",77 unidades,606.45,1,activo,
+1131,10/12/2023,App Web,Medellin,Ana Garcia,70 unidades,194.58,,Activo,
+1090,2024/06/27,-,Medellín (Ant),Maria Ruiz,59,$122.58,4,Inactivo,
+1051,2023/11/27,REPORTE AUTOMATICO,B/quilla,"Torres, Laura",73,433.09,2,1,
+1271,2023-07-19,API REST,Manizales (Caldas),carlos.lopez@empresa.com,13 unidades,573.55,Excelente,0,Contactar al 3131180941
+1095,2024/03/14,Dashboard,MEDELLIN,Carlos Lopez,24,668.91,5,Activo,
+1340,2024/05/29,API REST,Manizales,"Lopez, Carlos",,270.51,10,Inactivo,Pago en transferencia
+1178,"June 08, 2024",api rest,manizales,laura.torres,64,$433,1.9,Activo,
+TRX-0204,2024/04/07,Reporte Automatico,manizales,Ana Garcia,32 unidades,616.64,Malo,True,
+1123,08-25-2023,Reporte Automatico,Santiago de Cali,"Garcia, Ana",14,693.63,3,activo,Descuento del 5% aplicado
+1041,01-12-2024,PIPELINE ETL,bogota,Pedro Martin,49 unidades,-486.26,3,Inactivo,
+1089,2023-11-29,"['API REST', 'App Web']",Medellín,Pedro Martin,32,613.16,Regular,False,
+1281,,App Web,Medellin,Ana Garcia,13,138.73,6,True,Pago en tarjeta
+1206,08-04-2023,Dashboard,medellin,laura.torres,27,499.8,1,activo,
+1136,01-09-2024,App Web,Manizales (Caldas),Carlos Lopez,,621.08,4,Activo,
+1026,"January 04, 2024",Dashboard,Manizales (Caldas),ana.garcia,77,629.32,Regular,activo,Contactar al 3196529653
+1032,"November 26, 2023",Reporte Automatico,BOGOTA,Carlos Lopez,77,532.43,4,False,URGENTE - revisar
+1141,2023/09/27,  Dashboard  ,Barranquilla,Laura Torres,28,200.91,2,True,URGENTE - revisar
+1246,06-15-2023,Dashboard,manizales,Ana Garcia,21 unidades,234.75,1.1,,Contactar al 3184412736
+1300,"June 25, 2024",api rest,barranquilla,"Garcia, Ana",73,511.46,1.4,1,
+1003,2023-10-29,api rest,Medellín (Ant),carlos.lopez,2,289.22,5,Activo,Descuento del 25% aplicado
+1000,2023-07-30,App Web,manizales,Carlos Lopez,64,605.23,2,0,Pago en efectivo
+1323,2023-06-04,App Web,Manizales (Caldas),Laura Torres,36 unidades,85.71,3.9,,
+1100,2023-08-26,App Web,medellin,Ana Garcia,50uds,789.06,N/A,Activo,Contactar al 3134985679
+TRX-0226,17/11/2023,['Reporte Automatico'],Santiago de Cali,Pedro Martin,62,674.26,Malo,True,
+1264,10-26-2023,Dashboard,Barranquilla,ana.garcia,,,1,1,Ref: NC-6315
+1213,"September 18, 2023",API REST,cali,Laura Torres,28,$672.48,9,Activo,Contactar al 3132633490
+1171,2023-11-02,REPORTE AUTOMATICO,bogota,Ana Garcia,72,$253.08,1,SI,
+1098,01/04/2024,Reporte Automatico,medellin,Laura Torres,12,783.33,7,inactivo,
+1215,03/07/2023,Dashboard,Bog,carlos.lopez,36 unidades,726.85,4.6,Inactivo,
+1061,2024/02/23,API REST, ,Maria Ruiz,17uds,$405.46,3.2,Activo,
+1047,2023-06-21,Dashboard,Medellín,Pedro Martin,42 unidades,147.54,Bueno,True,
+1032,"November 26, 2023",Reporte Automatico,BOGOTA,Carlos Lopez,77,532.43,4,False,URGENTE - revisar
+1001,10 de June de 2024,Reporte Automatico,barranquilla,"Lopez, Carlos",21,104.35,4.1,Pendiente,
+1321,2023-12-10,"['Dashboard', 'App Web']",Manizales (Caldas),CARLOS LOPEZ,24,131.32,1.9,ACTIVO,URGENTE - revisar
+1027,02-21-2024,['API REST'],B/quilla,Sin asignar,37,778.19,9,inactivo,Pago en tarjeta
+1283,fecha_invalida,-,Barranquilla,"Ruiz, Maria",10,174.11,4,activo,Descuento del 28% aplicado
+1230,18/03/2024,,CALI,Ana Garcia,54,53.21,4.8,Activo,
+1260,2024-04-01,  Pipeline ETL  ,Manizales,Maria Ruiz,53,71.71,9,Si,
+1136,17/07/2023,,Bogotá DC,Carlos Lopez,6,379.72,1.2,activo,
+1307,2023/06/03,API REST,Bquilla,maria.ruiz,16,463.97 COP,2,NO,
+1138,2023-07-10,Pipeline ETL,Barranquilla,"Lopez, Carlos",67,108.46,N/A,SI,
+1062,06-23-2024,Dashboard,manizales,laura.torres@empresa.com,20,$734.81,4,1,
+trx135,,['API REST'],medellin,,74,262.0,3.4,True,
+1128,03/08/2023,App Web,barranquilla,Laura Torres,64 unidades,595.92,5,ACTIVO,
+TRX-0008,2023-11-05,dashboard,barranquilla,Ana Garcia,1,498.94,Regular,1,
+1064,2023-12-22,Pipeline ETL,B/quilla,PEDRO MARTIN,N/A,186.14,,Activo,
+trx14,2023-10-22,API REST,Bogotá DC,"Lopez, Carlos",59,243.26,2,Inactivo,
+1156,2024-01-08,AppWeb,Cali,pedro.martin,23,245.11,5,activo,
+1040,"January 10, 2024",,Bog,Pedro Martin,17,298.86,Bueno,,Contactar al 3175346549
+1331,11-14-2023,APP WEB,CALI,Pedro Martin,45,$302.34,Regular,ACTIVO,Pago en tarjeta
+1342,04/02/2024,N/A,Bogotá D.C.,Maria Ruiz,,378.32,2.4,activo,Pago en transferencia
+1216,09/03/2024,['API REST'],cali,Maria Ruiz,40uds,643.15,5,Si,
+1279,14/07/2023,Reporte Automatico,Manizales (Caldas),carlos.lopez,78,613.11,4,Activo,
+1312,2024/04/09,App Web,Bogotá,Ana Garcia,38,680.47,6,Pendiente,
+1236,22/03/2024,-,Medellín (Ant),pedro.martin@empresa.com,14,790.27,4,1,Descuento del 24% aplicado
+1207,2024-02-27,Pipeline ETL,B/quilla,Pedro Martin,62,316.49,1,True,Descuento del 25% aplicado
+1212,2024/02/05,PipelineETL,Bog,Pedro Martin,64,723.18 COP,1,ACTIVO,Contactar al 3115171371
+1329,11/11/2023,PIPELINE ETL,Medellin,ANA GARCIA,49,526.91,2.4,Activo,Pago en efectivo
+1251,2023/06/17,  App Web  ,Bogotá DC,Maria Ruiz,63,550.12,2.6,1,Contactar al 3154107997
+1317,,Dashboard,Barranquilla,ANA GARCIA,21,581.2,2,False,
+1024,08-20-2023,API REST,Medellín,Pedro Martin,77,342.19,5,Activo,
+1269,01-15-2024,Dashboard,Medellín,Sin asignar,45,250.61,5,1,
+1201,2024-01-23,  Dashboard  ,Medellín,Ana Garcia,4 unidades,601.6,10,Inactivo,Ref: FC-5055
+TRX-0161,2024-04-13,Pipeline ETL,Medellin,ana.garcia@empresa.com,55,428.84,Regular,NO,URGENTE - revisar
+1043,06-23-2023,App Web,Desconocida,LAURA TORRES,31,,3.1,ACTIVO,
+1217,2023/06/15,  Reporte Automatico  ,Bogotá,Maria Ruiz,40,568.24,3.1,Activo,Contactar al 3132431398
+1190,2023-11-11,APP WEB,CALI,,26,$430.12,2,ACTIVO,URGENTE - revisar
+1259,05-21-2024,pipeline etl,manizales,Maria Ruiz,52,263.99,,NO,Contactar al 3155079038
+1105,2024/02/05,reporte automatico,Bogota,carlos.lopez,53,755.81,1,Si,
+1053,09/08/2023,Reporte Automatico,B/quilla,Ana Garcia,24,525.84,1.5,NO,Ref: ND-5747
+1001,06-19-2024,Reporte Automatico,MANIZALES,Ana Garcia,65,702.96 COP,10,ACTIVO,URGENTE - revisar
+1049,11/10/2023,Pipeline ETL,Cali,Carlos Lopez,59 unidades,$180.08,N/A,Pendiente,Pago en tarjeta
+1080,2024/02/24,Pipeline ETL,Cali,Ana Garcia,43uds,725.38,1,0,
+1205,08-27-2023,N/A,Bquilla,Ana Garcia,70,456.39,Regular,Activo,URGENTE - revisar
+1034,2023/07/20,api rest, ,Laura Torres,34,580.05,Malo,Inactivo,
+1263,2023-08-28,Reporte Automatico,Medellin,Laura Torres,62,"559,99",2,ACTIVO,Contactar al 3178241502
+1091,07/08/2023,App Web,manizales,Carlos Lopez,3800,660.51,N/A,inactivo,
+1052,26 de January de 2024,"['API REST', 'Dashboard']",Bogotá D.C.,CARLOS LOPEZ,74,$478.31,1.4,Si,
+1264,2023-09-08,Dashboard,Manizales (Caldas),Pedro Martin,78uds,64350.0,1,1,
+1241,"June 18, 2024",Dashboard,Santiago de Cali,Ana Garcia,76,,9,Activo,
+TRX-0008,2024-05-13,Reporte Automatico,Cali,Maria Ruiz,80,710.67,6,Activo,
+1315,2024/02/29,Reporte Automatico,,PEDRO MARTIN,54,91.09,4.6,Inactivo,
+1088,"January 24, 2024",API REST,B/quilla,Pedro Martin,-43,"541,41",4.8,Si,
+1273,21 de October de 2023,Pipeline ETL,Bogota,Maria Ruiz,16,"538,45",Excelente,Activo,
+1166,01/04/2024,"['Reporte Automatico', 'Dashboard']",Medellín,,39,734.84,1,0,
+1095,2024/03/14,Dashboard,MEDELLIN,Carlos Lopez,24,668.91,5,Activo,
+1134,2024-02-01,Pipeline ETL,Bogota,Carlos Lopez,24,331.78 COP,,Pendiente,
+1306,2023/11/01,AppWeb,Medellín (Ant),"Martin, Pedro",6300,$500.92,3,SI,
+1347,06-15-2023,N/A,Bogotá,Ana Garcia,51,105.21,,False,URGENTE - revisar
+1319,09-13-2023,N/A,Manizales (Caldas),Ana Garcia,6,257.45,Bueno,Si,Ref: FC-8853
+1243,2023-09-09,API REST,bogota,Pedro Martin,75,58419.00000000001,3,Inactivo,
+1054,08/08/2023,Reporte Automatico,Medellín (Ant),,62,752.93,2.5,Activo,Ref: FC-5380
+1050,01-27-2024,App Web,BOGOTA,Ana Garcia,17,500.36,3.6,Inactivo,
+1174,fecha_invalida,APIREST,Santiago de Cali,"Garcia, Ana",35,663.42 COP,1.2,False,
+1189,2023-12-20,app web,barranquilla,Maria Ruiz,20,522.39,,ACTIVO,
+1112,12-05-2023,APIREST,Medellin,laura.torres@empresa.com,80,$704.30,5,False,
+1187,21 de August de 2023,App Web,Bogotá D.C.,Pedro Martin,68,430.36,N/A,0,Descuento del 24% aplicado
+1169,12 de March de 2024,Reporte Automatico,Medellin,Ana Garcia,16,59.06,2,Pendiente,
+1058,2024/02/28,Pipeline ETL,manizales,Maria Ruiz,28uds,$764.36,5,Inactivo,Contactar al 3101199131
+1048,2023-09-26,['API REST'],Bogota,ana.garcia,75,711.22,4,False,
+1235,10-01-2023,API REST,Bogotá,MARIA RUIZ,7200,796.36,1,ACTIVO,Pago en tarjeta
+1252,2024/06/28,Pipeline ETL,Bquilla,Laura Torres,22,141.95,1,ACTIVO,Descuento del 15% aplicado
+1021,13/11/2023,AppWeb,CALI,Maria Ruiz,700,203.11 COP,4,activo,
+1313,fecha_invalida,DASHBOARD,CALI,Ana Garcia,69,592.43,1,,Descuento del 28% aplicado
+1160,04-12-2024,App Web,Bog,Pedro Martin,12,115.48,,Inactivo,
+1276,2023/11/30,Pipeline ETL,,Laura Torres,72,,2,inactivo,Contactar al 3118260196
+1191,2024/06/07,ReporteAutomatico,Bogota,Ana Garcia,77,189.95 COP,3,NO,Contactar al 3176922592
+1293,,ReporteAutomatico,B/quilla,"Garcia, Ana",16,587.8,5,activo,
+1343,"July 09, 2023",-,B/quilla,Maria Ruiz,76uds,,2.1,Inactivo,
+1257,24/04/2024,App Web,MANIZALES,"Garcia, Ana",74,604.48 COP,1.5,SI,Descuento del 17% aplicado
+1308,2024/05/16,['API REST'],CALI,Pedro Martin,23,423.16,3,SI,Descuento del 7% aplicado
+1149,2023/08/09,Dashboard,Bogotá,Maria Ruiz,27,264.84,,activo,Ref: ND-2410
+1130,2024/05/10,App Web,MANIZALES,Pedro Martin,66,$705.40,4.5,1,
+1151,13/06/2024,App Web,Manizales (Caldas),Carlos Lopez,38,,5,Activo,Contactar al 3149812761
+1099,2023-08-01,Pipeline ETL,B/quilla,LAURA TORRES,21,133.34,1.5,SI,
+1087,"May 15, 2024",Reporte Automatico,Barranquilla,Laura Torres,14,563.56,7,Inactivo,Contactar al 3106379091
+1330,"May 10, 2024",API REST,Manizales,Laura Torres,67,404.9,1.6,Pendiente,
+1127,05/11/2023,API REST,B/quilla,Carlos Lopez,63,312.17,1,SI,
+1121,01/07/2024,App Web,Santiago de Cali,Ana Garcia,19,182.04,,Inactivo,
+1257,24/04/2024,App Web,MANIZALES,"Garcia, Ana",74,604.48 COP,1.5,SI,Descuento del 17% aplicado
+1020,2023/11/02,,,Carlos Lopez,,537.77,7,inactivo,URGENTE - revisar
+1188,2024/02/29,App Web,Santiago de Cali,Pedro Martin,38,576.52,2,ACTIVO,
+1071,2023/09/02,Pipeline ETL,Manizales,Maria Ruiz,54,608.59,2.6,inactivo,
+1106,2023-11-21,['App Web'],Medellin,MARIA RUIZ,80,790.5,3,No,
+1270,03-31-2024,App Web,MANIZALES,,62,741.37,2.9,SI,
+1348,11-27-2023,Reporte Automatico,Manizales (Caldas),Ana Garcia,23,191.57,1,activo,
+1102,2024-01-13,App Web,Santiago de Cali,MARIA RUIZ,50,393.95,2,ACTIVO,
