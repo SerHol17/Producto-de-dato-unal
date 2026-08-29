@@ -1,0 +1,1309 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pandas Profiling — Diagnostico automatico de un dataset &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_1/U1_Profiling';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="1.3: Visualizacion de Datos" href="unidad13.html" />
+    <link rel="prev" title="Evaluemos lo aprendido!!" href="Taller1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejercicio_U1.html">Ejercicio Unidad 1 — Python para Datos + Limpieza y Normalizacion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Taller1.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Pandas Profiling — Diagnostico automatico de un dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_1/U1_Profiling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_1/U1_Profiling.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_1/U1_Profiling.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pandas Profiling — Diagnostico automatico de un dataset</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos">Unidad 1: Introduccion a Desarrollo de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instalacion-y-primer-reporte">1. Instalacion y primer reporte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretar-las-secciones-del-reporte">2. Interpretar las secciones del reporte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-vision-general">2.1 Overview — Vision general</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-detalle-por-columna">2.2 Variables — Detalle por columna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlaciones">2.3 Correlaciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values-patrones-de-nulos">2.4 Missing values — Patrones de nulos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados">2.5 Duplicados</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-y-modos-de-ejecucion">3. Configuracion y modos de ejecucion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparar-dos-datasets-antes-vs-despues">4. Comparar dos datasets — antes vs despues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrar-profiling-en-un-pipeline">5. Integrar profiling en un pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternativas-a-ydata-profiling">6. Alternativas a ydata-profiling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-usar-cada-herramienta">Cuando usar cada herramienta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-recomendado">Flujo recomendado</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pandas-profiling-diagnostico-automatico-de-un-dataset">
+<h1>Pandas Profiling — Diagnostico automatico de un dataset<a class="headerlink" href="#pandas-profiling-diagnostico-automatico-de-un-dataset" title="Link to this heading">#</a></h1>
+<section id="unidad-1-introduccion-a-desarrollo-de-productos-de-datos">
+<h2>Unidad 1: Introduccion a Desarrollo de Productos de Datos<a class="headerlink" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos" title="Link to this heading">#</a></h2>
+<p>Antes de limpiar datos, necesitamos entender que tenemos. Hacerlo columna por columna con <code class="docutils literal notranslate"><span class="pre">.info()</span></code>, <code class="docutils literal notranslate"><span class="pre">.describe()</span></code>, <code class="docutils literal notranslate"><span class="pre">.value_counts()</span></code> funciona, pero con 10 columnas y 362 filas ya se vuelve lento.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ydata-profiling</span></code> (antes llamado <code class="docutils literal notranslate"><span class="pre">pandas-profiling</span></code>) genera un reporte HTML completo con un solo comando: tipos de datos, nulos, duplicados, distribuciones, correlaciones y alertas automaticas. En este notebook lo aplicamos al dataset <code class="docutils literal notranslate"><span class="pre">datos_feos.csv</span></code> para ver que encuentra sin que le digamos donde buscar.</p>
+<section id="contenido">
+<h3>Contenido:<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Instalacion y primer reporte</p></li>
+<li><p>Interpretar las secciones del reporte</p></li>
+<li><p>Configuracion y modos de ejecucion</p></li>
+<li><p>Comparar dos datasets (antes vs despues de limpiar)</p></li>
+<li><p>Integrar profiling en un pipeline</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="instalacion-y-primer-reporte">
+<h2>1. Instalacion y primer reporte<a class="headerlink" href="#instalacion-y-primer-reporte" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># INSTALACION</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># ydata-profiling es el nombre actual del paquete</span>
+<span class="c1"># pandas-profiling fue el nombre hasta la version 3.x</span>
+<span class="c1"># Ambos se importan igual: from ydata_profiling import ProfileReport</span>
+
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">ydata</span><span class="o">-</span><span class="n">profiling</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CARGAR EL DATASET</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'datos_feos.csv'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Columnas: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Columnas: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GENERAR EL REPORTE COMPLETO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ydata_profiling</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProfileReport</span>
+
+<span class="c1"># ProfileReport analiza el DataFrame completo</span>
+<span class="c1"># title: titulo que aparece en el reporte HTML</span>
+<span class="c1"># explorative: True activa analisis mas profundo (tarda mas)</span>
+<span class="n">profile</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"Diagnostico — datos_feos.csv"</span><span class="p">,</span>
+    <span class="n">explorative</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># .to_notebook_iframe() muestra el reporte dentro del notebook</span>
+<span class="c1"># Esto puede tardar 30-60 segundos dependiendo del tamano</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">to_notebook_iframe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GUARDAR COMO HTML</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># El HTML se puede abrir en cualquier navegador sin Python</span>
+<span class="c1"># Util para compartir con el equipo o con el gerente</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">"reporte_diagnostico.html"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Reporte guardado: reporte_diagnostico.html"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="interpretar-las-secciones-del-reporte">
+<h2>2. Interpretar las secciones del reporte<a class="headerlink" href="#interpretar-las-secciones-del-reporte" title="Link to this heading">#</a></h2>
+<p>El reporte tiene varias secciones. Cada una responde una pregunta distinta sobre los datos.</p>
+<section id="overview-vision-general">
+<h3>2.1 Overview — Vision general<a class="headerlink" href="#overview-vision-general" title="Link to this heading">#</a></h3>
+<p>La primera seccion muestra:</p>
+<ul class="simple">
+<li><p>Numero de filas, columnas y celdas totales</p></li>
+<li><p>Porcentaje de celdas faltantes</p></li>
+<li><p>Filas duplicadas</p></li>
+<li><p>Tipos de variables detectados (numerica, categorica, texto, etc.)</p></li>
+</ul>
+<p>Tambien muestra <strong>alertas</strong> automaticas. Estas son las mas utiles para arrancar:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ACCEDER A LAS ALERTAS PROGRAMATICAMENTE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># .get_description() retorna toda la info del profiling como diccionario</span>
+<span class="n">description</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span>
+
+<span class="c1"># Las alertas estan en description.alerts</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== ALERTAS DEL PROFILING ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total de alertas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">description</span><span class="o">.</span><span class="n">alerts</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">alerta</span> <span class="ow">in</span> <span class="n">description</span><span class="o">.</span><span class="n">alerts</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  [</span><span class="si">{</span><span class="n">alerta</span><span class="o">.</span><span class="n">alert_type</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">alerta</span><span class="o">.</span><span class="n">column_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">alerta</span><span class="o">.</span><span class="n">values</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="variables-detalle-por-columna">
+<h3>2.2 Variables — Detalle por columna<a class="headerlink" href="#variables-detalle-por-columna" title="Link to this heading">#</a></h3>
+<p>Para cada columna, el reporte muestra:</p>
+<ul class="simple">
+<li><p><strong>Tipo detectado</strong>: numeric, categorical, text, datetime, boolean</p></li>
+<li><p><strong>Nulos</strong>: conteo y porcentaje</p></li>
+<li><p><strong>Valores unicos</strong>: cuantos y cuales son los mas frecuentes</p></li>
+<li><p><strong>Distribucion</strong>: histograma para numericas, barras para categoricas</p></li>
+<li><p><strong>Estadisticas</strong>: media, mediana, std, min, max, percentiles</p></li>
+</ul>
+<p>Veamos como acceder a esta informacion desde Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ESTADISTICAS POR COLUMNA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># description.variables es un diccionario con info de cada columna</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">variables</span>
+
+<span class="c1"># Ver que info tiene disponible para una columna</span>
+<span class="n">col_ejemplo</span> <span class="o">=</span> <span class="s2">"producto"</span>
+<span class="n">info_col</span> <span class="o">=</span> <span class="n">variables</span><span class="p">[</span><span class="n">col_ejemplo</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"=== Columna: </span><span class="si">{</span><span class="n">col_ejemplo</span><span class="si">}</span><span class="s2"> ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Tipo detectado: </span><span class="si">{</span><span class="n">info_col</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Valores unicos: </span><span class="si">{</span><span class="n">info_col</span><span class="p">[</span><span class="s1">'n_distinct'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Nulos: </span><span class="si">{</span><span class="n">info_col</span><span class="p">[</span><span class="s1">'n_missing'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">info_col</span><span class="p">[</span><span class="s1">'p_missing'</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># RESUMEN DE NULOS POR COLUMNA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Construir un resumen rapido de nulos usando los datos del profiling</span>
+<span class="n">resumen_nulos</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">col_info</span> <span class="ow">in</span> <span class="n">variables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">n_missing</span> <span class="o">=</span> <span class="n">col_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'n_missing'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">p_missing</span> <span class="o">=</span> <span class="n">col_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'p_missing'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">tipo</span> <span class="o">=</span> <span class="n">col_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">'Unknown'</span><span class="p">)</span>
+    <span class="n">resumen_nulos</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s1">'columna'</span><span class="p">:</span> <span class="n">col_name</span><span class="p">,</span>
+        <span class="s1">'tipo_detectado'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">tipo</span><span class="p">),</span>
+        <span class="s1">'nulos'</span><span class="p">:</span> <span class="n">n_missing</span><span class="p">,</span>
+        <span class="s1">'porcentaje'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">p_missing</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">})</span>
+
+<span class="n">df_nulos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resumen_nulos</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'nulos'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_nulos</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="correlaciones">
+<h3>2.3 Correlaciones<a class="headerlink" href="#correlaciones" title="Link to this heading">#</a></h3>
+<p>El reporte calcula correlaciones entre variables numericas automaticamente. En nuestro dataset la mayoria de columnas son texto, asi que esta seccion sera limitada. Pero cuando se usa con datos numericos limpios, detecta relaciones fuertes y posible multicolinealidad.</p>
+<p>Los tipos de correlacion que calcula:</p>
+<ul class="simple">
+<li><p><strong>Pearson</strong>: relacion lineal entre dos variables</p></li>
+<li><p><strong>Spearman</strong>: relacion monotonica (no necesariamente lineal)</p></li>
+<li><p><strong>Phik</strong>: correlacion para variables mixtas (numericas y categoricas)</p></li>
+</ul>
+</section>
+<section id="missing-values-patrones-de-nulos">
+<h3>2.4 Missing values — Patrones de nulos<a class="headerlink" href="#missing-values-patrones-de-nulos" title="Link to this heading">#</a></h3>
+<p>Esta seccion es particularmente util. No solo muestra cuantos nulos hay, sino <strong>donde estan</strong>: muestra un mapa de calor donde cada fila es un registro y cada columna es una variable. Si los nulos forman bloques o patrones, es senal de un problema sistematico (una fuente que no envia ciertos campos, un periodo sin datos, etc.).</p>
+</section>
+<section id="duplicados">
+<h3>2.5 Duplicados<a class="headerlink" href="#duplicados" title="Link to this heading">#</a></h3>
+<p>El reporte detecta filas duplicadas exactas y muestra cuantas y cuales son. En nuestro dataset introdujimos 12 duplicados intencionalmente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_dup</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">alerta</span> <span class="ow">in</span> <span class="n">description</span><span class="o">.</span><span class="n">alerts</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">alerta</span><span class="o">.</span><span class="n">alert_type</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">'DUPLICATES'</span><span class="p">:</span>
+        <span class="n">n_dup</span> <span class="o">=</span> <span class="n">alerta</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'n_duplicates'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">break</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas duplicadas detectadas: </span><span class="si">{</span><span class="n">n_dup</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Porcentaje: </span><span class="si">{</span><span class="n">n_dup</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="configuracion-y-modos-de-ejecucion">
+<h2>3. Configuracion y modos de ejecucion<a class="headerlink" href="#configuracion-y-modos-de-ejecucion" title="Link to this heading">#</a></h2>
+<p>El reporte completo puede tardar varios minutos con datasets grandes. Hay formas de hacerlo mas rapido o mas enfocado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># MODO MINIMAL — rapido, sin correlaciones ni interacciones</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Ideal para datasets grandes (&gt;100K filas) o para un primer vistazo</span>
+<span class="n">profile_minimal</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"Diagnostico Rapido"</span><span class="p">,</span>
+    <span class="n">minimal</span><span class="o">=</span><span class="kc">True</span>   <span class="c1"># Solo estadisticas basicas, sin graficos pesados</span>
+<span class="p">)</span>
+
+<span class="c1"># Este se genera mucho mas rapido</span>
+<span class="n">profile_minimal</span><span class="o">.</span><span class="n">to_notebook_iframe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONFIGURACION PERSONALIZADA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Se puede controlar exactamente que calcular y que no</span>
+<span class="n">profile_custom</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"Diagnostico Personalizado"</span><span class="p">,</span>
+    
+    <span class="c1"># Activar/desactivar secciones</span>
+    <span class="n">correlations</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"pearson"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"calculate"</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s2">"spearman"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"calculate"</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>  <span class="c1"># Desactivar Spearman</span>
+        <span class="s2">"phik"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"calculate"</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>       <span class="c1"># Desactivar Phik (lento)</span>
+    <span class="p">},</span>
+    
+    <span class="c1"># Umbrales de alertas</span>
+    <span class="n">missing_diagrams</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"bar"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>       <span class="c1"># Grafico de barras de nulos</span>
+        <span class="s2">"matrix"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>    <span class="c1"># Matriz de nulos (patron)</span>
+        <span class="s2">"heatmap"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Correlacion de nulos</span>
+    <span class="p">},</span>
+    
+    <span class="c1"># Muestreo para datasets grandes</span>
+    <span class="c1"># samples={"head": 10, "tail": 10},</span>
+    
+    <span class="c1"># Interacciones entre variables</span>
+    <span class="n">interactions</span><span class="o">=</span><span class="p">{</span><span class="s2">"continuous"</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>  <span class="c1"># Desactivar scatter plots</span>
+<span class="p">)</span>
+
+<span class="n">profile_custom</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">"reporte_custom.html"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Reporte personalizado guardado"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PROFILING DE UN SUBCONJUNTO DE COLUMNAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># A veces solo interesa analizar ciertas columnas</span>
+<span class="n">cols_interes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'producto'</span><span class="p">,</span> <span class="s1">'region'</span><span class="p">,</span> <span class="s1">'unidades'</span><span class="p">,</span> <span class="s1">'precio_unitario'</span><span class="p">]</span>
+
+<span class="n">profile_parcial</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">cols_interes</span><span class="p">],</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"Diagnostico — Solo columnas criticas"</span><span class="p">,</span>
+    <span class="n">minimal</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">profile_parcial</span><span class="o">.</span><span class="n">to_notebook_iframe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PROFILING CON DATASET GRANDE — SAMPLING</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Con datasets de millones de filas, conviene muestrear</span>
+<span class="c1"># El profiling sobre la muestra da una idea general sin esperar horas</span>
+
+<span class="c1"># Ejemplo: tomar 10,000 filas aleatorias</span>
+<span class="c1"># df_muestra = df.sample(n=10000, random_state=42)</span>
+<span class="c1"># profile_muestra = ProfileReport(df_muestra, title="Muestra 10K", minimal=True)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Para datasets grandes:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  1. Usar minimal=True"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  2. Muestrear con df.sample()"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  3. Seleccionar solo las columnas que interesan"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  4. Desactivar correlaciones y interacciones"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="comparar-dos-datasets-antes-vs-despues">
+<h2>4. Comparar dos datasets — antes vs despues<a class="headerlink" href="#comparar-dos-datasets-antes-vs-despues" title="Link to this heading">#</a></h2>
+<p>Una de las funciones mas utiles de profiling es comparar dos versiones del mismo dataset. Permite verificar que la limpieza realmente mejoro los datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># LIMPIAR UNA VERSION RAPIDA PARA COMPARAR</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Hacemos una limpieza basica para tener un "despues" que comparar</span>
+<span class="c1"># (la limpieza completa es el ejercicio aparte)</span>
+
+<span class="n">df_limpio</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Eliminar duplicados</span>
+<span class="n">df_limpio</span> <span class="o">=</span> <span class="n">df_limpio</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="c1"># Producto: limpiar basico</span>
+<span class="n">df_limpio</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_limpio</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[\[\]']"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># quitar corchetes y comillas</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>                                <span class="c1"># quitar espacios</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>                                <span class="c1"># minusculas</span>
+    <span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">'n/a'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">''</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">})</span>
+<span class="p">)</span>
+
+<span class="c1"># Region: limpiar basico</span>
+<span class="n">df_limpio</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_limpio</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">''</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">' '</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">'desconocida'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">})</span>
+<span class="p">)</span>
+
+<span class="c1"># Unidades: extraer numeros</span>
+<span class="n">df_limpio</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_limpio</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^\d.\-]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># solo numeros</span>
+    <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Precio: extraer numeros</span>
+<span class="n">df_limpio</span><span class="p">[</span><span class="s1">'precio_unitario'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_limpio</span><span class="p">[</span><span class="s1">'precio_unitario'</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[^\d.\-]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Antes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Despues: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_limpio</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Producto valores unicos: </span><span class="si">{</span><span class="n">df_limpio</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Region valores unicos: </span><span class="si">{</span><span class="n">df_limpio</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="integrar-profiling-en-un-pipeline">
+<h2>5. Integrar profiling en un pipeline<a class="headerlink" href="#integrar-profiling-en-un-pipeline" title="Link to this heading">#</a></h2>
+<p>El profiling no es solo para exploracion interactiva. Se puede integrar como un paso automatico en un pipeline de datos para generar reportes de calidad cada vez que llegan datos nuevos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUNCION DE DIAGNOSTICO AUTOMATICO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">diagnosticar_dataset</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">nombre</span><span class="p">,</span>
+    <span class="n">carpeta_reportes</span><span class="o">=</span><span class="s2">"reportes_calidad"</span><span class="p">,</span>
+    <span class="n">modo</span><span class="o">=</span><span class="s2">"minimal"</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Genera un reporte de profiling y lo guarda con timestamp.</span>
+<span class="sd">    Pensado para correr automaticamente cada vez que llegan datos nuevos.</span>
+<span class="sd">    </span>
+<span class="sd">    Parametros:</span>
+<span class="sd">        df (DataFrame): datos a diagnosticar</span>
+<span class="sd">        nombre (str): nombre del dataset</span>
+<span class="sd">        carpeta_reportes (str): donde guardar los HTML</span>
+<span class="sd">        modo (str): 'minimal' para rapido, 'full' para completo</span>
+<span class="sd">    </span>
+<span class="sd">    Retorna:</span>
+<span class="sd">        dict: resumen con metricas clave</span>
+<span class="sd">    """</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">carpeta_reportes</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># Generar el profile</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Diagnostico — </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="n">minimal</span><span class="o">=</span><span class="p">(</span><span class="n">modo</span> <span class="o">==</span> <span class="s2">"minimal"</span><span class="p">)</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Guardar con timestamp</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">_%H%M"</span><span class="p">)</span>
+    <span class="n">ruta</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">carpeta_reportes</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">"diagnostico_</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">.html"</span>
+    <span class="p">)</span>
+    <span class="n">profile</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+    
+    <span class="c1"># Extraer metricas clave</span>
+    <span class="n">desc</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span>
+    
+    <span class="n">resumen</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"nombre"</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">,</span>
+        <span class="s2">"filas"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span>
+        <span class="s2">"columnas"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>
+        <span class="s2">"duplicados"</span><span class="p">:</span> <span class="n">desc</span><span class="o">.</span><span class="n">duplicates</span><span class="p">,</span>
+        <span class="s2">"nulos_totales"</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="s2">"porcentaje_nulos"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">"alertas"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">desc</span><span class="o">.</span><span class="n">alerts</span><span class="p">),</span>
+        <span class="s2">"reporte"</span><span class="p">:</span> <span class="n">ruta</span><span class="p">,</span>
+    <span class="p">}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Diagnostico generado: </span><span class="si">{</span><span class="n">ruta</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Filas: </span><span class="si">{</span><span class="n">resumen</span><span class="p">[</span><span class="s1">'filas'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Duplicados: </span><span class="si">{</span><span class="n">resumen</span><span class="p">[</span><span class="s1">'duplicados'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Nulos: </span><span class="si">{</span><span class="n">resumen</span><span class="p">[</span><span class="s1">'nulos_totales'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">resumen</span><span class="p">[</span><span class="s1">'porcentaje_nulos'</span><span class="p">]</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Alertas: </span><span class="si">{</span><span class="n">resumen</span><span class="p">[</span><span class="s1">'alertas'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">resumen</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EJECUTAR EL DIAGNOSTICO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Sobre los datos crudos</span>
+<span class="n">resumen_crudo</span> <span class="o">=</span> <span class="n">diagnosticar_dataset</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">"datos_feos"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Sobre los datos limpios</span>
+<span class="n">resumen_limpio</span> <span class="o">=</span> <span class="n">diagnosticar_dataset</span><span class="p">(</span><span class="n">df_limpio</span><span class="p">,</span> <span class="s2">"datos_limpios"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># TABLA COMPARATIVA DE METRICAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">comparativa</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">resumen_crudo</span><span class="p">,</span> <span class="n">resumen_limpio</span><span class="p">])</span>
+<span class="n">comparativa</span> <span class="o">=</span> <span class="n">comparativa</span><span class="p">[[</span><span class="s1">'nombre'</span><span class="p">,</span> <span class="s1">'filas'</span><span class="p">,</span> <span class="s1">'duplicados'</span><span class="p">,</span> <span class="s1">'nulos_totales'</span><span class="p">,</span> <span class="s1">'porcentaje_nulos'</span><span class="p">,</span> <span class="s1">'alertas'</span><span class="p">]]</span>
+<span class="n">comparativa</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EXTRAER DATOS DEL PROFILING COMO JSON</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Util para almacenar metricas de calidad en una base de datos</span>
+<span class="c1"># y hacer seguimiento historico</span>
+
+<span class="n">profile_json</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"Para JSON"</span><span class="p">,</span>
+    <span class="n">minimal</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Guardar como JSON</span>
+<span class="n">profile_json</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">"reporte_diagnostico.json"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Reporte JSON guardado: reporte_diagnostico.json"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Util para cargar en dashboards o bases de datos de metricas."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="alternativas-a-ydata-profiling">
+<h2>6. Alternativas a ydata-profiling<a class="headerlink" href="#alternativas-a-ydata-profiling" title="Link to this heading">#</a></h2>
+<p>ydata-profiling es el mas completo, pero hay alternativas mas ligeras segun el caso:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># SWEETVIZ — mas rapido, orientado a comparacion</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># !pip install sweetviz</span>
+
+<span class="c1"># import sweetviz as sv</span>
+<span class="c1"># report = sv.analyze(df)</span>
+<span class="c1"># report.show_html("sweetviz_report.html")</span>
+
+<span class="c1"># Comparar dos datasets:</span>
+<span class="c1"># report = sv.compare([df, "Antes"], [df_limpio, "Despues"])</span>
+<span class="c1"># report.show_html("sweetviz_comparacion.html")</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"sweetviz: rapido, bueno para comparar antes vs despues"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># SKIMPY — resumen en consola, sin HTML</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># !pip install skimpy</span>
+
+<span class="c1"># from skimpy import skim</span>
+<span class="c1"># skim(df)</span>
+
+<span class="c1"># Imprime un resumen tipo R::skimr directamente en la terminal</span>
+<span class="c1"># No genera HTML, solo texto formateado</span>
+<span class="c1"># Ideal para scripts y pipelines donde no necesitas un archivo</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"skimpy: resumen rapido en consola, sin generar archivos"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DATAPREP — profiling + limpieza en un solo paquete</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># !pip install dataprep</span>
+
+<span class="c1"># from dataprep.eda import create_report</span>
+<span class="c1"># report = create_report(df, title="DataPrep Report")</span>
+<span class="c1"># report.save("dataprep_report.html")</span>
+
+<span class="c1"># DataPrep tambien tiene funciones de limpieza:</span>
+<span class="c1"># from dataprep.clean import clean_email, clean_phone</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"dataprep: profiling + limpieza integrada"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="cuando-usar-cada-herramienta">
+<h3>Cuando usar cada herramienta<a class="headerlink" href="#cuando-usar-cada-herramienta" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Velocidad</p></th>
+<th class="head"><p>Output</p></th>
+<th class="head"><p>Mejor para</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>ydata-profiling</strong></p></td>
+<td><p>Lento</p></td>
+<td><p>HTML completo</p></td>
+<td><p>Diagnostico exhaustivo, compartir con equipo</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sweetviz</strong></p></td>
+<td><p>Medio</p></td>
+<td><p>HTML limpio</p></td>
+<td><p>Comparar antes vs despues</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>skimpy</strong></p></td>
+<td><p>Rapido</p></td>
+<td><p>Consola</p></td>
+<td><p>Vistazo rapido en terminal o script</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>dataprep</strong></p></td>
+<td><p>Medio</p></td>
+<td><p>HTML</p></td>
+<td><p>Profiling + limpieza en uno</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepto</p></th>
+<th class="head"><p>Lo esencial</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>ProfileReport(df)</strong></p></td>
+<td><p>Genera el reporte completo con un comando</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>.to_notebook_iframe()</strong></p></td>
+<td><p>Muestra el reporte dentro del notebook</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>.to_file()</strong></p></td>
+<td><p>Guarda como HTML o JSON</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>minimal=True</strong></p></td>
+<td><p>Modo rapido para datasets grandes</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>.compare()</strong></p></td>
+<td><p>Comparar dos versiones del dataset lado a lado</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>.get_description()</strong></p></td>
+<td><p>Acceder a metricas y alertas desde Python</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Alertas</strong></p></td>
+<td><p>Lo mas util: el profiling te dice donde estan los problemas antes de que los busques</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="flujo-recomendado">
+<h3>Flujo recomendado<a class="headerlink" href="#flujo-recomendado" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Cargar datos crudos</p></li>
+<li><p>Correr profiling (minimal si es grande)</p></li>
+<li><p>Leer las alertas — ahi esta el 80% del diagnostico</p></li>
+<li><p>Limpiar</p></li>
+<li><p>Correr profiling de nuevo y comparar</p></li>
+<li><p>Si las alertas bajan y los tipos son correctos, los datos estan listos</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Taller1.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Evaluemos lo aprendido!!</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="unidad13.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">1.3: Visualizacion de Datos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-1-introduccion-a-desarrollo-de-productos-de-datos">Unidad 1: Introduccion a Desarrollo de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instalacion-y-primer-reporte">1. Instalacion y primer reporte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretar-las-secciones-del-reporte">2. Interpretar las secciones del reporte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-vision-general">2.1 Overview — Vision general</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-detalle-por-columna">2.2 Variables — Detalle por columna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlaciones">2.3 Correlaciones</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values-patrones-de-nulos">2.4 Missing values — Patrones de nulos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicados">2.5 Duplicados</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-y-modos-de-ejecucion">3. Configuracion y modos de ejecucion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparar-dos-datasets-antes-vs-despues">4. Comparar dos datasets — antes vs despues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrar-profiling-en-un-pipeline">5. Integrar profiling en un pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternativas-a-ydata-profiling">6. Alternativas a ydata-profiling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-usar-cada-herramienta">Cuando usar cada herramienta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flujo-recomendado">Flujo recomendado</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
