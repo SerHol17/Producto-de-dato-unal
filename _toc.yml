@@ -6,8 +6,9 @@ chapters:
     - file: "Unidades/Unidad_1/U1_S1_python_datos"
     - file: "Unidades/Unidad_1/U1_S2_limpieza_normalizacion"
     - file: "Unidades/Unidad_1/Ejercicio_U1"
+    - file: "Unidades/Unidad_1/Taller1"
+    - file: "Unidades/Unidad_1/U1_Profiling"
     - file: "Unidades/Unidad_1/unidad13"
-    
     - file: "Unidades/Unidad_1/Matplotlib.md"
     - file: "Unidades/Unidad_1/01_matplotlib_intro"
     - file: "Unidades/Unidad_1/02_matplotlib_avanzado"

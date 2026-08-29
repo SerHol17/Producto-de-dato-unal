@@ -262,5 +262,8 @@ Al finalizar esta unidad, cada estudiante habrá construido un reporte automatiz
 
 ---
 
-
+## Datos utilizados en la unidad
+```{note}
+Recurso 📂 [Data](https://github.com/SerHol17/Producto-de-dato-unal/tree/main/Data)
+```
 ::::
