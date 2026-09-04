@@ -28,3 +28,9 @@ chapters:
   - file: Unidad2
     sections:
     - file: "Unidades/Unidad_2/U2_S1_calidad_datos"
+    - file: "Unidades/Unidad_2/U2_S2_diseno_productos"
+    - file: "Unidades/Unidad_2/U2_S3_kpis"
+    - file: "Unidades/Unidad_2/U2_S4_storytelling"
+    - file: "Unidades/Unidad_2/Ejemplo_Practico_API"
+
+
