@@ -25,4 +25,6 @@ chapters:
     - file: "Unidades/Unidad_1/Que Grafica escoger"
     - file: "Unidades/Unidad_1/caso_practico_fifa23"
     - file: "Unidades/Unidad_1/U1_S4_reportes_automaticos"
-
+  - file: Unidad2
+    sections:
+    - file: "Unidades/Unidad_2/U2_S1_calidad_datos"
