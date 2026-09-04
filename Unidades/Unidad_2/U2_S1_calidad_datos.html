@@ -1,0 +1,1495 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.1 — Calidad de datos &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_2/U2_S1_calidad_datos';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="prev" title="Unidad 2 - Caracteristicas de Productos de Datos" href="../../Unidad2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Ejercicio_U1.html">Ejercicio Unidad 1 — Python para Datos + Limpieza y Normalizacion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Taller1.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_Profiling.html">Pandas Profiling — Diagnostico automatico de un dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2 - Caracteristicas de Productos de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.1 — Calidad de datos</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_2/U2_S1_calidad_datos.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_2/U2_S1_calidad_datos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_2/U2_S1_calidad_datos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.1 — Calidad de datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-2-caracteristicas-de-productos-de-datos">Unidad 2: Caracteristicas de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-diferencia-entre-limpiar-y-validar">1. La diferencia entre limpiar y validar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-con-pandera">2. Validacion con pandera</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esquema-basico">2.1 Esquema basico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checks-personalizados">2.2 Checks personalizados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esquema-con-decoradores-forma-avanzada">2.3 Esquema con decoradores (forma avanzada)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-con-pydantic">3. Validacion con Pydantic</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandera-vs-pydantic-cuando-usar-cada-uno">Pandera vs Pydantic — cuando usar cada uno</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-con-great-expectations">4. Validacion con Great Expectations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrar-validacion-en-un-pipeline">5. Integrar validacion en un pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-esencial">Lo esencial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="calidad-de-datos">
+<h1>2.1 — Calidad de datos<a class="headerlink" href="#calidad-de-datos" title="Link to this heading">#</a></h1>
+<section id="unidad-2-caracteristicas-de-productos-de-datos">
+<h2>Unidad 2: Caracteristicas de Productos de Datos<a class="headerlink" href="#unidad-2-caracteristicas-de-productos-de-datos" title="Link to this heading">#</a></h2>
+<p>En la Unidad 1 limpiamos datos a mano: encontramos nulos, los arreglamos, seguimos adelante. Eso funciona una vez. Pero un producto de datos recibe datos nuevos cada dia, cada semana, cada hora. No podemos sentarnos a revisar cada carga.</p>
+<p>La calidad de datos no es limpiar — es escribir reglas que validan automaticamente. Si los datos cumplen las reglas, pasan. Si no, el pipeline se detiene antes de que el dato sucio llegue al dashboard.</p>
+<section id="contenido">
+<h3>Contenido:<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>La diferencia entre limpiar y validar</p></li>
+<li><p>Validacion con pandera — esquemas sobre DataFrames</p></li>
+<li><p>Validacion con Pydantic — esquemas sobre registros</p></li>
+<li><p>Validacion con Great Expectations — suites de pruebas</p></li>
+<li><p>Integrar validacion en un pipeline</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># INSTALACION</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># !pip install pandera pydantic great_expectations</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DATOS DE EJEMPLO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Simulamos datos que llegan a un pipeline</span>
+<span class="c1"># Algunos son correctos, otros tienen errores</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Datos "buenos" — lo que esperamos recibir</span>
+<span class="n">datos_buenos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s2">"2024-06-01"</span><span class="p">,</span> <span class="s2">"2024-06-02"</span><span class="p">,</span> <span class="s2">"2024-06-03"</span><span class="p">,</span> <span class="s2">"2024-06-04"</span><span class="p">]),</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"reporte"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">,</span> <span class="s2">"app web"</span><span class="p">],</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"bogota"</span><span class="p">,</span> <span class="s2">"medellin"</span><span class="p">,</span> <span class="s2">"cali"</span><span class="p">,</span> <span class="s2">"manizales"</span><span class="p">],</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="s2">"precio"</span><span class="p">:</span> <span class="p">[</span><span class="mf">450.0</span><span class="p">,</span> <span class="mf">280.0</span><span class="p">,</span> <span class="mf">620.0</span><span class="p">,</span> <span class="mf">350.0</span><span class="p">],</span>
+    <span class="s2">"calificacion"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="c1"># Datos "malos" — lo que puede llegar en la vida real</span>
+<span class="n">datos_malos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s2">"2024-06-01"</span><span class="p">,</span> <span class="s2">"2024-06-02"</span><span class="p">,</span> <span class="s2">"2024-06-03"</span><span class="p">,</span> <span class="s2">"2024-06-04"</span><span class="p">,</span> <span class="s2">"2024-06-05"</span><span class="p">]),</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"REPORTE"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">,</span> <span class="s2">"producto_nuevo"</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"bogota"</span><span class="p">,</span> <span class="s2">"medellin"</span><span class="p">,</span> <span class="s2">"tokio"</span><span class="p">,</span> <span class="s2">"cali"</span><span class="p">,</span> <span class="s2">"manizales"</span><span class="p">],</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="s2">"precio"</span><span class="p">:</span> <span class="p">[</span><span class="mf">450.0</span><span class="p">,</span> <span class="mf">280.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">620.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="s2">"calificacion"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Datos buenos:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">datos_buenos</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Datos malos:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">datos_malos</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="la-diferencia-entre-limpiar-y-validar">
+<h2>1. La diferencia entre limpiar y validar<a class="headerlink" href="#la-diferencia-entre-limpiar-y-validar" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Limpiar (Unidad 1)</p></th>
+<th class="head"><p>Validar (Unidad 2)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Cuando</p></td>
+<td><p>Despues de que los datos llegaron</p></td>
+<td><p>Antes de que entren al sistema</p></td>
+</tr>
+<tr class="row-odd"><td><p>Quien</p></td>
+<td><p>Un analista, una vez</p></td>
+<td><p>Codigo automatico, siempre</p></td>
+</tr>
+<tr class="row-even"><td><p>Resultado</p></td>
+<td><p>Datos corregidos</p></td>
+<td><p>Datos aprobados o rechazados</p></td>
+</tr>
+<tr class="row-odd"><td><p>Analogia</p></td>
+<td><p>Limpiar el cuarto</p></td>
+<td><p>Poner reglas para que no se ensucie</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La validacion responde una pregunta simple: estos datos cumplen las reglas que definimos? Si la respuesta es no, no los dejamos pasar.</p>
+</section>
+<hr class="docutils" />
+<section id="validacion-con-pandera">
+<h2>2. Validacion con pandera<a class="headerlink" href="#validacion-con-pandera" title="Link to this heading">#</a></h2>
+<p>pandera valida DataFrames de pandas contra un esquema. El esquema define que columnas debe tener, que tipo, que rango, que valores son aceptables. Si el DataFrame no cumple, pandera lanza un error con el detalle de que fallo.</p>
+<section id="esquema-basico">
+<h3>2.1 Esquema basico<a class="headerlink" href="#esquema-basico" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PANDERA — DEFINIR UN ESQUEMA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandera</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+
+<span class="c1"># Un esquema define las reglas para cada columna</span>
+<span class="c1"># pa.Column(tipo, checks=[lista de validaciones])</span>
+
+<span class="n">esquema_ventas</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">({</span>
+    
+    <span class="c1"># La fecha debe ser datetime, no puede ser nula</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="s2">"datetime64[ns]"</span><span class="p">,</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+    
+    <span class="c1"># El producto debe ser uno de los 5 permitidos</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="nb">str</span><span class="p">,</span>
+        <span class="n">checks</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"reporte"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">,</span> <span class="s2">"app web"</span><span class="p">,</span> <span class="s2">"pipeline etl"</span><span class="p">]),</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+    
+    <span class="c1"># La region debe ser una de las 5 ciudades</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="nb">str</span><span class="p">,</span>
+        <span class="n">checks</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"bogota"</span><span class="p">,</span> <span class="s2">"medellin"</span><span class="p">,</span> <span class="s2">"cali"</span><span class="p">,</span> <span class="s2">"manizales"</span><span class="p">,</span> <span class="s2">"barranquilla"</span><span class="p">]),</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+    
+    <span class="c1"># Unidades: entero positivo, maximo razonable 200</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="nb">int</span><span class="p">,</span>
+        <span class="n">checks</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">less_than_or_equal_to</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+    
+    <span class="c1"># Precio: float positivo</span>
+    <span class="s2">"precio"</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="nb">float</span><span class="p">,</span>
+        <span class="n">checks</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+    
+    <span class="c1"># Calificacion: entero entre 1 y 5</span>
+    <span class="s2">"calificacion"</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="nb">int</span><span class="p">,</span>
+        <span class="n">checks</span><span class="o">=</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">in_range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">),</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Esquema definido con 6 columnas y sus reglas."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VALIDAR DATOS BUENOS — deben pasar</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># .validate() retorna el DataFrame si pasa, lanza error si no</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">df_validado</span> <span class="o">=</span> <span class="n">esquema_ventas</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">datos_buenos</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"PASO: los datos buenos cumplen el esquema."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas validadas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_validado</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">pa</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">SchemaError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"FALLO: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VALIDAR DATOS MALOS — deben fallar</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Con los datos malos, pandera debe detectar los errores</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">df_validado</span> <span class="o">=</span> <span class="n">esquema_ventas</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">datos_malos</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"PASO: (esto no deberia pasar)"</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">pa</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">SchemaError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"FALLO (esperado). Errores detectados:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="c1"># El error tiene un DataFrame con el detalle</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># MODO LAZY — recoger TODOS los errores en vez de parar en el primero</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Por defecto pandera para en el primer error</span>
+<span class="c1"># lazy=True recopila todos los errores y los reporta juntos</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">esquema_ventas</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">datos_malos</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">pa</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">SchemaErrors</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total de errores: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">failure_cases</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="c1"># e.failure_cases es un DataFrame con todos los errores</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">failure_cases</span><span class="p">[[</span><span class="s2">"schema_context"</span><span class="p">,</span> <span class="s2">"column"</span><span class="p">,</span> <span class="s2">"check"</span><span class="p">,</span> <span class="s2">"failure_case"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="checks-personalizados">
+<h3>2.2 Checks personalizados<a class="headerlink" href="#checks-personalizados" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CHECKS PERSONALIZADOS — logica propia</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Pa.Check recibe una funcion que retorna True/False por elemento</span>
+<span class="c1"># o una funcion que recibe la Serie completa y retorna True/False</span>
+
+<span class="n">esquema_avanzado</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">({</span>
+    
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="nb">str</span><span class="p">,</span>
+        <span class="n">checks</span><span class="o">=</span><span class="p">[</span>
+            <span class="c1"># Check personalizado: debe estar en minusculas</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="o">==</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+                <span class="n">error</span><span class="o">=</span><span class="s2">"El producto debe estar en minusculas"</span>
+            <span class="p">),</span>
+            <span class="c1"># Check personalizado: no debe tener espacios al inicio o final</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span> <span class="o">==</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+                <span class="n">error</span><span class="o">=</span><span class="s2">"El producto no debe tener espacios al inicio o final"</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">),</span>
+    
+    <span class="s2">"precio"</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="nb">float</span><span class="p">,</span>
+        <span class="n">checks</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+            <span class="c1"># Check a nivel de Serie: el promedio debe ser mayor a 100</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">,</span>
+                <span class="n">error</span><span class="o">=</span><span class="s2">"El precio promedio del lote es sospechosamente bajo"</span>
+            <span class="p">),</span>
+        <span class="p">]</span>
+    <span class="p">),</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Esquema con checks personalizados definido."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="esquema-con-decoradores-forma-avanzada">
+<h3>2.3 Esquema con decoradores (forma avanzada)<a class="headerlink" href="#esquema-con-decoradores-forma-avanzada" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PANDERA CON CLASES — SchemaModel</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Forma mas limpia de definir esquemas, similar a Pydantic</span>
+<span class="c1"># Cada campo es un atributo de la clase</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandera</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandera.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Series</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">EsquemaVentas</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">DataFrameModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Esquema de validacion para el DataFrame de ventas."""</span>
+    
+    <span class="n">fecha</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">DateTime</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">producto</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">isin</span><span class="o">=</span><span class="p">[</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"reporte"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">,</span> <span class="s2">"app web"</span><span class="p">,</span> <span class="s2">"pipeline etl"</span><span class="p">],</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">region</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span>
+        <span class="n">isin</span><span class="o">=</span><span class="p">[</span><span class="s2">"bogota"</span><span class="p">,</span> <span class="s2">"medellin"</span><span class="p">,</span> <span class="s2">"cali"</span><span class="p">,</span> <span class="s2">"manizales"</span><span class="p">,</span> <span class="s2">"barranquilla"</span><span class="p">],</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">unidades</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">precio</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">calificacion</span><span class="p">:</span> <span class="n">Series</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+        <span class="n">strict</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># No permite columnas adicionales</span>
+        <span class="n">coerce</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># No intenta convertir tipos automaticamente</span>
+
+<span class="c1"># Validar con la clase</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">EsquemaVentas</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">datos_buenos</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"PASO con SchemaModel"</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">pa</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">SchemaError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"FALLO: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="validacion-con-pydantic">
+<h2>3. Validacion con Pydantic<a class="headerlink" href="#validacion-con-pydantic" title="Link to this heading">#</a></h2>
+<p>Pydantic valida registros individuales (diccionarios, JSON). Es el estandar en Python para validar datos que vienen de APIs, archivos de configuracion o formularios. Mientras pandera valida DataFrames completos, Pydantic valida fila por fila.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PYDANTIC — DEFINIR UN MODELO DE DATOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">field_validator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TransaccionVenta</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Modelo de validacion para una transaccion de venta."""</span>
+    
+    <span class="c1"># Literal restringe a valores exactos</span>
+    <span class="n">producto</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"reporte"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">,</span> <span class="s2">"app web"</span><span class="p">,</span> <span class="s2">"pipeline etl"</span><span class="p">]</span>
+    <span class="n">region</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"bogota"</span><span class="p">,</span> <span class="s2">"medellin"</span><span class="p">,</span> <span class="s2">"cali"</span><span class="p">,</span> <span class="s2">"manizales"</span><span class="p">,</span> <span class="s2">"barranquilla"</span><span class="p">]</span>
+    
+    <span class="c1"># Field define restricciones numericas</span>
+    <span class="n">unidades</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Unidades vendidas"</span><span class="p">)</span>
+    <span class="n">precio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Precio unitario en COP"</span><span class="p">)</span>
+    <span class="n">calificacion</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Calificacion del cliente"</span><span class="p">)</span>
+    
+    <span class="n">fecha</span><span class="p">:</span> <span class="n">date</span>
+    
+    <span class="c1"># Validador personalizado: producto debe estar en minusculas</span>
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">producto_minusculas</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"El producto debe estar en minusculas, recibido: '</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Modelo Pydantic definido."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Campos: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">TransaccionVenta</span><span class="o">.</span><span class="n">model_fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VALIDAR UN REGISTRO BUENO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Pydantic recibe un diccionario y retorna un objeto validado</span>
+<span class="n">registro_bueno</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="s2">"dashboard"</span><span class="p">,</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="s2">"bogota"</span><span class="p">,</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="s2">"precio"</span><span class="p">:</span> <span class="mf">450.0</span><span class="p">,</span>
+    <span class="s2">"calificacion"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="s2">"2024-06-01"</span>
+<span class="p">}</span>
+
+<span class="n">venta</span> <span class="o">=</span> <span class="n">TransaccionVenta</span><span class="p">(</span><span class="o">**</span><span class="n">registro_bueno</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"PASO:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Producto: </span><span class="si">{</span><span class="n">venta</span><span class="o">.</span><span class="n">producto</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Region: </span><span class="si">{</span><span class="n">venta</span><span class="o">.</span><span class="n">region</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Ingreso: </span><span class="si">{</span><span class="n">venta</span><span class="o">.</span><span class="n">unidades</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">venta</span><span class="o">.</span><span class="n">precio</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VALIDAR UN REGISTRO MALO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">ValidationError</span>
+
+<span class="n">registro_malo</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="s2">"DASHBOARD"</span><span class="p">,</span>        <span class="c1"># Mayusculas</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="s2">"tokio"</span><span class="p">,</span>              <span class="c1"># No esta en la lista</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span>                 <span class="c1"># Negativo</span>
+    <span class="s2">"precio"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>                    <span class="c1"># Cero</span>
+    <span class="s2">"calificacion"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>              <span class="c1"># Fuera de rango</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="s2">"2024-06-01"</span>
+<span class="p">}</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">venta</span> <span class="o">=</span> <span class="n">TransaccionVenta</span><span class="p">(</span><span class="o">**</span><span class="n">registro_malo</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"FALLO (esperado). Errores: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">error_count</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">errors</span><span class="p">():</span>
+        <span class="n">campo</span> <span class="o">=</span> <span class="n">error</span><span class="p">[</span><span class="s1">'loc'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">mensaje</span> <span class="o">=</span> <span class="n">error</span><span class="p">[</span><span class="s1">'msg'</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">campo</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">mensaje</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VALIDAR UN DATAFRAME COMPLETO FILA POR FILA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Convertir DataFrame a lista de diccionarios y validar cada uno</span>
+<span class="c1"># Esto permite saber exactamente cuales filas fallaron</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validar_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">modelo</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Valida cada fila de un DataFrame contra un modelo Pydantic.</span>
+<span class="sd">    Retorna dos DataFrames: validas y rechazadas.</span>
+<span class="sd">    """</span>
+    <span class="n">validas</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">rechazadas</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">registro</span> <span class="o">=</span> <span class="n">modelo</span><span class="p">(</span><span class="o">**</span><span class="n">fila</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+            <span class="n">validas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fila</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">errores</span> <span class="o">=</span> <span class="s2">"; "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">err</span><span class="p">[</span><span class="s1">'loc'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">err</span><span class="p">[</span><span class="s1">'msg'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">errors</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="n">fila_con_error</span> <span class="o">=</span> <span class="n">fila</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">fila_con_error</span><span class="p">[</span><span class="s2">"errores"</span><span class="p">]</span> <span class="o">=</span> <span class="n">errores</span>
+            <span class="n">rechazadas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fila_con_error</span><span class="p">)</span>
+    
+    <span class="n">df_validas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">validas</span><span class="p">)</span> <span class="k">if</span> <span class="n">validas</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">df_rechazadas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rechazadas</span><span class="p">)</span> <span class="k">if</span> <span class="n">rechazadas</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">df_validas</span><span class="p">,</span> <span class="n">df_rechazadas</span>
+
+<span class="c1"># Aplicar a los datos malos</span>
+<span class="n">validas</span><span class="p">,</span> <span class="n">rechazadas</span> <span class="o">=</span> <span class="n">validar_dataframe</span><span class="p">(</span><span class="n">datos_malos</span><span class="p">,</span> <span class="n">TransaccionVenta</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas validas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">validas</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Filas rechazadas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rechazadas</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rechazadas</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Detalle de rechazadas:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rechazadas</span><span class="p">[[</span><span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">,</span> <span class="s2">"unidades"</span><span class="p">,</span> <span class="s2">"precio"</span><span class="p">,</span> <span class="s2">"errores"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="pandera-vs-pydantic-cuando-usar-cada-uno">
+<h3>Pandera vs Pydantic — cuando usar cada uno<a class="headerlink" href="#pandera-vs-pydantic-cuando-usar-cada-uno" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>pandera</p></th>
+<th class="head"><p>Pydantic</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Valida</p></td>
+<td><p>DataFrames completos</p></td>
+<td><p>Registros individuales</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mejor para</p></td>
+<td><p>Archivos CSV, tablas SQL, lotes</p></td>
+<td><p>APIs, JSON, formularios</p></td>
+</tr>
+<tr class="row-even"><td><p>Checks</p></td>
+<td><p>Estadisticos (media, distribucion)</p></td>
+<td><p>Por campo (tipo, rango)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ecosistema</p></td>
+<td><p>pandas, pyspark</p></td>
+<td><p>FastAPI, Django, cualquier backend</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="validacion-con-great-expectations">
+<h2>4. Validacion con Great Expectations<a class="headerlink" href="#validacion-con-great-expectations" title="Link to this heading">#</a></h2>
+<p>Great Expectations (GX) es el framework mas completo para calidad de datos. Define «expectativas» sobre los datos (como pruebas unitarias pero para datos), las ejecuta y genera reportes HTML con los resultados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GREAT EXPECTATIONS — SETUP BASICO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">great_expectations</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gx</span>
+
+<span class="c1"># Crear un contexto efimero (sin archivos de config)</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">gx</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span>
+
+<span class="c1"># Conectar nuestro DataFrame como fuente de datos</span>
+<span class="n">data_source</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">data_sources</span><span class="o">.</span><span class="n">add_pandas</span><span class="p">(</span><span class="s2">"ventas"</span><span class="p">)</span>
+<span class="n">data_asset</span> <span class="o">=</span> <span class="n">data_source</span><span class="o">.</span><span class="n">add_dataframe_asset</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"transacciones"</span><span class="p">)</span>
+<span class="n">batch_definition</span> <span class="o">=</span> <span class="n">data_asset</span><span class="o">.</span><span class="n">add_batch_definition_whole_dataframe</span><span class="p">(</span><span class="s2">"lote_completo"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Contexto de Great Expectations creado."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DEFINIR EXPECTATIVAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Crear una suite de expectativas (como una suite de tests)</span>
+<span class="n">suite</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">suites</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">ExpectationSuite</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"validacion_ventas"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Cada expectativa es una regla sobre los datos</span>
+<span class="c1"># El nombre del metodo describe lo que espera</span>
+
+<span class="c1"># 1. La columna 'producto' debe existir</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectColumnToExist</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">"producto"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 2. La columna 'producto' no debe tener nulos</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectColumnValuesToNotBeNull</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">"producto"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 3. Los valores de 'producto' deben ser de un conjunto</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectColumnValuesToBeInSet</span><span class="p">(</span>
+        <span class="n">column</span><span class="o">=</span><span class="s2">"producto"</span><span class="p">,</span>
+        <span class="n">value_set</span><span class="o">=</span><span class="p">[</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"reporte"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">,</span> <span class="s2">"app web"</span><span class="p">,</span> <span class="s2">"pipeline etl"</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 4. 'unidades' debe ser positivo</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectColumnValuesToBeBetween</span><span class="p">(</span>
+        <span class="n">column</span><span class="o">=</span><span class="s2">"unidades"</span><span class="p">,</span>
+        <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_value</span><span class="o">=</span><span class="mi">200</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 5. 'precio' no debe tener nulos</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectColumnValuesToNotBeNull</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">"precio"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 6. 'precio' debe ser positivo</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectColumnValuesToBeBetween</span><span class="p">(</span>
+        <span class="n">column</span><span class="o">=</span><span class="s2">"precio"</span><span class="p">,</span>
+        <span class="n">min_value</span><span class="o">=</span><span class="mf">0.01</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 7. 'calificacion' entre 1 y 5</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectColumnValuesToBeBetween</span><span class="p">(</span>
+        <span class="n">column</span><span class="o">=</span><span class="s2">"calificacion"</span><span class="p">,</span>
+        <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_value</span><span class="o">=</span><span class="mi">5</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 8. No debe haber filas duplicadas</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectCompoundColumnsToBeUnique</span><span class="p">(</span>
+        <span class="n">column_list</span><span class="o">=</span><span class="p">[</span><span class="s2">"fecha"</span><span class="p">,</span> <span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 9. La tabla debe tener entre 1 y 10000 filas</span>
+<span class="n">suite</span><span class="o">.</span><span class="n">add_expectation</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">expectations</span><span class="o">.</span><span class="n">ExpectTableRowCountToBeBetween</span><span class="p">(</span>
+        <span class="n">min_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_value</span><span class="o">=</span><span class="mi">10000</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Suite definida con </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">suite</span><span class="o">.</span><span class="n">expectations</span><span class="p">)</span><span class="si">}</span><span class="s2"> expectativas."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EJECUTAR VALIDACION SOBRE DATOS BUENOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Crear un validation definition</span>
+<span class="n">validation_def</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">validation_definitions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">ValidationDefinition</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"validar_datos_buenos"</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">batch_definition</span><span class="p">,</span>
+        <span class="n">suite</span><span class="o">=</span><span class="n">suite</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Ejecutar</span>
+<span class="n">batch_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"dataframe"</span><span class="p">:</span> <span class="n">datos_buenos</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">validation_def</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">batch_parameters</span><span class="o">=</span><span class="n">batch_params</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Resultado: </span><span class="si">{</span><span class="s1">'PASO'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'FALLO'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expectativas evaluadas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s1">'OK'</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">success</span> <span class="k">else</span> <span class="s1">'FALLO'</span>
+    <span class="n">exp_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">expectation_config</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  [</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">exp_type</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EJECUTAR VALIDACION SOBRE DATOS MALOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">validation_def2</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">validation_definitions</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">gx</span><span class="o">.</span><span class="n">ValidationDefinition</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"validar_datos_malos"</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">batch_definition</span><span class="p">,</span>
+        <span class="n">suite</span><span class="o">=</span><span class="n">suite</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">batch_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"dataframe"</span><span class="p">:</span> <span class="n">datos_malos</span><span class="p">}</span>
+<span class="n">result_malo</span> <span class="o">=</span> <span class="n">validation_def2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">batch_parameters</span><span class="o">=</span><span class="n">batch_params</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Resultado: </span><span class="si">{</span><span class="s1">'PASO'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">result_malo</span><span class="o">.</span><span class="n">success</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'FALLO'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result_malo</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s1">'OK'</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">success</span> <span class="k">else</span> <span class="s1">'FALLO'</span>
+    <span class="n">exp_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">expectation_config</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  [</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">exp_type</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">success</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="s1">'get'</span><span class="p">):</span>
+        <span class="n">unexpected</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'unexpected_count'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unexpected</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"          </span><span class="si">{</span><span class="n">unexpected</span><span class="si">}</span><span class="s2"> valores inesperados"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="integrar-validacion-en-un-pipeline">
+<h2>5. Integrar validacion en un pipeline<a class="headerlink" href="#integrar-validacion-en-un-pipeline" title="Link to this heading">#</a></h2>
+<p>Todo lo anterior fue interactivo — en un notebook, mirando los resultados. En produccion, la validacion es un paso automatico dentro de un pipeline: llegan datos, se validan, si pasan siguen al dashboard, si no se rechazan y alguien recibe una alerta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUNCION DE PIPELINE CON VALIDACION</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">pipeline_ventas</span><span class="p">(</span><span class="n">ruta_csv</span><span class="p">,</span> <span class="n">esquema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pipeline que carga, valida y procesa datos de ventas.</span>
+<span class="sd">    Si la validacion falla, rechaza el lote completo.</span>
+<span class="sd">    </span>
+<span class="sd">    Parametros:</span>
+<span class="sd">        ruta_csv (str): ruta al archivo CSV</span>
+<span class="sd">        esquema: esquema de pandera para validar</span>
+<span class="sd">    </span>
+<span class="sd">    Retorna:</span>
+<span class="sd">        dict: resultado del pipeline con metricas</span>
+<span class="sd">    """</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">,</span>
+        <span class="s2">"archivo"</span><span class="p">:</span> <span class="n">ruta_csv</span><span class="p">,</span>
+        <span class="s2">"estado"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"filas"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"errores"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># 1. Cargar</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ruta_csv</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"fecha"</span><span class="p">])</span>
+        <span class="n">resultado</span><span class="p">[</span><span class="s2">"filas"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] Cargado: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">resultado</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"ERROR_CARGA"</span>
+        <span class="n">resultado</span><span class="p">[</span><span class="s2">"errores"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] Error de carga: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resultado</span>
+    
+    <span class="c1"># 2. Validar</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">df_validado</span> <span class="o">=</span> <span class="n">esquema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">resultado</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"APROBADO"</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] Validacion: APROBADO"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">pa</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">SchemaErrors</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">resultado</span><span class="p">[</span><span class="s2">"estado"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"RECHAZADO"</span>
+        <span class="n">resultado</span><span class="p">[</span><span class="s2">"errores"</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">failure_cases</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s2">"records"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] Validacion: RECHAZADO"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] Errores: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">failure_cases</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resultado</span>
+    
+    <span class="c1"># 3. Procesar (solo si paso la validacion)</span>
+    <span class="n">df_validado</span><span class="p">[</span><span class="s2">"ingreso"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_validado</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_validado</span><span class="p">[</span><span class="s2">"precio"</span><span class="p">]</span>
+    <span class="n">resultado</span><span class="p">[</span><span class="s2">"ingreso_total"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_validado</span><span class="p">[</span><span class="s2">"ingreso"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] Procesado: ingreso total = $</span><span class="si">{</span><span class="n">resultado</span><span class="p">[</span><span class="s1">'ingreso_total'</span><span class="p">]</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    
+    <span class="c1"># 4. Guardar</span>
+    <span class="n">df_validado</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"datos_aprobados.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] Guardado: datos_aprobados.csv"</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">resultado</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PROBAR CON DATOS BUENOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Guardar datos buenos como CSV para simular la carga</span>
+<span class="n">datos_buenos</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"lote_bueno.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  PIPELINE — LOTE BUENO"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">resultado_bueno</span> <span class="o">=</span> <span class="n">pipeline_ventas</span><span class="p">(</span><span class="s2">"lote_bueno.csv"</span><span class="p">,</span> <span class="n">esquema_ventas</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Estado final: </span><span class="si">{</span><span class="n">resultado_bueno</span><span class="p">[</span><span class="s1">'estado'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PROBAR CON DATOS MALOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">datos_malos</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"lote_malo.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  PIPELINE — LOTE MALO"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">resultado_malo</span> <span class="o">=</span> <span class="n">pipeline_ventas</span><span class="p">(</span><span class="s2">"lote_malo.csv"</span><span class="p">,</span> <span class="n">esquema_ventas</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Estado final: </span><span class="si">{</span><span class="n">resultado_malo</span><span class="p">[</span><span class="s1">'estado'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Errores: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">resultado_malo</span><span class="p">[</span><span class="s1">'errores'</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GUARDAR LOG DE VALIDACION</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># En produccion, cada ejecucion del pipeline deja un log</span>
+<span class="c1"># para rastrear que lotes pasaron y cuales no</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="p">[</span><span class="n">resultado_bueno</span><span class="p">,</span> <span class="n">resultado_malo</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"log_validacion.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Log guardado: log_validacion.json"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Este log se puede cargar en un dashboard de calidad de datos."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Herramienta</p></th>
+<th class="head"><p>Que valida</p></th>
+<th class="head"><p>Cuando usarla</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>pandera</strong></p></td>
+<td><p>DataFrames completos contra un esquema</p></td>
+<td><p>Archivos CSV, cargas batch, tablas SQL</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Pydantic</strong></p></td>
+<td><p>Registros individuales (dicts/JSON)</p></td>
+<td><p>APIs, formularios, datos en streaming</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Great Expectations</strong></p></td>
+<td><p>Suites de expectativas con reportes</p></td>
+<td><p>Pipelines de datos en produccion</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="lo-esencial">
+<h3>Lo esencial<a class="headerlink" href="#lo-esencial" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepto</p></th>
+<th class="head"><p>Lo que importa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Esquema</strong></p></td>
+<td><p>Define que columnas, que tipos, que rangos y que valores acepta</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Validacion</strong></p></td>
+<td><p>Ejecuta el esquema contra los datos y dice si pasan o no</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>lazy=True</strong></p></td>
+<td><p>Recopila todos los errores en vez de parar en el primero</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Pipeline</strong></p></td>
+<td><p>La validacion es un paso automatico: cargar, validar, procesar o rechazar</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Log</strong></p></td>
+<td><p>Cada ejecucion deja registro de que paso y que fallo</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="siguiente-paso">
+<h3>Siguiente paso<a class="headerlink" href="#siguiente-paso" title="Link to this heading">#</a></h3>
+<p>En el <strong>Notebook 2.2</strong> veremos como disenar un producto de datos que sea compartible, modular y documentado — las caracteristicas que hacen que otros equipos puedan usarlo sin depender de quien lo construyo.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../Unidad2.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Unidad 2 - Caracteristicas de Productos de Datos</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-2-caracteristicas-de-productos-de-datos">Unidad 2: Caracteristicas de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-diferencia-entre-limpiar-y-validar">1. La diferencia entre limpiar y validar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-con-pandera">2. Validacion con pandera</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esquema-basico">2.1 Esquema basico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checks-personalizados">2.2 Checks personalizados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#esquema-con-decoradores-forma-avanzada">2.3 Esquema con decoradores (forma avanzada)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-con-pydantic">3. Validacion con Pydantic</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandera-vs-pydantic-cuando-usar-cada-uno">Pandera vs Pydantic — cuando usar cada uno</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-con-great-expectations">4. Validacion con Great Expectations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrar-validacion-en-un-pipeline">5. Integrar validacion en un pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-esencial">Lo esencial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
