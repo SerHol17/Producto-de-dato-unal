@@ -1,0 +1,1726 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.4 — Storytelling con Datos &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_2/U2_S4_storytelling';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="Ejemplo Practico — Colombianos Presos en el Exterior" href="Ejemplo_Practico_API.html" />
+    <link rel="prev" title="2.3 — KPIs y Metricas de Producto" href="U2_S3_kpis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Ejercicio_U1.html">Ejercicio Unidad 1 — Python para Datos + Limpieza y Normalizacion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Taller1.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_Profiling.html">Pandas Profiling — Diagnostico automatico de un dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2 - Caracteristicas de Productos de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="U2_S1_calidad_datos.html">2.1 — Calidad de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U2_S2_diseno_productos.html">2.2 — Diseno de productos de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U2_S3_kpis.html">2.3 — KPIs y Metricas de Producto</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.4 — Storytelling con Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejemplo_Practico_API.html">Ejemplo Practico — Colombianos Presos en el Exterior</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_2/U2_S4_storytelling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_2/U2_S4_storytelling.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_2/U2_S4_storytelling.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.4 — Storytelling con Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-2-caracteristicas-de-productos-de-datos">Unidad 2: Caracteristicas de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-narrativa-contexto-hallazgo-accion">1. Estructura narrativa: Contexto - Hallazgo - Accion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-de-diseno-visual">2. Principios de diseno visual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-completo-de-los-datos-al-memo-ejecutivo">3. Ejemplo completo: de los datos al memo ejecutivo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-estructura-de-la-historia">La estructura de la historia</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-comunes-que-matan-la-historia">4. Errores comunes que matan la historia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plantilla-de-storytelling-reutilizable">5. Plantilla de storytelling reutilizable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regla-de-oro">La regla de oro</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="storytelling-con-datos">
+<h1>2.4 — Storytelling con Datos<a class="headerlink" href="#storytelling-con-datos" title="Link to this heading">#</a></h1>
+<section id="unidad-2-caracteristicas-de-productos-de-datos">
+<h2>Unidad 2: Caracteristicas de Productos de Datos<a class="headerlink" href="#unidad-2-caracteristicas-de-productos-de-datos" title="Link to this heading">#</a></h2>
+<p>Un grafico correcto muestra datos. Una historia con datos genera una decision. La diferencia no es tecnica — es narrativa: en que orden presentas, que contexto das antes del numero, como guias a la audiencia desde «esto paso» hasta «esto hay que hacer».</p>
+<p>Este notebook no es sobre hacer graficos bonitos. Es sobre construir una narrativa que conecte datos con acciones.</p>
+<section id="contenido">
+<h3>Contenido:<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Estructura narrativa: contexto, hallazgo, accion</p></li>
+<li><p>Principios de diseno visual</p></li>
+<li><p>Ejemplo completo: de los datos al memo ejecutivo</p></li>
+<li><p>Errores comunes que matan la historia</p></li>
+<li><p>Plantilla de storytelling reutilizable</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mticker</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'font.family'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'sans-serif'</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'font.size'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'axes.spines.top'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'axes.spines.right'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DATOS — reutilizamos el dataset de KPIs (notebook 2.3)</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">meses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">'2024-01-01'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'MS'</span><span class="p">)</span>
+
+<span class="n">df_kpis</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">'mes'</span><span class="p">:</span> <span class="n">meses</span><span class="p">,</span>
+    <span class="s1">'mrr'</span><span class="p">:</span> <span class="p">[</span><span class="mi">28500</span><span class="p">,</span> <span class="mi">30200</span><span class="p">,</span> <span class="mi">31800</span><span class="p">,</span> <span class="mi">33100</span><span class="p">,</span> <span class="mi">32500</span><span class="p">,</span> <span class="mi">31900</span><span class="p">,</span>
+            <span class="mi">33800</span><span class="p">,</span> <span class="mi">35200</span><span class="p">,</span> <span class="mi">34100</span><span class="p">,</span> <span class="mi">36500</span><span class="p">,</span> <span class="mi">37800</span><span class="p">,</span> <span class="mi">39200</span><span class="p">],</span>
+    <span class="s1">'clientes_activos'</span><span class="p">:</span> <span class="p">[</span><span class="mi">285</span><span class="p">,</span> <span class="mi">302</span><span class="p">,</span> <span class="mi">318</span><span class="p">,</span> <span class="mi">331</span><span class="p">,</span> <span class="mi">325</span><span class="p">,</span> <span class="mi">319</span><span class="p">,</span>
+                         <span class="mi">338</span><span class="p">,</span> <span class="mi">352</span><span class="p">,</span> <span class="mi">341</span><span class="p">,</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">378</span><span class="p">,</span> <span class="mi">392</span><span class="p">],</span>
+    <span class="s1">'retencion'</span><span class="p">:</span> <span class="p">[</span><span class="mf">95.2</span><span class="p">,</span> <span class="mf">94.1</span><span class="p">,</span> <span class="mf">93.8</span><span class="p">,</span> <span class="mf">92.5</span><span class="p">,</span> <span class="mf">89.7</span><span class="p">,</span> <span class="mf">88.3</span><span class="p">,</span>
+                  <span class="mf">91.2</span><span class="p">,</span> <span class="mf">93.1</span><span class="p">,</span> <span class="mf">91.8</span><span class="p">,</span> <span class="mf">94.5</span><span class="p">,</span> <span class="mf">95.1</span><span class="p">,</span> <span class="mf">95.8</span><span class="p">],</span>
+    <span class="s1">'churn'</span><span class="p">:</span> <span class="p">[</span><span class="mf">4.8</span><span class="p">,</span> <span class="mf">5.9</span><span class="p">,</span> <span class="mf">6.2</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">,</span> <span class="mf">11.7</span><span class="p">,</span>
+             <span class="mf">8.8</span><span class="p">,</span> <span class="mf">6.9</span><span class="p">,</span> <span class="mf">8.2</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">],</span>
+    <span class="s1">'tickets_soporte'</span><span class="p">:</span> <span class="p">[</span><span class="mi">142</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span>
+                        <span class="mi">245</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">205</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">148</span><span class="p">,</span> <span class="mi">135</span><span class="p">],</span>
+    <span class="s1">'nps'</span><span class="p">:</span> <span class="p">[</span><span class="mi">72</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">76</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%b'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dataset de KPIs cargado: 12 meses"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset de KPIs cargado: 12 meses
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="estructura-narrativa-contexto-hallazgo-accion">
+<h2>1. Estructura narrativa: Contexto - Hallazgo - Accion<a class="headerlink" href="#estructura-narrativa-contexto-hallazgo-accion" title="Link to this heading">#</a></h2>
+<p>Toda historia con datos tiene tres partes:</p>
+<ol class="arabic simple">
+<li><p><strong>Contexto</strong>: que estamos midiendo y por que importa</p></li>
+<li><p><strong>Hallazgo</strong>: que encontramos en los datos (el giro)</p></li>
+<li><p><strong>Accion</strong>: que debemos hacer al respecto</p></li>
+</ol>
+<p>Sin contexto, el numero no tiene significado. Sin hallazgo, no hay historia. Sin accion, no hay consecuencia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># MAL: grafico sin historia</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Este grafico es tecnicaente correcto pero no dice nada</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes'</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Churn'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'%'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Problemas con este grafico:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - El titulo no dice nada ('Churn' — que pasa con el churn?)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - No hay umbral (es bueno o malo?)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - No hay contexto (por que deberia importarme?)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - No hay accion (que hago con esta informacion?)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/80195f62fb33c9d033ca31792f03fd05f8cc2dda0cc052d73d21aaa45dc0be16.png" src="../../_images/80195f62fb33c9d033ca31792f03fd05f8cc2dda0cc052d73d21aaa45dc0be16.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Problemas con este grafico:
+  - El titulo no dice nada ('Churn' — que pasa con el churn?)
+  - No hay umbral (es bueno o malo?)
+  - No hay contexto (por que deberia importarme?)
+  - No hay accion (que hago con esta informacion?)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># BIEN: el mismo grafico con historia</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># La linea principal</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes'</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># Umbral — la linea que separa "aceptable" de "alerta"</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">5.3</span><span class="p">,</span> <span class="s1">'Umbral 5%'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'right'</span><span class="p">)</span>
+
+<span class="c1"># Sombrear la zona critica (mayo-junio)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">meses</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">'Crisis mayo-junio:</span><span class="se">\n</span><span class="s1">bug en facturacion'</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">11</span><span class="p">),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">'-&gt;'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+
+<span class="c1"># Anotar la recuperacion</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">'Recuperacion:</span><span class="se">\n</span><span class="s1">correccion + campaña'</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">9</span><span class="p">]),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">'-&gt;'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+
+<span class="c1"># Titulo que cuenta la historia</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'El churn se disparo en mayo por un bug en facturacion,</span><span class="se">\n</span><span class="s1">'</span>
+             <span class="s1">'pero ya estamos por debajo del umbral desde octubre'</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Tasa de cancelacion (%)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+
+<span class="c1"># Etiquetas de mes legibles</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">meses</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Diferencia:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - El titulo cuenta QUE PASO (contexto + hallazgo)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - El umbral dice si es bueno o malo"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Las anotaciones explican POR QUE paso"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - La zona sombreada dirige la mirada al problema"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/54bc68d0c799d037055ade15599be1c1ac00b2e9087e341d5c01da173eb0b011.png" src="../../_images/54bc68d0c799d037055ade15599be1c1ac00b2e9087e341d5c01da173eb0b011.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Diferencia:
+  - El titulo cuenta QUE PASO (contexto + hallazgo)
+  - El umbral dice si es bueno o malo
+  - Las anotaciones explican POR QUE paso
+  - La zona sombreada dirige la mirada al problema
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="principios-de-diseno-visual">
+<h2>2. Principios de diseno visual<a class="headerlink" href="#principios-de-diseno-visual" title="Link to this heading">#</a></h2>
+<p>Menos es mas. Cada elemento que agregamos al grafico compite por la atencion del lector. Solo debe quedar lo que aporta a la historia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PRINCIPIO 1: eliminar basura visual (chartjunk)</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">datos</span> <span class="o">=</span> <span class="n">df_kpis</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'mes_nombre'</span><span class="p">)[</span><span class="s1">'mrr'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
+
+<span class="c1"># MAL: lleno de ruido</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">datos</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">datos</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">'#1f77b4'</span><span class="p">,</span> <span class="s1">'#ff7f0e'</span><span class="p">,</span> <span class="s1">'#2ca02c'</span><span class="p">,</span>
+       <span class="s1">'#d62728'</span><span class="p">,</span> <span class="s1">'#9467bd'</span><span class="p">,</span> <span class="s1">'#8c564b'</span><span class="p">,</span> <span class="s1">'#e377c2'</span><span class="p">,</span> <span class="s1">'#7f7f7f'</span><span class="p">,</span>
+       <span class="s1">'#bcbd22'</span><span class="p">,</span> <span class="s1">'#17becf'</span><span class="p">,</span> <span class="s1">'#aec7e8'</span><span class="p">,</span> <span class="s1">'#ffbb78'</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'MRR Mensual (Miles $)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Miles de $'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="c1"># Agregar borde y fondo</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">'#f0f0f0'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">spine</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">spine</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="s1">'Fuente: Sistema interno. Elaborado: Equipo de datos. Fecha: 2024.'</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">)</span>
+
+<span class="c1"># BIEN: limpio</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'#d1d5db'</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+<span class="n">colores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'#007B3E'</span>  <span class="c1"># Solo destacar el ultimo mes</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">datos</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">datos</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colores</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'MRR crecio 37</span><span class="si">% e</span><span class="s1">n el ano, cerrando en $39.2K'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'MRR (miles $)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="c1"># Solo anotar el primero y el ultimo</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">datos</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'$</span><span class="si">{</span><span class="n">datos</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">K'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">datos</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'$</span><span class="si">{</span><span class="n">datos</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">K'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">'Con ruido'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">'Sin ruido'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cc35bda234606a6e2c6b6d9f99c1597b6bd83b0b142bba0fd14e9c60203c3982.png" src="../../_images/cc35bda234606a6e2c6b6d9f99c1597b6bd83b0b142bba0fd14e9c60203c3982.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PRINCIPIO 2: usar color con proposito</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># El color no es decoracion — es significado</span>
+<span class="c1"># Gris = contexto, color = lo que importa</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Todo en gris excepto lo que cuenta la historia</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meses</span><span class="p">,</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'retencion'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#d1d5db'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Retencion'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">meses</span><span class="p">,</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'nps'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#d1d5db'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'NPS'</span><span class="p">)</span>
+
+<span class="c1"># Destacar la caida</span>
+<span class="n">caida</span> <span class="o">=</span> <span class="n">df_kpis</span><span class="p">[</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'retencion'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">caida</span><span class="p">[</span><span class="s1">'mes'</span><span class="p">],</span> <span class="n">caida</span><span class="p">[</span><span class="s1">'retencion'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Destacar la recuperacion</span>
+<span class="n">recup</span> <span class="o">=</span> <span class="n">df_kpis</span><span class="p">[</span><span class="n">df_kpis</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">recup</span><span class="p">[</span><span class="s1">'mes'</span><span class="p">],</span> <span class="n">recup</span><span class="p">[</span><span class="s1">'retencion'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'La retencion cayo por debajo del 90</span><span class="si">% e</span><span class="s1">n mayo-junio</span><span class="se">\n</span><span class="s1">'</span>
+             <span class="s1">'y tardo 4 meses en recuperarse'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">':'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">90.5</span><span class="p">,</span> <span class="s1">'Umbral 90%'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">meses</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Porcentaje'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Reglas de color:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  Gris: contexto, lo que no necesita atencion"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  Rojo: problema, lo que salio mal"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  Verde: solucion, lo que esta mejorando"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  Un color por idea. Si todo tiene color, nada destaca."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6a6b54d5cb06a02b2cf82dc2d170638668d277a4f87b934bc42afb519c52efdf.png" src="../../_images/6a6b54d5cb06a02b2cf82dc2d170638668d277a4f87b934bc42afb519c52efdf.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reglas de color:
+  Gris: contexto, lo que no necesita atencion
+  Rojo: problema, lo que salio mal
+  Verde: solucion, lo que esta mejorando
+  Un color por idea. Si todo tiene color, nada destaca.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># PRINCIPIO 3: el titulo es la conclusion, no la descripcion</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">titulos_malos</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Ventas por region"</span><span class="p">,</span>
+    <span class="s2">"Grafico de barras del MRR"</span><span class="p">,</span>
+    <span class="s2">"Evolucion del churn 2024"</span><span class="p">,</span>
+    <span class="s2">"Datos de soporte"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">titulos_buenos</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Bogota concentra el 45</span><span class="si">% d</span><span class="s2">e las ventas, Cali esta cayendo"</span><span class="p">,</span>
+    <span class="s2">"El MRR crecio 37</span><span class="si">% e</span><span class="s2">n el ano, cerrando en $39.2K"</span><span class="p">,</span>
+    <span class="s2">"El bug de mayo disparo el churn al 11.7%, ya esta controlado"</span><span class="p">,</span>
+    <span class="s2">"Los tickets de soporte bajaron 58</span><span class="si">% d</span><span class="s2">espues del rediseno del onboarding"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Titulos descriptivos vs titulos que cuentan la historia:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">malo</span><span class="p">,</span> <span class="n">bueno</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">titulos_malos</span><span class="p">,</span> <span class="n">titulos_buenos</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  MAL:  </span><span class="si">{</span><span class="n">malo</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  BIEN: </span><span class="si">{</span><span class="n">bueno</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Titulos descriptivos vs titulos que cuentan la historia:
+
+  MAL:  Ventas por region
+  BIEN: Bogota concentra el 45% de las ventas, Cali esta cayendo
+
+  MAL:  Grafico de barras del MRR
+  BIEN: El MRR crecio 37% en el ano, cerrando en $39.2K
+
+  MAL:  Evolucion del churn 2024
+  BIEN: El bug de mayo disparo el churn al 11.7%, ya esta controlado
+
+  MAL:  Datos de soporte
+  BIEN: Los tickets de soporte bajaron 58% despues del rediseno del onboarding
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="ejemplo-completo-de-los-datos-al-memo-ejecutivo">
+<h2>3. Ejemplo completo: de los datos al memo ejecutivo<a class="headerlink" href="#ejemplo-completo-de-los-datos-al-memo-ejecutivo" title="Link to this heading">#</a></h2>
+<p>Vamos a construir una presentacion de 4 graficos que cuente una historia completa sobre lo que paso en el 2024. La audiencia es el gerente general.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GRAFICO 1: EL CONTEXTO — como va el negocio</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="n">mrr</span> <span class="o">=</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mrr'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'#d1d5db'</span><span class="p">]</span> <span class="o">*</span> <span class="mi">12</span>
+<span class="n">colores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'#007B3E'</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">],</span> <span class="n">mrr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colores</span><span class="p">)</span>
+
+<span class="c1"># Linea de tendencia</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="n">mrr</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">tendencia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">],</span> <span class="n">tendencia</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'El MRR crecio de $28.5K a $39.2K durante 2024 (+37%)'</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mrr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'$</span><span class="si">{</span><span class="n">mrr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">K'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">mrr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'$</span><span class="si">{</span><span class="n">mrr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">K'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'MRR (miles $)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">mrr</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">'historia_01_contexto.png'</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/10fc9d4f68cc8c33d897acb071d04887c27989a4f8a147f36e2fa1a175a11c09.png" src="../../_images/10fc9d4f68cc8c33d897acb071d04887c27989a4f8a147f36e2fa1a175a11c09.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GRAFICO 2: EL PROBLEMA — que salio mal</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="c1"># Churn</span>
+<span class="n">colores_churn</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'#007B3E'</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="k">else</span> <span class="s1">'#D4A843'</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">8</span> <span class="k">else</span> <span class="s1">'#DC2626'</span>
+                 <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]]</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colores_churn</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Churn se disparo en mayo-junio</span><span class="se">\n</span><span class="s1">por un bug en facturacion'</span><span class="p">,</span>
+              <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Churn (%)'</span><span class="p">)</span>
+
+<span class="c1"># Anotar el pico</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">df_kpis</span><span class="p">[</span><span class="s2">"churn"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s1">%'</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span>
+             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.8</span><span class="p">))</span>
+
+<span class="c1"># Tickets de soporte</span>
+<span class="n">colores_tickets</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'#007B3E'</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">170</span> <span class="k">else</span> <span class="s1">'#D4A843'</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="mi">250</span> <span class="k">else</span> <span class="s1">'#DC2626'</span>
+                   <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">]]</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colores_tickets</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Los tickets de soporte se duplicaron</span><span class="se">\n</span><span class="s1">en el mismo periodo'</span><span class="p">,</span>
+              <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Tickets / mes'</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">df_kpis</span><span class="p">[</span><span class="s2">"tickets_soporte"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span>
+             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">'historia_02_problema.png'</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2fee424dd4b34037ec6466d9e8a3c7f6a0cbd36d26c49a4a3eede4912f707872.png" src="../../_images/2fee424dd4b34037ec6466d9e8a3c7f6a0cbd36d26c49a4a3eede4912f707872.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GRAFICO 3: LA CORRELACION — por que paso</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">],</span>
+                     <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'RdYlGn_r'</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span>
+                     <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Anotar algunos meses</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_kpis</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Jan'</span><span class="p">,</span> <span class="s1">'May'</span><span class="p">,</span> <span class="s1">'Jun'</span><span class="p">,</span> <span class="s1">'Oct'</span><span class="p">,</span> <span class="s1">'Dec'</span><span class="p">]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">],</span>
+                    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">]),</span>
+                    <span class="n">textcoords</span><span class="o">=</span><span class="s1">'offset points'</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+
+<span class="c1"># Linea de tendencia</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_line</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">x_line</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Correlacion</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'tickets_soporte'</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'churn'</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Mas tickets de soporte = mas cancelaciones (r=</span><span class="si">{</span><span class="n">corr</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">)'</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Tickets de soporte / mes'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Churn (%)'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">'historia_03_causa.png'</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Correlacion: </span><span class="si">{</span><span class="n">corr</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Los meses con mas tickets son los meses con mas cancelaciones."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"El bug causo tickets, los tickets causaron frustacion, la frustracion causo churn."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b3fa95c655c265c32615422fd36a94582688827380073ac6b628e60ea3bec9e1.png" src="../../_images/b3fa95c655c265c32615422fd36a94582688827380073ac6b628e60ea3bec9e1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlacion: 0.99
+Los meses con mas tickets son los meses con mas cancelaciones.
+El bug causo tickets, los tickets causaron frustacion, la frustracion causo churn.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GRAFICO 4: LA SOLUCION — que hicimos y funciono</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># NPS como indicador de satisfaccion</span>
+<span class="n">colores_nps</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'#DC2626'</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">50</span> <span class="k">else</span> <span class="s1">'#D4A843'</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">65</span> <span class="k">else</span> <span class="s1">'#007B3E'</span>
+               <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'nps'</span><span class="p">]]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes_nombre'</span><span class="p">],</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'nps'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colores_nps</span><span class="p">)</span>
+
+<span class="c1"># Lineas de referencia NPS</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">':'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">':'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">11.5</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="s1">'NPS 50'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">11.5</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="s1">'NPS 70'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">)</span>
+
+<span class="c1"># Anotar las acciones tomadas</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">'Bug corregido</span><span class="se">\n</span><span class="s1">+ campaña de disculpa'</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'nps'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">6</span><span class="p">]),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">'-&gt;'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">'Rediseno de</span><span class="se">\n</span><span class="s1">onboarding'</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">df_kpis</span><span class="p">[</span><span class="s1">'nps'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">9</span><span class="p">]),</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">82</span><span class="p">),</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">'-&gt;'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'La satisfaccion del cliente se recupero:</span><span class="se">\n</span><span class="s1">NPS paso de 42 (junio) a 76 (diciembre)'</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Net Promoter Score'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">'historia_04_solucion.png'</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c27f38a89a1960c44c8164af9b4aff2996cb616192d986204cd0f3a323f4c655.png" src="../../_images/c27f38a89a1960c44c8164af9b4aff2996cb616192d986204cd0f3a323f4c655.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EL MEMO EJECUTIVO — la historia completa en texto</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">memo</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">MEMO EJECUTIVO — Revision Anual 2024</span>
+<span class="s2">====================================</span>
+
+<span class="s2">RESUMEN:</span>
+<span class="s2">El MRR crecio 37</span><span class="si">% d</span><span class="s2">urante 2024, cerrando en $39.2K. Sin embargo,</span>
+<span class="s2">un incidente critico en mayo-junio afecto la retencion y la</span>
+<span class="s2">satisfaccion de los clientes. Las acciones correctivas funcionaron</span>
+<span class="s2">y cerramos el ano en los mejores numeros historicos.</span>
+
+<span class="s2">QUE PASO:</span>
+<span class="s2">Un bug en el sistema de facturacion en mayo genero cobros</span>
+<span class="s2">duplicados a 45 clientes. Los tickets de soporte se duplicaron</span>
+<span class="s2">(de 175 a 320) y el churn alcanzo el 11.7</span><span class="si">% e</span><span class="s2">n junio — mas del</span>
+<span class="s2">doble del umbral del 5%.</span>
+
+<span class="s2">QUE HICIMOS:</span>
+<span class="s2">1. Correccion del bug (julio)</span>
+<span class="s2">2. Campaña de disculpa con credito del 50% (julio)</span>
+<span class="s2">3. Rediseno del proceso de onboarding (septiembre)</span>
+<span class="s2">4. Monitoreo proactivo de tickets como indicador adelantado</span>
+
+<span class="s2">RESULTADO:</span>
+<span class="s2">- Churn: de 11.7% (junio) a 4.2% (diciembre)</span>
+<span class="s2">- NPS: de 42 (junio) a 76 (diciembre)</span>
+<span class="s2">- Tickets: de 320 (junio) a 135 (diciembre)</span>
+<span class="s2">- MRR: el crecimiento no se detuvo a pesar del incidente</span>
+
+<span class="s2">APRENDIZAJE:</span>
+<span class="s2">Los tickets de soporte son un indicador adelantado del churn</span>
+<span class="s2">(correlacion 0.96). Implementamos una alerta automatica cuando</span>
+<span class="s2">los tickets superan 200/mes para intervenir antes de que los</span>
+<span class="s2">clientes cancelen.</span>
+<span class="s2">"""</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">memo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MEMO EJECUTIVO — Revision Anual 2024
+====================================
+
+RESUMEN:
+El MRR crecio 37% durante 2024, cerrando en $39.2K. Sin embargo,
+un incidente critico en mayo-junio afecto la retencion y la
+satisfaccion de los clientes. Las acciones correctivas funcionaron
+y cerramos el ano en los mejores numeros historicos.
+
+QUE PASO:
+Un bug en el sistema de facturacion en mayo genero cobros
+duplicados a 45 clientes. Los tickets de soporte se duplicaron
+(de 175 a 320) y el churn alcanzo el 11.7% en junio — mas del
+doble del umbral del 5%.
+
+QUE HICIMOS:
+1. Correccion del bug (julio)
+2. Campaña de disculpa con credito del 50% (julio)
+3. Rediseno del proceso de onboarding (septiembre)
+4. Monitoreo proactivo de tickets como indicador adelantado
+
+RESULTADO:
+- Churn: de 11.7% (junio) a 4.2% (diciembre)
+- NPS: de 42 (junio) a 76 (diciembre)
+- Tickets: de 320 (junio) a 135 (diciembre)
+- MRR: el crecimiento no se detuvo a pesar del incidente
+
+APRENDIZAJE:
+Los tickets de soporte son un indicador adelantado del churn
+(correlacion 0.96). Implementamos una alerta automatica cuando
+los tickets superan 200/mes para intervenir antes de que los
+clientes cancelen.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="la-estructura-de-la-historia">
+<h3>La estructura de la historia<a class="headerlink" href="#la-estructura-de-la-historia" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parte</p></th>
+<th class="head"><p>Grafico</p></th>
+<th class="head"><p>Mensaje</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Contexto</strong></p></td>
+<td><p>MRR mensual</p></td>
+<td><p>El negocio esta creciendo</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Problema</strong></p></td>
+<td><p>Churn + tickets</p></td>
+<td><p>Algo salio mal en mayo-junio</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Causa</strong></p></td>
+<td><p>Scatter churn vs tickets</p></td>
+<td><p>Mas tickets = mas cancelaciones</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Solucion</strong></p></td>
+<td><p>NPS con anotaciones</p></td>
+<td><p>Las acciones funcionaron</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cada grafico responde UNA pregunta. Juntos cuentan una historia completa: que paso, por que, que hicimos, como termino.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="errores-comunes-que-matan-la-historia">
+<h2>4. Errores comunes que matan la historia<a class="headerlink" href="#errores-comunes-que-matan-la-historia" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># ERROR 1: grafico de torta con muchas categorias</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">datos_plan</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s1">'Basico'</span><span class="p">:</span> <span class="mi">196</span><span class="p">,</span> <span class="s1">'Profesional'</span><span class="p">:</span> <span class="mi">137</span><span class="p">,</span> <span class="s1">'Enterprise'</span><span class="p">:</span> <span class="mi">59</span><span class="p">})</span>
+
+<span class="c1"># MAL: torta</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">datos_plan</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">datos_plan</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">'</span><span class="si">%1.0f%%</span><span class="s1">'</span><span class="p">,</span>
+        <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">'#60a5fa'</span><span class="p">,</span> <span class="s1">'#34d399'</span><span class="p">,</span> <span class="s1">'#fbbf24'</span><span class="p">])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Distribucion por plan'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># BIEN: barras horizontales</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Basico'</span><span class="p">:</span> <span class="s1">'#d1d5db'</span><span class="p">,</span> <span class="s1">'Profesional'</span><span class="p">:</span> <span class="s1">'#d1d5db'</span><span class="p">,</span> <span class="s1">'Enterprise'</span><span class="p">:</span> <span class="s1">'#007B3E'</span><span class="p">}</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">datos_plan</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">datos_plan</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">colores</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">datos_plan</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Enterprise es solo el 15% pero genera el 47</span><span class="si">% d</span><span class="s1">el MRR'</span><span class="p">,</span>
+              <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">plan</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datos_plan</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">pct</span> <span class="o">=</span> <span class="n">val</span> <span class="o">/</span> <span class="n">datos_plan</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">pct</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">%)'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Clientes'</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">'Torta: no dice que importa'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s1">'Barras: destaca lo que importa'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b2a2896fc69f958801c71ce707dd96e61fd3b006d9a181d3eddb7b78a40432db.png" src="../../_images/b2a2896fc69f958801c71ce707dd96e61fd3b006d9a181d3eddb7b78a40432db.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># RESUMEN DE ERRORES COMUNES</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">errores</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">"Titulo descriptivo"</span><span class="p">,</span> <span class="s2">"'Ventas por region'"</span><span class="p">,</span> <span class="s2">"'Bogota concentra el 45%'"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Torta con muchas categorias"</span><span class="p">,</span> <span class="s2">"8 pedazos del 12%"</span><span class="p">,</span> <span class="s2">"Barras ordenadas"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Demasiados colores"</span><span class="p">,</span> <span class="s2">"Un color por barra"</span><span class="p">,</span> <span class="s2">"Gris + 1 color de enfasis"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Sin umbral"</span><span class="p">,</span> <span class="s2">"Linea que sube y baja"</span><span class="p">,</span> <span class="s2">"Linea + zona roja"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Eje Y no empieza en 0"</span><span class="p">,</span> <span class="s2">"Cambio del 2% parece 200%"</span><span class="p">,</span> <span class="s2">"Escala honesta"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Muchos graficos sin hilo"</span><span class="p">,</span> <span class="s2">"6 graficos inconexos"</span><span class="p">,</span> <span class="s2">"4 graficos que cuentan 1 historia"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"Solo datos, sin accion"</span><span class="p">,</span> <span class="s2">"'El churn es 11.7%'"</span><span class="p">,</span> <span class="s2">"'El churn es 11.7%, hay que...'"</span><span class="p">],</span>
+<span class="p">]</span>
+
+<span class="n">df_errores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">errores</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'Error'</span><span class="p">,</span> <span class="s1">'Ejemplo malo'</span><span class="p">,</span> <span class="s1">'Alternativa'</span><span class="p">])</span>
+<span class="n">df_errores</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_errores</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">df_errores</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-09e174ff-2a4c-4495-8cd5-4100c71fcd5a" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Error</th>
+      <th>Ejemplo malo</th>
+      <th>Alternativa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Titulo descriptivo</td>
+      <td>'Ventas por region'</td>
+      <td>'Bogota concentra el 45%'</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Torta con muchas categorias</td>
+      <td>8 pedazos del 12%</td>
+      <td>Barras ordenadas</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Demasiados colores</td>
+      <td>Un color por barra</td>
+      <td>Gris + 1 color de enfasis</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Sin umbral</td>
+      <td>Linea que sube y baja</td>
+      <td>Linea + zona roja</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Eje Y no empieza en 0</td>
+      <td>Cambio del 2% parece 200%</td>
+      <td>Escala honesta</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Muchos graficos sin hilo</td>
+      <td>6 graficos inconexos</td>
+      <td>4 graficos que cuentan 1 historia</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Solo datos, sin accion</td>
+      <td>'El churn es 11.7%'</td>
+      <td>'El churn es 11.7%, hay que...'</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-09e174ff-2a4c-4495-8cd5-4100c71fcd5a')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-09e174ff-2a4c-4495-8cd5-4100c71fcd5a button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-09e174ff-2a4c-4495-8cd5-4100c71fcd5a');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_9d5f9846-765e-4812-a497-3553561569f0">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df_errores')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_9d5f9846-765e-4812-a497-3553561569f0 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df_errores');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="plantilla-de-storytelling-reutilizable">
+<h2>5. Plantilla de storytelling reutilizable<a class="headerlink" href="#plantilla-de-storytelling-reutilizable" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUNCION: grafico con historia</span>
+<span class="c1"># ============================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">grafico_con_historia</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+    <span class="n">titulo</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">,</span>
+    <span class="n">umbral</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">umbral_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">destacar_ultimo</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">tipo</span><span class="o">=</span><span class="s1">'linea'</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">'#007B3E'</span><span class="p">,</span>
+    <span class="n">anotaciones</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="n">guardar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Genera un grafico listo para presentar.</span>
+<span class="sd">    Incluye titulo narrativo, umbral y anotaciones.</span>
+<span class="sd">    """</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">tipo</span> <span class="o">==</span> <span class="s1">'linea'</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">tipo</span> <span class="o">==</span> <span class="s1">'barras'</span><span class="p">:</span>
+        <span class="n">colores</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'#d1d5db'</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">destacar_ultimo</span><span class="p">:</span>
+            <span class="n">colores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colores</span><span class="p">)</span>
+
+    <span class="c1"># Umbral</span>
+    <span class="k">if</span> <span class="n">umbral</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">umbral</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">umbral_label</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">umbral</span> <span class="o">*</span> <span class="mf">1.02</span><span class="p">,</span> <span class="n">umbral_label</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s1">'#DC2626'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'right'</span><span class="p">)</span>
+
+    <span class="c1"># Anotaciones</span>
+    <span class="k">if</span> <span class="n">anotaciones</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">anot</span> <span class="ow">in</span> <span class="n">anotaciones</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">anot</span><span class="p">[</span><span class="s1">'texto'</span><span class="p">],</span>
+                        <span class="n">xy</span><span class="o">=</span><span class="n">anot</span><span class="p">[</span><span class="s1">'punto'</span><span class="p">],</span>
+                        <span class="n">xytext</span><span class="o">=</span><span class="n">anot</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'offset'</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)),</span>
+                        <span class="n">textcoords</span><span class="o">=</span><span class="s1">'offset points'</span><span class="p">,</span>
+                        <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+                        <span class="n">color</span><span class="o">=</span><span class="n">anot</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'color'</span><span class="p">,</span> <span class="s1">'#333'</span><span class="p">),</span>
+                        <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span>
+                        <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s1">'-&gt;'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">anot</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'color'</span><span class="p">,</span> <span class="s1">'#333'</span><span class="p">)))</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">titulo</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">guardar</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">guardar</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">fig</span>
+
+<span class="c1"># Ejemplo de uso</span>
+<span class="n">grafico_con_historia</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'mes'</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">df_kpis</span><span class="p">[</span><span class="s1">'retencion'</span><span class="p">],</span>
+    <span class="n">titulo</span><span class="o">=</span><span class="s1">'La retencion se recupero y cerro el ano en 95.8%'</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s1">'Retencion (%)'</span><span class="p">,</span>
+    <span class="n">umbral</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+    <span class="n">umbral_label</span><span class="o">=</span><span class="s1">'Umbral 90%'</span><span class="p">,</span>
+    <span class="n">anotaciones</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s1">'texto'</span><span class="p">:</span> <span class="s1">'Caida'</span><span class="p">,</span> <span class="s1">'punto'</span><span class="p">:</span> <span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="mf">88.3</span><span class="p">),</span> <span class="s1">'color'</span><span class="p">:</span> <span class="s1">'#DC2626'</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">'texto'</span><span class="p">:</span> <span class="s1">'Recuperacion'</span><span class="p">,</span> <span class="s1">'punto'</span><span class="p">:</span> <span class="p">(</span><span class="n">meses</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="mf">94.5</span><span class="p">),</span> <span class="s1">'color'</span><span class="p">:</span> <span class="s1">'#007B3E'</span><span class="p">,</span> <span class="s1">'offset'</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)},</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7a87023a78d71760690172de9d608d62570a1598d477c7b3ef43f58958bdb618.png" src="../../_images/7a87023a78d71760690172de9d608d62570a1598d477c7b3ef43f58958bdb618.png" />
+<img alt="../../_images/7a87023a78d71760690172de9d608d62570a1598d477c7b3ef43f58958bdb618.png" src="../../_images/7a87023a78d71760690172de9d608d62570a1598d477c7b3ef43f58958bdb618.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CHECKLIST ANTES DE PRESENTAR UN GRAFICO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">checklist</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"El titulo dice QUE PASO, no que tipo de grafico es"</span><span class="p">,</span>
+    <span class="s2">"Hay un umbral o referencia que diga si el numero es bueno o malo"</span><span class="p">,</span>
+    <span class="s2">"El color destaca lo importante, todo lo demas es gris"</span><span class="p">,</span>
+    <span class="s2">"No hay elementos decorativos que no aporten informacion"</span><span class="p">,</span>
+    <span class="s2">"El grafico responde UNA pregunta, no tres"</span><span class="p">,</span>
+    <span class="s2">"Alguien que no conoce el contexto puede entenderlo en 5 segundos"</span><span class="p">,</span>
+    <span class="s2">"El grafico lleva a una accion concreta"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Checklist antes de presentar un grafico:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">checklist</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Checklist antes de presentar un grafico:
+
+  1. El titulo dice QUE PASO, no que tipo de grafico es
+  2. Hay un umbral o referencia que diga si el numero es bueno o malo
+  3. El color destaca lo importante, todo lo demas es gris
+  4. No hay elementos decorativos que no aporten informacion
+  5. El grafico responde UNA pregunta, no tres
+  6. Alguien que no conoce el contexto puede entenderlo en 5 segundos
+  7. El grafico lleva a una accion concreta
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Principio</p></th>
+<th class="head"><p>Lo que importa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Contexto - Hallazgo - Accion</strong></p></td>
+<td><p>Toda historia tiene estas 3 partes, en ese orden</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Titulo narrativo</strong></p></td>
+<td><p>La conclusion, no la descripcion del grafico</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Color con proposito</strong></p></td>
+<td><p>Gris = contexto, color = lo que importa</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Menos es mas</strong></p></td>
+<td><p>Cada elemento debe ganarse su lugar</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Umbral</strong></p></td>
+<td><p>Sin referencia, el numero no tiene significado</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Accion</strong></p></td>
+<td><p>Si el grafico no lleva a una decision, sobra</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="la-regla-de-oro">
+<h3>La regla de oro<a class="headerlink" href="#la-regla-de-oro" title="Link to this heading">#</a></h3>
+<p>Si alguien ve tu grafico y dice «interesante» pero no hace nada, la historia fallo. Si dice «hay que hacer algo con esto», funciono.</p>
+</section>
+<section id="siguiente-paso">
+<h3>Siguiente paso<a class="headerlink" href="#siguiente-paso" title="Link to this heading">#</a></h3>
+<p>Con la Unidad 2 completa (calidad, diseno, KPIs, storytelling), en la <strong>Unidad 3</strong> construimos el producto de datos real: dashboards con Streamlit y Power BI.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="U2_S3_kpis.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.3 — KPIs y Metricas de Producto</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Ejemplo_Practico_API.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Ejemplo Practico — Colombianos Presos en el Exterior</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-2-caracteristicas-de-productos-de-datos">Unidad 2: Caracteristicas de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-narrativa-contexto-hallazgo-accion">1. Estructura narrativa: Contexto - Hallazgo - Accion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-de-diseno-visual">2. Principios de diseno visual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-completo-de-los-datos-al-memo-ejecutivo">3. Ejemplo completo: de los datos al memo ejecutivo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-estructura-de-la-historia">La estructura de la historia</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-comunes-que-matan-la-historia">4. Errores comunes que matan la historia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plantilla-de-storytelling-reutilizable">5. Plantilla de storytelling reutilizable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regla-de-oro">La regla de oro</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,2140 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.2 — Diseno de productos de datos &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_2/U2_S2_diseno_productos';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="2.3 — KPIs y Metricas de Producto" href="U2_S3_kpis.html" />
+    <link rel="prev" title="2.1 — Calidad de datos" href="U2_S1_calidad_datos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Ejercicio_U1.html">Ejercicio Unidad 1 — Python para Datos + Limpieza y Normalizacion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Taller1.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_Profiling.html">Pandas Profiling — Diagnostico automatico de un dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2 - Caracteristicas de Productos de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="U2_S1_calidad_datos.html">2.1 — Calidad de datos</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.2 — Diseno de productos de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U2_S3_kpis.html">2.3 — KPIs y Metricas de Producto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U2_S4_storytelling.html">2.4 — Storytelling con Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ejemplo_Practico_API.html">Ejemplo Practico — Colombianos Presos en el Exterior</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_2/U2_S2_diseno_productos.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_2/U2_S2_diseno_productos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_2/U2_S2_diseno_productos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.2 — Diseno de productos de datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-2-caracteristicas-de-productos-de-datos">Unidad 2: Caracteristicas de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-de-diseno">1. Principios de diseno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contratos-de-datos">2. Contratos de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modularidad-y-reutilizacion">3. Modularidad y reutilizacion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versionado-de-datos">4. Versionado de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-y-documentacion">5. Metadata y documentacion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatos-interoperables">6. Formatos interoperables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regla-de-oro">La regla de oro</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="diseno-de-productos-de-datos">
+<h1>2.2 — Diseno de productos de datos<a class="headerlink" href="#diseno-de-productos-de-datos" title="Link to this heading">#</a></h1>
+<section id="unidad-2-caracteristicas-de-productos-de-datos">
+<h2>Unidad 2: Caracteristicas de Productos de Datos<a class="headerlink" href="#unidad-2-caracteristicas-de-productos-de-datos" title="Link to this heading">#</a></h2>
+<p>Un producto de datos que solo funciona en tu maquina, que solo tu entiendes y que se rompe cuando algo cambia no es un producto — es un script personal. Un producto de datos real es compartible, modular, documentado y versionado. Otro equipo puede usarlo sin preguntarte como funciona.</p>
+<p>Este notebook cubre los principios y herramientas para disenar productos de datos que sobrevivan a su creador.</p>
+<section id="contenido">
+<h3>Contenido:<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Principios de diseno</p></li>
+<li><p>Contratos de datos</p></li>
+<li><p>Modularidad y reutilizacion</p></li>
+<li><p>Versionado de datos</p></li>
+<li><p>Metadata y documentacion</p></li>
+<li><p>Formatos interoperables</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pandera</span> <span class="n">pydantic</span> <span class="n">great_expectations</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandera in /usr/local/lib/python3.13/dist-packages (0.33.1)
+Requirement already satisfied: pydantic in /usr/local/lib/python3.13/dist-packages (2.13.4)
+Requirement already satisfied: great_expectations in /usr/local/lib/python3.13/dist-packages (1.22.0)
+Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.13/dist-packages (from pandera) (26.3)
+Requirement already satisfied: typeguard in /usr/local/lib/python3.13/dist-packages (from pandera) (4.6.0)
+Requirement already satisfied: typing_extensions in /usr/local/lib/python3.13/dist-packages (from pandera) (4.16.0)
+Requirement already satisfied: typing_inspect&gt;=0.6.0 in /usr/local/lib/python3.13/dist-packages (from pandera) (0.9.0)
+Requirement already satisfied: annotated-types&gt;=0.6.0 in /usr/local/lib/python3.13/dist-packages (from pydantic) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.4 in /usr/local/lib/python3.13/dist-packages (from pydantic) (2.46.4)
+Requirement already satisfied: typing-inspection&gt;=0.4.2 in /usr/local/lib/python3.13/dist-packages (from pydantic) (0.4.4)
+Requirement already satisfied: altair&lt;7.0.0,&gt;=5.0.0 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (5.5.0)
+Requirement already satisfied: cryptography&gt;=3.2 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (50.0.1)
+Requirement already satisfied: jinja2&gt;=3 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (3.1.6)
+Requirement already satisfied: jsonschema&gt;=2.5.1 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (4.26.0)
+Requirement already satisfied: marshmallow&gt;=3.18.0 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (4.3.1)
+Requirement already satisfied: mistune&gt;=0.8.4 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (3.3.4)
+Requirement already satisfied: numpy&gt;=1.22.4 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (2.1.3)
+Requirement already satisfied: pandas&gt;=1.3.0 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (2.2.3)
+Requirement already satisfied: pyparsing!=3.2.4,&gt;=2.4 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (3.3.2)
+Requirement already satisfied: python-dateutil&gt;=2.8.1 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (2.9.0.post0)
+Requirement already satisfied: requests&gt;=2.20 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (2.32.4)
+Requirement already satisfied: ruamel.yaml&gt;=0.16 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (0.19.1)
+Requirement already satisfied: scipy&gt;=1.6.0 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (1.16.3)
+Requirement already satisfied: tqdm&gt;=4.59.0 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (4.67.3)
+Requirement already satisfied: tzlocal&gt;=1.2 in /usr/local/lib/python3.13/dist-packages (from great_expectations) (5.4.4)
+Requirement already satisfied: narwhals&gt;=1.14.2 in /usr/local/lib/python3.13/dist-packages (from altair&lt;7.0.0,&gt;=5.0.0-&gt;great_expectations) (2.25.0)
+Requirement already satisfied: cffi&gt;=2.0.0 in /usr/local/lib/python3.13/dist-packages (from cryptography&gt;=3.2-&gt;great_expectations) (2.1.1)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2&gt;=3-&gt;great_expectations) (3.0.3)
+Requirement already satisfied: attrs&gt;=22.2.0 in /usr/local/lib/python3.13/dist-packages (from jsonschema&gt;=2.5.1-&gt;great_expectations) (26.1.0)
+Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /usr/local/lib/python3.13/dist-packages (from jsonschema&gt;=2.5.1-&gt;great_expectations) (2025.9.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in /usr/local/lib/python3.13/dist-packages (from jsonschema&gt;=2.5.1-&gt;great_expectations) (0.37.0)
+Requirement already satisfied: rpds-py&gt;=0.25.0 in /usr/local/lib/python3.13/dist-packages (from jsonschema&gt;=2.5.1-&gt;great_expectations) (2026.6.3)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.13/dist-packages (from pandas&gt;=1.3.0-&gt;great_expectations) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.13/dist-packages (from pandas&gt;=1.3.0-&gt;great_expectations) (2026.3)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.13/dist-packages (from python-dateutil&gt;=2.8.1-&gt;great_expectations) (1.17.0)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.13/dist-packages (from requests&gt;=2.20-&gt;great_expectations) (3.4.9)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.13/dist-packages (from requests&gt;=2.20-&gt;great_expectations) (3.19)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.13/dist-packages (from requests&gt;=2.20-&gt;great_expectations) (2.5.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.13/dist-packages (from requests&gt;=2.20-&gt;great_expectations) (2026.7.22)
+Requirement already satisfied: mypy-extensions&gt;=0.3.0 in /usr/local/lib/python3.13/dist-packages (from typing_inspect&gt;=0.6.0-&gt;pandera) (1.1.0)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.13/dist-packages (from cffi&gt;=2.0.0-&gt;cryptography&gt;=3.2-&gt;great_expectations) (3.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="principios-de-diseno">
+<h2>1. Principios de diseno<a class="headerlink" href="#principios-de-diseno" title="Link to this heading">#</a></h2>
+<p>Antes de las herramientas, los principios. Un producto de datos bien disenado cumple estas caracteristicas:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Principio</p></th>
+<th class="head"><p>Pregunta clave</p></th>
+<th class="head"><p>Ejemplo malo</p></th>
+<th class="head"><p>Ejemplo bueno</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Compartible</strong></p></td>
+<td><p>Puede usarlo alguien que no lo construyo?</p></td>
+<td><p>Script que solo corre en tu maquina</p></td>
+<td><p>Paquete instalable con instrucciones</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Interoperable</strong></p></td>
+<td><p>Puede conectarse con otros sistemas?</p></td>
+<td><p>CSV con encoding raro y fechas ambiguas</p></td>
+<td><p>Parquet con tipos explicitos y schema</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Modular</strong></p></td>
+<td><p>Puedo cambiar una parte sin romper todo?</p></td>
+<td><p>Un notebook de 2000 lineas</p></td>
+<td><p>Funciones separadas por responsabilidad</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Reutilizable</strong></p></td>
+<td><p>Puedo usarlo para otro proyecto?</p></td>
+<td><p>Codigo con rutas hardcoded y variables globales</p></td>
+<td><p>Funciones parametrizadas, config externa</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Documentado</strong></p></td>
+<td><p>Alguien puede entenderlo sin preguntarme?</p></td>
+<td><p>Funciones sin docstring, columnas sin descripcion</p></td>
+<td><p>README, docstrings, catalogo de datos</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Versionado</strong></p></td>
+<td><p>Puedo saber que cambio y cuando?</p></td>
+<td><p>Archivos con nombre «final_v3_definitivo»</p></td>
+<td><p>Git + versionado semantico</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="contratos-de-datos">
+<h2>2. Contratos de datos<a class="headerlink" href="#contratos-de-datos" title="Link to this heading">#</a></h2>
+<p>Un contrato de datos es un acuerdo entre quien produce los datos y quien los consume. Define que columnas tiene, que tipo, que valores acepta y que garantias ofrece. Si el productor cambia la estructura sin avisar, el contrato se rompe y el consumidor lo detecta automaticamente.</p>
+<p>Es la diferencia entre «me mandaron un CSV y tuve que adivinar que significaba cada columna» y «hay un documento que me dice exactamente que esperar».</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONTRATO DE DATOS COMO ARCHIVO JSON</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Un contrato define la estructura esperada de un dataset</span>
+<span class="c1"># Se guarda como archivo y se versiona con el proyecto</span>
+
+<span class="n">contrato_ventas</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"transacciones_ventas"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Registro de transacciones de venta de productos de datos"</span><span class="p">,</span>
+    <span class="s2">"propietario"</span><span class="p">:</span> <span class="s2">"equipo-datos"</span><span class="p">,</span>
+    <span class="s2">"consumidores"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"dashboard-ventas"</span><span class="p">,</span> <span class="s2">"reporte-gerencia"</span><span class="p">,</span> <span class="s2">"modelo-prediccion"</span><span class="p">],</span>
+    <span class="s2">"frecuencia_actualizacion"</span><span class="p">:</span> <span class="s2">"diaria"</span><span class="p">,</span>
+    <span class="s2">"sla"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"disponibilidad"</span><span class="p">:</span> <span class="s2">"99.5%"</span><span class="p">,</span>
+        <span class="s2">"latencia_maxima"</span><span class="p">:</span> <span class="s2">"2 horas despues del cierre del dia"</span><span class="p">,</span>
+        <span class="s2">"contacto"</span><span class="p">:</span> <span class="s2">"datos@empresa.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"columnas"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"fecha"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"datetime"</span><span class="p">,</span>
+            <span class="s2">"nullable"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Fecha de la transaccion"</span><span class="p">,</span>
+            <span class="s2">"formato"</span><span class="p">:</span> <span class="s2">"YYYY-MM-DD"</span>
+        <span class="p">},</span>
+        <span class="s2">"producto"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+            <span class="s2">"nullable"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"valores_permitidos"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"reporte"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">,</span> <span class="s2">"app web"</span><span class="p">,</span> <span class="s2">"pipeline etl"</span><span class="p">],</span>
+            <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Tipo de producto vendido"</span>
+        <span class="p">},</span>
+        <span class="s2">"region"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+            <span class="s2">"nullable"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"valores_permitidos"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"bogota"</span><span class="p">,</span> <span class="s2">"medellin"</span><span class="p">,</span> <span class="s2">"cali"</span><span class="p">,</span> <span class="s2">"manizales"</span><span class="p">,</span> <span class="s2">"barranquilla"</span><span class="p">],</span>
+            <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Ciudad de la venta"</span>
+        <span class="p">},</span>
+        <span class="s2">"unidades"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"integer"</span><span class="p">,</span>
+            <span class="s2">"nullable"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"rango"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"min"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">:</span> <span class="mi">200</span><span class="p">},</span>
+            <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Cantidad de unidades vendidas"</span>
+        <span class="p">},</span>
+        <span class="s2">"precio"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"float"</span><span class="p">,</span>
+            <span class="s2">"nullable"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"rango"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"min"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+            <span class="s2">"unidad"</span><span class="p">:</span> <span class="s2">"COP"</span><span class="p">,</span>
+            <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Precio unitario en pesos colombianos"</span>
+        <span class="p">},</span>
+        <span class="s2">"calificacion"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"integer"</span><span class="p">,</span>
+            <span class="s2">"nullable"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"rango"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"min"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+            <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Calificacion del cliente (1=peor, 5=mejor)"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Guardar el contrato</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"contrato_ventas.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">contrato_ventas</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Contrato guardado: contrato_ventas.json"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Columnas definidas: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">contrato_ventas</span><span class="p">[</span><span class="s1">'columnas'</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Consumidores: </span><span class="si">{</span><span class="n">contrato_ventas</span><span class="p">[</span><span class="s1">'consumidores'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrato guardado: contrato_ventas.json
+Columnas definidas: ['fecha', 'producto', 'region', 'unidades', 'precio', 'calificacion']
+Consumidores: ['dashboard-ventas', 'reporte-gerencia', 'modelo-prediccion']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GENERAR ESQUEMA PANDERA DESDE EL CONTRATO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># El contrato es documentacion. El esquema es ejecucion.</span>
+<span class="c1"># Esta funcion convierte uno en otro automaticamente.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandera.pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pa</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">contrato_a_esquema</span><span class="p">(</span><span class="n">contrato</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convierte un contrato de datos JSON en un esquema pandera.</span>
+<span class="sd">    El contrato define las reglas, el esquema las ejecuta.</span>
+<span class="sd">    """</span>
+    <span class="n">columnas</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">tipo_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"string"</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s2">"integer"</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="s2">"float"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="s2">"datetime"</span><span class="p">:</span> <span class="s2">"datetime64[ns]"</span><span class="p">,</span>
+        <span class="s2">"boolean"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">col_name</span><span class="p">,</span> <span class="n">col_def</span> <span class="ow">in</span> <span class="n">contrato</span><span class="p">[</span><span class="s2">"columnas"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">checks</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Valores permitidos</span>
+        <span class="k">if</span> <span class="s2">"valores_permitidos"</span> <span class="ow">in</span> <span class="n">col_def</span><span class="p">:</span>
+            <span class="n">checks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">col_def</span><span class="p">[</span><span class="s2">"valores_permitidos"</span><span class="p">]))</span>
+
+        <span class="c1"># Rango</span>
+        <span class="k">if</span> <span class="s2">"rango"</span> <span class="ow">in</span> <span class="n">col_def</span><span class="p">:</span>
+            <span class="n">rango</span> <span class="o">=</span> <span class="n">col_def</span><span class="p">[</span><span class="s2">"rango"</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">"min"</span> <span class="ow">in</span> <span class="n">rango</span> <span class="ow">and</span> <span class="s2">"max"</span> <span class="ow">in</span> <span class="n">rango</span><span class="p">:</span>
+                <span class="n">checks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">in_range</span><span class="p">(</span><span class="n">rango</span><span class="p">[</span><span class="s2">"min"</span><span class="p">],</span> <span class="n">rango</span><span class="p">[</span><span class="s2">"max"</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="s2">"min"</span> <span class="ow">in</span> <span class="n">rango</span><span class="p">:</span>
+                <span class="n">checks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">greater_than_or_equal_to</span><span class="p">(</span><span class="n">rango</span><span class="p">[</span><span class="s2">"min"</span><span class="p">]))</span>
+            <span class="k">elif</span> <span class="s2">"max"</span> <span class="ow">in</span> <span class="n">rango</span><span class="p">:</span>
+                <span class="n">checks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">Check</span><span class="o">.</span><span class="n">less_than_or_equal_to</span><span class="p">(</span><span class="n">rango</span><span class="p">[</span><span class="s2">"max"</span><span class="p">]))</span>
+
+        <span class="n">tipo</span> <span class="o">=</span> <span class="n">tipo_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col_def</span><span class="p">[</span><span class="s2">"tipo"</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span>
+        <span class="n">nullable</span> <span class="o">=</span> <span class="n">col_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nullable"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">columnas</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">tipo</span><span class="p">,</span> <span class="n">checks</span><span class="o">=</span><span class="n">checks</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="n">nullable</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pa</span><span class="o">.</span><span class="n">DataFrameSchema</span><span class="p">(</span><span class="n">columnas</span><span class="p">)</span>
+
+<span class="c1"># Generar esquema desde el contrato</span>
+<span class="n">esquema</span> <span class="o">=</span> <span class="n">contrato_a_esquema</span><span class="p">(</span><span class="n">contrato_ventas</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Esquema pandera generado desde el contrato."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Columnas: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">esquema</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Esquema pandera generado desde el contrato.
+Columnas: ['fecha', 'producto', 'region', 'unidades', 'precio', 'calificacion']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VERIFICAR QUE EL CONTRATO SE CUMPLE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">datos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s2">"2024-06-01"</span><span class="p">,</span> <span class="s2">"2024-06-02"</span><span class="p">,</span> <span class="s2">"2024-06-03"</span><span class="p">]),</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"reporte"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">],</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"bogota"</span><span class="p">,</span> <span class="s2">"medellin"</span><span class="p">,</span> <span class="s2">"cali"</span><span class="p">],</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span>
+    <span class="s2">"precio"</span><span class="p">:</span> <span class="p">[</span><span class="mf">450.0</span><span class="p">,</span> <span class="mf">280.0</span><span class="p">,</span> <span class="mf">620.0</span><span class="p">],</span>
+    <span class="s2">"calificacion"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">esquema</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"El dataset cumple el contrato."</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">pa</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">SchemaError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"El dataset rompe el contrato: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El dataset cumple el contrato.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="modularidad-y-reutilizacion">
+<h2>3. Modularidad y reutilizacion<a class="headerlink" href="#modularidad-y-reutilizacion" title="Link to this heading">#</a></h2>
+<p>Un notebook de 2000 lineas no es reutilizable. Una funcion con parametros si. Un modulo con funciones agrupadas por responsabilidad es todavia mejor. La idea es separar el codigo en piezas que se pueden usar independientemente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># MAL: todo en un bloque, hardcoded, no reutilizable</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Esto funciona pero no se puede reutilizar en otro proyecto</span>
+
+<span class="c1"># df = pd.read_csv("/home/sergio/datos/ventas_junio.csv")</span>
+<span class="c1"># df = df[df["region"] == "bogota"]</span>
+<span class="c1"># df["ingreso"] = df["unidades"] * df["precio"]</span>
+<span class="c1"># resumen = df.groupby("producto")["ingreso"].sum()</span>
+<span class="c1"># resumen.to_csv("/home/sergio/reportes/resumen_bogota.csv")</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Problemas:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Rutas hardcoded (solo funciona en tu maquina)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Region fija (no sirve para medellin)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Sin validacion (si el CSV cambia, se rompe en silencio)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Sin documentacion (que hace cada linea?)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Problemas:
+  - Rutas hardcoded (solo funciona en tu maquina)
+  - Region fija (no sirve para medellin)
+  - Sin validacion (si el CSV cambia, se rompe en silencio)
+  - Sin documentacion (que hace cada linea?)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># BIEN: funciones separadas por responsabilidad</span>
+<span class="c1"># ============================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cargar_ventas</span><span class="p">(</span><span class="n">ruta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Carga el CSV de ventas y convierte tipos."""</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"fecha"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"fecha"</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">filtrar_por_region</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">region</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Filtra un DataFrame de ventas por region."""</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"region"</span><span class="p">]</span> <span class="o">==</span> <span class="n">region</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calcular_ingreso</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Agrega la columna ingreso = unidades * precio."""</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"ingreso"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"unidades"</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">"precio"</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">resumir_por_producto</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Genera resumen de ingreso agrupado por producto."""</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"producto"</span><span class="p">)[</span><span class="s2">"ingreso"</span><span class="p">]</span>
+            <span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">"sum"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">])</span>
+            <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"sum"</span><span class="p">:</span> <span class="s2">"total"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">:</span> <span class="s2">"promedio"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">:</span> <span class="s2">"ventas"</span><span class="p">})</span>
+            <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"total"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># Ahora el pipeline es legible y reutilizable</span>
+<span class="c1"># df = cargar_ventas("ventas.csv")</span>
+<span class="c1"># df = filtrar_por_region(df, "bogota")  # parametro, no hardcoded</span>
+<span class="c1"># df = calcular_ingreso(df)</span>
+<span class="c1"># resumen = resumir_por_producto(df)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ventajas:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Cada funcion hace UNA cosa"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Se pueden reusar en otro proyecto"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Se pueden testear individualmente"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - El pipeline se lee como un texto"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ventajas:
+  - Cada funcion hace UNA cosa
+  - Se pueden reusar en otro proyecto
+  - Se pueden testear individualmente
+  - El pipeline se lee como un texto
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># MEJOR: modulo .py con configuracion externa</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># En un proyecto real, las funciones van en un archivo .py</span>
+<span class="c1"># y la configuracion en un archivo separado</span>
+
+<span class="c1"># Estructura recomendada:</span>
+<span class="n">estructura</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">mi_producto/</span>
+<span class="s2">    config.yaml           # Configuracion (rutas, parametros)</span>
+<span class="s2">    contrato_ventas.json  # Contrato de datos</span>
+
+<span class="s2">    src/</span>
+<span class="s2">        __init__.py</span>
+<span class="s2">        cargar.py         # Funciones de carga</span>
+<span class="s2">        limpiar.py        # Funciones de limpieza</span>
+<span class="s2">        transformar.py    # Funciones de transformacion</span>
+<span class="s2">        validar.py        # Esquemas de validacion</span>
+
+<span class="s2">    notebooks/</span>
+<span class="s2">        exploracion.ipynb  # Analisis interactivo</span>
+
+<span class="s2">    tests/</span>
+<span class="s2">        test_limpiar.py    # Pruebas unitarias</span>
+
+<span class="s2">    README.md              # Documentacion</span>
+<span class="s2">    requirements.txt       # Dependencias</span>
+<span class="s2">"""</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">estructura</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mi_producto/
+    config.yaml           # Configuracion (rutas, parametros)
+    contrato_ventas.json  # Contrato de datos
+    
+    src/
+        __init__.py
+        cargar.py         # Funciones de carga
+        limpiar.py        # Funciones de limpieza
+        transformar.py    # Funciones de transformacion
+        validar.py        # Esquemas de validacion
+    
+    notebooks/
+        exploracion.ipynb  # Analisis interactivo
+    
+    tests/
+        test_limpiar.py    # Pruebas unitarias
+    
+    README.md              # Documentacion
+    requirements.txt       # Dependencias
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONFIGURACION EXTERNA CON YAML</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># La configuracion no va en el codigo — va en un archivo aparte</span>
+<span class="c1"># Asi el mismo codigo funciona con datos distintos</span>
+
+<span class="n">config_yaml</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2"># config.yaml</span>
+<span class="s2">datos:</span>
+<span class="s2">  ruta_entrada: "datos/ventas_crudas.csv"</span>
+<span class="s2">  ruta_salida: "datos/ventas_limpias.parquet"</span>
+<span class="s2">  contrato: "contrato_ventas.json"</span>
+
+<span class="s2">procesamiento:</span>
+<span class="s2">  regiones_validas:</span>
+<span class="s2">    - bogota</span>
+<span class="s2">    - medellin</span>
+<span class="s2">    - cali</span>
+<span class="s2">    - manizales</span>
+<span class="s2">    - barranquilla</span>
+<span class="s2">  precio_maximo: 10000</span>
+<span class="s2">  unidades_maximo: 200</span>
+
+<span class="s2">salida:</span>
+<span class="s2">  formato: "parquet"</span>
+<span class="s2">  compresion: "snappy"</span>
+<span class="s2">"""</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"config.yaml"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">config_yaml</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"config.yaml creado."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"El codigo lee la config, no tiene valores hardcoded."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Para cambiar la ruta o un parametro, editas el YAML, no el codigo."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>config.yaml creado.
+El codigo lee la config, no tiene valores hardcoded.
+Para cambiar la ruta o un parametro, editas el YAML, no el codigo.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># LEER CONFIGURACION EN PYTHON</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># pip install pyyaml</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"config.yaml"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Configuracion cargada:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Ruta entrada: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">'datos'</span><span class="p">][</span><span class="s1">'ruta_entrada'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Formato salida: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">'salida'</span><span class="p">][</span><span class="s1">'formato'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Regiones: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">'procesamiento'</span><span class="p">][</span><span class="s1">'regiones_validas'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Ahora el codigo usa config['datos']['ruta_entrada'] en vez de un string hardcoded</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Configuracion cargada:
+  Ruta entrada: datos/ventas_crudas.csv
+  Formato salida: parquet
+  Regiones: ['bogota', 'medellin', 'cali', 'manizales', 'barranquilla']
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="versionado-de-datos">
+<h2>4. Versionado de datos<a class="headerlink" href="#versionado-de-datos" title="Link to this heading">#</a></h2>
+<p>El codigo se versiona con Git. Pero los datos? Si el esquema cambia, si se agrega una columna, si se corrige un error historico, necesitamos saber que version de los datos uso cada reporte.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VERSIONADO SIMPLE — POR NOMBRE DE ARCHIVO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># La forma mas basica: incluir fecha o version en el nombre</span>
+
+<span class="c1"># MAL:</span>
+<span class="c1"># ventas.csv</span>
+<span class="c1"># ventas_final.csv</span>
+<span class="c1"># ventas_final_v2.csv</span>
+<span class="c1"># ventas_final_v2_definitivo.csv</span>
+
+<span class="c1"># BIEN:</span>
+<span class="c1"># ventas_2024-06-01.parquet</span>
+<span class="c1"># ventas_2024-06-02.parquet</span>
+
+<span class="c1"># MEJOR: con version semantica del esquema</span>
+<span class="c1"># ventas_v1.0.0_2024-06-01.parquet</span>
+<span class="c1"># ventas_v1.1.0_2024-06-15.parquet  (se agrego una columna)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">guardar_con_version</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">carpeta</span><span class="o">=</span><span class="s2">"datos_versionados"</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Guarda un DataFrame con version y timestamp en el nombre."""</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">carpeta</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fecha</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">ruta</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">carpeta</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">_v</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">fecha</span><span class="si">}</span><span class="s2">.parquet"</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Guardado: </span><span class="si">{</span><span class="n">ruta</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ruta</span>
+
+<span class="n">guardar_con_version</span><span class="p">(</span><span class="n">datos</span><span class="p">,</span> <span class="s2">"ventas"</span><span class="p">,</span> <span class="s2">"1.0.0"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guardado: datos_versionados/ventas_v1.0.0_20260904.parquet
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'datos_versionados/ventas_v1.0.0_20260904.parquet'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VERSIONADO SEMANTICO PARA DATOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># El mismo concepto que en software, aplicado a datos:</span>
+<span class="c1">#</span>
+<span class="c1"># MAJOR.MINOR.PATCH</span>
+<span class="c1">#   1.0.0 -&gt; 1.0.1   Correccion de datos (arreglar un error historico)</span>
+<span class="c1">#   1.0.0 -&gt; 1.1.0   Columna nueva (compatible hacia atras)</span>
+<span class="c1">#   1.0.0 -&gt; 2.0.0   Cambio de esquema (rompe compatibilidad)</span>
+
+<span class="n">historial_versiones</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span> <span class="s2">"fecha"</span><span class="p">:</span> <span class="s2">"2024-01-15"</span><span class="p">,</span>
+     <span class="s2">"cambios"</span><span class="p">:</span> <span class="s2">"Version inicial. 6 columnas."</span><span class="p">},</span>
+
+    <span class="p">{</span><span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0.1"</span><span class="p">,</span> <span class="s2">"fecha"</span><span class="p">:</span> <span class="s2">"2024-02-01"</span><span class="p">,</span>
+     <span class="s2">"cambios"</span><span class="p">:</span> <span class="s2">"Corregido: precios negativos en enero reemplazados con mediana."</span><span class="p">},</span>
+
+    <span class="p">{</span><span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.1.0"</span><span class="p">,</span> <span class="s2">"fecha"</span><span class="p">:</span> <span class="s2">"2024-03-10"</span><span class="p">,</span>
+     <span class="s2">"cambios"</span><span class="p">:</span> <span class="s2">"Nueva columna: vendedor. Compatible hacia atras."</span><span class="p">},</span>
+
+    <span class="p">{</span><span class="s2">"version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span> <span class="s2">"fecha"</span><span class="p">:</span> <span class="s2">"2024-06-01"</span><span class="p">,</span>
+     <span class="s2">"cambios"</span><span class="p">:</span> <span class="s2">"Columna 'precio' renombrada a 'precio_unitario'. Rompe compatibilidad."</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Historial de versiones:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">historial_versiones</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  v</span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">'version'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">'cambios'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Historial de versiones:
+  v1.0.0 (2024-01-15): Version inicial. 6 columnas.
+  v1.0.1 (2024-02-01): Corregido: precios negativos en enero reemplazados con mediana.
+  v1.1.0 (2024-03-10): Nueva columna: vendedor. Compatible hacia atras.
+  v2.0.0 (2024-06-01): Columna 'precio' renombrada a 'precio_unitario'. Rompe compatibilidad.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CHANGELOG COMO ARCHIVO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">changelog</span> <span class="o">=</span> <span class="s2">"""# Changelog — transacciones_ventas</span>
+
+<span class="s2">## [2.0.0] - 2024-06-01</span>
+<span class="s2">### Breaking</span>
+<span class="s2">- Columna 'precio' renombrada a 'precio_unitario'</span>
+<span class="s2">- Consumidores deben actualizar sus queries</span>
+
+<span class="s2">## [1.1.0] - 2024-03-10</span>
+<span class="s2">### Added</span>
+<span class="s2">- Nueva columna 'vendedor' (nullable)</span>
+<span class="s2">- Compatible hacia atras, los consumidores existentes no se rompen</span>
+
+<span class="s2">## [1.0.1] - 2024-02-01</span>
+<span class="s2">### Fixed</span>
+<span class="s2">- Corregidos 23 precios negativos de enero (reemplazados con mediana del producto)</span>
+
+<span class="s2">## [1.0.0] - 2024-01-15</span>
+<span class="s2">### Initial</span>
+<span class="s2">- Version inicial: fecha, producto, region, unidades, precio, calificacion</span>
+<span class="s2">"""</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"CHANGELOG.md"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">changelog</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"CHANGELOG.md creado."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Este archivo se versiona con Git junto al contrato y el codigo."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CHANGELOG.md creado.
+Este archivo se versiona con Git junto al contrato y el codigo.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="metadata-y-documentacion">
+<h2>5. Metadata y documentacion<a class="headerlink" href="#metadata-y-documentacion" title="Link to this heading">#</a></h2>
+<p>La metadata es informacion sobre los datos: que significan, de donde vienen, cuando se actualizaron, que tan confiables son. Sin metadata, un archivo es solo columnas con nombres crípticos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CATALOGO DE DATOS — diccionario de columnas</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Un catalogo de datos describe cada columna para que</span>
+<span class="c1"># cualquier persona pueda entender el dataset sin preguntar</span>
+
+<span class="n">catalogo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s2">"columna"</span><span class="p">:</span> <span class="s2">"fecha"</span><span class="p">,</span> <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"datetime"</span><span class="p">,</span>
+     <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Fecha en que se realizo la transaccion"</span><span class="p">,</span>
+     <span class="s2">"fuente"</span><span class="p">:</span> <span class="s2">"Sistema ERP"</span><span class="p">,</span> <span class="s2">"ejemplo"</span><span class="p">:</span> <span class="s2">"2024-06-15"</span><span class="p">,</span>
+     <span class="s2">"notas"</span><span class="p">:</span> <span class="s2">"Zona horaria: America/Bogota"</span><span class="p">},</span>
+
+    <span class="p">{</span><span class="s2">"columna"</span><span class="p">:</span> <span class="s2">"producto"</span><span class="p">,</span> <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+     <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Tipo de producto de datos vendido"</span><span class="p">,</span>
+     <span class="s2">"fuente"</span><span class="p">:</span> <span class="s2">"Catalogo de productos"</span><span class="p">,</span> <span class="s2">"ejemplo"</span><span class="p">:</span> <span class="s2">"dashboard"</span><span class="p">,</span>
+     <span class="s2">"notas"</span><span class="p">:</span> <span class="s2">"5 valores validos, siempre en minusculas"</span><span class="p">},</span>
+
+    <span class="p">{</span><span class="s2">"columna"</span><span class="p">:</span> <span class="s2">"region"</span><span class="p">,</span> <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+     <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Ciudad donde se realizo la venta"</span><span class="p">,</span>
+     <span class="s2">"fuente"</span><span class="p">:</span> <span class="s2">"CRM"</span><span class="p">,</span> <span class="s2">"ejemplo"</span><span class="p">:</span> <span class="s2">"bogota"</span><span class="p">,</span>
+     <span class="s2">"notas"</span><span class="p">:</span> <span class="s2">"Sin tildes, en minusculas"</span><span class="p">},</span>
+
+    <span class="p">{</span><span class="s2">"columna"</span><span class="p">:</span> <span class="s2">"unidades"</span><span class="p">,</span> <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"integer"</span><span class="p">,</span>
+     <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Cantidad de licencias o suscripciones vendidas"</span><span class="p">,</span>
+     <span class="s2">"fuente"</span><span class="p">:</span> <span class="s2">"Sistema ERP"</span><span class="p">,</span> <span class="s2">"ejemplo"</span><span class="p">:</span> <span class="s2">"15"</span><span class="p">,</span>
+     <span class="s2">"notas"</span><span class="p">:</span> <span class="s2">"Rango valido: 1-200. Valores mayores son errores de captura"</span><span class="p">},</span>
+
+    <span class="p">{</span><span class="s2">"columna"</span><span class="p">:</span> <span class="s2">"precio"</span><span class="p">,</span> <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"float"</span><span class="p">,</span>
+     <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Precio por unidad en pesos colombianos (COP)"</span><span class="p">,</span>
+     <span class="s2">"fuente"</span><span class="p">:</span> <span class="s2">"Lista de precios"</span><span class="p">,</span> <span class="s2">"ejemplo"</span><span class="p">:</span> <span class="s2">"450.00"</span><span class="p">,</span>
+     <span class="s2">"notas"</span><span class="p">:</span> <span class="s2">"No incluye IVA. Siempre positivo"</span><span class="p">},</span>
+
+    <span class="p">{</span><span class="s2">"columna"</span><span class="p">:</span> <span class="s2">"calificacion"</span><span class="p">,</span> <span class="s2">"tipo"</span><span class="p">:</span> <span class="s2">"integer"</span><span class="p">,</span>
+     <span class="s2">"descripcion"</span><span class="p">:</span> <span class="s2">"Calificacion del cliente despues de la compra"</span><span class="p">,</span>
+     <span class="s2">"fuente"</span><span class="p">:</span> <span class="s2">"Encuesta post-venta"</span><span class="p">,</span> <span class="s2">"ejemplo"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
+     <span class="s2">"notas"</span><span class="p">:</span> <span class="s2">"Escala 1-5. Puede ser nulo si el cliente no respondio"</span><span class="p">},</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Catalogo de datos:"</span><span class="p">)</span>
+<span class="n">catalogo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Catalogo de datos:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-97ceb4a9-6e4a-4eb0-a5d3-743ab9dacde2" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>columna</th>
+      <th>tipo</th>
+      <th>descripcion</th>
+      <th>fuente</th>
+      <th>ejemplo</th>
+      <th>notas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>fecha</td>
+      <td>datetime</td>
+      <td>Fecha en que se realizo la transaccion</td>
+      <td>Sistema ERP</td>
+      <td>2024-06-15</td>
+      <td>Zona horaria: America/Bogota</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>producto</td>
+      <td>string</td>
+      <td>Tipo de producto de datos vendido</td>
+      <td>Catalogo de productos</td>
+      <td>dashboard</td>
+      <td>5 valores validos, siempre en minusculas</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>region</td>
+      <td>string</td>
+      <td>Ciudad donde se realizo la venta</td>
+      <td>CRM</td>
+      <td>bogota</td>
+      <td>Sin tildes, en minusculas</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>unidades</td>
+      <td>integer</td>
+      <td>Cantidad de licencias o suscripciones vendidas</td>
+      <td>Sistema ERP</td>
+      <td>15</td>
+      <td>Rango valido: 1-200. Valores mayores son error...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>precio</td>
+      <td>float</td>
+      <td>Precio por unidad en pesos colombianos (COP)</td>
+      <td>Lista de precios</td>
+      <td>450.00</td>
+      <td>No incluye IVA. Siempre positivo</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>calificacion</td>
+      <td>integer</td>
+      <td>Calificacion del cliente despues de la compra</td>
+      <td>Encuesta post-venta</td>
+      <td>4</td>
+      <td>Escala 1-5. Puede ser nulo si el cliente no re...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-97ceb4a9-6e4a-4eb0-a5d3-743ab9dacde2')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-97ceb4a9-6e4a-4eb0-a5d3-743ab9dacde2 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-97ceb4a9-6e4a-4eb0-a5d3-743ab9dacde2');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_59bdefbd-0deb-4d44-a9d9-cb1ea55b41b5">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('catalogo')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_59bdefbd-0deb-4d44-a9d9-cb1ea55b41b5 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('catalogo');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># METADATA AUTOMATICA — informacion del dataset</span>
+<span class="c1"># ============================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generar_metadata</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">descripcion</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Genera metadata automatica de un DataFrame.</span>
+<span class="sd">    Incluye estadisticas, tipos y timestamp.</span>
+<span class="sd">    """</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"nombre"</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
+        <span class="s2">"descripcion"</span><span class="p">:</span> <span class="n">descripcion</span><span class="p">,</span>
+        <span class="s2">"generado_el"</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="s2">"filas"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span>
+        <span class="s2">"columnas"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>
+        <span class="s2">"tamano_bytes"</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+        <span class="s2">"nulos_totales"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+        <span class="s2">"duplicados"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+        <span class="s2">"esquema"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="n">col</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"tipo"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+                <span class="s2">"nulos"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
+                <span class="s2">"unicos"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()),</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="p">},</span>
+        <span class="s2">"periodo"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Si hay columna de fecha, agregar rango temporal</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">"datetime64"</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">meta</span><span class="p">[</span><span class="s2">"periodo"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"inicio"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s2">"fin"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">meta</span>
+
+<span class="n">meta</span> <span class="o">=</span> <span class="n">generar_metadata</span><span class="p">(</span><span class="n">datos</span><span class="p">,</span> <span class="s2">"transacciones_ventas"</span><span class="p">,</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+                        <span class="s2">"Ventas de productos de datos"</span><span class="p">)</span>
+
+<span class="c1"># Guardar metadata junto al dataset</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"ventas_metadata.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Metadata generada:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Metadata generada:
+{
+  "nombre": "transacciones_ventas",
+  "version": "1.0.0",
+  "descripcion": "Ventas de productos de datos",
+  "generado_el": "2026-09-04T15:18:09.169566",
+  "filas": 3,
+  "columnas": 6,
+  "tamano_bytes": "559",
+  "nulos_totales": 0,
+  "duplicados": 0,
+  "esquema": {
+    "fecha": {
+      "tipo": "datetime64[ns]",
+      "nulos": 0,
+      "unicos": 3
+    },
+    "producto": {
+      "tipo": "object",
+      "nulos": 0,
+      "unicos": 3
+    },
+    "region": {
+      "tipo": "object",
+      "nulos": 0,
+      "unicos": 3
+    },
+    "unidades": {
+      "tipo": "int64",
+      "nulos": 0,
+      "unicos": 3
+    },
+    "precio": {
+      "tipo": "float64",
+      "nulos": 0,
+      "unicos": 3
+    },
+    "calificacion": {
+      "tipo": "int64",
+      "nulos": 0,
+      "unicos": 3
+    }
+  },
+  "periodo": {
+    "inicio": "2024-06-01T00:00:00",
+    "fin": "2024-06-03T00:00:00"
+  }
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># README PARA EL PRODUCTO DE DATOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">readme</span> <span class="o">=</span> <span class="s2">"""# Transacciones de Ventas</span>
+
+<span class="s2">## Que es</span>
+<span class="s2">Dataset diario con las transacciones de venta de productos de datos.</span>
+
+<span class="s2">## Propietario</span>
+<span class="s2">Equipo de Datos (datos@empresa.com)</span>
+
+<span class="s2">## Actualizacion</span>
+<span class="s2">Diaria, antes de las 8:00 AM.</span>
+
+<span class="s2">## Esquema</span>
+<span class="s2">Ver `contrato_ventas.json` para la definicion completa.</span>
+
+<span class="s2">| Columna | Tipo | Descripcion |</span>
+<span class="s2">|---|---|---|</span>
+<span class="s2">| fecha | datetime | Fecha de la transaccion |</span>
+<span class="s2">| producto | string | Tipo de producto (5 valores) |</span>
+<span class="s2">| region | string | Ciudad (5 valores) |</span>
+<span class="s2">| unidades | int | Cantidad vendida (1-200) |</span>
+<span class="s2">| precio | float | Precio unitario COP |</span>
+<span class="s2">| calificacion | int | Nota del cliente (1-5, nullable) |</span>
+
+<span class="s2">## Como usar</span>
+<span class="s2">```python</span>
+<span class="s2">import pandas as pd</span>
+<span class="s2">df = pd.read_parquet("datos/ventas_v1.0.0_20240601.parquet")</span>
+<span class="s2">```</span>
+
+<span class="s2">## Cambios</span>
+<span class="s2">Ver `CHANGELOG.md`.</span>
+<span class="s2">"""</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"README_datos.md"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">readme</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"README_datos.md creado."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Con esto, cualquier persona del equipo sabe que hay, como usarlo y a quien preguntar."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>README_datos.md creado.
+Con esto, cualquier persona del equipo sabe que hay, como usarlo y a quien preguntar.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="formatos-interoperables">
+<h2>6. Formatos interoperables<a class="headerlink" href="#formatos-interoperables" title="Link to this heading">#</a></h2>
+<p>No todos los consumidores usan Python. Un dashboard puede estar en Power BI, un modelo en R, una API en Go. El formato del archivo determina quien puede leerlo y que tan eficiente es.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># COMPARAR FORMATOS — tamano y velocidad</span>
+<span class="c1"># ============================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Crear un dataset mas grande para que la diferencia sea visible</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="n">df_grande</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"fecha"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"2023-01-01"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"h"</span><span class="p">),</span>
+    <span class="s2">"producto"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">"dashboard"</span><span class="p">,</span> <span class="s2">"reporte"</span><span class="p">,</span> <span class="s2">"api"</span><span class="p">,</span> <span class="s2">"app web"</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s2">"region"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">"bogota"</span><span class="p">,</span> <span class="s2">"medellin"</span><span class="p">,</span> <span class="s2">"cali"</span><span class="p">,</span> <span class="s2">"manizales"</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s2">"unidades"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s2">"precio"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">})</span>
+
+<span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># CSV</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_grande</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"test.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">t_write_csv</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="n">size_csv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">"test.csv"</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"test.csv"</span><span class="p">)</span>
+<span class="n">t_read_csv</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"formato"</span><span class="p">:</span> <span class="s2">"CSV"</span><span class="p">,</span> <span class="s2">"tamano_mb"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">size_csv</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                   <span class="s2">"escribir_seg"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_write_csv</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"leer_seg"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_read_csv</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                   <span class="s2">"tipos_preservados"</span><span class="p">:</span> <span class="s2">"No"</span><span class="p">,</span> <span class="s2">"compresion"</span><span class="p">:</span> <span class="s2">"No"</span><span class="p">})</span>
+
+<span class="c1"># Parquet</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_grande</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s2">"test.parquet"</span><span class="p">)</span>
+<span class="n">t_write_pq</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="n">size_pq</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">"test.parquet"</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"test.parquet"</span><span class="p">)</span>
+<span class="n">t_read_pq</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"formato"</span><span class="p">:</span> <span class="s2">"Parquet"</span><span class="p">,</span> <span class="s2">"tamano_mb"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">size_pq</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                   <span class="s2">"escribir_seg"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_write_pq</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"leer_seg"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_read_pq</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                   <span class="s2">"tipos_preservados"</span><span class="p">:</span> <span class="s2">"Si"</span><span class="p">,</span> <span class="s2">"compresion"</span><span class="p">:</span> <span class="s2">"Si (snappy)"</span><span class="p">})</span>
+
+<span class="c1"># JSON</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_grande</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s2">"test.json"</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">"records"</span><span class="p">)</span>
+<span class="n">t_write_json</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="n">size_json</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">"test.json"</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">"test.json"</span><span class="p">)</span>
+<span class="n">t_read_json</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"formato"</span><span class="p">:</span> <span class="s2">"JSON"</span><span class="p">,</span> <span class="s2">"tamano_mb"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">size_json</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                   <span class="s2">"escribir_seg"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_write_json</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"leer_seg"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_read_json</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                   <span class="s2">"tipos_preservados"</span><span class="p">:</span> <span class="s2">"Parcial"</span><span class="p">,</span> <span class="s2">"compresion"</span><span class="p">:</span> <span class="s2">"No"</span><span class="p">})</span>
+
+<span class="c1"># Excel</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_grande</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">50000</span><span class="p">)</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">"test.xlsx"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Excel tiene limite de filas</span>
+<span class="n">t_write_xl</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="n">size_xl</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">"test.xlsx"</span><span class="p">)</span>
+
+<span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"formato"</span><span class="p">:</span> <span class="s2">"Excel"</span><span class="p">,</span> <span class="s2">"tamano_mb"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">size_xl</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                   <span class="s2">"escribir_seg"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">t_write_xl</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"leer_seg"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+                   <span class="s2">"tipos_preservados"</span><span class="p">:</span> <span class="s2">"Parcial"</span><span class="p">,</span> <span class="s2">"compresion"</span><span class="p">:</span> <span class="s2">"Si (zip)"</span><span class="p">})</span>
+
+<span class="n">df_comparacion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Benchmark con </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">df_comparacion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Benchmark con 100,000 filas:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-938a6c52-a9e1-4d53-ab53-b9a723a59769" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>formato</th>
+      <th>tamano_mb</th>
+      <th>escribir_seg</th>
+      <th>leer_seg</th>
+      <th>tipos_preservados</th>
+      <th>compresion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CSV</td>
+      <td>4.50</td>
+      <td>0.689</td>
+      <td>0.095</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Parquet</td>
+      <td>1.52</td>
+      <td>0.074</td>
+      <td>0.032</td>
+      <td>Si</td>
+      <td>Si (snappy)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>JSON</td>
+      <td>9.30</td>
+      <td>0.251</td>
+      <td>0.546</td>
+      <td>Parcial</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Excel</td>
+      <td>1.41</td>
+      <td>11.126</td>
+      <td>-</td>
+      <td>Parcial</td>
+      <td>Si (zip)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-938a6c52-a9e1-4d53-ab53-b9a723a59769')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-938a6c52-a9e1-4d53-ab53-b9a723a59769 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-938a6c52-a9e1-4d53-ab53-b9a723a59769');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_658ba53b-2bf0-4880-a8fd-5cad2b3b8b09">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df_comparacion')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_658ba53b-2bf0-4880-a8fd-5cad2b3b8b09 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df_comparacion');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># POR QUE PARQUET</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Parquet es el formato recomendado para productos de datos:</span>
+
+<span class="n">ventajas</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Columnar: lee solo las columnas que necesitas, no todo el archivo"</span><span class="p">,</span>
+    <span class="s2">"Tipos preservados: datetime sigue siendo datetime, no string"</span><span class="p">,</span>
+    <span class="s2">"Compresion integrada: ocupa menos espacio que CSV"</span><span class="p">,</span>
+    <span class="s2">"Rapido: lectura y escritura mas rapida que CSV"</span><span class="p">,</span>
+    <span class="s2">"Compatible: Python, R, Spark, Power BI, DuckDB lo leen"</span><span class="p">,</span>
+    <span class="s2">"Metadata integrada: el esquema viaja dentro del archivo"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ventajas de Parquet:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ventajas</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Cuando NO usar Parquet:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Cuando el consumidor necesita abrir el archivo en Excel"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Cuando es un archivo pequeno que va por correo"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - En esos casos, CSV o Excel siguen siendo validos"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ventajas de Parquet:
+  - Columnar: lee solo las columnas que necesitas, no todo el archivo
+  - Tipos preservados: datetime sigue siendo datetime, no string
+  - Compresion integrada: ocupa menos espacio que CSV
+  - Rapido: lectura y escritura mas rapida que CSV
+  - Compatible: Python, R, Spark, Power BI, DuckDB lo leen
+  - Metadata integrada: el esquema viaja dentro del archivo
+
+Cuando NO usar Parquet:
+  - Cuando el consumidor necesita abrir el archivo en Excel
+  - Cuando es un archivo pequeno que va por correo
+  - En esos casos, CSV o Excel siguen siendo validos
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limpiar archivos de prueba</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"test.csv"</span><span class="p">,</span> <span class="s2">"test.parquet"</span><span class="p">,</span> <span class="s2">"test.json"</span><span class="p">,</span> <span class="s2">"test.xlsx"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepto</p></th>
+<th class="head"><p>Lo que importa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Contrato de datos</strong></p></td>
+<td><p>Acuerdo entre productor y consumidor: que columnas, que tipos, que garantias</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Modularidad</strong></p></td>
+<td><p>Funciones separadas por responsabilidad, config externa, estructura de proyecto</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Versionado</strong></p></td>
+<td><p>Semantico (MAJOR.MINOR.PATCH), changelog, historial de cambios</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Metadata</strong></p></td>
+<td><p>Catalogo de columnas, estadisticas automaticas, README</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Interoperabilidad</strong></p></td>
+<td><p>Parquet para produccion, CSV para compartir con no-tecnicos</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="la-regla-de-oro">
+<h3>La regla de oro<a class="headerlink" href="#la-regla-de-oro" title="Link to this heading">#</a></h3>
+<p>Si te vas de vacaciones y alguien mas tiene que usar tu producto de datos sin llamarte, esta bien disenado. Si te tienen que llamar, falta documentacion, falta un contrato o falta modularidad.</p>
+</section>
+<section id="siguiente-paso">
+<h3>Siguiente paso<a class="headerlink" href="#siguiente-paso" title="Link to this heading">#</a></h3>
+<p>En el <strong>Notebook 2.3</strong> definiremos KPIs y metricas de producto: que medir, por que, y como saber si el producto de datos esta generando valor.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="U2_S1_calidad_datos.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">2.1 — Calidad de datos</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="U2_S3_kpis.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">2.3 — KPIs y Metricas de Producto</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-2-caracteristicas-de-productos-de-datos">Unidad 2: Caracteristicas de Productos de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principios-de-diseno">1. Principios de diseno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contratos-de-datos">2. Contratos de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modularidad-y-reutilizacion">3. Modularidad y reutilizacion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versionado-de-datos">4. Versionado de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadata-y-documentacion">5. Metadata y documentacion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatos-interoperables">6. Formatos interoperables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regla-de-oro">La regla de oro</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
