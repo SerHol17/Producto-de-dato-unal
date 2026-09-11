@@ -1,0 +1,1238 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Big Data con PySpark — Notebook 6 &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_4/nb06_pipeline_completo';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="Data Warehouse" href="U4_datawarehouse.html" />
+    <link rel="prev" title="Big Data con PySpark — Notebook 5" href="nb05_spark_sql_joins.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Ejercicio_U1.html">Ejercicio Unidad 1 — Python para Datos + Limpieza y Normalizacion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Taller1.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_Profiling.html">Pandas Profiling — Diagnostico automatico de un dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2 - Caracteristicas de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S1_calidad_datos.html">2.1 — Calidad de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S2_diseno_productos.html">2.2 — Diseno de productos de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S3_kpis.html">2.3 — KPIs y Metricas de Producto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S4_storytelling.html">2.4 — Storytelling con Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/Ejemplo_Practico_API.html">Ejemplo Practico — Colombianos Presos en el Exterior</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad3.html">Unidad 3 Visualizacion con Power BI</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad4.html">Unidad 4 - Infraestructura de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rdd_spark_completo.html">RDDs en Apache Spark para Big Data</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="nb01_carga_exploracion.html">Big Data con PySpark — Notebook 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb02_filtros_limpieza.html">Big Data con PySpark — Notebook 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb03_transformaciones.html">Big Data con PySpark — Notebook 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb04_agregaciones.html">Big Data con PySpark — Notebook 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb05_spark_sql_joins.html">Big Data con PySpark — Notebook 5</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Big Data con PySpark — Notebook 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_datawarehouse.html">Data Warehouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_datawarehouse.html">Data Warehouse — Modelado Dimensional en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_datalake.html">Data Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_datalake.html">Data Lake — Zonas, Formatos y Particionamiento en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_lakehouse.html">Lakehouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_lakehouse.html">Lakehouse — Construir un Lakehouse Local con Delta Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_deltalake.html">Delta Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_deltalake.html">Delta Lake — Funcionalidades Avanzadas</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_4/nb06_pipeline_completo.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_4/nb06_pipeline_completo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_4/nb06_pipeline_completo.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Big Data con PySpark — Notebook 6</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-completo-de-analisis-preguntas-de-negocio">Pipeline Completo de Análisis: Preguntas de Negocio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-1-que-aerolinea-tiene-la-mejor-puntualidad-por-ruta">Pregunta 1: ¿Qué aerolinea tiene la mejor puntualidad por ruta?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-2-cuales-son-los-horarios-con-mayor-retraso">Pregunta 2: ¿Cuáles son los horarios con mayor retraso?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-3-que-rutas-generan-mas-ingreso-por-pasajero">Pregunta 3: ¿Qué rutas generan más ingreso por pasajero?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-4-como-evoluciono-la-demanda-mensualmente">Pregunta 4: ¿Cómo evolucionó la demanda mensualmente?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-5-que-perfil-tiene-un-vuelo-de-alto-retraso">Pregunta 5: ¿Qué perfil tiene un vuelo de alto retraso?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-resultados">Exportar resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-completo-del-curso">Resumen completo del curso</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="big-data-con-pyspark-notebook-6">
+<h1>Big Data con PySpark — Notebook 6<a class="headerlink" href="#big-data-con-pyspark-notebook-6" title="Link to this heading">#</a></h1>
+<section id="pipeline-completo-de-analisis-preguntas-de-negocio">
+<h2>Pipeline Completo de Análisis: Preguntas de Negocio<a class="headerlink" href="#pipeline-completo-de-analisis-preguntas-de-negocio" title="Link to this heading">#</a></h2>
+<p>Este notebook responde <strong>5 preguntas reales de negocio</strong> usando todo lo aprendido.</p>
+<hr class="docutils" />
+<p><strong>Preguntas a responder:</strong></p>
+<ol class="arabic simple">
+<li><p>¿Qué aerolinea tiene la mejor puntualidad por ruta?</p></li>
+<li><p>¿Cuáles son los horarios con mayor retraso?</p></li>
+<li><p>¿Qué rutas generan más ingreso por pasajero?</p></li>
+<li><p>¿Cómo evolucionó la demanda mensualmente?</p></li>
+<li><p>¿Qué perfil tiene un vuelo de alto retraso?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">'/content/drive'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mounted at /content/drive
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntegerType</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span>
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"Vuelos_Pipeline_Final"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">"local[*]"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">,</span> <span class="s2">"8"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/content/drive/MyDrive/Colab Notebooks/vuelos_limpio.parquet"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dataset cargado: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> vuelos"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset cargado: 446,399 vuelos
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-1-que-aerolinea-tiene-la-mejor-puntualidad-por-ruta">
+<h2>Pregunta 1: ¿Qué aerolinea tiene la mejor puntualidad por ruta?<a class="headerlink" href="#pregunta-1-que-aerolinea-tiene-la-mejor-puntualidad-por-ruta" title="Link to this heading">#</a></h2>
+<p>Queremos saber, para las rutas más frecuentes, qué aerolinea tiene más vuelos a tiempo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+
+<span class="c1"># Paso 1: Crear columnas derivadas y calcular métricas por aerolínea y ruta</span>
+<span class="c1"># (Se define puntualidad como retraso_min &lt;= 15 min; ajusta a &lt;= 0 si tu métrica es estricta)</span>
+<span class="n">puntualidad</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"estado"</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">"CANCELADO"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"ruta"</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">concat_ws</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"origen"</span><span class="p">),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"destino"</span><span class="p">)))</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"es_puntual"</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"retraso_min"</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"ruta"</span><span class="p">,</span> <span class="s2">"aerolinea"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"vuelos"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"es_puntual"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"pct_puntual"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"retraso_min"</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"retraso_prom"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"vuelos"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">500</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Paso 2: Rankear aerolíneas dentro de cada ruta por puntualidad</span>
+<span class="n">ventana_ruta</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"ruta"</span><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="s2">"pct_puntual"</span><span class="p">))</span>
+
+<span class="n">mejor_aerolinea_por_ruta</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">puntualidad</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"rank"</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">ventana_ruta</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"rank"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="s2">"pct_puntual"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"ruta"</span><span class="p">,</span> <span class="s2">"aerolinea"</span><span class="p">,</span> <span class="s2">"vuelos"</span><span class="p">,</span> <span class="s2">"pct_puntual"</span><span class="p">,</span> <span class="s2">"retraso_prom"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Mejor aerolinea por puntualidad en cada ruta:"</span><span class="p">)</span>
+<span class="n">mejor_aerolinea_por_ruta</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejor aerolinea por puntualidad en cada ruta:
++-------+---------+------+-----------+------------+
+|ruta   |aerolinea|vuelos|pct_puntual|retraso_prom|
++-------+---------+------+-----------+------------+
+|BOG-CLO|EasyFly  |501   |77.0       |30.7        |
+|VVC-CLO|Wingo    |722   |76.6       |29.2        |
+|MTR-BOG|Avianca  |1530  |75.8       |31.0        |
+|SMR-MDE|EasyFly  |516   |75.8       |32.3        |
+|CLO-MTR|Wingo    |675   |75.6       |31.4        |
+|LET-MDE|Wingo    |676   |75.3       |31.0        |
+|CTG-MDE|Wingo    |730   |75.1       |33.5        |
+|CLO-SMR|LATAM    |1126  |75.0       |33.5        |
+|PEI-VVC|Wingo    |653   |74.7       |33.5        |
+|CTG-MTR|Wingo    |739   |74.6       |31.6        |
+|CLO-BAQ|Avianca  |1587  |74.6       |31.9        |
+|BOG-SMR|Wingo    |753   |74.6       |33.6        |
+|MTR-SMR|Wingo    |677   |74.6       |33.7        |
+|VVC-LET|Wingo    |685   |74.6       |33.1        |
+|CTG-VVC|LATAM    |1131  |74.5       |31.9        |
++-------+---------+------+-----------+------------+
+only showing top 15 rows
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ¿Qué aerolinea gana más rutas?</span>
+<span class="p">(</span>
+    <span class="n">mejor_aerolinea_por_ruta</span>
+    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"aerolinea"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"rutas_ganadas"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="s2">"rutas_ganadas"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>+---------+-------------+
+|aerolinea|rutas_ganadas|
++---------+-------------+
+|    Wingo|           31|
+|    LATAM|           30|
+|  Avianca|           29|
+|  EasyFly|            2|
+|   Satena|            1|
++---------+-------------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-2-cuales-son-los-horarios-con-mayor-retraso">
+<h2>Pregunta 2: ¿Cuáles son los horarios con mayor retraso?<a class="headerlink" href="#pregunta-2-cuales-son-los-horarios-con-mayor-retraso" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">retraso_por_hora</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"retraso_min"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>       <span class="c1"># solo vuelos que sí tuvieron retraso</span>
+    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"vuelos_demorados"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"retraso_min"</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"retraso_prom_min"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="s2">"retraso_min"</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"retraso_max_min"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Calcular el % de vuelos demorados por hora respecto al total de esa hora</span>
+<span class="n">total_por_hora</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_vuelos"</span><span class="p">))</span>
+
+<span class="n">analisis_horario</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">retraso_por_hora</span>
+    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">total_por_hora</span><span class="p">),</span> <span class="n">on</span><span class="o">=</span><span class="s2">"hora"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+    <span class="c1"># on="hora" → join por columna con el mismo nombre en ambos DFs</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">"pct_demorados"</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"vuelos_demorados"</span><span class="p">)</span> <span class="o">/</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"total_vuelos"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="s2">"retraso_prom_min"</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">,</span> <span class="s2">"total_vuelos"</span><span class="p">,</span> <span class="s2">"vuelos_demorados"</span><span class="p">,</span> <span class="s2">"pct_demorados"</span><span class="p">,</span> <span class="s2">"retraso_prom_min"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"⏰ Horas del día con mayor retraso promedio:"</span><span class="p">)</span>
+<span class="n">analisis_horario</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>⏰ Horas del día con mayor retraso promedio:
++----+------------+----------------+-------------+----------------+
+|hora|total_vuelos|vuelos_demorados|pct_demorados|retraso_prom_min|
++----+------------+----------------+-------------+----------------+
+|  23|       18507|            5592|         30.2|           122.2|
+|   3|       18551|            5473|         29.5|           121.8|
+|  13|       18344|            5614|         30.6|           121.4|
+|  11|       18726|            5497|         29.4|           121.3|
+|   1|       18672|            5609|         30.0|           121.2|
+|   8|       18701|            5566|         29.8|           121.2|
+|  21|       18552|            5499|         29.6|           121.0|
+|  15|       18723|            5608|         30.0|           120.8|
+|   5|       18617|            5476|         29.4|           120.6|
+|  12|       18648|            5664|         30.4|           120.5|
+|   6|       18459|            5548|         30.1|           120.5|
+|   0|       18498|            5390|         29.1|           120.5|
+|  18|       18498|            5451|         29.5|           120.4|
+|  16|       18392|            5468|         29.7|           120.2|
+|  10|       18843|            5621|         29.8|           120.1|
+|  17|       18737|            5595|         29.9|           120.0|
+|   7|       18704|            5510|         29.5|           120.0|
+|  20|       18605|            5480|         29.5|           120.0|
+|  19|       18729|            5461|         29.2|           119.8|
+|   4|       18525|            5505|         29.7|           119.5|
+|  14|       18634|            5596|         30.0|           119.4|
+|  22|       18667|            5617|         30.1|           119.1|
+|   9|       18504|            5422|         29.3|           118.9|
+|   2|       18563|            5403|         29.1|           118.6|
++----+------------+----------------+-------------+----------------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-3-que-rutas-generan-mas-ingreso-por-pasajero">
+<h2>Pregunta 3: ¿Qué rutas generan más ingreso por pasajero?<a class="headerlink" href="#pregunta-3-que-rutas-generan-mas-ingreso-por-pasajero" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="c1"># 1. Preparar columnas calculadas y limpiar cancelados</span>
+<span class="n">df_preparado</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"estado"</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">"CANCELADO"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"ruta"</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">concat_ws</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"origen"</span><span class="p">),</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"destino"</span><span class="p">)))</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"ingreso_total_usd"</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"pasajeros"</span><span class="p">)</span> <span class="o">*</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"tarifa_usd"</span><span class="p">))</span>
+    <span class="c1"># Si no tienes 'tipo_ruta', puedes clasificarla por distancia (ajusta los umbrales si lo requieres):</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">"tipo_ruta"</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"distancia_km"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">800</span><span class="p">,</span> <span class="s2">"CORTA"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"distancia_km"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">,</span> <span class="s2">"MEDIA"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">"LARGA"</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 2. Agrupación y cálculo de ingreso por pasajero</span>
+<span class="n">ingreso_por_pasajero</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df_preparado</span>
+    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"ruta"</span><span class="p">,</span> <span class="s2">"tipo_ruta"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"vuelos"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s2">"ingreso_total_usd"</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"ingreso_total"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s2">"pasajeros"</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"pasajeros_total"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"distancia_km"</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"distancia_prom"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">"ingreso_por_pasajero"</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"ingreso_total"</span><span class="p">)</span> <span class="o">/</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"pasajeros_total"</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"vuelos"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="s2">"ingreso_por_pasajero"</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Top 15 rutas por ingreso por pasajero:"</span><span class="p">)</span>
+<span class="n">ingreso_por_pasajero</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 15 rutas por ingreso por pasajero:
++-------+---------+------+-------------+---------------+--------------+--------------------+
+|ruta   |tipo_ruta|vuelos|ingreso_total|pasajeros_total|distancia_prom|ingreso_por_pasajero|
++-------+---------+------+-------------+---------------+--------------+--------------------+
+|BOG-LET|CORTA    |1367  |7.0543881E7  |157441         |426.0         |448.07              |
+|LET-CTG|LARGA    |961   |4.8663951E7  |109777         |2243.0        |443.3               |
+|CLO-MDE|LARGA    |987   |5.0020769E7  |112937         |2251.0        |442.91              |
+|VVC-LET|LARGA    |934   |4.7880794E7  |108540         |2251.0        |441.14              |
+|PEI-BAQ|LARGA    |977   |4.9304456E7  |111948         |2244.0        |440.42              |
+|MDE-LET|LARGA    |932   |4.7337252E7  |107748         |2248.0        |439.33              |
+|CLO-CTG|CORTA    |1360  |6.9041468E7  |157225         |435.0         |439.13              |
+|MTR-VVC|LARGA    |980   |4.9226683E7  |112199         |2254.0        |438.74              |
+|MTR-CTG|LARGA    |910   |4.5735987E7  |104412         |2245.0        |438.03              |
+|BOG-BAQ|LARGA    |991   |4.9733648E7  |113547         |2254.0        |438.0               |
+|CTG-MTR|CORTA    |1366  |6.8844589E7  |157276         |444.0         |437.73              |
+|LET-BOG|CORTA    |1370  |6.9368175E7  |158573         |434.0         |437.45              |
+|MDE-PEI|LARGA    |987   |4.9190215E7  |112471         |2252.0        |437.36              |
+|MDE-CLO|LARGA    |962   |4.7962555E7  |109664         |2254.0        |437.36              |
+|MTR-BOG|CORTA    |1378  |6.8216407E7  |155991         |433.0         |437.31              |
++-------+---------+------+-------------+---------------+--------------+--------------------+
+only showing top 15 rows
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-4-como-evoluciono-la-demanda-mensualmente">
+<h2>Pregunta 4: ¿Cómo evolucionó la demanda mensualmente?<a class="headerlink" href="#pregunta-4-como-evoluciono-la-demanda-mensualmente" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evolucion</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"anio"</span><span class="p">,</span> <span class="s2">"mes"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"vuelos"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s2">"pasajeros"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"pasajeros"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"tarifa_usd"</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"tarifa_prom"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"anio"</span><span class="p">,</span> <span class="s2">"mes"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Añadir variación mes a mes (Month-over-Month)</span>
+<span class="n">ventana_tiempo</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"anio"</span><span class="p">,</span> <span class="s2">"mes"</span><span class="p">)</span>
+
+<span class="n">evolucion_con_mom</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">evolucion</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">"vuelos_mes_ant"</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">lag</span><span class="p">(</span><span class="s2">"vuelos"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">ventana_tiempo</span><span class="p">)</span>  <span class="c1"># vuelos del mes anterior</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">"variacion_mom_pct"</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"vuelos"</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"vuelos_mes_ant"</span><span class="p">))</span> <span class="o">/</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"vuelos_mes_ant"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="mi">1</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"anio"</span><span class="p">,</span> <span class="s2">"mes"</span><span class="p">,</span> <span class="s2">"vuelos"</span><span class="p">,</span> <span class="s2">"pasajeros"</span><span class="p">,</span> <span class="s2">"tarifa_prom"</span><span class="p">,</span> <span class="s2">"variacion_mom_pct"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"📈 Evolución mensual de vuelos y pasajeros:"</span><span class="p">)</span>
+<span class="n">evolucion_con_mom</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================================
+Tasa de alto retraso (&gt;=90 min) por aerolinea:
++---------+------+----------------+------------+
+|aerolinea|vuelos|pct_alto_retraso|retraso_prom|
++---------+------+----------------+------------+
+|LATAM    |104027|18.84           |36.1        |
+|EasyFly  |41412 |18.79           |35.9        |
+|Avianca  |144972|18.74           |35.8        |
+|Wingo    |62299 |18.62           |35.6        |
+|Satena   |41369 |18.54           |35.5        |
+|JetBlue  |20953 |18.45           |35.3        |
++---------+------+----------------+------------+
+
+
+==================================================
+Tasa de alto retraso (&gt;=90 min) por clase:
++---------+------+----------------+------------+
+|clase    |vuelos|pct_alto_retraso|retraso_prom|
++---------+------+----------------+------------+
+|Economica|311890|18.77           |35.9        |
+|Primera  |20504 |18.68           |35.9        |
+|Business |82638 |18.53           |35.5        |
++---------+------+----------------+------------+
+
+
+==================================================
+Tasa de alto retraso (&gt;=90 min) por tipo_ruta:
++---------+------+----------------+------------+
+|tipo_ruta|vuelos|pct_alto_retraso|retraso_prom|
++---------+------+----------------+------------+
+|MEDIA    |205570|18.79           |35.9        |
+|LARGA    |85885 |18.66           |35.6        |
+|CORTA    |123577|18.64           |35.7        |
++---------+------+----------------+------------+
+
+
+==================================================
+Tasa de alto retraso (&gt;=90 min) por franja_dia:
++----------+------+----------------+------------+
+|franja_dia|vuelos|pct_alto_retraso|retraso_prom|
++----------+------+----------------+------------+
+|TARDE     |103613|18.96           |36.2        |
+|MAÑANA    |104161|18.68           |35.8        |
+|MADRUGADA |103567|18.63           |35.6        |
+|NOCHE     |103691|18.62           |35.7        |
++----------+------+----------------+------------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-5-que-perfil-tiene-un-vuelo-de-alto-retraso">
+<h2>Pregunta 5: ¿Qué perfil tiene un vuelo de alto retraso?<a class="headerlink" href="#pregunta-5-que-perfil-tiene-un-vuelo-de-alto-retraso" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="n">umbral</span> <span class="o">=</span> <span class="mi">90</span>
+
+<span class="c1"># 1. Crear variables derivadas y calcular la bandera de alto retraso</span>
+<span class="n">df_perfil</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"estado"</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">"CANCELADO"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">"alto_retraso"</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"retraso_min"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">umbral</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">"tipo_ruta"</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"distancia_km"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">800</span><span class="p">,</span> <span class="s2">"CORTA"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"distancia_km"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">,</span> <span class="s2">"MEDIA"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">"LARGA"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s2">"franja_dia"</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">((</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">),</span> <span class="s2">"MADRUGADA"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">when</span><span class="p">((</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">),</span> <span class="s2">"MAÑANA"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">when</span><span class="p">((</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"hora"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">),</span> <span class="s2">"TARDE"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">"NOCHE"</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 2. Tasa de alto retraso por variable</span>
+<span class="k">for</span> <span class="n">col_analisis</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"aerolinea"</span><span class="p">,</span> <span class="s2">"clase"</span><span class="p">,</span> <span class="s2">"tipo_ruta"</span><span class="p">,</span> <span class="s2">"franja_dia"</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="s1">'='</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tasa de alto retraso (&gt;=</span><span class="si">{</span><span class="n">umbral</span><span class="si">}</span><span class="s2"> min) por </span><span class="si">{</span><span class="n">col_analisis</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
+    <span class="p">(</span>
+        <span class="n">df_perfil</span>
+        <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">col_analisis</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+            <span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"vuelos"</span><span class="p">),</span>
+            <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"alto_retraso"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"pct_alto_retraso"</span><span class="p">),</span>
+            <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"retraso_min"</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"retraso_prom"</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">desc</span><span class="p">(</span><span class="s2">"pct_alto_retraso"</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================================
+Tasa de alto retraso (&gt;=90 min) por aerolinea:
++---------+------+----------------+------------+
+|aerolinea|vuelos|pct_alto_retraso|retraso_prom|
++---------+------+----------------+------------+
+|LATAM    |104027|18.84           |36.1        |
+|EasyFly  |41412 |18.79           |35.9        |
+|Avianca  |144972|18.74           |35.8        |
+|Wingo    |62299 |18.62           |35.6        |
+|Satena   |41369 |18.54           |35.5        |
+|JetBlue  |20953 |18.45           |35.3        |
++---------+------+----------------+------------+
+
+
+==================================================
+Tasa de alto retraso (&gt;=90 min) por clase:
++---------+------+----------------+------------+
+|clase    |vuelos|pct_alto_retraso|retraso_prom|
++---------+------+----------------+------------+
+|Economica|311890|18.77           |35.9        |
+|Primera  |20504 |18.68           |35.9        |
+|Business |82638 |18.53           |35.5        |
++---------+------+----------------+------------+
+
+
+==================================================
+Tasa de alto retraso (&gt;=90 min) por tipo_ruta:
++---------+------+----------------+------------+
+|tipo_ruta|vuelos|pct_alto_retraso|retraso_prom|
++---------+------+----------------+------------+
+|MEDIA    |205570|18.79           |35.9        |
+|LARGA    |85885 |18.66           |35.6        |
+|CORTA    |123577|18.64           |35.7        |
++---------+------+----------------+------------+
+
+
+==================================================
+Tasa de alto retraso (&gt;=90 min) por franja_dia:
++----------+------+----------------+------------+
+|franja_dia|vuelos|pct_alto_retraso|retraso_prom|
++----------+------+----------------+------------+
+|TARDE     |103613|18.96           |36.2        |
+|MAÑANA    |104161|18.68           |35.8        |
+|MADRUGADA |103567|18.63           |35.6        |
+|NOCHE     |103691|18.62           |35.7        |
++----------+------+----------------+------------+
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="exportar-resultados">
+<h2>Exportar resultados<a class="headerlink" href="#exportar-resultados" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Guardar los reportes como CSV para presentación</span>
+<span class="n">reportes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"puntualidad_por_ruta"</span><span class="p">:</span> <span class="n">mejor_aerolinea_por_ruta</span><span class="p">,</span>
+    <span class="s2">"retraso_por_hora"</span><span class="p">:</span>     <span class="n">analisis_horario</span><span class="p">,</span>
+    <span class="s2">"ingreso_por_pasajero"</span><span class="p">:</span> <span class="n">ingreso_por_pasajero</span><span class="p">,</span>
+    <span class="s2">"evolucion_mensual"</span><span class="p">:</span>    <span class="n">evolucion_con_mom</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">resultado_df</span> <span class="ow">in</span> <span class="n">reportes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">ruta_salida</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"reporte_</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">"</span>
+    <span class="p">(</span>
+        <span class="n">resultado_df</span>
+        <span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># reduce a 1 sola partición → 1 solo archivo CSV</span>
+        <span class="c1"># Sin coalesce, Spark escribe 1 archivo por partición (ej: 8 archivos)</span>
+        <span class="o">.</span><span class="n">write</span>
+        <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"header"</span><span class="p">,</span> <span class="s2">"true"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">ruta_salida</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">" </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">ruta_salida</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> puntualidad_por_ruta → reporte_puntualidad_por_ruta
+ retraso_por_hora → reporte_retraso_por_hora
+ ingreso_por_pasajero → reporte_ingreso_por_pasajero
+ evolucion_mensual → reporte_evolucion_mensual
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Liberar recursos</span>
+<span class="n">df</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>    <span class="c1"># liberar caché del DataFrame principal</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>      <span class="c1"># cerrar la sesión de Spark</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">" Sesión Spark cerrada"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Sesión Spark cerrada
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen-completo-del-curso">
+<h2>Resumen completo del curso<a class="headerlink" href="#resumen-completo-del-curso" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>NOTEBOOK 1 — Carga y exploración
+  spark.read.option(...).csv()     → leer CSV
+  df.printSchema()                 → ver tipos
+  df.describe()                    → estadísticas descriptivas
+  df.cache()                       → guardar en memoria
+
+NOTEBOOK 2 — Filtros y limpieza
+  df.select() / df.drop()          → seleccionar columnas
+  df.filter() / df.where()         → filtrar filas
+  df.dropna() / df.fillna()        → manejar nulos
+  df.dropDuplicates()              → eliminar duplicados
+  col.cast() / to_timestamp()      → cambiar tipos
+
+NOTEBOOK 3 — Transformaciones
+  df.withColumn()                  → crear/modificar columna
+  F.when().otherwise()             → lógica condicional
+  F.concat() / F.upper()           → funciones de string
+  F.udf() / @udf                   → funciones Python custom
+
+NOTEBOOK 4 — Agregaciones
+  df.groupBy().agg()               → métricas por grupo
+  df.groupBy().pivot()             → tabla dinámica
+  Window + rank/avg/sum/lag/lead   → funciones de ventana
+
+NOTEBOOK 5 — SQL y Joins
+  createOrReplaceTempView()        → DataFrame → tabla SQL
+  spark.sql()                      → ejecutar SQL
+  df.join(df2, cond, how=...)      → unir DataFrames
+  F.broadcast()                    → optimizar joins
+
+NOTEBOOK 6 — Pipeline completo
+  Combinación de todo lo anterior para responder preguntas de negocio
+  .coalesce(1) → un solo archivo de salida
+  spark.stop() → liberar recursos
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nb05_spark_sql_joins.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Big Data con PySpark — Notebook 5</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="U4_datawarehouse.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Data Warehouse</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-completo-de-analisis-preguntas-de-negocio">Pipeline Completo de Análisis: Preguntas de Negocio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-1-que-aerolinea-tiene-la-mejor-puntualidad-por-ruta">Pregunta 1: ¿Qué aerolinea tiene la mejor puntualidad por ruta?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-2-cuales-son-los-horarios-con-mayor-retraso">Pregunta 2: ¿Cuáles son los horarios con mayor retraso?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-3-que-rutas-generan-mas-ingreso-por-pasajero">Pregunta 3: ¿Qué rutas generan más ingreso por pasajero?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-4-como-evoluciono-la-demanda-mensualmente">Pregunta 4: ¿Cómo evolucionó la demanda mensualmente?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-5-que-perfil-tiene-un-vuelo-de-alto-retraso">Pregunta 5: ¿Qué perfil tiene un vuelo de alto retraso?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportar-resultados">Exportar resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-completo-del-curso">Resumen completo del curso</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

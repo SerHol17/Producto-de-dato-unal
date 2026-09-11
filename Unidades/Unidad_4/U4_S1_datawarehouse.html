@@ -1,0 +1,1534 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Warehouse — Modelado Dimensional en Python &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_4/U4_S1_datawarehouse';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="Data Lake" href="U4_datalake.html" />
+    <link rel="prev" title="Data Warehouse" href="U4_datawarehouse.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Ejercicio_U1.html">Ejercicio Unidad 1 — Python para Datos + Limpieza y Normalizacion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Taller1.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_Profiling.html">Pandas Profiling — Diagnostico automatico de un dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2 - Caracteristicas de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S1_calidad_datos.html">2.1 — Calidad de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S2_diseno_productos.html">2.2 — Diseno de productos de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S3_kpis.html">2.3 — KPIs y Metricas de Producto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S4_storytelling.html">2.4 — Storytelling con Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/Ejemplo_Practico_API.html">Ejemplo Practico — Colombianos Presos en el Exterior</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad3.html">Unidad 3 Visualizacion con Power BI</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad4.html">Unidad 4 - Infraestructura de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rdd_spark_completo.html">RDDs en Apache Spark para Big Data</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="nb01_carga_exploracion.html">Big Data con PySpark — Notebook 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb02_filtros_limpieza.html">Big Data con PySpark — Notebook 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb03_transformaciones.html">Big Data con PySpark — Notebook 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb04_agregaciones.html">Big Data con PySpark — Notebook 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb05_spark_sql_joins.html">Big Data con PySpark — Notebook 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb06_pipeline_completo.html">Big Data con PySpark — Notebook 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_datawarehouse.html">Data Warehouse</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data Warehouse — Modelado Dimensional en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_datalake.html">Data Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_datalake.html">Data Lake — Zonas, Formatos y Particionamiento en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_lakehouse.html">Lakehouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_lakehouse.html">Lakehouse — Construir un Lakehouse Local con Delta Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_deltalake.html">Delta Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_deltalake.html">Delta Lake — Funcionalidades Avanzadas</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_4/U4_S1_datawarehouse.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_4/U4_S1_datawarehouse.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_4/U4_S1_datawarehouse.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Warehouse — Modelado Dimensional en Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-4-infraestructura-de-datos">Unidad 4: Infraestructura de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-esquema-estrella">1. Crear el esquema estrella</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-etl">2. Pipeline ETL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consultas-analiticas-olap">3. Consultas analiticas (OLAP)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slowly-changing-dimensions-scd-tipo-2">4. Slowly Changing Dimensions (SCD Tipo 2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mart">5. Data Mart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-warehouse-modelado-dimensional-en-python">
+<h1>Data Warehouse — Modelado Dimensional en Python<a class="headerlink" href="#data-warehouse-modelado-dimensional-en-python" title="Link to this heading">#</a></h1>
+<section id="unidad-4-infraestructura-de-datos">
+<h2>Unidad 4: Infraestructura de Datos<a class="headerlink" href="#unidad-4-infraestructura-de-datos" title="Link to this heading">#</a></h2>
+<p>Este notebook implementa un Data Warehouse completo usando Python y SQLite: creamos un esquema estrella desde cero, cargamos datos con un pipeline ETL, ejecutamos consultas analiticas y construimos una dimension de tipo SCD-2 con historial de cambios.</p>
+<section id="contenido">
+<h3>Contenido:<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Crear el esquema estrella (hechos + dimensiones)</p></li>
+<li><p>Pipeline ETL: extraer, transformar, cargar</p></li>
+<li><p>Consultas analiticas (OLAP)</p></li>
+<li><p>Slowly Changing Dimensions (SCD Tipo 2)</p></li>
+<li><p>Data Mart: crear una vista para un area de negocio</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="crear-el-esquema-estrella">
+<h2>1. Crear el esquema estrella<a class="headerlink" href="#crear-el-esquema-estrella" title="Link to this heading">#</a></h2>
+<p>Usamos SQLite como motor porque no requiere instalacion — viene con Python. Los conceptos aplican igual a Snowflake, BigQuery o PostgreSQL.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CREAR LA BASE DE DATOS Y LAS TABLAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># SQLite guarda todo en un archivo local</span>
+<span class="n">db_path</span> <span class="o">=</span> <span class="s1">'warehouse.db'</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">db_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Base de datos creada: </span><span class="si">{</span><span class="n">db_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DIMENSION: FECHA</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># La dimension fecha se precalcula con todos los atributos</span>
+<span class="c1"># que los reportes van a necesitar: dia, mes, trimestre,</span>
+<span class="c1"># es festivo, es fin de semana, etc.</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">CREATE TABLE dim_fecha (</span>
+<span class="s2">    fecha_id     INTEGER PRIMARY KEY,   -- Formato YYYYMMDD</span>
+<span class="s2">    fecha        DATE NOT NULL,</span>
+<span class="s2">    dia          INTEGER,</span>
+<span class="s2">    mes          INTEGER,</span>
+<span class="s2">    mes_nombre   TEXT,</span>
+<span class="s2">    trimestre    TEXT,</span>
+<span class="s2">    anio         INTEGER,</span>
+<span class="s2">    dia_semana   TEXT,</span>
+<span class="s2">    es_fin_semana INTEGER,              -- 0 o 1</span>
+<span class="s2">    semana_anio  INTEGER</span>
+<span class="s2">)</span>
+<span class="s2">"""</span><span class="p">)</span>
+
+<span class="c1"># Generar 2 anios de fechas</span>
+<span class="n">fechas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">'2023-01-01'</span><span class="p">,</span> <span class="s1">'2024-12-31'</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'D'</span><span class="p">)</span>
+
+<span class="n">registros_fecha</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fechas</span><span class="p">:</span>
+    <span class="n">registros_fecha</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+        <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y%m</span><span class="si">%d</span><span class="s1">'</span><span class="p">)),</span>        <span class="c1"># fecha_id: 20230101</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">'</span><span class="p">),</span>            <span class="c1"># fecha</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>                              <span class="c1"># dia</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>                            <span class="c1"># mes</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%B'</span><span class="p">),</span>                   <span class="c1"># mes_nombre</span>
+        <span class="sa">f</span><span class="s1">'Q</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">quarter</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>                   <span class="c1"># trimestre</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>                             <span class="c1"># anio</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%A'</span><span class="p">),</span>                   <span class="c1"># dia_semana</span>
+        <span class="mi">1</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>      <span class="c1"># es_fin_semana</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">isocalendar</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span>                 <span class="c1"># semana_anio</span>
+    <span class="p">))</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
+    <span class="s2">"INSERT INTO dim_fecha VALUES (?,?,?,?,?,?,?,?,?,?)"</span><span class="p">,</span>
+    <span class="n">registros_fecha</span>
+<span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"dim_fecha: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">registros_fecha</span><span class="p">)</span><span class="si">}</span><span class="s2"> registros cargados"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM dim_fecha LIMIT 5"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DIMENSION: PRODUCTO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">CREATE TABLE dim_producto (</span>
+<span class="s2">    producto_id   INTEGER PRIMARY KEY,</span>
+<span class="s2">    nombre        TEXT NOT NULL,</span>
+<span class="s2">    categoria     TEXT NOT NULL,</span>
+<span class="s2">    subcategoria  TEXT,</span>
+<span class="s2">    precio_lista  REAL</span>
+<span class="s2">)</span>
+<span class="s2">"""</span><span class="p">)</span>
+
+<span class="n">productos</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s1">'Dashboard Ejecutivo'</span><span class="p">,</span> <span class="s1">'BI'</span><span class="p">,</span> <span class="s1">'Visualizacion'</span><span class="p">,</span> <span class="mf">450.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="s1">'Reporte Automatico'</span><span class="p">,</span> <span class="s1">'BI'</span><span class="p">,</span> <span class="s1">'Reporteria'</span><span class="p">,</span> <span class="mf">280.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">103</span><span class="p">,</span> <span class="s1">'API REST'</span><span class="p">,</span> <span class="s1">'Integracion'</span><span class="p">,</span> <span class="s1">'Datos'</span><span class="p">,</span> <span class="mf">620.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">104</span><span class="p">,</span> <span class="s1">'App Web Analitica'</span><span class="p">,</span> <span class="s1">'BI'</span><span class="p">,</span> <span class="s1">'Aplicacion'</span><span class="p">,</span> <span class="mf">350.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">105</span><span class="p">,</span> <span class="s1">'Pipeline ETL'</span><span class="p">,</span> <span class="s1">'Integracion'</span><span class="p">,</span> <span class="s1">'Infraestructura'</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">106</span><span class="p">,</span> <span class="s1">'Modelo Predictivo'</span><span class="p">,</span> <span class="s1">'ML'</span><span class="p">,</span> <span class="s1">'Modelos'</span><span class="p">,</span> <span class="mf">800.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">107</span><span class="p">,</span> <span class="s1">'Chatbot Datos'</span><span class="p">,</span> <span class="s1">'ML'</span><span class="p">,</span> <span class="s1">'Aplicacion'</span><span class="p">,</span> <span class="mf">550.0</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
+    <span class="s2">"INSERT INTO dim_producto VALUES (?,?,?,?,?)"</span><span class="p">,</span>
+    <span class="n">productos</span>
+<span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"dim_producto: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">productos</span><span class="p">)</span><span class="si">}</span><span class="s2"> registros"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM dim_producto"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DIMENSION: REGION</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">CREATE TABLE dim_region (</span>
+<span class="s2">    region_id     INTEGER PRIMARY KEY,</span>
+<span class="s2">    ciudad        TEXT NOT NULL,</span>
+<span class="s2">    departamento  TEXT NOT NULL,</span>
+<span class="s2">    zona          TEXT NOT NULL</span>
+<span class="s2">)</span>
+<span class="s2">"""</span><span class="p">)</span>
+
+<span class="n">regiones</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Bogota'</span><span class="p">,</span> <span class="s1">'Cundinamarca'</span><span class="p">,</span> <span class="s1">'Centro'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'Medellin'</span><span class="p">,</span> <span class="s1">'Antioquia'</span><span class="p">,</span> <span class="s1">'Noroccidente'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">'Cali'</span><span class="p">,</span> <span class="s1">'Valle del Cauca'</span><span class="p">,</span> <span class="s1">'Suroccidente'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">'Manizales'</span><span class="p">,</span> <span class="s1">'Caldas'</span><span class="p">,</span> <span class="s1">'Eje Cafetero'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">'Barranquilla'</span><span class="p">,</span> <span class="s1">'Atlantico'</span><span class="p">,</span> <span class="s1">'Costa'</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
+    <span class="s2">"INSERT INTO dim_region VALUES (?,?,?,?)"</span><span class="p">,</span>
+    <span class="n">regiones</span>
+<span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"dim_region: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">regiones</span><span class="p">)</span><span class="si">}</span><span class="s2"> registros"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM dim_region"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># DIMENSION: CLIENTE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">CREATE TABLE dim_cliente (</span>
+<span class="s2">    cliente_id   INTEGER PRIMARY KEY,</span>
+<span class="s2">    nombre       TEXT NOT NULL,</span>
+<span class="s2">    segmento     TEXT NOT NULL,</span>
+<span class="s2">    canal        TEXT NOT NULL,</span>
+<span class="s2">    fecha_registro DATE</span>
+<span class="s2">)</span>
+<span class="s2">"""</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nombres</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'TechCorp'</span><span class="p">,</span> <span class="s1">'DataSoft'</span><span class="p">,</span> <span class="s1">'Analitika'</span><span class="p">,</span> <span class="s1">'InfoSystems'</span><span class="p">,</span> <span class="s1">'CloudBI'</span><span class="p">,</span>
+           <span class="s1">'MetricaPro'</span><span class="p">,</span> <span class="s1">'VisionData'</span><span class="p">,</span> <span class="s1">'SmartBI'</span><span class="p">,</span> <span class="s1">'DataDriven'</span><span class="p">,</span> <span class="s1">'AIFactory'</span><span class="p">,</span>
+           <span class="s1">'NeoAnalytics'</span><span class="p">,</span> <span class="s1">'ByteInsights'</span><span class="p">,</span> <span class="s1">'PredictCo'</span><span class="p">,</span> <span class="s1">'FlowData'</span><span class="p">,</span> <span class="s1">'CoreBI'</span><span class="p">]</span>
+<span class="n">segmentos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Enterprise'</span><span class="p">,</span> <span class="s1">'Profesional'</span><span class="p">,</span> <span class="s1">'Startup'</span><span class="p">]</span>
+<span class="n">canales</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Directo'</span><span class="p">,</span> <span class="s1">'Referido'</span><span class="p">,</span> <span class="s1">'Organico'</span><span class="p">,</span> <span class="s1">'Evento'</span><span class="p">]</span>
+
+<span class="n">clientes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nombres</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">fecha</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">700</span><span class="p">)))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span>
+    <span class="n">clientes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">segmentos</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">canales</span><span class="p">),</span>
+        <span class="n">fecha</span>
+    <span class="p">))</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
+    <span class="s2">"INSERT INTO dim_cliente VALUES (?,?,?,?,?)"</span><span class="p">,</span>
+    <span class="n">clientes</span>
+<span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"dim_cliente: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">clientes</span><span class="p">)</span><span class="si">}</span><span class="s2"> registros"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM dim_cliente"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># TABLA DE HECHOS: VENTAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">CREATE TABLE hechos_ventas (</span>
+<span class="s2">    venta_id      INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s2">    fecha_id      INTEGER NOT NULL REFERENCES dim_fecha(fecha_id),</span>
+<span class="s2">    producto_id   INTEGER NOT NULL REFERENCES dim_producto(producto_id),</span>
+<span class="s2">    region_id     INTEGER NOT NULL REFERENCES dim_region(region_id),</span>
+<span class="s2">    cliente_id    INTEGER NOT NULL REFERENCES dim_cliente(cliente_id),</span>
+<span class="s2">    unidades      INTEGER NOT NULL,</span>
+<span class="s2">    precio_venta  REAL NOT NULL,</span>
+<span class="s2">    costo         REAL NOT NULL,</span>
+<span class="s2">    descuento     REAL DEFAULT 0</span>
+<span class="s2">)</span>
+<span class="s2">"""</span><span class="p">)</span>
+
+<span class="c1"># Generar transacciones sinteticas</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n_ventas</span> <span class="o">=</span> <span class="mi">5000</span>
+
+<span class="n">producto_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">productos</span><span class="p">]</span>
+<span class="n">producto_precios</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">p</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">productos</span><span class="p">}</span>
+<span class="n">region_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">regiones</span><span class="p">]</span>
+<span class="n">cliente_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">clientes</span><span class="p">]</span>
+
+<span class="n">ventas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_ventas</span><span class="p">):</span>
+    <span class="c1"># Fecha aleatoria en 2023-2024</span>
+    <span class="n">fecha</span> <span class="o">=</span> <span class="n">fechas</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fechas</span><span class="p">))]</span>
+    <span class="n">fecha_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fecha</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y%m</span><span class="si">%d</span><span class="s1">'</span><span class="p">))</span>
+    
+    <span class="n">prod_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">producto_ids</span><span class="p">)</span>
+    <span class="n">precio_lista</span> <span class="o">=</span> <span class="n">producto_precios</span><span class="p">[</span><span class="n">prod_id</span><span class="p">]</span>
+    
+    <span class="c1"># Bogota tiene mas ventas (40%)</span>
+    <span class="n">reg_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">region_ids</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+    <span class="n">cli_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">cliente_ids</span><span class="p">)</span>
+    
+    <span class="n">unidades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+    <span class="n">descuento</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+    <span class="n">precio_venta</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">precio_lista</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">descuento</span> <span class="o">/</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">costo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">precio_lista</span> <span class="o">*</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">ventas</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">fecha_id</span><span class="p">,</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">reg_id</span><span class="p">,</span> <span class="n">cli_id</span><span class="p">,</span> <span class="n">unidades</span><span class="p">,</span> <span class="n">precio_venta</span><span class="p">,</span> <span class="n">costo</span><span class="p">,</span> <span class="n">descuento</span><span class="p">))</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
+    <span class="s2">"INSERT INTO hechos_ventas (fecha_id, producto_id, region_id, cliente_id, unidades, precio_venta, costo, descuento) VALUES (?,?,?,?,?,?,?,?)"</span><span class="p">,</span>
+    <span class="n">ventas</span>
+<span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"hechos_ventas: </span><span class="si">{</span><span class="n">n_ventas</span><span class="si">}</span><span class="s2"> transacciones generadas"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM hechos_ventas LIMIT 5"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VERIFICAR EL ESQUEMA COMPLETO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">tablas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+    <span class="s2">"SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"</span><span class="p">,</span>
+    <span class="n">conn</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tablas en el Warehouse:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">tablas</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">nombre</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">"SELECT COUNT(*) as n FROM </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">tipo</span> <span class="o">=</span> <span class="s1">'HECHOS'</span> <span class="k">if</span> <span class="n">nombre</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'hechos'</span><span class="p">)</span> <span class="k">else</span> <span class="s1">'DIMENSION'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  [</span><span class="si">{</span><span class="n">tipo</span><span class="si">:</span><span class="s2">9s</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">nombre</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s2">&gt;6,</span><span class="si">}</span><span class="s2"> registros"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pipeline-etl">
+<h2>2. Pipeline ETL<a class="headerlink" href="#pipeline-etl" title="Link to this heading">#</a></h2>
+<p>Simulamos la llegada de datos nuevos desde un sistema transaccional (un CSV) y los cargamos al Warehouse pasando por las 3 fases: Extract, Transform, Load.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EXTRACT: simular datos crudos desde el sistema operacional</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># En produccion esto seria un query a la base de datos</span>
+<span class="c1"># transaccional, o un archivo que deja el ERP</span>
+
+<span class="n">datos_crudos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">'fecha'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'2024-12-28'</span><span class="p">,</span> <span class="s1">'2024-12-28'</span><span class="p">,</span> <span class="s1">'2024-12-29'</span><span class="p">,</span>
+              <span class="s1">'2024-12-29'</span><span class="p">,</span> <span class="s1">'2024-12-30'</span><span class="p">,</span> <span class="s1">'28/12/2024'</span><span class="p">],</span>  <span class="c1"># Formato inconsistente</span>
+    <span class="s1">'producto'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Dashboard Ejecutivo'</span><span class="p">,</span> <span class="s1">'API REST'</span><span class="p">,</span> <span class="s1">'Reporte Automatico'</span><span class="p">,</span>
+                 <span class="s1">'DASHBOARD EJECUTIVO'</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">'Pipeline ETL'</span><span class="p">],</span>  <span class="c1"># Duplicado en mayusculas + nulo</span>
+    <span class="s1">'ciudad'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Bogota'</span><span class="p">,</span> <span class="s1">'Medellin'</span><span class="p">,</span> <span class="s1">'Bogotá'</span><span class="p">,</span> <span class="s1">'bogota'</span><span class="p">,</span>
+               <span class="s1">'Cali'</span><span class="p">,</span> <span class="s1">'Manizales'</span><span class="p">],</span>  <span class="c1"># Variantes de Bogota</span>
+    <span class="s1">'cliente'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'TechCorp'</span><span class="p">,</span> <span class="s1">'DataSoft'</span><span class="p">,</span> <span class="s1">'Analitika'</span><span class="p">,</span>
+                <span class="s1">'TechCorp'</span><span class="p">,</span> <span class="s1">'InfoSystems'</span><span class="p">,</span> <span class="s1">'CloudBI'</span><span class="p">],</span>
+    <span class="s1">'unidades'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>  <span class="c1"># Negativo</span>
+    <span class="s1">'precio'</span><span class="p">:</span> <span class="p">[</span><span class="mf">450.0</span><span class="p">,</span> <span class="mf">620.0</span><span class="p">,</span> <span class="mf">280.0</span><span class="p">,</span> <span class="mf">450.0</span><span class="p">,</span> <span class="mf">350.0</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">],</span>
+    <span class="s1">'descuento_pct'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'10%'</span><span class="p">,</span> <span class="s1">'0'</span><span class="p">,</span> <span class="s1">'5%'</span><span class="p">,</span> <span class="s1">'15%'</span><span class="p">,</span> <span class="s1">'0'</span><span class="p">,</span> <span class="s1">'20%'</span><span class="p">],</span>  <span class="c1"># Formato inconsistente</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Datos crudos del sistema operacional:"</span><span class="p">)</span>
+<span class="n">datos_crudos</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># TRANSFORM: limpiar y mapear a las dimensiones del Warehouse</span>
+<span class="c1"># ============================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">transformar_datos</span><span class="p">(</span><span class="n">df_crudo</span><span class="p">,</span> <span class="n">conn</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Transforma datos crudos del sistema operacional</span>
+<span class="sd">    al formato del esquema estrella del Warehouse.</span>
+<span class="sd">    Retorna datos listos para cargar y registros rechazados.</span>
+<span class="sd">    """</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_crudo</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">rechazados</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># 1. Limpiar fechas (multiples formatos)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'mixed'</span><span class="p">,</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span>
+    
+    <span class="c1"># 2. Limpiar producto</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+    
+    <span class="c1"># 3. Limpiar ciudad (tildes, case)</span>
+    <span class="n">mapeo_ciudad</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'bogotá'</span><span class="p">:</span> <span class="s1">'Bogota'</span><span class="p">,</span> <span class="s1">'bogota'</span><span class="p">:</span> <span class="s1">'Bogota'</span><span class="p">}</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'ciudad'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'ciudad'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">mapeo_ciudad</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+    
+    <span class="c1"># 4. Limpiar descuento</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'%'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># 5. Rechazar filas invalidas</span>
+    <span class="n">mask_nulo</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+    <span class="n">mask_negativo</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+    <span class="n">mask_invalido</span> <span class="o">=</span> <span class="n">mask_nulo</span> <span class="o">|</span> <span class="n">mask_negativo</span>
+    
+    <span class="k">if</span> <span class="n">mask_invalido</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">rechazados</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">mask_invalido</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">rechazados</span><span class="p">[</span><span class="s1">'motivo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask_nulo</span><span class="p">,</span> <span class="s1">'valor_nulo'</span><span class="p">,</span> <span class="s1">'unidades_negativas'</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">mask_invalido</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># 6. Mapear a claves del Warehouse</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'fecha_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y%m</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    
+    <span class="c1"># Buscar producto_id</span>
+    <span class="n">dim_prod</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT producto_id, nombre FROM dim_producto"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dim_prod</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">'producto'</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">'nombre'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
+    
+    <span class="c1"># Buscar region_id</span>
+    <span class="n">dim_reg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT region_id, ciudad FROM dim_region"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dim_reg</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'ciudad'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
+    
+    <span class="c1"># Buscar cliente_id</span>
+    <span class="n">dim_cli</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT cliente_id, nombre FROM dim_cliente"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dim_cli</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">'cliente'</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">'nombre'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'_cli'</span><span class="p">))</span>
+    
+    <span class="c1"># Calcular metricas</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'precio_venta'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'costo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.4</span>
+    
+    <span class="c1"># Seleccionar columnas del esquema</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'fecha_id'</span><span class="p">,</span> <span class="s1">'producto_id'</span><span class="p">,</span> <span class="s1">'region_id'</span><span class="p">,</span> <span class="s1">'cliente_id'</span><span class="p">,</span>
+                    <span class="s1">'unidades'</span><span class="p">,</span> <span class="s1">'precio_venta'</span><span class="p">,</span> <span class="s1">'costo'</span><span class="p">,</span> <span class="s1">'descuento_pct'</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="n">resultado</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'descuento_pct'</span><span class="p">:</span> <span class="s1">'descuento'</span><span class="p">})</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="n">resultado</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>  <span class="c1"># Quitar los que no mapearon</span>
+    
+    <span class="k">return</span> <span class="n">resultado</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rechazados</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rechazados</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="n">datos_transformados</span><span class="p">,</span> <span class="n">datos_rechazados</span> <span class="o">=</span> <span class="n">transformar_datos</span><span class="p">(</span><span class="n">datos_crudos</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Transformados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">datos_transformados</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas listas para cargar"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rechazados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">datos_rechazados</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datos_rechazados</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Registros rechazados:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">datos_rechazados</span><span class="p">[[</span><span class="s1">'fecha'</span><span class="p">,</span> <span class="s1">'producto'</span><span class="p">,</span> <span class="s1">'unidades'</span><span class="p">,</span> <span class="s1">'motivo'</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Datos listos para cargar:"</span><span class="p">)</span>
+<span class="n">datos_transformados</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># LOAD: cargar al Warehouse</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">antes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT COUNT(*) as n FROM hechos_ventas"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Insertar los datos transformados</span>
+<span class="n">datos_transformados</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">'hechos_ventas'</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">'append'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">despues</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT COUNT(*) as n FROM hechos_ventas"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Carga completada:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Antes: </span><span class="si">{</span><span class="n">antes</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Cargadas: </span><span class="si">{</span><span class="n">despues</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">antes</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Despues: </span><span class="si">{</span><span class="n">despues</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="consultas-analiticas-olap">
+<h2>3. Consultas analiticas (OLAP)<a class="headerlink" href="#consultas-analiticas-olap" title="Link to this heading">#</a></h2>
+<p>Las consultas sobre el Warehouse usan JOINs entre la tabla de hechos y las dimensiones para responder preguntas de negocio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONSULTA 1: Ingreso por region y trimestre</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">query_1</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">SELECT</span>
+<span class="s2">    r.ciudad,</span>
+<span class="s2">    r.zona,</span>
+<span class="s2">    f.trimestre,</span>
+<span class="s2">    f.anio,</span>
+<span class="s2">    SUM(v.unidades * v.precio_venta) AS ingreso,</span>
+<span class="s2">    SUM(v.unidades * v.costo) AS costo_total,</span>
+<span class="s2">    SUM(v.unidades * v.precio_venta) - SUM(v.unidades * v.costo) AS margen,</span>
+<span class="s2">    COUNT(*) AS transacciones</span>
+<span class="s2">FROM hechos_ventas v</span>
+<span class="s2">JOIN dim_region r ON v.region_id = r.region_id</span>
+<span class="s2">JOIN dim_fecha f ON v.fecha_id = f.fecha_id</span>
+<span class="s2">WHERE f.anio = 2024</span>
+<span class="s2">GROUP BY r.ciudad, r.zona, f.trimestre, f.anio</span>
+<span class="s2">ORDER BY r.ciudad, f.trimestre</span>
+<span class="s2">"""</span>
+
+<span class="n">resultado_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query_1</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ingreso por region y trimestre (2024):"</span><span class="p">)</span>
+<span class="n">resultado_1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONSULTA 2: Top productos por ingreso</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">query_2</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">SELECT</span>
+<span class="s2">    p.nombre AS producto,</span>
+<span class="s2">    p.categoria,</span>
+<span class="s2">    COUNT(*) AS transacciones,</span>
+<span class="s2">    SUM(v.unidades) AS unidades_totales,</span>
+<span class="s2">    ROUND(SUM(v.unidades * v.precio_venta), 0) AS ingreso_total,</span>
+<span class="s2">    ROUND(AVG(v.descuento), 1) AS descuento_promedio</span>
+<span class="s2">FROM hechos_ventas v</span>
+<span class="s2">JOIN dim_producto p ON v.producto_id = p.producto_id</span>
+<span class="s2">GROUP BY p.nombre, p.categoria</span>
+<span class="s2">ORDER BY ingreso_total DESC</span>
+<span class="s2">"""</span>
+
+<span class="n">resultado_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query_2</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Top productos por ingreso:"</span><span class="p">)</span>
+<span class="n">resultado_2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONSULTA 3: Ingreso mensual con tendencia</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">query_3</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">SELECT</span>
+<span class="s2">    f.anio,</span>
+<span class="s2">    f.mes,</span>
+<span class="s2">    f.mes_nombre,</span>
+<span class="s2">    COUNT(DISTINCT v.cliente_id) AS clientes_unicos,</span>
+<span class="s2">    ROUND(SUM(v.unidades * v.precio_venta), 0) AS ingreso</span>
+<span class="s2">FROM hechos_ventas v</span>
+<span class="s2">JOIN dim_fecha f ON v.fecha_id = f.fecha_id</span>
+<span class="s2">GROUP BY f.anio, f.mes, f.mes_nombre</span>
+<span class="s2">ORDER BY f.anio, f.mes</span>
+<span class="s2">"""</span>
+
+<span class="n">resultado_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query_3</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ingreso mensual:"</span><span class="p">)</span>
+<span class="n">resultado_3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONSULTA 4: Analisis por segmento de cliente</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">query_4</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">SELECT</span>
+<span class="s2">    c.segmento,</span>
+<span class="s2">    COUNT(DISTINCT c.cliente_id) AS clientes,</span>
+<span class="s2">    COUNT(*) AS transacciones,</span>
+<span class="s2">    ROUND(SUM(v.unidades * v.precio_venta), 0) AS ingreso_total,</span>
+<span class="s2">    ROUND(SUM(v.unidades * v.precio_venta) * 1.0 / COUNT(DISTINCT c.cliente_id), 0) AS ingreso_por_cliente,</span>
+<span class="s2">    ROUND(AVG(v.unidades), 1) AS unidades_promedio</span>
+<span class="s2">FROM hechos_ventas v</span>
+<span class="s2">JOIN dim_cliente c ON v.cliente_id = c.cliente_id</span>
+<span class="s2">GROUP BY c.segmento</span>
+<span class="s2">ORDER BY ingreso_total DESC</span>
+<span class="s2">"""</span>
+
+<span class="n">resultado_4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query_4</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Analisis por segmento de cliente:"</span><span class="p">)</span>
+<span class="n">resultado_4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONSULTA 5: Fin de semana vs entre semana</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Esto demuestra el valor de la dimension fecha precalculada:</span>
+<span class="c1"># no necesitas calcular si es fin de semana en el query</span>
+
+<span class="n">query_5</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">SELECT</span>
+<span class="s2">    CASE WHEN f.es_fin_semana = 1 THEN 'Fin de semana' ELSE 'Entre semana' END AS periodo,</span>
+<span class="s2">    COUNT(*) AS transacciones,</span>
+<span class="s2">    ROUND(SUM(v.unidades * v.precio_venta), 0) AS ingreso,</span>
+<span class="s2">    ROUND(AVG(v.unidades * v.precio_venta), 0) AS ticket_promedio</span>
+<span class="s2">FROM hechos_ventas v</span>
+<span class="s2">JOIN dim_fecha f ON v.fecha_id = f.fecha_id</span>
+<span class="s2">GROUP BY f.es_fin_semana</span>
+<span class="s2">"""</span>
+
+<span class="n">resultado_5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query_5</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ventas: fin de semana vs entre semana:"</span><span class="p">)</span>
+<span class="n">resultado_5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="slowly-changing-dimensions-scd-tipo-2">
+<h2>4. Slowly Changing Dimensions (SCD Tipo 2)<a class="headerlink" href="#slowly-changing-dimensions-scd-tipo-2" title="Link to this heading">#</a></h2>
+<p>Las dimensiones cambian. Un cliente cambia de segmento, una ciudad cambia de zona, un producto cambia de precio. El SCD Tipo 2 conserva el historial creando una nueva fila por cada cambio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CREAR DIMENSION CLIENTE CON SCD TIPO 2</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">CREATE TABLE dim_cliente_scd2 (</span>
+<span class="s2">    sk_cliente    INTEGER PRIMARY KEY AUTOINCREMENT,  -- Surrogate key</span>
+<span class="s2">    cliente_id    INTEGER NOT NULL,                   -- Natural key (la del sistema origen)</span>
+<span class="s2">    nombre        TEXT NOT NULL,</span>
+<span class="s2">    segmento      TEXT NOT NULL,</span>
+<span class="s2">    canal         TEXT NOT NULL,</span>
+<span class="s2">    ciudad        TEXT NOT NULL,</span>
+<span class="s2">    vigente_desde DATE NOT NULL,</span>
+<span class="s2">    vigente_hasta DATE NOT NULL,</span>
+<span class="s2">    es_actual     INTEGER NOT NULL DEFAULT 1          -- 1 = vigente, 0 = historico</span>
+<span class="s2">)</span>
+<span class="s2">"""</span><span class="p">)</span>
+
+<span class="c1"># Cargar estado inicial</span>
+<span class="n">clientes_scd</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'TechCorp'</span><span class="p">,</span> <span class="s1">'Startup'</span><span class="p">,</span> <span class="s1">'Directo'</span><span class="p">,</span> <span class="s1">'Medellin'</span><span class="p">,</span> <span class="s1">'2022-01-15'</span><span class="p">,</span> <span class="s1">'9999-12-31'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'DataSoft'</span><span class="p">,</span> <span class="s1">'Profesional'</span><span class="p">,</span> <span class="s1">'Referido'</span><span class="p">,</span> <span class="s1">'Bogota'</span><span class="p">,</span> <span class="s1">'2022-03-01'</span><span class="p">,</span> <span class="s1">'9999-12-31'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">'Analitika'</span><span class="p">,</span> <span class="s1">'Startup'</span><span class="p">,</span> <span class="s1">'Organico'</span><span class="p">,</span> <span class="s1">'Cali'</span><span class="p">,</span> <span class="s1">'2022-06-15'</span><span class="p">,</span> <span class="s1">'9999-12-31'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
+    <span class="s2">"INSERT INTO dim_cliente_scd2 (cliente_id, nombre, segmento, canal, ciudad, vigente_desde, vigente_hasta, es_actual) VALUES (?,?,?,?,?,?,?,?)"</span><span class="p">,</span>
+    <span class="n">clientes_scd</span>
+<span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Estado inicial:"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM dim_cliente_scd2"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># APLICAR UN CAMBIO: TechCorp paso de Startup a Enterprise</span>
+<span class="c1"># y se mudo de Medellin a Bogota</span>
+<span class="c1"># ============================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">aplicar_cambio_scd2</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">cliente_id</span><span class="p">,</span> <span class="n">nuevos_datos</span><span class="p">,</span> <span class="n">fecha_cambio</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Aplica un cambio SCD Tipo 2:</span>
+<span class="sd">    1. Cierra el registro actual (vigente_hasta = fecha_cambio - 1)</span>
+<span class="sd">    2. Crea un registro nuevo con los datos actualizados</span>
+<span class="sd">    """</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">fecha_cierre</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">fecha_cambio</span><span class="p">,</span> <span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span>
+    
+    <span class="c1"># 1. Cerrar el registro actual</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">        UPDATE dim_cliente_scd2</span>
+<span class="s2">        SET vigente_hasta = ?,</span>
+<span class="s2">            es_actual = 0</span>
+<span class="s2">        WHERE cliente_id = ?</span>
+<span class="s2">          AND es_actual = 1</span>
+<span class="s2">    """</span><span class="p">,</span> <span class="p">(</span><span class="n">fecha_cierre</span><span class="p">,</span> <span class="n">cliente_id</span><span class="p">))</span>
+    
+    <span class="c1"># 2. Insertar el registro nuevo</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">        INSERT INTO dim_cliente_scd2</span>
+<span class="s2">        (cliente_id, nombre, segmento, canal, ciudad, vigente_desde, vigente_hasta, es_actual)</span>
+<span class="s2">        VALUES (?, ?, ?, ?, ?, ?, '9999-12-31', 1)</span>
+<span class="s2">    """</span><span class="p">,</span> <span class="p">(</span>
+        <span class="n">cliente_id</span><span class="p">,</span>
+        <span class="n">nuevos_datos</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">],</span>
+        <span class="n">nuevos_datos</span><span class="p">[</span><span class="s1">'segmento'</span><span class="p">],</span>
+        <span class="n">nuevos_datos</span><span class="p">[</span><span class="s1">'canal'</span><span class="p">],</span>
+        <span class="n">nuevos_datos</span><span class="p">[</span><span class="s1">'ciudad'</span><span class="p">],</span>
+        <span class="n">fecha_cambio</span>
+    <span class="p">))</span>
+    
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="c1"># TechCorp cambio de Startup a Enterprise y se mudo a Bogota el 2024-07-01</span>
+<span class="n">aplicar_cambio_scd2</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">cliente_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nuevos_datos</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">'nombre'</span><span class="p">:</span> <span class="s1">'TechCorp'</span><span class="p">,</span>
+    <span class="s1">'segmento'</span><span class="p">:</span> <span class="s1">'Enterprise'</span><span class="p">,</span>
+    <span class="s1">'canal'</span><span class="p">:</span> <span class="s1">'Directo'</span><span class="p">,</span>
+    <span class="s1">'ciudad'</span><span class="p">:</span> <span class="s1">'Bogota'</span><span class="p">,</span>
+<span class="p">},</span> <span class="n">fecha_cambio</span><span class="o">=</span><span class="s1">'2024-07-01'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Despues del cambio — TechCorp tiene 2 filas:"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">    SELECT * FROM dim_cliente_scd2</span>
+<span class="s2">    WHERE cliente_id = 1</span>
+<span class="s2">    ORDER BY vigente_desde</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CONSULTAR CON HISTORIAL</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Consulta que respeta el historial:</span>
+<span class="c1"># las ventas de TechCorp en 2023 se atribuyen a Medellin/Startup</span>
+<span class="c1"># las ventas de TechCorp en 2024-Q3+ se atribuyen a Bogota/Enterprise</span>
+
+<span class="n">query_scd</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">SELECT</span>
+<span class="s2">    c.nombre,</span>
+<span class="s2">    c.segmento,</span>
+<span class="s2">    c.ciudad,</span>
+<span class="s2">    c.vigente_desde,</span>
+<span class="s2">    c.vigente_hasta,</span>
+<span class="s2">    c.es_actual</span>
+<span class="s2">FROM dim_cliente_scd2 c</span>
+<span class="s2">ORDER BY c.cliente_id, c.vigente_desde</span>
+<span class="s2">"""</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dimension completa con historial:"</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query_scd</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="data-mart">
+<h2>5. Data Mart<a class="headerlink" href="#data-mart" title="Link to this heading">#</a></h2>
+<p>Un Data Mart es una vista del Warehouse enfocada en un area de negocio. En vez de que cada analista escriba el mismo JOIN de 5 tablas, se crea una vista precalculada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CREAR UN DATA MART DE VENTAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Una vista que une hechos + dimensiones y precalcula metricas</span>
+<span class="c1"># El analista de ventas solo hace SELECT sobre esta vista</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">CREATE VIEW IF NOT EXISTS mart_ventas AS</span>
+<span class="s2">SELECT</span>
+<span class="s2">    f.fecha,</span>
+<span class="s2">    f.anio,</span>
+<span class="s2">    f.mes_nombre AS mes,</span>
+<span class="s2">    f.trimestre,</span>
+<span class="s2">    f.dia_semana,</span>
+<span class="s2">    p.nombre AS producto,</span>
+<span class="s2">    p.categoria AS categoria_producto,</span>
+<span class="s2">    r.ciudad,</span>
+<span class="s2">    r.zona,</span>
+<span class="s2">    c.nombre AS cliente,</span>
+<span class="s2">    c.segmento,</span>
+<span class="s2">    v.unidades,</span>
+<span class="s2">    v.precio_venta,</span>
+<span class="s2">    v.costo,</span>
+<span class="s2">    v.descuento,</span>
+<span class="s2">    v.unidades * v.precio_venta AS ingreso,</span>
+<span class="s2">    v.unidades * v.costo AS costo_total,</span>
+<span class="s2">    v.unidades * (v.precio_venta - v.costo) AS margen</span>
+<span class="s2">FROM hechos_ventas v</span>
+<span class="s2">JOIN dim_fecha f ON v.fecha_id = f.fecha_id</span>
+<span class="s2">JOIN dim_producto p ON v.producto_id = p.producto_id</span>
+<span class="s2">JOIN dim_region r ON v.region_id = r.region_id</span>
+<span class="s2">JOIN dim_cliente c ON v.cliente_id = c.cliente_id</span>
+<span class="s2">"""</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vista mart_ventas creada."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ahora el analista solo escribe:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  SELECT ciudad, SUM(ingreso) FROM mart_ventas GROUP BY ciudad"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># USAR EL DATA MART — queries simples</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Ahora las consultas son triviales — sin JOINs</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== Ingreso por ciudad (2024) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">    SELECT ciudad, ROUND(SUM(ingreso), 0) AS ingreso,</span>
+<span class="s2">           ROUND(SUM(margen), 0) AS margen</span>
+<span class="s2">    FROM mart_ventas WHERE anio = 2024</span>
+<span class="s2">    GROUP BY ciudad ORDER BY ingreso DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== Ingreso por categoria (2024) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">    SELECT categoria_producto, ROUND(SUM(ingreso), 0) AS ingreso,</span>
+<span class="s2">           COUNT(*) AS transacciones</span>
+<span class="s2">    FROM mart_ventas WHERE anio = 2024</span>
+<span class="s2">    GROUP BY categoria_producto ORDER BY ingreso DESC</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== Top 5 clientes (2024) ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">    SELECT cliente, segmento, ROUND(SUM(ingreso), 0) AS ingreso</span>
+<span class="s2">    FROM mart_ventas WHERE anio = 2024</span>
+<span class="s2">    GROUP BY cliente, segmento ORDER BY ingreso DESC LIMIT 5</span>
+<span class="s2">"""</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EXPORTAR EL DATA MART A PARQUET</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Para conectar con Power BI o Streamlit,</span>
+<span class="c1"># se puede exportar la vista como Parquet</span>
+
+<span class="n">df_mart</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM mart_ventas"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="n">df_mart</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">'mart_ventas.parquet'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Data Mart exportado: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_mart</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Archivo: mart_ventas.parquet (</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s1">'mart_ventas.parquet'</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Columnas: </span><span class="si">{</span><span class="n">df_mart</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cerrar la conexion y limpiar</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'warehouse.db'</span><span class="p">,</span> <span class="s1">'mart_ventas.parquet'</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Archivos de prueba eliminados."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepto</p></th>
+<th class="head"><p>Lo que importa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Esquema estrella</strong></p></td>
+<td><p>Tabla de hechos (metricas) + dimensiones (contexto). Los JOINs conectan todo</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>dim_fecha</strong></p></td>
+<td><p>Precalcular atributos (trimestre, dia semana, festivo) facilita los reportes</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ETL</strong></p></td>
+<td><p>Extract (traer), Transform (limpiar y mapear), Load (cargar). Los rechazados se registran</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SCD Tipo 2</strong></p></td>
+<td><p>Conservar historial de cambios con vigente_desde / vigente_hasta</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Data Mart</strong></p></td>
+<td><p>Vista precalculada para que el analista haga queries simples sin JOINs</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Claves</strong></p></td>
+<td><p>Natural key (del sistema origen) vs Surrogate key (generada por el Warehouse)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="siguiente-paso">
+<h3>Siguiente paso<a class="headerlink" href="#siguiente-paso" title="Link to this heading">#</a></h3>
+<p>En el notebook de <strong>Data Lake</strong> veremos como almacenar datos crudos en multiples formatos, organizar zonas Bronze/Silver/Gold, y por que Parquet es el formato dominante.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="U4_datawarehouse.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Data Warehouse</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="U4_datalake.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Data Lake</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-4-infraestructura-de-datos">Unidad 4: Infraestructura de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-esquema-estrella">1. Crear el esquema estrella</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-etl">2. Pipeline ETL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consultas-analiticas-olap">3. Consultas analiticas (OLAP)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slowly-changing-dimensions-scd-tipo-2">4. Slowly Changing Dimensions (SCD Tipo 2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-mart">5. Data Mart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

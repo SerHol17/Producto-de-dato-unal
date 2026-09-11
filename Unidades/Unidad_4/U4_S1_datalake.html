@@ -1,0 +1,1618 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Lake — Zonas, Formatos y Particionamiento en Python &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_4/U4_S1_datalake';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="Lakehouse" href="U4_lakehouse.html" />
+    <link rel="prev" title="Data Lake" href="U4_datalake.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Ejercicio_U1.html">Ejercicio Unidad 1 — Python para Datos + Limpieza y Normalizacion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Taller1.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_Profiling.html">Pandas Profiling — Diagnostico automatico de un dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2 - Caracteristicas de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S1_calidad_datos.html">2.1 — Calidad de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S2_diseno_productos.html">2.2 — Diseno de productos de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S3_kpis.html">2.3 — KPIs y Metricas de Producto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S4_storytelling.html">2.4 — Storytelling con Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/Ejemplo_Practico_API.html">Ejemplo Practico — Colombianos Presos en el Exterior</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Unidad3.html">Unidad 3 Visualizacion con Power BI</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad4.html">Unidad 4 - Infraestructura de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rdd_spark_completo.html">RDDs en Apache Spark para Big Data</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="nb01_carga_exploracion.html">Big Data con PySpark — Notebook 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb02_filtros_limpieza.html">Big Data con PySpark — Notebook 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb03_transformaciones.html">Big Data con PySpark — Notebook 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb04_agregaciones.html">Big Data con PySpark — Notebook 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb05_spark_sql_joins.html">Big Data con PySpark — Notebook 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb06_pipeline_completo.html">Big Data con PySpark — Notebook 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_datawarehouse.html">Data Warehouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_datawarehouse.html">Data Warehouse — Modelado Dimensional en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_datalake.html">Data Lake</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data Lake — Zonas, Formatos y Particionamiento en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_lakehouse.html">Lakehouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_lakehouse.html">Lakehouse — Construir un Lakehouse Local con Delta Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_deltalake.html">Delta Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_deltalake.html">Delta Lake — Funcionalidades Avanzadas</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_4/U4_S1_datalake.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_4/U4_S1_datalake.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_4/U4_S1_datalake.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Lake — Zonas, Formatos y Particionamiento en Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-4-infraestructura-de-datos">Unidad 4: Infraestructura de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-estructura-del-lake">1. Crear la estructura del Lake</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bronze-ingestar-datos-crudos">2. Bronze: ingestar datos crudos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-on-read-el-problema">Schema-on-Read: el problema</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#silver-limpiar-y-unificar">3. Silver: limpiar y unificar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gold-agregar-para-consumo">4. Gold: agregar para consumo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particionamiento">5. Particionamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatos-csv-vs-parquet">6. Formatos: CSV vs Parquet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#almacenamiento-columnar-lectura-selectiva">7. Almacenamiento columnar: lectura selectiva</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catalogo-de-datos">8. Catalogo de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-lake-zonas-formatos-y-particionamiento-en-python">
+<h1>Data Lake — Zonas, Formatos y Particionamiento en Python<a class="headerlink" href="#data-lake-zonas-formatos-y-particionamiento-en-python" title="Link to this heading">#</a></h1>
+<section id="unidad-4-infraestructura-de-datos">
+<h2>Unidad 4: Infraestructura de Datos<a class="headerlink" href="#unidad-4-infraestructura-de-datos" title="Link to this heading">#</a></h2>
+<p>Este notebook construye un Data Lake local completo: ingestamos datos crudos de multiples fuentes y formatos (CSV, JSON, logs), los procesamos por las zonas Bronze → Silver → Gold, y comparamos formatos de almacenamiento (CSV vs Parquet). Tambien implementamos particionamiento y un catalogo de datos basico.</p>
+<section id="contenido">
+<h3>Contenido:<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Crear la estructura del Lake (zonas)</p></li>
+<li><p>Bronze: ingestar datos crudos de multiples fuentes</p></li>
+<li><p>Silver: limpiar y unificar</p></li>
+<li><p>Gold: agregar para consumo</p></li>
+<li><p>Particionamiento</p></li>
+<li><p>Formatos: CSV vs Parquet — benchmark</p></li>
+<li><p>Almacenamiento columnar: lectura selectiva</p></li>
+<li><p>Catalogo de datos</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="crear-la-estructura-del-lake">
+<h2>1. Crear la estructura del Lake<a class="headerlink" href="#crear-la-estructura-del-lake" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CREAR ESTRUCTURA DE CARPETAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Un Data Lake es simplemente carpetas organizadas</span>
+<span class="c1"># En produccion estas carpetas estan en S3 o Azure Blob</span>
+<span class="c1"># Aqui usamos el filesystem local — los conceptos son iguales</span>
+
+<span class="n">LAKE_ROOT</span> <span class="o">=</span> <span class="s1">'datalake'</span>
+
+<span class="c1"># Limpiar si existe</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">LAKE_ROOT</span><span class="p">):</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">LAKE_ROOT</span><span class="p">)</span>
+
+<span class="n">zonas</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'bronze'</span><span class="p">:</span> <span class="s1">'Datos crudos, tal como llegaron. Fuente de verdad.'</span><span class="p">,</span>
+    <span class="s1">'silver'</span><span class="p">:</span> <span class="s1">'Datos limpios, tipados, deduplicados. Listos para analisis.'</span><span class="p">,</span>
+    <span class="s1">'gold'</span><span class="p">:</span>   <span class="s1">'Datos agregados y modelados. Listos para consumo (dashboards, KPIs).'</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">zona</span><span class="p">,</span> <span class="n">descripcion</span> <span class="ow">in</span> <span class="n">zonas</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">zona</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Dejar un README en cada zona</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">zona</span><span class="si">}</span><span class="s1">/README.md'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">'# Zona </span><span class="si">{</span><span class="n">zona</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">descripcion</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Estructura del Data Lake:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s2">/"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">zona</span> <span class="ow">in</span> <span class="n">zonas</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"    </span><span class="si">{</span><span class="n">zona</span><span class="si">}</span><span class="s2">/"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"      README.md"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="bronze-ingestar-datos-crudos">
+<h2>2. Bronze: ingestar datos crudos<a class="headerlink" href="#bronze-ingestar-datos-crudos" title="Link to this heading">#</a></h2>
+<p>En Bronze guardamos los datos exactamente como llegan. No se limpian, no se transforman, no se borran. Cada fuente tiene su propia carpeta y los archivos se nombran con la fecha de llegada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUENTE 1: CSV del sistema ERP (ventas estructuradas)</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/ventas_erp'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Simular 3 dias de datos del ERP</span>
+<span class="k">for</span> <span class="n">dia</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'2024-06-01'</span><span class="p">,</span> <span class="s1">'2024-06-02'</span><span class="p">,</span> <span class="s1">'2024-06-03'</span><span class="p">]:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">'fecha'</span><span class="p">:</span> <span class="n">dia</span><span class="p">,</span>
+        <span class="s1">'producto'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">'Dashboard'</span><span class="p">,</span> <span class="s1">'Reporte'</span><span class="p">,</span> <span class="s1">'API REST'</span><span class="p">,</span> <span class="s1">'App Web'</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+        <span class="s1">'region'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">'Bogota'</span><span class="p">,</span> <span class="s1">'Medellin'</span><span class="p">,</span> <span class="s1">'Cali'</span><span class="p">,</span> <span class="s1">'Manizales'</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]),</span>
+        <span class="s1">'unidades'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+        <span class="s1">'precio'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">})</span>
+    <span class="n">ruta</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/ventas_erp/</span><span class="si">{</span><span class="n">dia</span><span class="si">}</span><span class="s1">.csv'</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">ruta</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Ingestado: </span><span class="si">{</span><span class="n">ruta</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> filas)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUENTE 2: JSON de la API del CRM (clientes y leads)</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Diferente fuente, diferente formato, diferentes columnas</span>
+<span class="c1"># Esto es lo normal en un Data Lake: cada fuente manda lo que quiere</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/crm_api'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">crm_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">"client_name"</span><span class="p">:</span> <span class="s2">"TechCorp"</span><span class="p">,</span>
+        <span class="s2">"contact_email"</span><span class="p">:</span> <span class="s2">"ana@techcorp.co"</span><span class="p">,</span>
+        <span class="s2">"deal_value"</span><span class="p">:</span> <span class="mi">15000</span><span class="p">,</span>
+        <span class="s2">"stage"</span><span class="p">:</span> <span class="s2">"closed_won"</span><span class="p">,</span>
+        <span class="s2">"product_interest"</span><span class="p">:</span> <span class="s2">"dashboard"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Bogota"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2024-06-01T10:23:45Z"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">"client_name"</span><span class="p">:</span> <span class="s2">"DataSoft"</span><span class="p">,</span>
+        <span class="s2">"contact_email"</span><span class="p">:</span> <span class="s2">"carlos@datasoft.com"</span><span class="p">,</span>
+        <span class="s2">"deal_value"</span><span class="p">:</span> <span class="mi">8500</span><span class="p">,</span>
+        <span class="s2">"stage"</span><span class="p">:</span> <span class="s2">"negotiation"</span><span class="p">,</span>
+        <span class="s2">"product_interest"</span><span class="p">:</span> <span class="s2">"api"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Medellin"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2024-06-01T14:05:12Z"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">"client_name"</span><span class="p">:</span> <span class="s2">"Analitika"</span><span class="p">,</span>
+        <span class="s2">"contact_email"</span><span class="p">:</span> <span class="s2">"maria@analitika.co"</span><span class="p">,</span>
+        <span class="s2">"deal_value"</span><span class="p">:</span> <span class="mi">22000</span><span class="p">,</span>
+        <span class="s2">"stage"</span><span class="p">:</span> <span class="s2">"closed_won"</span><span class="p">,</span>
+        <span class="s2">"product_interest"</span><span class="p">:</span> <span class="s2">"pipeline etl"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"Cali"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2024-06-02T09:15:30Z"</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">ruta_crm</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/crm_api/deals_2024-06.json'</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_crm</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">crm_data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Ingestado: </span><span class="si">{</span><span class="n">ruta_crm</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">crm_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> registros)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUENTE 3: Logs del servidor (texto semi-estructurado)</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/server_logs'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">logs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'2024-06-01 08:15:23 INFO  user=ana action=login ip=192.168.1.10'</span><span class="p">,</span>
+    <span class="s1">'2024-06-01 08:16:01 ERROR user=carlos action=api_call msg="timeout after 30s"'</span><span class="p">,</span>
+    <span class="s1">'2024-06-01 08:17:45 INFO  user=ana action=generate_report report_id=RPT-2024-001'</span><span class="p">,</span>
+    <span class="s1">'2024-06-01 08:20:12 WARN  user=maria action=upload msg="file too large (52MB)"'</span><span class="p">,</span>
+    <span class="s1">'2024-06-01 08:22:33 INFO  user=carlos action=login ip=192.168.1.15'</span><span class="p">,</span>
+    <span class="s1">'2024-06-01 08:25:00 INFO  user=ana action=export format=parquet rows=15000'</span><span class="p">,</span>
+    <span class="s1">'2024-06-01 08:30:18 ERROR user=pedro action=dashboard_load msg="query timeout"'</span><span class="p">,</span>
+    <span class="s1">'2024-06-01 08:35:44 INFO  user=ana action=logout session_duration=1221s'</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">ruta_logs</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/server_logs/app_2024-06-01.log'</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_logs</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">logs</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Ingestado: </span><span class="si">{</span><span class="n">ruta_logs</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">logs</span><span class="p">)</span><span class="si">}</span><span class="s2"> lineas)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># FUENTE 4: Encuesta de satisfaccion (Excel)</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/encuestas'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">encuestas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">'Fecha Respuesta'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'01/06/2024'</span><span class="p">,</span> <span class="s1">'02/06/2024'</span><span class="p">,</span> <span class="s1">'02/06/2024'</span><span class="p">,</span> <span class="s1">'03/06/2024'</span><span class="p">],</span>
+    <span class="s1">'Cliente'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'TechCorp'</span><span class="p">,</span> <span class="s1">'DataSoft'</span><span class="p">,</span> <span class="s1">'Analitika'</span><span class="p">,</span> <span class="s1">'TechCorp'</span><span class="p">],</span>
+    <span class="s1">'Producto Evaluado'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Dashboard Ejecutivo'</span><span class="p">,</span> <span class="s1">'API REST'</span><span class="p">,</span> <span class="s1">'Pipeline ETL'</span><span class="p">,</span> <span class="s1">'Dashboard Ejecutivo'</span><span class="p">],</span>
+    <span class="s1">'NPS (0-10)'</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s1">'Comentario'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">'Excelente, lo usamos todos los dias'</span><span class="p">,</span>
+        <span class="s1">'Funciona pero es lento a veces'</span><span class="p">,</span>
+        <span class="s1">'Muy util para automatizar'</span><span class="p">,</span>
+        <span class="s1">'Mejor que la version anterior'</span>
+    <span class="p">],</span>
+<span class="p">})</span>
+
+<span class="n">ruta_encuesta</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/encuestas/nps_junio_2024.xlsx'</span>
+<span class="n">encuestas</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">ruta_encuesta</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Ingestado: </span><span class="si">{</span><span class="n">ruta_encuesta</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">encuestas</span><span class="p">)</span><span class="si">}</span><span class="s2"> respuestas)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VISTA GENERAL DEL BRONZE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Contenido de Bronze:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">total_bytes</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze'</span><span class="p">):</span>
+    <span class="n">level</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+    <span class="n">indent</span> <span class="o">=</span> <span class="s1">'  '</span> <span class="o">*</span> <span class="p">(</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dirname</span> <span class="o">!=</span> <span class="s1">'bronze'</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">indent</span><span class="si">}{</span><span class="n">dirname</span><span class="si">}</span><span class="s1">/'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file</span> <span class="o">==</span> <span class="s1">'README.md'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="n">total_bytes</span> <span class="o">+=</span> <span class="n">size</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">indent</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">file</span><span class="si">:</span><span class="s1">40s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">size</span><span class="si">:</span><span class="s1">&gt;8,</span><span class="si">}</span><span class="s1"> bytes  [</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s1">]'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">  Total Bronze: </span><span class="si">{</span><span class="n">total_bytes</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> bytes"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Fuentes: 4 (ERP csv, CRM json, Server logs, Encuestas xlsx)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Formatos: 4 diferentes"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Esquema: ninguno — cada fuente tiene su propia estructura"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="schema-on-read-el-problema">
+<h3>Schema-on-Read: el problema<a class="headerlink" href="#schema-on-read-el-problema" title="Link to this heading">#</a></h3>
+<p>Cada fuente tiene columnas distintas, formatos distintos y convenciones distintas. Eso es Schema-on-Read: los datos estan ahi pero no se pueden unir sin trabajo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># EL PROBLEMA: columnas incompatibles entre fuentes</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">df_erp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/ventas_erp/2024-06-01.csv'</span><span class="p">)</span>
+<span class="n">df_crm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/crm_api/deals_2024-06.json'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Columnas del ERP:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">df_erp</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Columnas del CRM:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">df_crm</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Problemas para unir:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - ERP dice 'producto', CRM dice 'product_interest'"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - ERP dice 'region', CRM dice 'city'"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - ERP tiene precio por unidad, CRM tiene valor total del deal"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  - Las fechas tienen formato distinto"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Esto se resuelve en Silver."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="silver-limpiar-y-unificar">
+<h2>3. Silver: limpiar y unificar<a class="headerlink" href="#silver-limpiar-y-unificar" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># SILVER: PROCESAR VENTAS DEL ERP</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Leer todos los CSVs del ERP y unificar en un solo DataFrame</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/silver/ventas'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">archivos_erp</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span>
+    <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/ventas_erp'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'.csv'</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">archivo</span> <span class="ow">in</span> <span class="n">archivos_erp</span><span class="p">:</span>
+    <span class="n">ruta</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/ventas_erp/</span><span class="si">{</span><span class="n">archivo</span><span class="si">}</span><span class="s1">'</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">'archivo_origen'</span><span class="p">]</span> <span class="o">=</span> <span class="n">archivo</span>  <span class="c1"># Metadata: de donde vino</span>
+    <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">df_ventas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Limpiar</span>
+<span class="n">df_ventas</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_ventas</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">])</span>
+<span class="n">df_ventas</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ventas</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">df_ventas</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ventas</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">df_ventas</span><span class="p">[</span><span class="s1">'ingreso'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ventas</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_ventas</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span>
+<span class="n">df_ventas</span> <span class="o">=</span> <span class="n">df_ventas</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="c1"># Guardar como Parquet (formato eficiente)</span>
+<span class="n">ruta_silver</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/silver/ventas/ventas_consolidadas.parquet'</span>
+<span class="n">df_ventas</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">ruta_silver</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Silver ventas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_ventas</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Guardado: </span><span class="si">{</span><span class="n">ruta_silver</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Columnas: </span><span class="si">{</span><span class="n">df_ventas</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tipos:</span><span class="se">\n</span><span class="si">{</span><span class="n">df_ventas</span><span class="o">.</span><span class="n">dtypes</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># SILVER: PROCESAR LOGS DEL SERVIDOR</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Parsear texto semi-estructurado a un DataFrame limpio</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/silver/logs'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/server_logs/app_2024-06-01.log'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">lineas</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="n">registros</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">linea</span> <span class="ow">in</span> <span class="n">lineas</span><span class="p">:</span>
+    <span class="n">linea</span> <span class="o">=</span> <span class="n">linea</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">linea</span><span class="p">:</span>
+        <span class="k">continue</span>
+    
+    <span class="c1"># Parsear la estructura: timestamp nivel user=X action=Y ...</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s1">'(\d</span><span class="si">{4}</span><span class="s1">-\d</span><span class="si">{2}</span><span class="s1">-\d</span><span class="si">{2}</span><span class="s1"> \d</span><span class="si">{2}</span><span class="s1">:\d</span><span class="si">{2}</span><span class="s1">:\d</span><span class="si">{2}</span><span class="s1">)\s+(\w+)\s+user=(\w+)\s+action=(\w+)(.*)'</span><span class="p">,</span>
+        <span class="n">linea</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+        <span class="n">timestamp</span><span class="p">,</span> <span class="n">nivel</span><span class="p">,</span> <span class="n">usuario</span><span class="p">,</span> <span class="n">accion</span><span class="p">,</span> <span class="n">extra</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+        <span class="n">registros</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">'timestamp'</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">,</span>
+            <span class="s1">'nivel'</span><span class="p">:</span> <span class="n">nivel</span><span class="p">,</span>
+            <span class="s1">'usuario'</span><span class="p">:</span> <span class="n">usuario</span><span class="p">,</span>
+            <span class="s1">'accion'</span><span class="p">:</span> <span class="n">accion</span><span class="p">,</span>
+            <span class="s1">'detalle'</span><span class="p">:</span> <span class="n">extra</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+        <span class="p">})</span>
+
+<span class="n">df_logs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">registros</span><span class="p">)</span>
+<span class="n">df_logs</span><span class="p">[</span><span class="s1">'timestamp'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_logs</span><span class="p">[</span><span class="s1">'timestamp'</span><span class="p">])</span>
+
+<span class="n">ruta_logs_silver</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/silver/logs/logs_parseados.parquet'</span>
+<span class="n">df_logs</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">ruta_logs_silver</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Silver logs: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_logs</span><span class="p">)</span><span class="si">}</span><span class="s2"> eventos parseados"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Guardado: </span><span class="si">{</span><span class="n">ruta_logs_silver</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">df_logs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># SILVER: PROCESAR ENCUESTAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/silver/encuestas'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df_enc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/bronze/encuestas/nps_junio_2024.xlsx'</span><span class="p">)</span>
+
+<span class="c1"># Estandarizar nombres de columnas</span>
+<span class="n">df_enc</span> <span class="o">=</span> <span class="n">df_enc</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">'Fecha Respuesta'</span><span class="p">:</span> <span class="s1">'fecha'</span><span class="p">,</span>
+    <span class="s1">'Cliente'</span><span class="p">:</span> <span class="s1">'cliente'</span><span class="p">,</span>
+    <span class="s1">'Producto Evaluado'</span><span class="p">:</span> <span class="s1">'producto'</span><span class="p">,</span>
+    <span class="s1">'NPS (0-10)'</span><span class="p">:</span> <span class="s1">'nps'</span><span class="p">,</span>
+    <span class="s1">'Comentario'</span><span class="p">:</span> <span class="s1">'comentario'</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">df_enc</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_enc</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">],</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_enc</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_enc</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">df_enc</span><span class="p">[</span><span class="s1">'cliente'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_enc</span><span class="p">[</span><span class="s1">'cliente'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># Clasificar NPS: Detractor (0-6), Pasivo (7-8), Promotor (9-10)</span>
+<span class="n">df_enc</span><span class="p">[</span><span class="s1">'categoria_nps'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
+    <span class="n">df_enc</span><span class="p">[</span><span class="s1">'nps'</span><span class="p">],</span>
+    <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">'detractor'</span><span class="p">,</span> <span class="s1">'pasivo'</span><span class="p">,</span> <span class="s1">'promotor'</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">ruta_enc_silver</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/silver/encuestas/nps_limpio.parquet'</span>
+<span class="n">df_enc</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">ruta_enc_silver</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Silver encuestas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_enc</span><span class="p">)</span><span class="si">}</span><span class="s2"> respuestas"</span><span class="p">)</span>
+<span class="n">df_enc</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="gold-agregar-para-consumo">
+<h2>4. Gold: agregar para consumo<a class="headerlink" href="#gold-agregar-para-consumo" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GOLD: RESUMEN DE VENTAS POR REGION Y PRODUCTO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/gold/dashboard_ventas'</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Leer desde Silver (ya limpio)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/silver/ventas/ventas_consolidadas.parquet'</span><span class="p">)</span>
+
+<span class="c1"># Agregar por region</span>
+<span class="n">resumen_region</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'region'</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">transacciones</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">),</span>
+        <span class="n">ingreso_total</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">),</span>
+        <span class="n">ticket_promedio</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'mean'</span><span class="p">),</span>
+        <span class="n">unidades_total</span><span class="o">=</span><span class="p">(</span><span class="s1">'unidades'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'ingreso_total'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+
+<span class="n">resumen_region</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/gold/dashboard_ventas/resumen_regional.parquet'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Agregar por producto</span>
+<span class="n">resumen_producto</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'producto'</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">transacciones</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">),</span>
+        <span class="n">ingreso_total</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">),</span>
+        <span class="n">precio_promedio</span><span class="o">=</span><span class="p">(</span><span class="s1">'precio'</span><span class="p">,</span> <span class="s1">'mean'</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'ingreso_total'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+
+<span class="n">resumen_producto</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/gold/dashboard_ventas/resumen_producto.parquet'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== Gold: resumen regional ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resumen_region</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== Gold: resumen por producto ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resumen_producto</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GOLD: KPIs DIARIOS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">kpis_diarios</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'fecha'</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">ingreso</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">),</span>
+        <span class="n">transacciones</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">),</span>
+        <span class="n">ticket_promedio</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'mean'</span><span class="p">),</span>
+        <span class="n">unidades</span><span class="o">=</span><span class="p">(</span><span class="s1">'unidades'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+
+<span class="n">kpis_diarios</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/gold/dashboard_ventas/kpis_diarios.parquet'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== Gold: KPIs diarios ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kpis_diarios</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># VISTA COMPLETA DEL LAKE</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Estructura completa del Data Lake:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">LAKE_ROOT</span><span class="p">):</span>
+    <span class="n">level</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">LAKE_ROOT</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+    <span class="n">indent</span> <span class="o">=</span> <span class="s1">'  '</span> <span class="o">*</span> <span class="n">level</span>
+    <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="c1"># Colorear por zona</span>
+    <span class="n">zona_tag</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="k">if</span> <span class="s1">'bronze'</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
+        <span class="n">zona_tag</span> <span class="o">=</span> <span class="s1">' [CRUDO]'</span>
+    <span class="k">elif</span> <span class="s1">'silver'</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
+        <span class="n">zona_tag</span> <span class="o">=</span> <span class="s1">' [LIMPIO]'</span>
+    <span class="k">elif</span> <span class="s1">'gold'</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
+        <span class="n">zona_tag</span> <span class="o">=</span> <span class="s1">' [CONSUMO]'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">indent</span><span class="si">}{</span><span class="n">dirname</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">zona_tag</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="n">subindent</span> <span class="o">=</span> <span class="s1">'  '</span> <span class="o">*</span> <span class="p">(</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file</span> <span class="o">==</span> <span class="s1">'README.md'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">subindent</span><span class="si">}{</span><span class="n">file</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">size</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> bytes)'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="particionamiento">
+<h2>5. Particionamiento<a class="headerlink" href="#particionamiento" title="Link to this heading">#</a></h2>
+<p>Cuando un dataset tiene millones de filas, particionarlo por una columna clave (fecha, region) hace que las consultas lean solo la carpeta relevante.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GENERAR DATASET GRANDE PARA DEMOSTRAR PARTICIONAMIENTO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">500_000</span>
+
+<span class="n">df_grande</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">'fecha'</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">'2023-01-01'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'min'</span><span class="p">),</span>
+    <span class="s1">'producto'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">'dashboard'</span><span class="p">,</span> <span class="s1">'reporte'</span><span class="p">,</span> <span class="s1">'api'</span><span class="p">,</span> <span class="s1">'app_web'</span><span class="p">],</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">'region'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">'bogota'</span><span class="p">,</span> <span class="s1">'medellin'</span><span class="p">,</span> <span class="s1">'cali'</span><span class="p">,</span> <span class="s1">'manizales'</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]),</span>
+    <span class="s1">'unidades'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="s1">'precio'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">})</span>
+<span class="n">df_grande</span><span class="p">[</span><span class="s1">'ingreso'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_grande</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_grande</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span>
+<span class="n">df_grande</span><span class="p">[</span><span class="s1">'anio'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_grande</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">df_grande</span><span class="p">[</span><span class="s1">'mes'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_grande</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dataset grande: </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_grande</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Memoria: </span><span class="si">{</span><span class="n">df_grande</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># GUARDAR SIN PARTICIONES vs CON PARTICIONES</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Sin particiones: un solo archivo</span>
+<span class="n">ruta_sin</span> <span class="o">=</span> <span class="s1">'test_sin_particion.parquet'</span>
+<span class="n">df_grande</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">ruta_sin</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">size_sin</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">ruta_sin</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sin particiones: </span><span class="si">{</span><span class="n">size_sin</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB (1 archivo)"</span><span class="p">)</span>
+
+<span class="c1"># Con particiones: una carpeta por anio y mes</span>
+<span class="n">ruta_con</span> <span class="o">=</span> <span class="s1">'test_con_particion'</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ruta_con</span><span class="p">):</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">ruta_con</span><span class="p">)</span>
+
+<span class="n">df_grande</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">ruta_con</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">partition_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">'anio'</span><span class="p">,</span> <span class="s1">'mes'</span><span class="p">])</span>
+
+<span class="c1"># Contar archivos y tamano</span>
+<span class="n">total_size</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total_files</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">ruta_con</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'.parquet'</span><span class="p">):</span>
+            <span class="n">total_size</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+            <span class="n">total_files</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Con particiones: </span><span class="si">{</span><span class="n">total_size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MB (</span><span class="si">{</span><span class="n">total_files</span><span class="si">}</span><span class="s2"> archivos)"</span><span class="p">)</span>
+
+<span class="c1"># Mostrar estructura de carpetas</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Estructura:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">ruta_con</span><span class="p">):</span>
+    <span class="n">level</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ruta_con</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">indent</span> <span class="o">=</span> <span class="s1">'  '</span> <span class="o">*</span> <span class="n">level</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">indent</span><span class="si">}{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="si">}</span><span class="s1">/'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">[:</span><span class="mi">1</span><span class="p">]:</span>  <span class="c1"># Solo mostrar 1 archivo por carpeta</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">indent</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># BENCHMARK: leer con y sin particiones</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Consulta: solo datos de junio 2023</span>
+
+<span class="c1"># Sin particiones: lee TODO el archivo y filtra</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_sin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">ruta_sin</span><span class="p">)</span>
+<span class="n">df_sin</span> <span class="o">=</span> <span class="n">df_sin</span><span class="p">[(</span><span class="n">df_sin</span><span class="p">[</span><span class="s1">'anio'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2023</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_sin</span><span class="p">[</span><span class="s1">'mes'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="n">t_sin</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="c1"># Con particiones: lee SOLO la carpeta anio=2023/mes=6</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_con</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span>
+    <span class="n">ruta_con</span><span class="p">,</span>
+    <span class="n">filters</span><span class="o">=</span><span class="p">[(</span><span class="s1">'anio'</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="mi">2023</span><span class="p">),</span> <span class="p">(</span><span class="s1">'mes'</span><span class="p">,</span> <span class="s1">'='</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="n">t_con</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Consulta: datos de junio 2023"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Resultado: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_con</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Sin particiones: </span><span class="si">{</span><span class="n">t_sin</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> seg (leyo </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas, filtro despues)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Con particiones: </span><span class="si">{</span><span class="n">t_con</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> seg (leyo solo </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_con</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Speedup: </span><span class="si">{</span><span class="n">t_sin</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">t_con</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x mas rapido"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="formatos-csv-vs-parquet">
+<h2>6. Formatos: CSV vs Parquet<a class="headerlink" href="#formatos-csv-vs-parquet" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># BENCHMARK COMPLETO: tamano, escritura, lectura</span>
+<span class="c1"># ============================================================</span>
+
+<span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># CSV</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_grande</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'bench.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">tw_csv</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="n">size_csv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s1">'bench.csv'</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'bench.csv'</span><span class="p">)</span>
+<span class="n">tr_csv</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+    <span class="s1">'formato'</span><span class="p">:</span> <span class="s1">'CSV'</span><span class="p">,</span> <span class="s1">'tamano_mb'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">size_csv</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'escribir_seg'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tw_csv</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">'leer_seg'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tr_csv</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s1">'compresion'</span><span class="p">:</span> <span class="s1">'No'</span><span class="p">,</span> <span class="s1">'tipos_preservados'</span><span class="p">:</span> <span class="s1">'No'</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="c1"># Parquet (snappy - default)</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_grande</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">'bench.parquet'</span><span class="p">)</span>
+<span class="n">tw_pq</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="n">size_pq</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s1">'bench.parquet'</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">'bench.parquet'</span><span class="p">)</span>
+<span class="n">tr_pq</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+    <span class="s1">'formato'</span><span class="p">:</span> <span class="s1">'Parquet (snappy)'</span><span class="p">,</span> <span class="s1">'tamano_mb'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">size_pq</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'escribir_seg'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tw_pq</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">'leer_seg'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tr_pq</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s1">'compresion'</span><span class="p">:</span> <span class="s1">'Si'</span><span class="p">,</span> <span class="s1">'tipos_preservados'</span><span class="p">:</span> <span class="s1">'Si'</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="c1"># Parquet (gzip - mas compresion)</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_grande</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">'bench_gz.parquet'</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">'gzip'</span><span class="p">)</span>
+<span class="n">tw_gz</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="n">size_gz</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s1">'bench_gz.parquet'</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">'bench_gz.parquet'</span><span class="p">)</span>
+<span class="n">tr_gz</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+    <span class="s1">'formato'</span><span class="p">:</span> <span class="s1">'Parquet (gzip)'</span><span class="p">,</span> <span class="s1">'tamano_mb'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">size_gz</span> <span class="o">/</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'escribir_seg'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tw_gz</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">'leer_seg'</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">tr_gz</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s1">'compresion'</span><span class="p">:</span> <span class="s1">'Si (mayor)'</span><span class="p">,</span> <span class="s1">'tipos_preservados'</span><span class="p">:</span> <span class="s1">'Si'</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">df_bench</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Benchmark con </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">df_bench</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># TIPOS PRESERVADOS: la diferencia practica</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># CSV pierde los tipos</span>
+<span class="n">df_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'bench.csv'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Despues de leer CSV:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  fecha:    </span><span class="si">{</span><span class="n">df_csv</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">  ← string, hay que convertir"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  unidades: </span><span class="si">{</span><span class="n">df_csv</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  precio:   </span><span class="si">{</span><span class="n">df_csv</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Parquet preserva los tipos</span>
+<span class="n">df_pq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">'bench.parquet'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Despues de leer Parquet:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  fecha:    </span><span class="si">{</span><span class="n">df_pq</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">  ← datetime, listo para usar"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  unidades: </span><span class="si">{</span><span class="n">df_pq</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  precio:   </span><span class="si">{</span><span class="n">df_pq</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="almacenamiento-columnar-lectura-selectiva">
+<h2>7. Almacenamiento columnar: lectura selectiva<a class="headerlink" href="#almacenamiento-columnar-lectura-selectiva" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># LEER SOLO LAS COLUMNAS QUE NECESITAS</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># CSV lee TODAS las columnas siempre</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_csv_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'bench.csv'</span><span class="p">)</span>
+<span class="n">t_csv</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="c1"># Parquet lee solo las columnas pedidas</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_pq_2cols</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">'bench.parquet'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">,</span> <span class="s1">'ingreso'</span><span class="p">])</span>
+<span class="n">t_pq_2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">df_pq_todas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">'bench.parquet'</span><span class="p">)</span>
+<span class="n">t_pq_all</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Leer 500K filas:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  CSV (8 columnas, lee todo):      </span><span class="si">{</span><span class="n">t_csv</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> seg"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Parquet (8 columnas, lee todo):   </span><span class="si">{</span><span class="n">t_pq_all</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> seg"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Parquet (2 columnas, selectivo):  </span><span class="si">{</span><span class="n">t_pq_2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> seg"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">CSV lee 8 columnas aunque solo necesites 2."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Parquet lee solo las 2 que pediste."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Con un dataset de 50 columnas la diferencia es enorme."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># POR QUE FUNCIONA: filas vs columnas</span>
+<span class="c1"># ============================================================</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">CSV guarda por FILAS (row-based):</span>
+<span class="s2">─────────────────────────────────</span>
+<span class="s2">  Ana, Bogota, dashboard, 15, 450.00</span>
+<span class="s2">  Carlos, Medellin, api, 8, 620.00</span>
+<span class="s2">  Maria, Cali, reporte, 22, 280.00</span>
+
+<span class="s2">  Para leer solo 'ingreso', tiene que recorrer TODA la fila</span>
+<span class="s2">  y saltar los campos que no necesita. Con 50 columnas, lee</span>
+<span class="s2">  50 campos por cada fila para quedarse con 1.</span>
+
+<span class="s2">Parquet guarda por COLUMNAS (columnar):</span>
+<span class="s2">───────────────────────────────────────</span>
+<span class="s2">  [Ana, Carlos, Maria]           ← bloque 'nombre'</span>
+<span class="s2">  [Bogota, Medellin, Cali]       ← bloque 'region'</span>
+<span class="s2">  [dashboard, api, reporte]      ← bloque 'producto'</span>
+<span class="s2">  [15, 8, 22]                    ← bloque 'unidades'</span>
+<span class="s2">  [450.00, 620.00, 280.00]       ← bloque 'precio'</span>
+
+<span class="s2">  Para leer solo 'precio', lee SOLO ese bloque.</span>
+<span class="s2">  Los otros 4 bloques ni se tocan.</span>
+<span class="s2">  Con 50 columnas y necesitas 2: lee el 4</span><span class="si">% d</span><span class="s2">el archivo.</span>
+<span class="s2">"""</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="catalogo-de-datos">
+<h2>8. Catalogo de datos<a class="headerlink" href="#catalogo-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># CATALOGO: registrar que hay en el Lake</span>
+<span class="c1"># ============================================================</span>
+
+<span class="c1"># Un catalogo previene el Data Swamp:</span>
+<span class="c1"># cada dataset tiene nombre, descripcion, ubicacion, propietario</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">registrar_en_catalogo</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">zona</span><span class="p">,</span> <span class="n">ruta</span><span class="p">,</span> <span class="n">descripcion</span><span class="p">,</span>
+                          <span class="n">propietario</span><span class="p">,</span> <span class="n">formato</span><span class="p">,</span> <span class="n">filas</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">columnas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Agrega una entrada al catalogo de datos."""</span>
+    <span class="n">catalogo</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s1">'nombre'</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span>
+        <span class="s1">'zona'</span><span class="p">:</span> <span class="n">zona</span><span class="p">,</span>
+        <span class="s1">'ruta'</span><span class="p">:</span> <span class="n">ruta</span><span class="p">,</span>
+        <span class="s1">'descripcion'</span><span class="p">:</span> <span class="n">descripcion</span><span class="p">,</span>
+        <span class="s1">'propietario'</span><span class="p">:</span> <span class="n">propietario</span><span class="p">,</span>
+        <span class="s1">'formato'</span><span class="p">:</span> <span class="n">formato</span><span class="p">,</span>
+        <span class="s1">'filas'</span><span class="p">:</span> <span class="n">filas</span><span class="p">,</span>
+        <span class="s1">'columnas'</span><span class="p">:</span> <span class="n">columnas</span><span class="p">,</span>
+        <span class="s1">'registrado_el'</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+    <span class="p">})</span>
+
+<span class="n">catalogo</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">registrar_en_catalogo</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span>
+    <span class="n">nombre</span><span class="o">=</span><span class="s1">'ventas_erp_diarias'</span><span class="p">,</span>
+    <span class="n">zona</span><span class="o">=</span><span class="s1">'bronze'</span><span class="p">,</span>
+    <span class="n">ruta</span><span class="o">=</span><span class="s1">'bronze/ventas_erp/*.csv'</span><span class="p">,</span>
+    <span class="n">descripcion</span><span class="o">=</span><span class="s1">'Ventas diarias del sistema ERP. Un archivo CSV por dia.'</span><span class="p">,</span>
+    <span class="n">propietario</span><span class="o">=</span><span class="s1">'equipo-ingenieria'</span><span class="p">,</span>
+    <span class="n">formato</span><span class="o">=</span><span class="s1">'CSV'</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">registrar_en_catalogo</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span>
+    <span class="n">nombre</span><span class="o">=</span><span class="s1">'ventas_consolidadas'</span><span class="p">,</span>
+    <span class="n">zona</span><span class="o">=</span><span class="s1">'silver'</span><span class="p">,</span>
+    <span class="n">ruta</span><span class="o">=</span><span class="s1">'silver/ventas/ventas_consolidadas.parquet'</span><span class="p">,</span>
+    <span class="n">descripcion</span><span class="o">=</span><span class="s1">'Ventas del ERP unificadas, limpias y tipadas.'</span><span class="p">,</span>
+    <span class="n">propietario</span><span class="o">=</span><span class="s1">'equipo-datos'</span><span class="p">,</span>
+    <span class="n">formato</span><span class="o">=</span><span class="s1">'Parquet'</span><span class="p">,</span>
+    <span class="n">filas</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df_ventas</span><span class="p">),</span>
+    <span class="n">columnas</span><span class="o">=</span><span class="n">df_ventas</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="n">registrar_en_catalogo</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span>
+    <span class="n">nombre</span><span class="o">=</span><span class="s1">'logs_parseados'</span><span class="p">,</span>
+    <span class="n">zona</span><span class="o">=</span><span class="s1">'silver'</span><span class="p">,</span>
+    <span class="n">ruta</span><span class="o">=</span><span class="s1">'silver/logs/logs_parseados.parquet'</span><span class="p">,</span>
+    <span class="n">descripcion</span><span class="o">=</span><span class="s1">'Logs del servidor parseados a columnas estructuradas.'</span><span class="p">,</span>
+    <span class="n">propietario</span><span class="o">=</span><span class="s1">'equipo-infra'</span><span class="p">,</span>
+    <span class="n">formato</span><span class="o">=</span><span class="s1">'Parquet'</span><span class="p">,</span>
+    <span class="n">filas</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df_logs</span><span class="p">),</span>
+    <span class="n">columnas</span><span class="o">=</span><span class="n">df_logs</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="n">registrar_en_catalogo</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span>
+    <span class="n">nombre</span><span class="o">=</span><span class="s1">'resumen_regional'</span><span class="p">,</span>
+    <span class="n">zona</span><span class="o">=</span><span class="s1">'gold'</span><span class="p">,</span>
+    <span class="n">ruta</span><span class="o">=</span><span class="s1">'gold/dashboard_ventas/resumen_regional.parquet'</span><span class="p">,</span>
+    <span class="n">descripcion</span><span class="o">=</span><span class="s1">'Ingreso y transacciones agregados por region. Para el dashboard de ventas.'</span><span class="p">,</span>
+    <span class="n">propietario</span><span class="o">=</span><span class="s1">'equipo-datos'</span><span class="p">,</span>
+    <span class="n">formato</span><span class="o">=</span><span class="s1">'Parquet'</span><span class="p">,</span>
+    <span class="n">filas</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">resumen_region</span><span class="p">),</span>
+    <span class="n">columnas</span><span class="o">=</span><span class="n">resumen_region</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="c1"># Guardar el catalogo</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKE_ROOT</span><span class="si">}</span><span class="s1">/catalogo.json'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Catalogo de datos:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">df_catalogo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">catalogo</span><span class="p">)[[</span><span class="s1">'nombre'</span><span class="p">,</span> <span class="s1">'zona'</span><span class="p">,</span> <span class="s1">'formato'</span><span class="p">,</span> <span class="s1">'propietario'</span><span class="p">,</span> <span class="s1">'filas'</span><span class="p">]]</span>
+<span class="n">df_catalogo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<span class="c1"># BUSCAR EN EL CATALOGO</span>
+<span class="c1"># ============================================================</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">buscar_dataset</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span> <span class="n">termino</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Busca datasets en el catalogo por nombre o descripcion."""</span>
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">catalogo</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">termino</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span>
+            <span class="n">termino</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">[</span><span class="s1">'descripcion'</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+            <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">resultados</span>
+
+<span class="c1"># "Donde estan los datos de ventas?"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Busqueda: 'ventas'</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">buscar_dataset</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span> <span class="s1">'ventas'</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  [</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'zona'</span><span class="p">]</span><span class="si">:</span><span class="s2">6s</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"           </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'descripcion'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"           Ruta: </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'ruta'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"           Propietario: </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">'propietario'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limpiar archivos de prueba</span>
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="p">[</span><span class="n">LAKE_ROOT</span><span class="p">,</span> <span class="s1">'test_sin_particion.parquet'</span><span class="p">,</span> <span class="s1">'test_con_particion'</span><span class="p">,</span>
+             <span class="s1">'bench.csv'</span><span class="p">,</span> <span class="s1">'bench.parquet'</span><span class="p">,</span> <span class="s1">'bench_gz.parquet'</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Archivos de prueba eliminados."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="resumen">
+<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepto</p></th>
+<th class="head"><p>Lo que importa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Bronze</strong></p></td>
+<td><p>Datos crudos, formato original. Nunca se modifican. Fuente de verdad</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Silver</strong></p></td>
+<td><p>Limpios, tipados, deduplicados. Un DataFrame por fuente, todo en Parquet</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Gold</strong></p></td>
+<td><p>Agregados para un caso de uso: dashboard, KPI, modelo. Lo que consume el usuario final</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Schema-on-Read</strong></p></td>
+<td><p>Cada fuente llega con su propia estructura. La unificacion pasa en Silver, no al ingestar</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Particionamiento</strong></p></td>
+<td><p>Dividir por fecha/region para que las consultas lean solo la carpeta relevante</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Parquet &gt; CSV</strong></p></td>
+<td><p>Mas pequeno, mas rapido, preserva tipos, lectura selectiva de columnas</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Catalogo</strong></p></td>
+<td><p>Registrar que hay en el Lake, donde esta, quien lo mantiene. Previene el Data Swamp</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="siguiente-paso">
+<h3>Siguiente paso<a class="headerlink" href="#siguiente-paso" title="Link to this heading">#</a></h3>
+<p>En el notebook de <strong>Lakehouse</strong> veremos como agregar transacciones ACID y control de esquema sobre estos mismos archivos Parquet usando Delta Lake.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="U4_datalake.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Data Lake</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="U4_lakehouse.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Lakehouse</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unidad-4-infraestructura-de-datos">Unidad 4: Infraestructura de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-estructura-del-lake">1. Crear la estructura del Lake</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bronze-ingestar-datos-crudos">2. Bronze: ingestar datos crudos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-on-read-el-problema">Schema-on-Read: el problema</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#silver-limpiar-y-unificar">3. Silver: limpiar y unificar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gold-agregar-para-consumo">4. Gold: agregar para consumo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particionamiento">5. Particionamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatos-csv-vs-parquet">6. Formatos: CSV vs Parquet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#almacenamiento-columnar-lectura-selectiva">7. Almacenamiento columnar: lectura selectiva</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catalogo-de-datos">8. Catalogo de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#siguiente-paso">Siguiente paso</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
