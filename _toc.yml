@@ -32,5 +32,20 @@ chapters:
     - file: "Unidades/Unidad_2/U2_S3_kpis"
     - file: "Unidades/Unidad_2/U2_S4_storytelling"
     - file: "Unidades/Unidad_2/Ejemplo_Practico_API"
+  - file: Unidad3
+  - file: Unidad4
+    sections: 
+    - file: "Unidades/Unidad_4/U4_datawarehouse"
+    - file: "Unidades/Unidad_4/U4_S1_datawarehouse"
+
+    - file: "Unidades/Unidad_4/U4_datalake"
+    - file: "Unidades/Unidad_4/U4_S1_datalake"
+
+    - file: "Unidades/Unidad_4/U4_lakehouse"
+    - file: "Unidades/Unidad_4/U4_S1_lakehouse"
+ 
+    - file: "Unidades/Unidad_4/U4_deltalake"
+    - file: "Unidades/Unidad_4/U4_S1_deltalake"
+
 
 
