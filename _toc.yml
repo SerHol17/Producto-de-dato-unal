@@ -35,6 +35,18 @@ chapters:
   - file: Unidad3
   - file: Unidad4
     sections: 
+
+    - file: "Unidades/Unidad_4/rdd_spark_completo"
+
+    - file: "Unidades/Unidad_4/nb01_carga_exploracion"
+    - file: "Unidades/Unidad_4/nb02_filtros_limpieza"
+    - file: "Unidades/Unidad_4/nb03_transformaciones"
+    - file: "Unidades/Unidad_4/nb04_agregaciones"
+    - file: "Unidades/Unidad_4/nb05_spark_sql_joins"
+    - file: "Unidades/Unidad_4/nb06_pipeline_completo"
+
+
+
     - file: "Unidades/Unidad_4/U4_datawarehouse"
     - file: "Unidades/Unidad_4/U4_S1_datawarehouse"
 

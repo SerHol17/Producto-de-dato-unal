@@ -1,20 +1,14 @@
 # Lakehouse
 
-```{image} _static/images/banner_lakehouse.png
-:alt: Banner Lakehouse — la convergencia del Warehouse y el Lake
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/banner_lakehouse.jpg">
+
 
 ## Contexto historico
 
 Durante la decada de 2010, la arquitectura dominante en empresas grandes era la **arquitectura de dos capas**: un Data Lake para almacenar todo crudo a bajo costo, y un Data Warehouse separado para hacer BI y reportes.
 
-```{image} _static/images/lh_problema_dos_capas.png
-:alt: Diagrama de arquitectura de dos capas — Lake + Warehouse separados con ETL entre ellos
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/lh_problema_dos_capas.jpg">
+
 
 El flujo era:
 
@@ -67,11 +61,8 @@ La clave es una **capa de metadata** (implementada por Delta Lake, Apache Iceber
 
 El Lakehouse tiene tres capas, cada una con una responsabilidad clara:
 
-```{image} _static/images/lh_arquitectura_3_capas.png
-:alt: Diagrama de las 3 capas del Lakehouse — consulta, metadata y almacenamiento
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/lh_arquitectura_3_capas.jpg>
+
 
 ### Capa 1: Almacenamiento (la base)
 
@@ -167,11 +158,7 @@ Ventajas:
 - Los datos estan disponibles en minutos, no horas
 - No hay ETL de copia entre Lake y Warehouse
 
-```{image} _static/images/lh_antes_vs_despues.png
-:alt: Diagrama lado a lado mostrando arquitectura de dos capas vs Lakehouse unificado
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/lh_antes_vs_despues.jpg">
 
 ---
 
@@ -234,11 +221,8 @@ La capa de metadata permite controlar:
 
 La organizacion en zonas Bronze/Silver/Gold que vimos en el Data Lake se formaliza en el Lakehouse como la **Medallion Architecture**:
 
-```{image} _static/images/lh_medallion_detallada.png
-:alt: Medallion Architecture detallada con Bronze, Silver y Gold, mostrando transformaciones entre cada capa
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/lh_medallion_detallada.jpg">
+
 
 | Capa | Formato | Esquema | Calidad | Quien la usa |
 |---|---|---|---|---|
@@ -332,13 +316,3 @@ La diferencia con un Lake puro: en el Lakehouse, cada capa es una **tabla Delta*
 **Veredicto:** un Lakehouse es un Lake con superpoderes. Si ya tienes un Lake, agregar Delta o Iceberg lo convierte en Lakehouse sin mover datos.
 
 ---
-
-## Imagenes necesarias
-
-```{comment}
-banner_lakehouse.png — Banner panoramico sobre la convergencia de Warehouse y Lake
-lh_problema_dos_capas.png — Diagrama mostrando Lake + ETL + Warehouse como sistemas separados, con flechas de copia y los problemas listados
-lh_arquitectura_3_capas.png — 3 bloques verticales apilados: arriba motores de consulta (Spark, Trino, DuckDB), medio la capa de metadata (Delta/Iceberg/Hudi), abajo almacenamiento (S3/ADLS/GCS con archivos Parquet)
-lh_antes_vs_despues.png — Lado izquierdo: arquitectura de dos capas con copia. Lado derecho: Lakehouse unificado sin copia. BI y ML apuntando al mismo lugar
-lh_medallion_detallada.png — 3 zonas Bronze/Silver/Gold como pipeline, con transformaciones entre cada una y usuarios a la derecha (ingenieros, analistas, negocio)
-```
