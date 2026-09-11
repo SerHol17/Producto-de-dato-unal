@@ -1,10 +1,6 @@
 # Data Lake
 
-```{image} _static/images/banner_datalake.jpg
-:alt: Banner Data Lake — almacenamiento masivo de datos crudos a bajo costo
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/banner_datalake.jpg">
 
 ## Contexto historico
 
@@ -46,11 +42,8 @@ Las caracteristicas que lo definen:
 
 Esta es la diferencia fundamental entre Warehouse y Lake:
 
-```{image} _static/images/dl_schema_on_read_vs_write.jpg
-:alt: Diagrama comparativo Schema-on-Write (Warehouse) vs Schema-on-Read (Lake)
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dl_schema_on_read_vs_write.jpg">
+
 
 ### Schema-on-Write (Warehouse)
 
@@ -105,11 +98,7 @@ Estos problemas llevaron a la creacion de **Apache Spark** (2014), que reemplazo
 
 Hoy, muy pocas empresas nuevas instalan Hadoop. Usan S3 + Spark, o directamente servicios cloud. Pero el concepto de Data Lake que Hadoop popularizo sigue vigente.
 
-```{image} _static/images/dl_hadoop_a_cloud.jpg
-:alt: Linea del tiempo de Hadoop (2006) a Spark (2014) a Cloud Lakes (2018+)
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dl_hadoop_a_cloud.jpg">
 
 ---
 
@@ -117,11 +106,8 @@ Hoy, muy pocas empresas nuevas instalan Hadoop. Usan S3 + Spark, o directamente 
 
 Un Data Lake sin organizacion es un pantano. La practica estandar es dividirlo en **zonas** (tambien llamadas capas o medallion architecture) que representan el nivel de madurez de los datos:
 
-```{image} _static/images/dl_zonas_medallion.jpg
-:alt: Diagrama de las 3 zonas del Data Lake — Bronze (raw), Silver (processed), Gold (curated)
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dl_zonas_medallion.jpg">
+
 
 ### Zona Bronze (Raw)
 
@@ -213,12 +199,8 @@ El formato del archivo determina el rendimiento y las capacidades:
 | **ORC** | Binario, columnas | Si | Si | Si | Hive, Hadoop legacy |
 
 **Parquet** es el formato dominante en Data Lakes modernos por su combinacion de compresion, velocidad y lectura selectiva de columnas.
+<img src="../../_static/images/dl_row_vs_columnar.jpg">
 
-```{image} _static/images/dl_row_vs_columnar.jpg
-:alt: Diagrama comparativo almacenamiento por filas (CSV) vs por columnas (Parquet) — mostrando como Parquet lee solo las columnas necesarias
-:class: bg-light
-:width: 100%
-```
 
 ### Almacenamiento por filas vs por columnas
 
@@ -284,11 +266,8 @@ La columna de particion debe tener **baja cardinalidad** (pocos valores unicos).
 
 Un Data Lake sin gobierno se convierte en un **Data Swamp** (pantano de datos): nadie sabe que hay, los datos no se pueden usar y el Lake se vuelve un cementerio de archivos.
 
-```{image} _static/images/dl_lake_vs_swamp.jpg
-:alt: Ilustracion comparando un Data Lake organizado vs un Data Swamp desordenado
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dl_lake_vs_swamp.jpg">
+
 
 ### Sintomas del Data Swamp
 

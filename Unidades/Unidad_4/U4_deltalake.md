@@ -1,10 +1,6 @@
 # Delta Lake
 
-```{image} _static/images/banner_deltalake.jpg
-:alt: Banner Delta Lake — transacciones ACID y time travel sobre archivos Parquet
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/banner_deltalake.jpg" width="800" />
 
 ## Contexto historico
 
@@ -48,11 +44,8 @@ Lo que agrega sobre Parquet puro:
 
 Una tabla Delta es un directorio con dos cosas: archivos Parquet (los datos) y un subdirectorio `_delta_log/` (el cerebro).
 
-```{image} _static/images/dt_estructura_interna.jpg
-:alt: Diagrama mostrando la estructura de una tabla Delta — archivos Parquet + _delta_log con versiones
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dt_estructura_interna.jpg">
+
 
 ```
 ventas_delta/
@@ -118,11 +111,7 @@ Lectura con checkpoint:  leer 990.checkpoint.parquet + 991.json + ... + 999.json
 
 ACID no es una caracteristica abstracta — resuelve problemas concretos que pasan en produccion:
 
-```{image} _static/images/dt_acid_explicado.jpg
-:alt: Diagrama mostrando las 4 propiedades ACID con ejemplos concretos de que pasa sin ellas
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dt_acid_explicado.jpg">
 
 ### Atomicidad — todo o nada
 
@@ -180,11 +169,8 @@ Una vez que el commit se registra en el log, los datos son permanentes. El log v
 
 Cada operacion sobre una tabla Delta crea una nueva version. Las versiones anteriores se conservan y se pueden leer en cualquier momento.
 
-```{image} _static/images/dt_time_travel.jpg
-:alt: Diagrama mostrando una tabla Delta con 4 versiones y la capacidad de leer cualquiera de ellas
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dt_time_travel.jpg">
+
 
 ### Leer una version especifica
 
@@ -296,11 +282,8 @@ write_deltalake(
 
 Una de las operaciones mas utiles: actualizar registros que ya existen e insertar los que son nuevos, en una sola operacion atomica.
 
-```{image} _static/images/dt_merge_upsert.jpg
-:alt: Diagrama mostrando operacion MERGE — datos nuevos se comparan con existentes, actualizando coincidencias e insertando nuevos
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dt_merge_upsert.jpg" >
+
 
 ### El problema sin Merge
 
