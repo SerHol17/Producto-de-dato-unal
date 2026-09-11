@@ -1,10 +1,6 @@
 # Data Warehouse
+<img src="../../_static/images/banner_datawarehouse.jpg">
 
-```{image} _static/images/banner_datawarehouse.jpg
-:alt: Banner Data Warehouse — almacenamiento estructurado para analitica de negocio
-:class: bg-light
-:width: 100%
-```
 
 ## Contexto historico
 
@@ -14,11 +10,8 @@ El problema aparecio cuando el gerente preguntaba: **"cual fue el ingreso por re
 
 La solucion fue separar los dos mundos: un sistema para **operar** (OLTP) y otro para **analizar** (OLAP). El Data Warehouse es ese segundo sistema.
 
-```{image} _static/images/dw_oltp_vs_olap.jpg
-:alt: Diagrama comparativo OLTP vs OLAP — sistemas transaccionales vs analiticos
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dw_oltp_vs_olap.jpg">
+
 
 ---
 
@@ -56,11 +49,7 @@ Antes de profundizar en el Warehouse, hay que entender la diferencia fundamental
 
 Un error comun es intentar hacer analitica directamente sobre la base de datos transaccional. Funciona con pocos datos, pero a escala las consultas analiticas compiten con las operacionales y el sistema se degrada.
 
-```{image} _static/images/dw_oltp_olap_arquitectura.jpg
-:alt: Diagrama mostrando fuentes OLTP alimentando un Data Warehouse OLAP separado
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dw_oltp_olap_arquitectura.jpg">
 
 ---
 
@@ -128,11 +117,8 @@ En la practica, **Kimball es el enfoque dominante** por su practicidad. Es lo qu
 
 El esquema estrella es la forma clasica de organizar datos en un Warehouse. Tiene una tabla central de **hechos** rodeada de tablas de **dimensiones**.
 
-```{image} _static/images/dw_esquema_estrella.jpg
-:alt: Diagrama de esquema estrella con tabla de hechos en el centro y 4 dimensiones alrededor
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dw_esquema_estrella.jpg">
+
 
 ### Tabla de hechos
 
@@ -242,11 +228,8 @@ En la practica, el esquema estrella es preferido porque las herramientas de BI (
 
 ETL (Extract, Transform, Load) es el pipeline que alimenta el Warehouse:
 
-```{image} _static/images/dw_etl_proceso.jpg
-:alt: Diagrama del proceso ETL con las 3 fases — extraer, transformar, cargar
-:class: bg-light
-:width: 100%
-```
+<img src="../../_static/images/dw_etl_proceso.jpg">
+
 
 ### Extract (Extraer)
 
