@@ -276,6 +276,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nb04_agregaciones.html">Big Data con PySpark — Notebook 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nb05_spark_sql_joins.html">Big Data con PySpark — Notebook 5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nb06_pipeline_completo.html">Big Data con PySpark — Notebook 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actividad4.html">Análisis Distribuido de Auditoría de Activos de Energía Renovable con Apache Spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="U4_datawarehouse.html">Data Warehouse</a></li>
 <li class="toctree-l2"><a class="reference internal" href="U4_S1_datawarehouse.html">Data Warehouse — Modelado Dimensional en Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="U4_datalake.html">Data Lake</a></li>
@@ -581,6 +582,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deltalake no instalado. Ejecuta: pip install deltalake
+Los ejemplos se mostraran como referencia.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -606,6 +613,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estructura creada:
+  lakehouse/
+    bronze/   ← Datos crudos como Delta (append-only, con historial)
+    silver/   ← Datos limpios como Delta (con schema enforcement)
+    gold/     ← Datos agregados como Delta (listos para BI y ML)
+
+La diferencia con el Data Lake puro:
+  Cada zona es una TABLA DELTA, no solo una carpeta con archivos.
+  Eso agrega: ACID, time travel, esquema, merge.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -614,14 +634,7 @@
 <h2>2. Crear tablas Delta<a class="headerlink" href="#crear-tablas-delta" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
-<span class="c1"># BRONZE: ingestar datos crudos como Delta</span>
-<span class="c1"># ============================================================</span>
-
-<span class="c1"># Simulamos 3 dias de datos del ERP</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-
-<span class="n">bronze_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/bronze/ventas'</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bronze_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/bronze/ventas'</span>
 
 <span class="k">for</span> <span class="n">dia</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'2024-06-01'</span><span class="p">,</span> <span class="s1">'2024-06-02'</span><span class="p">,</span> <span class="s1">'2024-06-03'</span><span class="p">]:</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
@@ -634,10 +647,12 @@
         <span class="s1">'precio'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
         <span class="s1">'ingesta_timestamp'</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>  <span class="c1"># Cuando llego al Lake</span>
     <span class="p">})</span>
-    
+
+    <span class="c1"># Calculate mode here so it's always defined</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="s1">'overwrite'</span> <span class="k">if</span> <span class="n">dia</span> <span class="o">==</span> <span class="s1">'2024-06-01'</span> <span class="k">else</span> <span class="s1">'append'</span>
+
     <span class="k">if</span> <span class="n">DELTA_OK</span><span class="p">:</span>
         <span class="c1"># Cada dia se agrega (append) a la misma tabla Delta</span>
-        <span class="n">mode</span> <span class="o">=</span> <span class="s1">'overwrite'</span> <span class="k">if</span> <span class="n">dia</span> <span class="o">==</span> <span class="s1">'2024-06-01'</span> <span class="k">else</span> <span class="s1">'append'</span>
         <span class="n">write_deltalake</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">,</span> <span class="n">df_dia</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Bronze: </span><span class="si">{</span><span class="n">dia</span><span class="si">}</span><span class="s2"> — </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> filas ingestadas (mode=</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -648,6 +663,13 @@
     <span class="n">dt_bronze</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">)</span>
     <span class="n">df_bronze</span> <span class="o">=</span> <span class="n">dt_bronze</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Bronze total: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_bronze</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dt_bronze</span><span class="o">.</span><span class="n">history</span><span class="p">())</span><span class="si">}</span><span class="s2"> versiones"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  [ref] write_deltalake('lakehouse/bronze/ventas', df, mode='overwrite')
+  [ref] write_deltalake('lakehouse/bronze/ventas', df, mode='append')
+  [ref] write_deltalake('lakehouse/bronze/ventas', df, mode='append')
 </pre></div>
 </div>
 </div>
@@ -670,11 +692,16 @@
             <span class="n">size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
             <span class="n">tag</span> <span class="o">=</span> <span class="s1">'← log de transacciones'</span> <span class="k">if</span> <span class="s1">'_delta_log'</span> <span class="ow">in</span> <span class="n">root</span> <span class="k">else</span> <span class="s1">'← datos (Parquet)'</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">subindent</span><span class="si">}{</span><span class="n">f</span><span class="si">:</span><span class="s1">55s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">size</span><span class="si">:</span><span class="s1">&gt;8,</span><span class="si">}</span><span class="s1"> bytes  </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">El _delta_log/ es lo que hace Delta diferente de Parquet puro."</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Controla que archivos son validos en cada version."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Instala deltalake para ver la estructura."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Instala deltalake para ver la estructura.
 </pre></div>
 </div>
 </div>
@@ -735,6 +762,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ref] Si la tabla tiene 7 columnas y el DataFrame tiene 8,
+Delta rechaza la escritura por defecto.
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -765,6 +798,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ref] write_deltalake(path, df, mode='append', schema_mode='merge')
+Las filas viejas tendran NULL en la columna nueva.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -780,23 +819,28 @@
     <span class="n">dt</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">)</span>
     <span class="n">version_actual</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">version</span><span class="p">()</span>
     <span class="n">df_actual</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Version actual: </span><span class="si">{</span><span class="n">version_actual</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_actual</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas)"</span><span class="p">)</span>
-    
+
     <span class="c1"># Leer la version 0 (solo el primer dia)</span>
     <span class="n">dt_v0</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">df_v0</span> <span class="o">=</span> <span class="n">dt_v0</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Version 0:      </span><span class="si">{</span><span class="mi">0</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_v0</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas)"</span><span class="p">)</span>
-    
+
     <span class="c1"># Leer la version 1 (primer + segundo dia)</span>
     <span class="n">dt_v1</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">df_v1</span> <span class="o">=</span> <span class="n">dt_v1</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Version 1:      </span><span class="si">{</span><span class="mi">1</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_v1</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas)"</span><span class="p">)</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Cada version es una foto de la tabla en ese momento."</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Si algo sale mal, puedes volver atras sin perder datos."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"[ref] DeltaTable(path, version=0)  # Leer version especifica"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ref] DeltaTable(path, version=0)  # Leer version especifica
 </pre></div>
 </div>
 </div>
@@ -818,21 +862,21 @@
         <span class="s1">'precio'</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span>
         <span class="s1">'ingesta_timestamp'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'error'</span><span class="p">],</span>
     <span class="p">})</span>
-    
+
     <span class="n">version_buena</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">version</span><span class="p">()</span>
     <span class="n">write_deltalake</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">,</span> <span class="n">datos_error</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'overwrite'</span><span class="p">)</span>
-    
+
     <span class="n">dt_error</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Despues del error: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dt_error</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">())</span><span class="si">}</span><span class="s2"> fila (todo se perdio?)"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Version actual: </span><span class="si">{</span><span class="n">dt_error</span><span class="o">.</span><span class="n">version</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    
+
     <span class="c1"># Restaurar la version buena</span>
     <span class="n">dt_buena</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version_buena</span><span class="p">)</span>
     <span class="n">df_restaurado</span> <span class="o">=</span> <span class="n">dt_buena</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
-    
+
     <span class="c1"># Reescribir con los datos buenos</span>
     <span class="n">write_deltalake</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">,</span> <span class="n">df_restaurado</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'overwrite'</span><span class="p">)</span>
-    
+
     <span class="n">dt_final</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">bronze_path</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Despues de restaurar: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dt_final</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">())</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Version actual: </span><span class="si">{</span><span class="n">dt_final</span><span class="o">.</span><span class="n">version</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -844,6 +888,16 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">"  3. Leer la version anterior: DeltaTable(path, version=N)"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"  4. Reescribir con los datos buenos"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"  5. Todo restaurado"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ref] Flujo de restauracion:
+  1. Alguien hace overwrite con datos incorrectos
+  2. La tabla ahora tiene 1 fila en vez de 300
+  3. Leer la version anterior: DeltaTable(path, version=N)
+  4. Reescribir con los datos buenos
+  5. Todo restaurado
 </pre></div>
 </div>
 </div>
@@ -878,6 +932,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> cliente_id      nombre    segmento    ciudad    mrr                actualizado
+          1    TechCorp     startup  medellin  500.0 2026-09-12T02:23:58.994750
+          2    DataSoft profesional    bogota 1500.0 2026-09-12T02:23:58.994750
+          3   Analitika     startup      cali  500.0 2026-09-12T02:23:58.994750
+          4 InfoSystems  enterprise    bogota 5000.0 2026-09-12T02:23:58.994750
+          5     CloudBI profesional manizales 1500.0 2026-09-12T02:23:58.994750
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -907,6 +971,19 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Datos nuevos del CRM:
+ cliente_id     nombre    segmento       ciudad    mrr                actualizado
+          1   TechCorp  enterprise       bogota 5000.0 2026-09-12T02:23:59.010410
+          5    CloudBI profesional    manizales 2200.0 2026-09-12T02:23:59.010410
+          6 VisionData     startup barranquilla  800.0 2026-09-12T02:23:59.010410
+
+  cliente_id=1 (TechCorp): actualizar segmento y ciudad
+  cliente_id=5 (CloudBI): actualizar MRR
+  cliente_id=6 (VisionData): insertar (nuevo)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -916,7 +993,7 @@
 
 <span class="k">if</span> <span class="n">DELTA_OK</span><span class="p">:</span>
     <span class="n">dt_clientes</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">silver_clientes_path</span><span class="p">)</span>
-    
+
     <span class="p">(</span>
         <span class="n">dt_clientes</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
             <span class="n">source</span><span class="o">=</span><span class="n">datos_nuevos</span><span class="p">,</span>
@@ -928,11 +1005,11 @@
         <span class="o">.</span><span class="n">when_not_matched_insert_all</span><span class="p">()</span>  <span class="c1"># Si no existe: insertar</span>
         <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
     <span class="p">)</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Despues del merge:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">df_merged</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">silver_clientes_path</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">df_merged</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Filas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df_merged</span><span class="p">)</span><span class="si">}</span><span class="s2"> (antes 5, ahora 6 — VisionData se inserto)"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"TechCorp: segmento=</span><span class="si">{</span><span class="n">df_merged</span><span class="p">[</span><span class="n">df_merged</span><span class="p">[</span><span class="s1">'cliente_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'segmento'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, "</span>
           <span class="sa">f</span><span class="s2">"ciudad=</span><span class="si">{</span><span class="n">df_merged</span><span class="p">[</span><span class="n">df_merged</span><span class="p">[</span><span class="s1">'cliente_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'ciudad'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> (actualizado)"</span><span class="p">)</span>
@@ -946,6 +1023,19 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">"  Si el id existe: actualiza todos los campos"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"  Si el id no existe: inserta la fila"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"  Todo en una operacion atomica"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ref] Merge con deltalake:
+  dt.merge(source=df, predicate='s.id = t.id', ...)
+    .when_matched_update_all()
+    .when_not_matched_insert_all()
+    .execute()
+
+  Si el id existe: actualiza todos los campos
+  Si el id no existe: inserta la fila
+  Todo en una operacion atomica
 </pre></div>
 </div>
 </div>
@@ -987,32 +1077,32 @@
 <span class="sd">    """</span>
     <span class="n">bronze</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">lakehouse_path</span><span class="si">}</span><span class="s1">/bronze/ventas'</span>
     <span class="n">silver</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">lakehouse_path</span><span class="si">}</span><span class="s1">/silver/ventas'</span>
-    
+
     <span class="c1"># Leer Bronze</span>
     <span class="n">dt</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">bronze</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Bronze: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas leidas"</span><span class="p">)</span>
-    
+
     <span class="c1"># Transformar</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'region'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'cliente'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'cliente'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'ingreso'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span>
-    
+
     <span class="c1"># Quitar la columna de metadata de ingesta y columnas extras</span>
     <span class="n">cols_silver</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'fecha'</span><span class="p">,</span> <span class="s1">'producto'</span><span class="p">,</span> <span class="s1">'region'</span><span class="p">,</span> <span class="s1">'cliente'</span><span class="p">,</span> <span class="s1">'unidades'</span><span class="p">,</span> <span class="s1">'precio'</span><span class="p">,</span> <span class="s1">'ingreso'</span><span class="p">]</span>
     <span class="n">cols_disponibles</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols_silver</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">cols_disponibles</span><span class="p">]</span>
-    
+
     <span class="c1"># Deduplicar</span>
     <span class="n">antes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Deduplicacion: </span><span class="si">{</span><span class="n">antes</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
-    
+
     <span class="c1"># Escribir Silver</span>
     <span class="n">write_deltalake</span><span class="p">(</span><span class="n">silver</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'overwrite'</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Silver: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas escritas"</span><span class="p">)</span>
-    
+
     <span class="k">return</span> <span class="n">df</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">pipeline_silver_a_gold</span><span class="p">(</span><span class="n">lakehouse_path</span><span class="p">):</span>
@@ -1023,11 +1113,11 @@
     <span class="n">gold_regional</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">lakehouse_path</span><span class="si">}</span><span class="s1">/gold/resumen_regional'</span>
     <span class="n">gold_producto</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">lakehouse_path</span><span class="si">}</span><span class="s1">/gold/resumen_producto'</span>
     <span class="n">gold_diario</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">lakehouse_path</span><span class="si">}</span><span class="s1">/gold/kpis_diarios'</span>
-    
+
     <span class="c1"># Leer Silver</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">silver</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Silver: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas leidas"</span><span class="p">)</span>
-    
+
     <span class="c1"># Gold: resumen regional</span>
     <span class="n">resumen_reg</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'region'</span><span class="p">)</span>
         <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">ingreso</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">),</span> <span class="n">transacciones</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">),</span>
@@ -1036,7 +1126,7 @@
         <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
     <span class="n">write_deltalake</span><span class="p">(</span><span class="n">gold_regional</span><span class="p">,</span> <span class="n">resumen_reg</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'overwrite'</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Gold resumen_regional: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">resumen_reg</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
-    
+
     <span class="c1"># Gold: resumen por producto</span>
     <span class="n">resumen_prod</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'producto'</span><span class="p">)</span>
         <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">ingreso</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">),</span> <span class="n">transacciones</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">),</span>
@@ -1045,7 +1135,7 @@
         <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
     <span class="n">write_deltalake</span><span class="p">(</span><span class="n">gold_producto</span><span class="p">,</span> <span class="n">resumen_prod</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'overwrite'</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Gold resumen_producto: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">resumen_prod</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
-    
+
     <span class="c1"># Gold: KPIs diarios</span>
     <span class="n">kpis</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'fecha'</span><span class="p">)</span>
         <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">ingreso</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">),</span> <span class="n">transacciones</span><span class="o">=</span><span class="p">(</span><span class="s1">'ingreso'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">),</span>
@@ -1053,7 +1143,7 @@
         <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
     <span class="n">write_deltalake</span><span class="p">(</span><span class="n">gold_diario</span><span class="p">,</span> <span class="n">kpis</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'overwrite'</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Gold kpis_diarios: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">kpis</span><span class="p">)</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
-    
+
     <span class="k">return</span> <span class="n">resumen_reg</span><span class="p">,</span> <span class="n">resumen_prod</span><span class="p">,</span> <span class="n">kpis</span>
 
 <span class="k">if</span> <span class="n">DELTA_OK</span><span class="p">:</span>
@@ -1061,7 +1151,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">"  PIPELINE: Bronze → Silver"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
     <span class="n">df_silver</span> <span class="o">=</span> <span class="n">pipeline_bronze_a_silver</span><span class="p">(</span><span class="n">LAKEHOUSE</span><span class="p">)</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="s1">'='</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">50</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"  PIPELINE: Silver → Gold"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
@@ -1069,6 +1159,12 @@
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"[ref] El pipeline lee Delta, transforma, y escribe Delta."</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Cada zona es una tabla con historial y esquema."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ref] El pipeline lee Delta, transforma, y escribe Delta.
+Cada zona es una tabla con historial y esquema.
 </pre></div>
 </div>
 </div>
@@ -1082,10 +1178,10 @@
 <span class="k">if</span> <span class="n">DELTA_OK</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"=== Gold: Resumen Regional ==="</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">DeltaTable</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/gold/resumen_regional'</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== Gold: Resumen Producto ==="</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">DeltaTable</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/gold/resumen_producto'</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== Gold: KPIs Diarios ==="</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">DeltaTable</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/gold/kpis_diarios'</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </pre></div>
@@ -1105,7 +1201,7 @@
 <span class="k">if</span> <span class="n">DELTA_OK</span><span class="p">:</span>
     <span class="c1"># Leer Silver y hacer analisis</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/silver/ventas'</span><span class="p">)</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
-    
+
     <span class="c1"># Top 3 clientes por ingreso</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Top 3 clientes:"</span><span class="p">)</span>
     <span class="n">top_clientes</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'cliente'</span><span class="p">)[</span><span class="s1">'ingreso'</span><span class="p">]</span>
@@ -1113,7 +1209,7 @@
                     <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                     <span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">top_clientes</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
-    
+
     <span class="c1"># Ticket promedio por region</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Ticket promedio por region:"</span><span class="p">)</span>
     <span class="n">ticket</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'region'</span><span class="p">)[</span><span class="s1">'ingreso'</span><span class="p">]</span>
@@ -1135,7 +1231,7 @@
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">duckdb</span>
-    
+
     <span class="c1"># DuckDB puede leer tablas Delta directamente con SQL</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""</span>
 <span class="s2">        SELECT</span>
@@ -1148,16 +1244,22 @@
 <span class="s2">        ORDER BY ingreso_total DESC</span>
 <span class="s2">        LIMIT 10</span>
 <span class="s2">    """</span><span class="p">)</span><span class="o">.</span><span class="n">df</span><span class="p">()</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="s2">"SQL con DuckDB sobre tabla Delta (sin Spark):</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-    
+
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"DuckDB no instalado. Ejecuta: pip install duckdb"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Permite hacer consultas SQL sobre tablas Delta sin Spark."</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Puede requerir: pip install duckdb --upgrade"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: IO Error: DeltKernel InvalidTableLocationError (28): Invalid table location: Path does not exist: "lakehouse/silver/ventas/".
+Puede requerir: pip install duckdb --upgrade
 </pre></div>
 </div>
 </div>
@@ -1170,7 +1272,7 @@
 
 <span class="k">if</span> <span class="n">DELTA_OK</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Estado del Lakehouse:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-    
+
     <span class="n">tablas</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">(</span><span class="s1">'bronze'</span><span class="p">,</span> <span class="s1">'ventas'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/bronze/ventas'</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">'silver'</span><span class="p">,</span> <span class="s1">'ventas'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/silver/ventas'</span><span class="p">),</span>
@@ -1179,7 +1281,7 @@
         <span class="p">(</span><span class="s1">'gold'</span><span class="p">,</span> <span class="s1">'resumen_producto'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/gold/resumen_producto'</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">'gold'</span><span class="p">,</span> <span class="s1">'kpis_diarios'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">LAKEHOUSE</span><span class="si">}</span><span class="s1">/gold/kpis_diarios'</span><span class="p">),</span>
     <span class="p">]</span>
-    
+
     <span class="k">for</span> <span class="n">zona</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">tablas</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
             <span class="n">dt</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -1197,6 +1299,11 @@
 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">LAKEHOUSE</span><span class="p">):</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">LAKEHOUSE</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Lakehouse eliminado."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lakehouse eliminado.
 </pre></div>
 </div>
 </div>

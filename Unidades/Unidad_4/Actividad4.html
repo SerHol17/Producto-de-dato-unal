@@ -1,0 +1,1334 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Análisis Distribuido de Auditoría de Activos de Energía Renovable con Apache Spark &#8212; Producto de dato 2026 - 01 UNAL</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script src="../../_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unidades/Unidad_4/Actividad4';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../../search.html" />
+    <link rel="next" title="Data Warehouse" href="U4_datawarehouse.html" />
+    <link rel="prev" title="Big Data con PySpark — Notebook 6" href="nb06_pipeline_completo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-light" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+    <img src="https://avatars.githubusercontent.com/u/142033488?s=200&v=4" class="logo__image only-dark pst-js-only" alt="Producto de dato 2026 - 01 UNAL - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Producto de Datos
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad1.html">Unidad 1 - Introducción a Desarrollo de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S1_python_datos.html">1.1 — Python para Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S2_limpieza_normalizacion.html">1.2 — Limpieza y Normalización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Ejercicio_U1.html">Ejercicio Unidad 1 — Python para Datos + Limpieza y Normalizacion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Taller1.html">Evaluemos lo aprendido!!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_Profiling.html">Pandas Profiling — Diagnostico automatico de un dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/unidad13.html">1.3: Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Matplotlib.html">1.3.1 Visualizacion con Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/01_matplotlib_intro.html">1.3.2 Matplotlib — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/02_matplotlib_avanzado.html">1.3.2: Matplotlib — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Seaborn.html">1.3.4 Visualizacion con Seaborn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/03_seaborn_intro.html">1.3.5 Seaborn — Fundamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/04_seaborn_avanzado.html">1.3.6: Seaborn — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/plotly.html">1.3.7 Visualizacion Interactiva con Plotly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/05_plotly_intro.html">1.3.8: Plotly — Gráficos Interactivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/06_plotly_avanzado.html">1.3.9: Plotly — Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/07_comparativa_y_casos.html">1.3.10: Comparativa y Casos de Uso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Buenas_Practicas.html">1.3.11 Buenas Practicas de Visualizacion de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/buenas_practicas_visualizacion.html">1.3.12 Buenas Prácticas de Visualización de Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que_Escoger.html">1.3.13 Que Grafica Escoger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/Que%20Grafica%20escoger.html">1.3.14 Analítica de Datos: Tipos de Gráficos y Análisis Exploratorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/caso_practico_fifa23.html">1.3.15 Caso Práctico: Análisis Visual del Dataset FIFA 23</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_1/U1_S4_reportes_automaticos.html">1.4 — Reportes Automaticos</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad2.html">Unidad 2 - Caracteristicas de Productos de Datos</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S1_calidad_datos.html">2.1 — Calidad de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S2_diseno_productos.html">2.2 — Diseno de productos de datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S3_kpis.html">2.3 — KPIs y Metricas de Producto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/U2_S4_storytelling.html">2.4 — Storytelling con Datos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/Ejemplo_Practico_API.html">Ejemplo Practico — Colombianos Presos en el Exterior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Unidad_2/taller2.html">Evaluemos lo aprendido!!</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Unidad3.html">Unidad 3 Visualizacion con Power BI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Taller3.html">Evaluemos lo aprendido!!</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Unidad4.html">Unidad 4 - Infraestructura de Datos</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rdd_spark_completo.html">RDDs en Apache Spark para Big Data</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="nb01_carga_exploracion.html">Big Data con PySpark — Notebook 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb02_filtros_limpieza.html">Big Data con PySpark — Notebook 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb03_transformaciones.html">Big Data con PySpark — Notebook 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb04_agregaciones.html">Big Data con PySpark — Notebook 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb05_spark_sql_joins.html">Big Data con PySpark — Notebook 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nb06_pipeline_completo.html">Big Data con PySpark — Notebook 6</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Análisis Distribuido de Auditoría de Activos de Energía Renovable con Apache Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_datawarehouse.html">Data Warehouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_datawarehouse.html">Data Warehouse — Modelado Dimensional en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_datalake.html">Data Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_datalake.html">Data Lake — Zonas, Formatos y Particionamiento en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_lakehouse.html">Lakehouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_lakehouse.html">Lakehouse — Construir un Lakehouse Local con Delta Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_deltalake.html">Delta Lake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="U4_S1_deltalake.html">Delta Lake — Funcionalidades Avanzadas</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SerHol17/Producto-de-dato-unal/blob/main/Unidades/Unidad_4/Actividad4.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SerHol17/Producto-de-dato-unal/issues/new?title=Issue%20on%20page%20%2FUnidades/Unidad_4/Actividad4.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Unidades/Unidad_4/Actividad4.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Análisis Distribuido de Auditoría de Activos de Energía Renovable con Apache Spark</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">Objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-entorno-spark">1. Configuración del Entorno Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-del-dataset">2. Carga del Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-rapida">Exploración rápida</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-1-integridad-de-eventos-duplicados">Pregunta 1 — Integridad de Eventos (Duplicados)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-2-tratamiento-de-nulos-en-columnas-criticas">Pregunta 2 — Tratamiento de Nulos en Columnas Críticas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-3-deteccion-de-outliers-en-temperatura-del-devanado">Pregunta 3 — Detección de Outliers en Temperatura del Devanado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-4-energia-inyectada-por-tecnologia">Pregunta 4 — Energía Inyectada por Tecnología</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-5-performance-ratio-por-subestacion">Pregunta 5 — Performance Ratio por Subestación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-6-diagnostico-de-salud-por-tecnologia-tabla-cruzada">Pregunta 6 — Diagnóstico de Salud por Tecnología (Tabla Cruzada)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-7-analisis-de-vibracion-en-aerogeneradores">Pregunta 7 — Análisis de Vibración en Aerogeneradores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-8-clasificacion-de-vida-util-del-activo">Pregunta 8 — Clasificación de Vida Útil del Activo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-9-top-empresas-certificadoras">Pregunta 9 — Top Empresas Certificadoras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-10-analisis-temporal-de-la-generacion">Pregunta 10 — Análisis Temporal de la Generación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-del-dataset-limpio">3. Exportación del Dataset Limpio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-de-la-sesion-spark">4. Cierre de la sesión Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checklist-de-entrega">Checklist de Entrega</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-distribuido-de-auditoria-de-activos-de-energia-renovable-con-apache-spark">
+<h1>Análisis Distribuido de Auditoría de Activos de Energía Renovable con Apache Spark<a class="headerlink" href="#analisis-distribuido-de-auditoria-de-activos-de-energia-renovable-con-apache-spark" title="Link to this heading">#</a></h1>
+<p><strong>Especialización en Inteligencia Artificial</strong></p>
+<section id="objetivo">
+<h2>Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading">#</a></h2>
+<p>Aplicar los principios de procesamiento distribuido para limpiar, transformar y analizar un dataset de <strong>1,200,000 registros</strong> de telemetría de activos de generación renovable con <strong>PySpark</strong>, identificando patrones de degradación, fallas y rendimiento operativo.</p>
+</section>
+<section id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">auditoria_activos_renovables.csv</span></code> — Lecturas de sensores y diagnósticos de activos de generación renovable en Colombia.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Columna</p></th>
+<th class="head"><p>Tipo</p></th>
+<th class="head"><p>Descripción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">uuid_evento</span></code></p></td>
+<td><p>string (UUID)</p></td>
+<td><p>Identificador único de cada lectura</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">codigo_activo</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Código del equipo físico (500000–999999)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tecnologia_generacion</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Fotovoltaica_Tracking</span></code>, <code class="docutils literal notranslate"><span class="pre">Fotovoltaica_Fija</span></code>, <code class="docutils literal notranslate"><span class="pre">Aerogenerador_Onshore</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nodo_inyeccion</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Subestación de conexión a la red eléctrica</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">energia_inyectada_mwh</span></code></p></td>
+<td><p>double</p></td>
+<td><p>Energía entregada al sistema (MWh)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">performance_ratio</span></code></p></td>
+<td><p>double</p></td>
+<td><p>Ratio de rendimiento real vs teórico (0.50–0.98)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">perdida_tecnica_pct</span></code></p></td>
+<td><p>double</p></td>
+<td><p>Pérdida técnica en porcentaje (1.2%–14.5%)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vibracion_cojinete_mms</span></code></p></td>
+<td><p>double</p></td>
+<td><p>Vibración del cojinete (mm/s) — crítica en aerogeneradores</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">temperatura_devanado_c</span></code></p></td>
+<td><p>double</p></td>
+<td><p>Temperatura del devanado del generador (°C)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">diagnostico_salud</span></code></p></td>
+<td><p>string</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Optimo</span></code>, <code class="docutils literal notranslate"><span class="pre">Degradacion_Leve</span></code>, <code class="docutils literal notranslate"><span class="pre">Falla_Termica</span></code>, <code class="docutils literal notranslate"><span class="pre">Desalineacion_Mecanica</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">horas_acumuladas_servicio</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Horas totales de operación del activo</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">empresa_certificadora</span></code></p></td>
+<td><p>string</p></td>
+<td><p>Contratista que realizó la certificación</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">timestamp_medicion</span></code></p></td>
+<td><p>string → timestamp</p></td>
+<td><p>Marca de tiempo de la medición</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>El dataset fue generado sintéticamente con <strong>1.2 millones de registros</strong>. Las distribuciones estadísticas son realistas: vibración con distribución Gamma para aerogeneradores, temperatura con distribución normal, performance ratio con clip [0.50, 0.98]. Pueden existir valores atípicos en temperatura y vibración que representan condiciones de falla.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="configuracion-del-entorno-spark">
+<h2>1. Configuración del Entorno Spark<a class="headerlink" href="#configuracion-del-entorno-spark" title="Link to this heading">#</a></h2>
+<p>Levantamos una <code class="docutils literal notranslate"><span class="pre">SparkSession</span></code> ajustada al volumen del dataset.</p>
+<p><strong>Conceptos clave:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spark.driver.memory</span></code> → memoria del proceso <em>driver</em> (coordinador). En Colab no hay cluster, el driver hace todo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spark.sql.shuffle.partitions</span></code> → número de particiones tras un <code class="docutils literal notranslate"><span class="pre">groupBy</span></code>/<code class="docutils literal notranslate"><span class="pre">join</span></code>. El default es <strong>200</strong>, excesivo para datos locales. Regla: <code class="docutils literal notranslate"><span class="pre">núcleos</span> <span class="pre">×</span> <span class="pre">2</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spark.sql.adaptive.enabled</span></code> (<strong>AQE</strong>) → reorganiza el plan de ejecución en runtime: combina particiones pequeñas, mitiga <em>skew</em> y elige el mejor tipo de join.</p></li>
+<li><p><strong>Esquema explícito</strong> evita una pasada extra sobre el archivo (<code class="docutils literal notranslate"><span class="pre">inferSchema</span></code> lee dos veces).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cache()</span></code></strong> mantiene el DataFrame en memoria entre acciones — clave cuando se hacen 10+ consultas sobre el mismo DF.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Si trabajas en Google Colab, descomenta:</span>
+<span class="c1"># !pip install pyspark==3.5.0 -q</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">StructType</span><span class="p">,</span> <span class="n">StructField</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span>
+    <span class="n">IntegerType</span><span class="p">,</span> <span class="n">DoubleType</span>
+<span class="p">)</span>
+
+<span class="n">spark</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span>
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"AuditoriaActivosRenovables"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.driver.memory"</span><span class="p">,</span> <span class="s2">"4g"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">,</span> <span class="s2">"8"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.enabled"</span><span class="p">,</span> <span class="s2">"true"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.coalescePartitions.enabled"</span><span class="p">,</span> <span class="s2">"true"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="s2">"WARN"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Spark version: </span><span class="si">{</span><span class="n">spark</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">spark</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="carga-del-dataset">
+<h2>2. Carga del Dataset<a class="headerlink" href="#carga-del-dataset" title="Link to this heading">#</a></h2>
+<p>Se define un <strong>esquema explícito</strong> para evitar la doble lectura de <code class="docutils literal notranslate"><span class="pre">inferSchema</span></code>. El <code class="docutils literal notranslate"><span class="pre">timestamp_medicion</span></code> se carga como <code class="docutils literal notranslate"><span class="pre">StringType</span></code> y se parsea inmediatamente a <code class="docutils literal notranslate"><span class="pre">TimestampType</span></code> con <code class="docutils literal notranslate"><span class="pre">to_timestamp</span></code>.</p>
+<blockquote>
+<div><p>Si el archivo está en Google Drive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">drive</span><span class="p">;</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">'/content/drive'</span><span class="p">)</span>
+<span class="n">RUTA</span> <span class="o">=</span> <span class="s1">'/content/drive/MyDrive/auditoria_activos_renovables.csv'</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"uuid_evento"</span><span class="p">,</span>              <span class="n">StringType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"codigo_activo"</span><span class="p">,</span>            <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"tecnologia_generacion"</span><span class="p">,</span>    <span class="n">StringType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"nodo_inyeccion"</span><span class="p">,</span>           <span class="n">StringType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"energia_inyectada_mwh"</span><span class="p">,</span>    <span class="n">DoubleType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"performance_ratio"</span><span class="p">,</span>        <span class="n">DoubleType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"perdida_tecnica_pct"</span><span class="p">,</span>      <span class="n">DoubleType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"vibracion_cojinete_mms"</span><span class="p">,</span>   <span class="n">DoubleType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"temperatura_devanado_c"</span><span class="p">,</span>   <span class="n">DoubleType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"diagnostico_salud"</span><span class="p">,</span>        <span class="n">StringType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"horas_acumuladas_servicio"</span><span class="p">,</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"empresa_certificadora"</span><span class="p">,</span>    <span class="n">StringType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+    <span class="n">StructField</span><span class="p">(</span><span class="s2">"timestamp_medicion"</span><span class="p">,</span>       <span class="n">StringType</span><span class="p">(),</span>  <span class="kc">True</span><span class="p">),</span>
+<span class="p">])</span>
+
+<span class="n">RUTA</span> <span class="o">=</span> <span class="s2">"auditoria_activos_renovables.csv"</span>   <span class="c1"># &lt;-- ajusta esta ruta</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"header"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"nullValue"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">RUTA</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"timestamp_medicion"</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">to_timestamp</span><span class="p">(</span><span class="s2">"timestamp_medicion"</span><span class="p">,</span> <span class="s2">"yyyy-MM-dd HH:mm:ss"</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="n">total_registros</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total de registros: </span><span class="si">{</span><span class="n">total_registros</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="exploracion-rapida">
+<h3>Exploración rápida<a class="headerlink" href="#exploracion-rapida" title="Link to this heading">#</a></h3>
+<p>Antes de limpiar, una mirada general: tipos, nulos por columna y muestra de distribuciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conteo de nulos por columna</span>
+<span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">([</span>
+    <span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">()</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"int"</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+<span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pregunta-1-integridad-de-eventos-duplicados">
+<h2>Pregunta 1 — Integridad de Eventos (Duplicados)<a class="headerlink" href="#pregunta-1-integridad-de-eventos-duplicados" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>¿Cuántos registros duplicados existen en el dataset? Elimínalos y crea un DataFrame limpio base.</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df.distinct()</span></code> — elimina filas idénticas en <strong>todas</strong> las columnas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">df.dropDuplicates([cols])</span></code> — permite indicar un subconjunto (ej. <code class="docutils literal notranslate"><span class="pre">[&quot;uuid_evento&quot;]</span></code>). Dado que cada UUID debería ser único, también puedes deduplicar por esa columna.</p></li>
+<li><p>Ambos disparan un <strong>shuffle</strong> (operación costosa en distribuido).</p></li>
+<li><p>El conteo de duplicados se obtiene como: <code class="docutils literal notranslate"><span class="pre">total</span> <span class="pre">−</span> <span class="pre">total_único</span></code>.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Calcular cuántos registros son duplicados.</p></li>
+<li><p>Crear un nuevo DataFrame <code class="docutils literal notranslate"><span class="pre">df_clean</span></code> ya sin duplicados y persistirlo con <code class="docutils literal notranslate"><span class="pre">.cache()</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># total = df.count()</span>
+<span class="c1"># df_clean = df.dropDuplicates()</span>
+<span class="c1"># df_clean.cache()</span>
+<span class="c1"># unicos = df_clean.count()</span>
+<span class="c1"># print(f"Duplicados eliminados: {total - unicos:,}")</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-2-tratamiento-de-nulos-en-columnas-criticas">
+<h2>Pregunta 2 — Tratamiento de Nulos en Columnas Críticas<a class="headerlink" href="#pregunta-2-tratamiento-de-nulos-en-columnas-criticas" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Identifica cuántos nulos hay en cada columna. Para las columnas numéricas críticas (<code class="docutils literal notranslate"><span class="pre">energia_inyectada_mwh</span></code>, <code class="docutils literal notranslate"><span class="pre">performance_ratio</span></code>, <code class="docutils literal notranslate"><span class="pre">temperatura_devanado_c</span></code>), decide una estrategia: ¿eliminar filas o imputar con la mediana por tecnología?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">df.dropna(subset=[...])</span></code> — elimina filas con nulos en las columnas indicadas.</p></li>
+<li><p>Imputación por mediana: calcular la mediana por grupo con <code class="docutils literal notranslate"><span class="pre">F.percentile_approx(col,</span> <span class="pre">0.5)</span></code> y luego usar un <code class="docutils literal notranslate"><span class="pre">join</span></code> + <code class="docutils literal notranslate"><span class="pre">coalesce</span></code> para rellenar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">F.coalesce(col_original,</span> <span class="pre">col_mediana)</span></code> — devuelve el primer valor no-nulo.</p></li>
+<li><p>La mediana es más robusta que la media ante outliers (ej. temperaturas extremas).</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Mostrar el conteo de nulos por columna.</p></li>
+<li><p>Aplicar <code class="docutils literal notranslate"><span class="pre">dropna</span></code> o imputación sobre <code class="docutils literal notranslate"><span class="pre">df_clean</span></code> y reportar cuántas filas se afectaron.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista (estrategia simple — eliminar):</span>
+<span class="c1"># antes = df_clean.count()</span>
+<span class="c1"># df_clean = df_clean.dropna(subset=["energia_inyectada_mwh", "performance_ratio", "temperatura_devanado_c"])</span>
+<span class="c1"># despues = df_clean.count()</span>
+<span class="c1"># print(f"Filas eliminadas por nulos críticos: {antes - despues:,}")</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-3-deteccion-de-outliers-en-temperatura-del-devanado">
+<h2>Pregunta 3 — Detección de Outliers en Temperatura del Devanado<a class="headerlink" href="#pregunta-3-deteccion-de-outliers-en-temperatura-del-devanado" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>La temperatura del devanado sigue una distribución normal con μ=68°C y σ=14°C. Identifica las lecturas fuera del rango [μ − 3σ, μ + 3σ] = [26°C, 110°C]. ¿Cuántas lecturas son outliers? ¿Qué diagnóstico de salud predomina en ellas?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p>Regla de 3-sigma: en una distribución normal, el 99.7% de los datos cae dentro de μ ± 3σ.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">F.col(&quot;temperatura_devanado_c&quot;).between(26,</span> <span class="pre">110)</span></code> filtra el rango.</p></li>
+<li><p>Para un análisis más dinámico, puedes calcular μ y σ con <code class="docutils literal notranslate"><span class="pre">F.avg()</span></code> y <code class="docutils literal notranslate"><span class="pre">F.stddev()</span></code> en vez de hardcodear.</p></li>
+<li><p>Cruzar outliers con <code class="docutils literal notranslate"><span class="pre">diagnostico_salud</span></code> ayuda a validar si las fallas térmicas se reflejan en los diagnósticos.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Filtrar los registros fuera del rango [26, 110] °C.</p></li>
+<li><p>Contar cuántos son y mostrar su distribución por <code class="docutils literal notranslate"><span class="pre">diagnostico_salud</span></code>.</p></li>
+<li><p>Decidir si eliminarlos o marcarlos.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># outliers_temp = df_clean.filter(</span>
+<span class="c1">#     ~F.col("temperatura_devanado_c").between(26, 110)</span>
+<span class="c1"># )</span>
+<span class="c1"># print(f"Outliers de temperatura: {outliers_temp.count():,}")</span>
+<span class="c1"># outliers_temp.groupBy("diagnostico_salud").count().orderBy(F.desc("count")).show()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-4-energia-inyectada-por-tecnologia">
+<h2>Pregunta 4 — Energía Inyectada por Tecnología<a class="headerlink" href="#pregunta-4-energia-inyectada-por-tecnologia" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Calcula la energía total, promedio y máxima inyectada por cada <code class="docutils literal notranslate"><span class="pre">tecnologia_generacion</span></code>. ¿Cuál contribuye más al sistema?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">groupBy(&quot;tecnologia_generacion&quot;).agg(...)</span></code> — múltiples agregaciones en una sola pasada.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">F.sum()</span></code>, <code class="docutils literal notranslate"><span class="pre">F.avg()</span></code>, <code class="docutils literal notranslate"><span class="pre">F.max()</span></code>, <code class="docutils literal notranslate"><span class="pre">F.stddev()</span></code> — funciones de agregación.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">F.round(expr,</span> <span class="pre">n)</span></code> para limitar decimales en la salida.</p></li>
+<li><p>Este es el patrón básico <strong>groupBy → agg → orderBy</strong> que se repite en Big Data.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Agrupar por tecnología de generación.</p></li>
+<li><p>Calcular: <code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">avg</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code> de <code class="docutils literal notranslate"><span class="pre">energia_inyectada_mwh</span></code>.</p></li>
+<li><p>Ordenar por energía total descendente.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># resumen_energia = (df_clean</span>
+<span class="c1">#     .groupBy("tecnologia_generacion")</span>
+<span class="c1">#     .agg(</span>
+<span class="c1">#         F.count("*").alias("total_lecturas"),</span>
+<span class="c1">#         F.round(F.sum("energia_inyectada_mwh"), 2).alias("energia_total_mwh"),</span>
+<span class="c1">#         F.round(F.avg("energia_inyectada_mwh"), 4).alias("energia_promedio_mwh"),</span>
+<span class="c1">#         F.round(F.max("energia_inyectada_mwh"), 4).alias("energia_maxima_mwh"),</span>
+<span class="c1">#     )</span>
+<span class="c1">#     .orderBy(F.desc("energia_total_mwh")))</span>
+<span class="c1"># resumen_energia.show(truncate=False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-5-performance-ratio-por-subestacion">
+<h2>Pregunta 5 — Performance Ratio por Subestación<a class="headerlink" href="#pregunta-5-performance-ratio-por-subestacion" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>¿Cuál subestación (<code class="docutils literal notranslate"><span class="pre">nodo_inyeccion</span></code>) presenta el mejor y el peor rendimiento promedio (<code class="docutils literal notranslate"><span class="pre">performance_ratio</span></code>)? ¿Existe correlación con las pérdidas técnicas?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">performance_ratio</span></code> mide qué porcentaje de la energía teórica se entrega realmente. Valores cercanos a 1 son óptimos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">perdida_tecnica_pct</span></code> debería tener correlación inversa con el PR: a mayor pérdida, menor rendimiento.</p></li>
+<li><p>Para validar la correlación, puedes usar <code class="docutils literal notranslate"><span class="pre">F.corr(col1,</span> <span class="pre">col2)</span></code> que calcula el coeficiente de Pearson.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Agrupar por <code class="docutils literal notranslate"><span class="pre">nodo_inyeccion</span></code> y calcular <code class="docutils literal notranslate"><span class="pre">avg(performance_ratio)</span></code> y <code class="docutils literal notranslate"><span class="pre">avg(perdida_tecnica_pct)</span></code>.</p></li>
+<li><p>Calcular la correlación global entre ambas variables.</p></li>
+<li><p>Identificar la mejor y peor subestación.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># pr_por_nodo = (df_clean</span>
+<span class="c1">#     .groupBy("nodo_inyeccion")</span>
+<span class="c1">#     .agg(</span>
+<span class="c1">#         F.round(F.avg("performance_ratio"), 4).alias("pr_promedio"),</span>
+<span class="c1">#         F.round(F.avg("perdida_tecnica_pct"), 2).alias("perdida_prom_pct"),</span>
+<span class="c1">#         F.count("*").alias("lecturas")</span>
+<span class="c1">#     )</span>
+<span class="c1">#     .orderBy(F.desc("pr_promedio")))</span>
+<span class="c1"># pr_por_nodo.show()</span>
+<span class="c1">#</span>
+<span class="c1"># # Correlación global</span>
+<span class="c1"># corr = df_clean.stat.corr("performance_ratio", "perdida_tecnica_pct")</span>
+<span class="c1"># print(f"Correlación PR vs Pérdida Técnica: {corr:.4f}")</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-6-diagnostico-de-salud-por-tecnologia-tabla-cruzada">
+<h2>Pregunta 6 — Diagnóstico de Salud por Tecnología (Tabla Cruzada)<a class="headerlink" href="#pregunta-6-diagnostico-de-salud-por-tecnologia-tabla-cruzada" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Construye una tabla cruzada de <code class="docutils literal notranslate"><span class="pre">tecnologia_generacion</span></code> vs <code class="docutils literal notranslate"><span class="pre">diagnostico_salud</span></code>. ¿Alguna tecnología concentra más fallas térmicas o desalineaciones mecánicas?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">groupBy(col_fila).pivot(col_columna).count()</span></code> — genera la tabla dinámica directamente en Spark.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pivot</span></code> convierte cada valor único de <code class="docutils literal notranslate"><span class="pre">diagnostico_salud</span></code> en una columna.</p></li>
+<li><p>La distribución original fue: 83% Óptimo, 11% Degradación Leve, 4% Falla Térmica, 2% Desalineación Mecánica.</p></li>
+<li><p>Un desvío significativo respecto a esas proporciones en alguna tecnología indicaría un patrón de falla específico.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Generar la tabla cruzada tecnología vs diagnóstico.</p></li>
+<li><p>Interpretar si alguna tecnología muestra concentración anómala de fallas.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># tabla_cruzada = (df_clean</span>
+<span class="c1">#     .groupBy("tecnologia_generacion")</span>
+<span class="c1">#     .pivot("diagnostico_salud")</span>
+<span class="c1">#     .count()</span>
+<span class="c1">#     .orderBy("tecnologia_generacion"))</span>
+<span class="c1"># tabla_cruzada.show(truncate=False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-7-analisis-de-vibracion-en-aerogeneradores">
+<h2>Pregunta 7 — Análisis de Vibración en Aerogeneradores<a class="headerlink" href="#pregunta-7-analisis-de-vibracion-en-aerogeneradores" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Filtra únicamente los registros de <code class="docutils literal notranslate"><span class="pre">Aerogenerador_Onshore</span></code>. ¿Cuál es la vibración promedio, máxima y el percentil 95? ¿Cuántos registros superan el umbral crítico de 5.0 mm/s?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p>La vibración de cojinetes en aerogeneradores sigue una <strong>distribución Gamma</strong> (α=2.5, β=1.2) en este dataset. Es asimétrica con cola larga a la derecha.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">F.percentile_approx(col,</span> <span class="pre">0.95)</span></code> — calcula el percentil 95 de forma aproximada (eficiente en Big Data).</p></li>
+<li><p>En la industria eólica, vibraciones &gt;5 mm/s suelen disparar alertas de mantenimiento.</p></li>
+<li><p>Patrón: <strong>filter → agg</strong> para focalizar el análisis en un subconjunto.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Filtrar por <code class="docutils literal notranslate"><span class="pre">Aerogenerador_Onshore</span></code>.</p></li>
+<li><p>Calcular <code class="docutils literal notranslate"><span class="pre">avg</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">percentile_approx(0.95)</span></code> de <code class="docutils literal notranslate"><span class="pre">vibracion_cojinete_mms</span></code>.</p></li>
+<li><p>Contar cuántos superan 5.0 mm/s y qué <code class="docutils literal notranslate"><span class="pre">diagnostico_salud</span></code> predomina en ellos.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># aero = df_clean.filter(F.col("tecnologia_generacion") == "Aerogenerador_Onshore")</span>
+<span class="c1">#</span>
+<span class="c1"># aero.agg(</span>
+<span class="c1">#     F.round(F.avg("vibracion_cojinete_mms"), 3).alias("vib_promedio"),</span>
+<span class="c1">#     F.round(F.max("vibracion_cojinete_mms"), 3).alias("vib_maxima"),</span>
+<span class="c1">#     F.round(F.percentile_approx("vibracion_cojinete_mms", 0.95), 3).alias("vib_p95"),</span>
+<span class="c1"># ).show()</span>
+<span class="c1">#</span>
+<span class="c1"># criticos = aero.filter(F.col("vibracion_cojinete_mms") &gt; 5.0)</span>
+<span class="c1"># print(f"Registros con vibración crítica (&gt;5 mm/s): {criticos.count():,}")</span>
+<span class="c1"># criticos.groupBy("diagnostico_salud").count().orderBy(F.desc("count")).show()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-8-clasificacion-de-vida-util-del-activo">
+<h2>Pregunta 8 — Clasificación de Vida Útil del Activo<a class="headerlink" href="#pregunta-8-clasificacion-de-vida-util-del-activo" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Crea una nueva columna <code class="docutils literal notranslate"><span class="pre">etapa_vida</span></code> que clasifique cada activo según sus <code class="docutils literal notranslate"><span class="pre">horas_acumuladas_servicio</span></code>:</em></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rango de horas</p></th>
+<th class="head"><p>Etapa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>&lt; 5,000</p></td>
+<td><p>Rodaje</p></td>
+</tr>
+<tr class="row-odd"><td><p>5,000 – 20,000</p></td>
+<td><p>Vida_Util</p></td>
+</tr>
+<tr class="row-even"><td><p>20,000 – 35,000</p></td>
+<td><p>Desgaste</p></td>
+</tr>
+<tr class="row-odd"><td><p>&gt; 35,000</p></td>
+<td><p>Fin_Vida</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>¿Cómo se distribuyen los diagnósticos de salud en cada etapa?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">F.when(...).when(...).otherwise(...)</span></code> — equivalente a un <code class="docutils literal notranslate"><span class="pre">CASE</span> <span class="pre">WHEN</span></code> de SQL.</p></li>
+<li><p>Las etapas reflejan la <strong>curva de bañera</strong> de confiabilidad: alta tasa de fallo inicial (rodaje), baja en vida útil, creciente en desgaste/fin de vida.</p></li>
+<li><p>Cruzar <code class="docutils literal notranslate"><span class="pre">etapa_vida</span></code> con <code class="docutils literal notranslate"><span class="pre">diagnostico_salud</span></code> permite validar si la tasa de falla sigue ese patrón.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Crear la columna <code class="docutils literal notranslate"><span class="pre">etapa_vida</span></code> con <code class="docutils literal notranslate"><span class="pre">withColumn</span></code> + <code class="docutils literal notranslate"><span class="pre">when</span></code>.</p></li>
+<li><p>Mostrar conteo de lecturas por etapa.</p></li>
+<li><p>Cruzar <code class="docutils literal notranslate"><span class="pre">etapa_vida</span></code> vs <code class="docutils literal notranslate"><span class="pre">diagnostico_salud</span></code> para analizar la tendencia.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># df_clean = df_clean.withColumn(</span>
+<span class="c1">#     "etapa_vida",</span>
+<span class="c1">#     F.when(F.col("horas_acumuladas_servicio") &lt; 5000, "Rodaje")</span>
+<span class="c1">#      .when(F.col("horas_acumuladas_servicio") &lt; 20000, "Vida_Util")</span>
+<span class="c1">#      .when(F.col("horas_acumuladas_servicio") &lt; 35000, "Desgaste")</span>
+<span class="c1">#      .otherwise("Fin_Vida")</span>
+<span class="c1"># )</span>
+<span class="c1">#</span>
+<span class="c1"># df_clean.groupBy("etapa_vida").count().orderBy("etapa_vida").show()</span>
+<span class="c1">#</span>
+<span class="c1"># (df_clean</span>
+<span class="c1">#     .groupBy("etapa_vida")</span>
+<span class="c1">#     .pivot("diagnostico_salud")</span>
+<span class="c1">#     .count()</span>
+<span class="c1">#     .orderBy("etapa_vida")</span>
+<span class="c1">#     .show(truncate=False))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-9-top-empresas-certificadoras">
+<h2>Pregunta 9 — Top Empresas Certificadoras<a class="headerlink" href="#pregunta-9-top-empresas-certificadoras" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Identifica las <strong>10 empresas certificadoras</strong> que más lecturas registran. De ellas, ¿cuál tiene la mayor proporción de diagnósticos <code class="docutils literal notranslate"><span class="pre">Falla_Termica</span></code> o <code class="docutils literal notranslate"><span class="pre">Desalineacion_Mecanica</span></code>?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul>
+<li><p>Top-N → <code class="docutils literal notranslate"><span class="pre">orderBy(F.desc(&quot;count&quot;)).limit(10)</span></code>.</p></li>
+<li><p>Para calcular la tasa de falla por empresa en una sola pasada:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total"</span><span class="p">),</span>
+    <span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"diagnostico_salud"</span><span class="p">)</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="s2">"Falla_Termica"</span><span class="p">,</span> <span class="s2">"Desalineacion_Mecanica"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"int"</span><span class="p">)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"fallas"</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>La tasa = <code class="docutils literal notranslate"><span class="pre">fallas</span> <span class="pre">/</span> <span class="pre">total</span> <span class="pre">*</span> <span class="pre">100</span></code>.</p></li>
+<li><p>Una empresa con tasa de falla significativamente mayor podría indicar baja calidad de certificación.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Agrupar por <code class="docutils literal notranslate"><span class="pre">empresa_certificadora</span></code>, calcular total y fallas.</p></li>
+<li><p>Calcular el porcentaje de fallas.</p></li>
+<li><p>Limitar al Top 10 más activas y ordenar por tasa de falla.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># top_empresas = (df_clean</span>
+<span class="c1">#     .groupBy("empresa_certificadora")</span>
+<span class="c1">#     .agg(</span>
+<span class="c1">#         F.count("*").alias("total_lecturas"),</span>
+<span class="c1">#         F.sum(</span>
+<span class="c1">#             F.col("diagnostico_salud").isin("Falla_Termica", "Desalineacion_Mecanica").cast("int")</span>
+<span class="c1">#         ).alias("fallas")</span>
+<span class="c1">#     )</span>
+<span class="c1">#     .withColumn("pct_falla", F.round(F.col("fallas") / F.col("total_lecturas") * 100, 2))</span>
+<span class="c1">#     .orderBy(F.desc("total_lecturas"))</span>
+<span class="c1">#     .limit(10))</span>
+<span class="c1"># top_empresas.orderBy(F.desc("pct_falla")).show(truncate=False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pregunta-10-analisis-temporal-de-la-generacion">
+<h2>Pregunta 10 — Análisis Temporal de la Generación<a class="headerlink" href="#pregunta-10-analisis-temporal-de-la-generacion" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Agrupa los datos por <strong>día</strong> extrayendo la fecha del <code class="docutils literal notranslate"><span class="pre">timestamp_medicion</span></code>. ¿Cuál fue el día con mayor energía total inyectada y cuál con más eventos de falla?</em></p>
+</div></blockquote>
+<p><strong>Conceptos:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">F.to_date(col)</span></code> o <code class="docutils literal notranslate"><span class="pre">F.date_format(col,</span> <span class="pre">&quot;yyyy-MM-dd&quot;)</span></code> extrae la parte de fecha.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">F.dayofweek(col)</span></code> devuelve 1 (Domingo) a 7 (Sábado) — útil para detectar patrones semanales.</p></li>
+<li><p>El dataset cubre ~60 días con lecturas cada 2 segundos, lo que da ~20,000 lecturas/día.</p></li>
+</ul>
+<p><strong>Tu tarea:</strong></p>
+<ol class="arabic simple">
+<li><p>Extraer la fecha en una nueva columna.</p></li>
+<li><p>Agrupar por fecha y calcular: <code class="docutils literal notranslate"><span class="pre">sum(energia_inyectada_mwh)</span></code> y conteo de fallas (<code class="docutils literal notranslate"><span class="pre">Falla_Termica</span></code> + <code class="docutils literal notranslate"><span class="pre">Desalineacion_Mecanica</span></code>).</p></li>
+<li><p>Mostrar los top 5 días con más energía y los top 5 con más fallas.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO AQUÍ</span>
+<span class="c1"># Pista:</span>
+<span class="c1"># df_temporal = df_clean.withColumn("fecha", F.to_date("timestamp_medicion"))</span>
+<span class="c1">#</span>
+<span class="c1"># por_dia = (df_temporal</span>
+<span class="c1">#     .groupBy("fecha")</span>
+<span class="c1">#     .agg(</span>
+<span class="c1">#         F.round(F.sum("energia_inyectada_mwh"), 2).alias("energia_total_mwh"),</span>
+<span class="c1">#         F.sum(</span>
+<span class="c1">#             F.col("diagnostico_salud").isin("Falla_Termica", "Desalineacion_Mecanica").cast("int")</span>
+<span class="c1">#         ).alias("total_fallas"),</span>
+<span class="c1">#         F.count("*").alias("lecturas")</span>
+<span class="c1">#     ))</span>
+<span class="c1">#</span>
+<span class="c1"># print("=== Top 5 días con mayor energía ===")</span>
+<span class="c1"># por_dia.orderBy(F.desc("energia_total_mwh")).show(5)</span>
+<span class="c1">#</span>
+<span class="c1"># print("=== Top 5 días con más fallas ===")</span>
+<span class="c1"># por_dia.orderBy(F.desc("total_fallas")).show(5)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="exportacion-del-dataset-limpio">
+<h2>3. Exportación del Dataset Limpio<a class="headerlink" href="#exportacion-del-dataset-limpio" title="Link to this heading">#</a></h2>
+<p><strong>Parquet vs CSV:</strong></p>
+<ul class="simple">
+<li><p><strong>Parquet</strong> → columnar, comprimido, con esquema embebido. Lectura selectiva por columnas. <strong>Recomendado</strong> para Big Data.</p></li>
+<li><p><strong>CSV</strong> → universal pero pesado y sin tipos. Solo si necesitas abrirlo en Excel.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">coalesce(1)</span></code> fuerza la salida a un único archivo (a costa de perder paralelismo). Para producción se prefiere dejar Spark elegir el número de particiones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resumen agregado para visualización rápida</span>
+<span class="n">resumen</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_clean</span>
+    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"nodo_inyeccion"</span><span class="p">,</span> <span class="s2">"tecnologia_generacion"</span><span class="p">,</span> <span class="s2">"diagnostico_salud"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_eventos"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s2">"energia_inyectada_mwh"</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"energia_total_mwh"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"performance_ratio"</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"pr_promedio"</span><span class="p">),</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="s2">"temperatura_devanado_c"</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"temp_promedio"</span><span class="p">)</span>
+    <span class="p">))</span>
+
+<span class="c1"># Dataset limpio completo en Parquet (recomendado)</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"auditoria_clean.parquet"</span><span class="p">)</span>
+
+<span class="c1"># Resumen en CSV (para abrir en Excel/Power BI)</span>
+<span class="p">(</span><span class="n">resumen</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"header"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"auditoria_resumen.csv"</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">" Exportación completa"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cierre-de-la-sesion-spark">
+<h2>4. Cierre de la sesión Spark<a class="headerlink" href="#cierre-de-la-sesion-spark" title="Link to this heading">#</a></h2>
+<p>Liberar recursos siempre — sobre todo si vas a re-ejecutar el notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="checklist-de-entrega">
+<h2>Checklist de Entrega<a class="headerlink" href="#checklist-de-entrega" title="Link to this heading">#</a></h2>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Notebook ejecutado de principio a fin sin errores.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Las <strong>10 preguntas</strong> respondidas con su captura de salida.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Archivo <code class="docutils literal notranslate"><span class="pre">auditoria_clean.parquet</span></code> generado.</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Archivo <code class="docutils literal notranslate"><span class="pre">auditoria_resumen.csv</span></code> generado.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Unidades\Unidad_4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nb06_pipeline_completo.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Big Data con PySpark — Notebook 6</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="U4_datawarehouse.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Data Warehouse</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">Objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-del-entorno-spark">1. Configuración del Entorno Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-del-dataset">2. Carga del Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-rapida">Exploración rápida</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-1-integridad-de-eventos-duplicados">Pregunta 1 — Integridad de Eventos (Duplicados)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-2-tratamiento-de-nulos-en-columnas-criticas">Pregunta 2 — Tratamiento de Nulos en Columnas Críticas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-3-deteccion-de-outliers-en-temperatura-del-devanado">Pregunta 3 — Detección de Outliers en Temperatura del Devanado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-4-energia-inyectada-por-tecnologia">Pregunta 4 — Energía Inyectada por Tecnología</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-5-performance-ratio-por-subestacion">Pregunta 5 — Performance Ratio por Subestación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-6-diagnostico-de-salud-por-tecnologia-tabla-cruzada">Pregunta 6 — Diagnóstico de Salud por Tecnología (Tabla Cruzada)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-7-analisis-de-vibracion-en-aerogeneradores">Pregunta 7 — Análisis de Vibración en Aerogeneradores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-8-clasificacion-de-vida-util-del-activo">Pregunta 8 — Clasificación de Vida Útil del Activo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-9-top-empresas-certificadoras">Pregunta 9 — Top Empresas Certificadoras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pregunta-10-analisis-temporal-de-la-generacion">Pregunta 10 — Análisis Temporal de la Generación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-del-dataset-limpio">3. Exportación del Dataset Limpio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-de-la-sesion-spark">4. Cierre de la sesión Spark</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checklist-de-entrega">Checklist de Entrega</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Sergio Alejandro Holguin García
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

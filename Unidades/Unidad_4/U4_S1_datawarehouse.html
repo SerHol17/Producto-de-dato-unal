@@ -276,6 +276,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nb04_agregaciones.html">Big Data con PySpark — Notebook 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nb05_spark_sql_joins.html">Big Data con PySpark — Notebook 5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nb06_pipeline_completo.html">Big Data con PySpark — Notebook 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actividad4.html">Análisis Distribuido de Auditoría de Activos de Energía Renovable con Apache Spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="U4_datawarehouse.html">Data Warehouse</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Data Warehouse — Modelado Dimensional en Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="U4_datalake.html">Data Lake</a></li>
@@ -582,6 +583,11 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Base de datos creada: warehouse.db
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -637,6 +643,194 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dim_fecha: 731 registros cargados
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-42745d61-120d-4834-81f6-5dbfeb72bad4" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fecha_id</th>
+      <th>fecha</th>
+      <th>dia</th>
+      <th>mes</th>
+      <th>mes_nombre</th>
+      <th>trimestre</th>
+      <th>anio</th>
+      <th>dia_semana</th>
+      <th>es_fin_semana</th>
+      <th>semana_anio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>20230101</td>
+      <td>2023-01-01</td>
+      <td>1</td>
+      <td>1</td>
+      <td>January</td>
+      <td>Q1</td>
+      <td>2023</td>
+      <td>Sunday</td>
+      <td>1</td>
+      <td>52</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>20230102</td>
+      <td>2023-01-02</td>
+      <td>2</td>
+      <td>1</td>
+      <td>January</td>
+      <td>Q1</td>
+      <td>2023</td>
+      <td>Monday</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20230103</td>
+      <td>2023-01-03</td>
+      <td>3</td>
+      <td>1</td>
+      <td>January</td>
+      <td>Q1</td>
+      <td>2023</td>
+      <td>Tuesday</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>20230104</td>
+      <td>2023-01-04</td>
+      <td>4</td>
+      <td>1</td>
+      <td>January</td>
+      <td>Q1</td>
+      <td>2023</td>
+      <td>Wednesday</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>20230105</td>
+      <td>2023-01-05</td>
+      <td>5</td>
+      <td>1</td>
+      <td>January</td>
+      <td>Q1</td>
+      <td>2023</td>
+      <td>Thursday</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-42745d61-120d-4834-81f6-5dbfeb72bad4')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-42745d61-120d-4834-81f6-5dbfeb72bad4 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-42745d61-120d-4834-81f6-5dbfeb72bad4');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -675,6 +869,180 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dim_producto: 7 registros
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-a476a03e-b824-4f7b-9fc2-c3ea156fc5f1" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>producto_id</th>
+      <th>nombre</th>
+      <th>categoria</th>
+      <th>subcategoria</th>
+      <th>precio_lista</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>101</td>
+      <td>Dashboard Ejecutivo</td>
+      <td>BI</td>
+      <td>Visualizacion</td>
+      <td>450.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>102</td>
+      <td>Reporte Automatico</td>
+      <td>BI</td>
+      <td>Reporteria</td>
+      <td>280.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>103</td>
+      <td>API REST</td>
+      <td>Integracion</td>
+      <td>Datos</td>
+      <td>620.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>104</td>
+      <td>App Web Analitica</td>
+      <td>BI</td>
+      <td>Aplicacion</td>
+      <td>350.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>105</td>
+      <td>Pipeline ETL</td>
+      <td>Integracion</td>
+      <td>Infraestructura</td>
+      <td>500.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>106</td>
+      <td>Modelo Predictivo</td>
+      <td>ML</td>
+      <td>Modelos</td>
+      <td>800.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>107</td>
+      <td>Chatbot Datos</td>
+      <td>ML</td>
+      <td>Aplicacion</td>
+      <td>550.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a476a03e-b824-4f7b-9fc2-c3ea156fc5f1')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-a476a03e-b824-4f7b-9fc2-c3ea156fc5f1 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-a476a03e-b824-4f7b-9fc2-c3ea156fc5f1');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -710,6 +1078,158 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dim_region: 5 registros
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-2f4026cb-6b6e-41fe-becb-0130be4c6a26" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>region_id</th>
+      <th>ciudad</th>
+      <th>departamento</th>
+      <th>zona</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Bogota</td>
+      <td>Cundinamarca</td>
+      <td>Centro</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Medellin</td>
+      <td>Antioquia</td>
+      <td>Noroccidente</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Cali</td>
+      <td>Valle del Cauca</td>
+      <td>Suroccidente</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Manizales</td>
+      <td>Caldas</td>
+      <td>Eje Cafetero</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Barranquilla</td>
+      <td>Atlantico</td>
+      <td>Costa</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-2f4026cb-6b6e-41fe-becb-0130be4c6a26')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-2f4026cb-6b6e-41fe-becb-0130be4c6a26 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-2f4026cb-6b6e-41fe-becb-0130be4c6a26');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -755,6 +1275,244 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dim_cliente: 15 registros
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-e1db3c0e-606a-44bf-a4a0-b6df4c18dca0" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cliente_id</th>
+      <th>nombre</th>
+      <th>segmento</th>
+      <th>canal</th>
+      <th>fecha_registro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>TechCorp</td>
+      <td>Startup</td>
+      <td>Organico</td>
+      <td>2022-04-13</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>DataSoft</td>
+      <td>Startup</td>
+      <td>Directo</td>
+      <td>2022-04-17</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Analitika</td>
+      <td>Profesional</td>
+      <td>Organico</td>
+      <td>2023-09-07</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>InfoSystems</td>
+      <td>Profesional</td>
+      <td>Directo</td>
+      <td>2022-11-27</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>CloudBI</td>
+      <td>Enterprise</td>
+      <td>Organico</td>
+      <td>2022-04-10</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>MetricaPro</td>
+      <td>Enterprise</td>
+      <td>Evento</td>
+      <td>2023-10-24</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>VisionData</td>
+      <td>Startup</td>
+      <td>Referido</td>
+      <td>2023-05-07</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>SmartBI</td>
+      <td>Startup</td>
+      <td>Directo</td>
+      <td>2022-07-11</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>DataDriven</td>
+      <td>Profesional</td>
+      <td>Directo</td>
+      <td>2023-04-05</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>AIFactory</td>
+      <td>Profesional</td>
+      <td>Organico</td>
+      <td>2023-07-15</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>NeoAnalytics</td>
+      <td>Enterprise</td>
+      <td>Evento</td>
+      <td>2023-11-13</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>ByteInsights</td>
+      <td>Enterprise</td>
+      <td>Referido</td>
+      <td>2022-07-09</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>PredictCo</td>
+      <td>Profesional</td>
+      <td>Evento</td>
+      <td>2023-07-17</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>FlowData</td>
+      <td>Enterprise</td>
+      <td>Organico</td>
+      <td>2023-05-20</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>CoreBI</td>
+      <td>Enterprise</td>
+      <td>Organico</td>
+      <td>2023-10-09</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e1db3c0e-606a-44bf-a4a0-b6df4c18dca0')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-e1db3c0e-606a-44bf-a4a0-b6df4c18dca0 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-e1db3c0e-606a-44bf-a4a0-b6df4c18dca0');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -790,19 +1548,19 @@
     <span class="c1"># Fecha aleatoria en 2023-2024</span>
     <span class="n">fecha</span> <span class="o">=</span> <span class="n">fechas</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fechas</span><span class="p">))]</span>
     <span class="n">fecha_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fecha</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y%m</span><span class="si">%d</span><span class="s1">'</span><span class="p">))</span>
-    
+
     <span class="n">prod_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">producto_ids</span><span class="p">)</span>
     <span class="n">precio_lista</span> <span class="o">=</span> <span class="n">producto_precios</span><span class="p">[</span><span class="n">prod_id</span><span class="p">]</span>
-    
+
     <span class="c1"># Bogota tiene mas ventas (40%)</span>
     <span class="n">reg_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">region_ids</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
     <span class="n">cli_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">cliente_ids</span><span class="p">)</span>
-    
+
     <span class="n">unidades</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
     <span class="n">descuento</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
     <span class="n">precio_venta</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">precio_lista</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">descuento</span> <span class="o">/</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">costo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">precio_lista</span> <span class="o">*</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    
+
     <span class="n">ventas</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">fecha_id</span><span class="p">,</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">reg_id</span><span class="p">,</span> <span class="n">cli_id</span><span class="p">,</span> <span class="n">unidades</span><span class="p">,</span> <span class="n">precio_venta</span><span class="p">,</span> <span class="n">costo</span><span class="p">,</span> <span class="n">descuento</span><span class="p">))</span>
 
 <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span>
@@ -816,6 +1574,188 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>hechos_ventas: 5000 transacciones generadas
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-15c30382-7198-4038-98e4-ce96c4bd0b82" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>venta_id</th>
+      <th>fecha_id</th>
+      <th>producto_id</th>
+      <th>region_id</th>
+      <th>cliente_id</th>
+      <th>unidades</th>
+      <th>precio_venta</th>
+      <th>costo</th>
+      <th>descuento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>20230413</td>
+      <td>b'h\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x05\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x0b\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>8</td>
+      <td>350.0</td>
+      <td>140.0</td>
+      <td>b'\x00\x00\x00\x00\x00\x00\x00\x00'</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>20240906</td>
+      <td>b'f\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x01\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x0b\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>11</td>
+      <td>238.0</td>
+      <td>112.0</td>
+      <td>b'\x0f\x00\x00\x00\x00\x00\x00\x00'</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>20230410</td>
+      <td>b'g\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x01\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x02\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>24</td>
+      <td>558.0</td>
+      <td>248.0</td>
+      <td>b'\n\x00\x00\x00\x00\x00\x00\x00'</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>20240121</td>
+      <td>b'h\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x01\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x0c\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>22</td>
+      <td>350.0</td>
+      <td>140.0</td>
+      <td>b'\x00\x00\x00\x00\x00\x00\x00\x00'</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>20240714</td>
+      <td>b'g\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\x02\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>b'\n\x00\x00\x00\x00\x00\x00\x00'</td>
+      <td>16</td>
+      <td>620.0</td>
+      <td>248.0</td>
+      <td>b'\x00\x00\x00\x00\x00\x00\x00\x00'</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-15c30382-7198-4038-98e4-ce96c4bd0b82')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-15c30382-7198-4038-98e4-ce96c4bd0b82 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-15c30382-7198-4038-98e4-ce96c4bd0b82');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -834,6 +1774,18 @@
     <span class="n">count</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">"SELECT COUNT(*) as n FROM </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">tipo</span> <span class="o">=</span> <span class="s1">'HECHOS'</span> <span class="k">if</span> <span class="n">nombre</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'hechos'</span><span class="p">)</span> <span class="k">else</span> <span class="s1">'DIMENSION'</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  [</span><span class="si">{</span><span class="n">tipo</span><span class="si">:</span><span class="s2">9s</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">nombre</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s2">&gt;6,</span><span class="si">}</span><span class="s2"> registros"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tablas en el Warehouse:
+
+  [DIMENSION] dim_cliente              15 registros
+  [DIMENSION] dim_fecha               731 registros
+  [DIMENSION] dim_producto              7 registros
+  [DIMENSION] dim_region                5 registros
+  [HECHOS   ] hechos_ventas         5,000 registros
+  [DIMENSION] sqlite_sequence           1 registros
 </pre></div>
 </div>
 </div>
@@ -871,10 +1823,251 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Datos crudos del sistema operacional:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-471a53ab-3c62-431e-b5ec-8a10e480c37a" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fecha</th>
+      <th>producto</th>
+      <th>ciudad</th>
+      <th>cliente</th>
+      <th>unidades</th>
+      <th>precio</th>
+      <th>descuento_pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2024-12-28</td>
+      <td>Dashboard Ejecutivo</td>
+      <td>Bogota</td>
+      <td>TechCorp</td>
+      <td>10</td>
+      <td>450.0</td>
+      <td>10%</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2024-12-28</td>
+      <td>API REST</td>
+      <td>Medellin</td>
+      <td>DataSoft</td>
+      <td>5</td>
+      <td>620.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2024-12-29</td>
+      <td>Reporte Automatico</td>
+      <td>Bogotá</td>
+      <td>Analitika</td>
+      <td>15</td>
+      <td>280.0</td>
+      <td>5%</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2024-12-29</td>
+      <td>DASHBOARD EJECUTIVO</td>
+      <td>bogota</td>
+      <td>TechCorp</td>
+      <td>8</td>
+      <td>450.0</td>
+      <td>15%</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2024-12-30</td>
+      <td>None</td>
+      <td>Cali</td>
+      <td>InfoSystems</td>
+      <td>-3</td>
+      <td>350.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>28/12/2024</td>
+      <td>Pipeline ETL</td>
+      <td>Manizales</td>
+      <td>CloudBI</td>
+      <td>12</td>
+      <td>500.0</td>
+      <td>20%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-471a53ab-3c62-431e-b5ec-8a10e480c37a')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-471a53ab-3c62-431e-b5ec-8a10e480c37a button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-471a53ab-3c62-431e-b5ec-8a10e480c37a');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_bad5bda7-e136-4a84-9d99-18cf253fbe5b">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('datos_crudos')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_bad5bda7-e136-4a84-9d99-18cf253fbe5b button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('datos_crudos');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============================================================</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># ============================================================</span>
 <span class="c1"># TRANSFORM: limpiar y mapear a las dimensiones del Warehouse</span>
 <span class="c1"># ============================================================</span>
 
@@ -886,56 +2079,58 @@
 <span class="sd">    """</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df_crudo</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">rechazados</span> <span class="o">=</span> <span class="p">[]</span>
-    
+
     <span class="c1"># 1. Limpiar fechas (multiples formatos)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'mixed'</span><span class="p">,</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span>
-    
+
     <span class="c1"># 2. Limpiar producto</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
-    
+
     <span class="c1"># 3. Limpiar ciudad (tildes, case)</span>
     <span class="n">mapeo_ciudad</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'bogotá'</span><span class="p">:</span> <span class="s1">'Bogota'</span><span class="p">,</span> <span class="s1">'bogota'</span><span class="p">:</span> <span class="s1">'Bogota'</span><span class="p">}</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'ciudad'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'ciudad'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">mapeo_ciudad</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
-    
+
     <span class="c1"># 4. Limpiar descuento</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'%'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    
+
     <span class="c1"># 5. Rechazar filas invalidas</span>
     <span class="n">mask_nulo</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
     <span class="n">mask_negativo</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'unidades'</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span>
     <span class="n">mask_invalido</span> <span class="o">=</span> <span class="n">mask_nulo</span> <span class="o">|</span> <span class="n">mask_negativo</span>
-    
+
     <span class="k">if</span> <span class="n">mask_invalido</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
         <span class="n">rechazados</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">mask_invalido</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">rechazados</span><span class="p">[</span><span class="s1">'motivo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask_nulo</span><span class="p">,</span> <span class="s1">'valor_nulo'</span><span class="p">,</span> <span class="s1">'unidades_negativas'</span><span class="p">)</span>
+        <span class="c1"># Recalculate mask_nulo for the 'rechazados' DataFrame to match its length</span>
+        <span class="n">rechazados_mask_nulo</span> <span class="o">=</span> <span class="n">rechazados</span><span class="p">[</span><span class="s1">'producto'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">rechazados</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+        <span class="n">rechazados</span><span class="p">[</span><span class="s1">'motivo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">rechazados_mask_nulo</span><span class="p">,</span> <span class="s1">'valor_nulo'</span><span class="p">,</span> <span class="s1">'unidades_negativas'</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">mask_invalido</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    
+
     <span class="c1"># 6. Mapear a claves del Warehouse</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'fecha_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'fecha'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y%m</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    
+
     <span class="c1"># Buscar producto_id</span>
     <span class="n">dim_prod</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT producto_id, nombre FROM dim_producto"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dim_prod</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">'producto'</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">'nombre'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
-    
+
     <span class="c1"># Buscar region_id</span>
     <span class="n">dim_reg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT region_id, ciudad FROM dim_region"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dim_reg</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'ciudad'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
-    
+
     <span class="c1"># Buscar cliente_id</span>
     <span class="n">dim_cli</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT cliente_id, nombre FROM dim_cliente"</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">dim_cli</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">'cliente'</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">'nombre'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'_cli'</span><span class="p">))</span>
-    
+
     <span class="c1"># Calcular metricas</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'precio_venta'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">'descuento_pct'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">'costo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'precio'</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.4</span>
-    
+
     <span class="c1"># Seleccionar columnas del esquema</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'fecha_id'</span><span class="p">,</span> <span class="s1">'producto_id'</span><span class="p">,</span> <span class="s1">'region_id'</span><span class="p">,</span> <span class="s1">'cliente_id'</span><span class="p">,</span>
                     <span class="s1">'unidades'</span><span class="p">,</span> <span class="s1">'precio_venta'</span><span class="p">,</span> <span class="s1">'costo'</span><span class="p">,</span> <span class="s1">'descuento_pct'</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="n">resultado</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'descuento_pct'</span><span class="p">:</span> <span class="s1">'descuento'</span><span class="p">})</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="n">resultado</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>  <span class="c1"># Quitar los que no mapearon</span>
-    
+
     <span class="k">return</span> <span class="n">resultado</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rechazados</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rechazados</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
 
 <span class="n">datos_transformados</span><span class="p">,</span> <span class="n">datos_rechazados</span> <span class="o">=</span> <span class="n">transformar_datos</span><span class="p">(</span><span class="n">datos_crudos</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
@@ -952,6 +2147,222 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transformados: 3 filas listas para cargar
+Rechazados: 1 filas
+
+Registros rechazados:
+     fecha producto  unidades     motivo
+2024-12-30     None        -3 valor_nulo
+
+Datos listos para cargar:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-9270c331-8251-4b6e-b231-6bd123b17e00" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fecha_id</th>
+      <th>producto_id</th>
+      <th>region_id</th>
+      <th>cliente_id</th>
+      <th>unidades</th>
+      <th>precio_venta</th>
+      <th>costo</th>
+      <th>descuento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>20241228</td>
+      <td>101.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>10</td>
+      <td>405.0</td>
+      <td>180.0</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20241229</td>
+      <td>102.0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>15</td>
+      <td>266.0</td>
+      <td>112.0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>20241229</td>
+      <td>101.0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8</td>
+      <td>382.5</td>
+      <td>180.0</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9270c331-8251-4b6e-b231-6bd123b17e00')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-9270c331-8251-4b6e-b231-6bd123b17e00 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-9270c331-8251-4b6e-b231-6bd123b17e00');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_0194ed89-da42-468c-bd30-d910e7aee9d0">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('datos_transformados')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_0194ed89-da42-468c-bd30-d910e7aee9d0 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('datos_transformados');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -970,6 +2381,14 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Antes: </span><span class="si">{</span><span class="n">antes</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Cargadas: </span><span class="si">{</span><span class="n">despues</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">antes</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Despues: </span><span class="si">{</span><span class="n">despues</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> filas"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Carga completada:
+  Antes: 5,000 filas
+  Cargadas: 3 filas
+  Despues: 5,003 filas
 </pre></div>
 </div>
 </div>
@@ -1009,6 +2428,193 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ingreso por region y trimestre (2024):
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-595ba16e-c187-4cb1-b1cc-66b223c714ba" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ciudad</th>
+      <th>zona</th>
+      <th>trimestre</th>
+      <th>anio</th>
+      <th>ingreso</th>
+      <th>costo_total</th>
+      <th>margen</th>
+      <th>transacciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bogota</td>
+      <td>Centro</td>
+      <td>Q4</td>
+      <td>2024</td>
+      <td>11100.0</td>
+      <td>4920.0</td>
+      <td>6180.0</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-595ba16e-c187-4cb1-b1cc-66b223c714ba')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-595ba16e-c187-4cb1-b1cc-66b223c714ba button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-595ba16e-c187-4cb1-b1cc-66b223c714ba');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_f630f1f3-3c72-4035-b165-6dcd030b4455">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('resultado_1')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_f630f1f3-3c72-4035-b165-6dcd030b4455 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('resultado_1');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1036,6 +2642,198 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top productos por ingreso:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-b16da5e6-221a-4942-b00c-888e1d4681a8" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>producto</th>
+      <th>categoria</th>
+      <th>transacciones</th>
+      <th>unidades_totales</th>
+      <th>ingreso_total</th>
+      <th>descuento_promedio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Dashboard Ejecutivo</td>
+      <td>BI</td>
+      <td>2</td>
+      <td>18</td>
+      <td>7110.0</td>
+      <td>12.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Reporte Automatico</td>
+      <td>BI</td>
+      <td>1</td>
+      <td>15</td>
+      <td>3990.0</td>
+      <td>5.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-b16da5e6-221a-4942-b00c-888e1d4681a8')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-b16da5e6-221a-4942-b00c-888e1d4681a8 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-b16da5e6-221a-4942-b00c-888e1d4681a8');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_53357dc6-8dd4-413b-9634-047261e0d332">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('resultado_2')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_53357dc6-8dd4-413b-9634-047261e0d332 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('resultado_2');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1062,6 +2860,371 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ingreso mensual:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-de03d5b0-36a7-4bfe-bb33-d10d290bdc16" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>anio</th>
+      <th>mes</th>
+      <th>mes_nombre</th>
+      <th>clientes_unicos</th>
+      <th>ingreso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2023</td>
+      <td>1</td>
+      <td>January</td>
+      <td>15</td>
+      <td>1435872.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2023</td>
+      <td>2</td>
+      <td>February</td>
+      <td>15</td>
+      <td>1183748.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2023</td>
+      <td>3</td>
+      <td>March</td>
+      <td>15</td>
+      <td>1460460.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2023</td>
+      <td>4</td>
+      <td>April</td>
+      <td>15</td>
+      <td>1199489.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2023</td>
+      <td>5</td>
+      <td>May</td>
+      <td>15</td>
+      <td>1232446.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2023</td>
+      <td>6</td>
+      <td>June</td>
+      <td>15</td>
+      <td>1341204.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2023</td>
+      <td>7</td>
+      <td>July</td>
+      <td>15</td>
+      <td>1105126.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2023</td>
+      <td>8</td>
+      <td>August</td>
+      <td>15</td>
+      <td>1357109.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2023</td>
+      <td>9</td>
+      <td>September</td>
+      <td>15</td>
+      <td>1362410.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2023</td>
+      <td>10</td>
+      <td>October</td>
+      <td>15</td>
+      <td>1155653.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2023</td>
+      <td>11</td>
+      <td>November</td>
+      <td>15</td>
+      <td>1093798.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2023</td>
+      <td>12</td>
+      <td>December</td>
+      <td>15</td>
+      <td>1259164.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2024</td>
+      <td>1</td>
+      <td>January</td>
+      <td>15</td>
+      <td>1309245.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2024</td>
+      <td>2</td>
+      <td>February</td>
+      <td>15</td>
+      <td>1386254.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2024</td>
+      <td>3</td>
+      <td>March</td>
+      <td>15</td>
+      <td>1285460.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2024</td>
+      <td>4</td>
+      <td>April</td>
+      <td>15</td>
+      <td>1152990.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2024</td>
+      <td>5</td>
+      <td>May</td>
+      <td>15</td>
+      <td>1192901.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2024</td>
+      <td>6</td>
+      <td>June</td>
+      <td>15</td>
+      <td>1117709.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2024</td>
+      <td>7</td>
+      <td>July</td>
+      <td>15</td>
+      <td>1506506.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2024</td>
+      <td>8</td>
+      <td>August</td>
+      <td>15</td>
+      <td>1355645.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2024</td>
+      <td>9</td>
+      <td>September</td>
+      <td>15</td>
+      <td>1359164.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2024</td>
+      <td>10</td>
+      <td>October</td>
+      <td>15</td>
+      <td>1274401.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2024</td>
+      <td>11</td>
+      <td>November</td>
+      <td>15</td>
+      <td>1226040.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2024</td>
+      <td>12</td>
+      <td>December</td>
+      <td>17</td>
+      <td>1401135.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-de03d5b0-36a7-4bfe-bb33-d10d290bdc16')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-de03d5b0-36a7-4bfe-bb33-d10d290bdc16 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-de03d5b0-36a7-4bfe-bb33-d10d290bdc16');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_a479b08d-787d-4322-8ae3-1e8160921b0e">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('resultado_3')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_a479b08d-787d-4322-8ae3-1e8160921b0e button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('resultado_3');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1089,6 +3252,198 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Analisis por segmento de cliente:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-d697abb5-8982-4eea-86b2-94c8f4514756" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>segmento</th>
+      <th>clientes</th>
+      <th>transacciones</th>
+      <th>ingreso_total</th>
+      <th>ingreso_por_cliente</th>
+      <th>unidades_promedio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Startup</td>
+      <td>1</td>
+      <td>2</td>
+      <td>7110.0</td>
+      <td>7110.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Profesional</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3990.0</td>
+      <td>3990.0</td>
+      <td>15.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-d697abb5-8982-4eea-86b2-94c8f4514756')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-d697abb5-8982-4eea-86b2-94c8f4514756 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-d697abb5-8982-4eea-86b2-94c8f4514756');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_bf9ef390-839e-49b5-bc80-360a66969a94">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('resultado_4')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_bf9ef390-839e-49b5-bc80-360a66969a94 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('resultado_4');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1116,6 +3471,192 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ventas: fin de semana vs entre semana:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-8a6c067d-d1e8-4f94-9259-e6dfa5e8b04d" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>periodo</th>
+      <th>transacciones</th>
+      <th>ingreso</th>
+      <th>ticket_promedio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Entre semana</td>
+      <td>3536</td>
+      <td>21767712.0</td>
+      <td>6156.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Fin de semana</td>
+      <td>1467</td>
+      <td>8986213.0</td>
+      <td>6126.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-8a6c067d-d1e8-4f94-9259-e6dfa5e8b04d')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-8a6c067d-d1e8-4f94-9259-e6dfa5e8b04d button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-8a6c067d-d1e8-4f94-9259-e6dfa5e8b04d');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+  <div id="id_f8f9ec28-95ea-43ff-8091-e8e579dc5c79">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('resultado_5')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_f8f9ec28-95ea-43ff-8091-e8e579dc5c79 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('resultado_5');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -1160,6 +3701,164 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estado inicial:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-3ce0bb2c-e8e0-4986-8a84-85a12ee95510" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sk_cliente</th>
+      <th>cliente_id</th>
+      <th>nombre</th>
+      <th>segmento</th>
+      <th>canal</th>
+      <th>ciudad</th>
+      <th>vigente_desde</th>
+      <th>vigente_hasta</th>
+      <th>es_actual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>TechCorp</td>
+      <td>Startup</td>
+      <td>Directo</td>
+      <td>Medellin</td>
+      <td>2022-01-15</td>
+      <td>9999-12-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2</td>
+      <td>DataSoft</td>
+      <td>Profesional</td>
+      <td>Referido</td>
+      <td>Bogota</td>
+      <td>2022-03-01</td>
+      <td>9999-12-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>3</td>
+      <td>Analitika</td>
+      <td>Startup</td>
+      <td>Organico</td>
+      <td>Cali</td>
+      <td>2022-06-15</td>
+      <td>9999-12-31</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-3ce0bb2c-e8e0-4986-8a84-85a12ee95510')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-3ce0bb2c-e8e0-4986-8a84-85a12ee95510 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-3ce0bb2c-e8e0-4986-8a84-85a12ee95510');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1176,7 +3875,7 @@
 <span class="sd">    """</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
     <span class="n">fecha_cierre</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">fecha_cambio</span><span class="p">,</span> <span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%m-</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span>
-    
+
     <span class="c1"># 1. Cerrar el registro actual</span>
     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">        UPDATE dim_cliente_scd2</span>
@@ -1185,7 +3884,7 @@
 <span class="s2">        WHERE cliente_id = ?</span>
 <span class="s2">          AND es_actual = 1</span>
 <span class="s2">    """</span><span class="p">,</span> <span class="p">(</span><span class="n">fecha_cierre</span><span class="p">,</span> <span class="n">cliente_id</span><span class="p">))</span>
-    
+
     <span class="c1"># 2. Insertar el registro nuevo</span>
     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">        INSERT INTO dim_cliente_scd2</span>
@@ -1199,7 +3898,7 @@
         <span class="n">nuevos_datos</span><span class="p">[</span><span class="s1">'ciudad'</span><span class="p">],</span>
         <span class="n">fecha_cambio</span>
     <span class="p">))</span>
-    
+
     <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
 <span class="c1"># TechCorp cambio de Startup a Enterprise y se mudo a Bogota el 2024-07-01</span>
@@ -1219,6 +3918,152 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Despues del cambio — TechCorp tiene 2 filas:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-856d5ccf-b1aa-4fb8-9867-ed7a8da72268" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sk_cliente</th>
+      <th>cliente_id</th>
+      <th>nombre</th>
+      <th>segmento</th>
+      <th>canal</th>
+      <th>ciudad</th>
+      <th>vigente_desde</th>
+      <th>vigente_hasta</th>
+      <th>es_actual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>TechCorp</td>
+      <td>Startup</td>
+      <td>Directo</td>
+      <td>Medellin</td>
+      <td>2022-01-15</td>
+      <td>2024-06-30</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>1</td>
+      <td>TechCorp</td>
+      <td>Enterprise</td>
+      <td>Directo</td>
+      <td>Bogota</td>
+      <td>2024-07-01</td>
+      <td>9999-12-31</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-856d5ccf-b1aa-4fb8-9867-ed7a8da72268')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-856d5ccf-b1aa-4fb8-9867-ed7a8da72268 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-856d5ccf-b1aa-4fb8-9867-ed7a8da72268');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1247,6 +4092,161 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimension completa con historial:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-0d508362-8e63-4f12-bfd3-3f35a06e86be" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nombre</th>
+      <th>segmento</th>
+      <th>ciudad</th>
+      <th>vigente_desde</th>
+      <th>vigente_hasta</th>
+      <th>es_actual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>TechCorp</td>
+      <td>Startup</td>
+      <td>Medellin</td>
+      <td>2022-01-15</td>
+      <td>2024-06-30</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>TechCorp</td>
+      <td>Enterprise</td>
+      <td>Bogota</td>
+      <td>2024-07-01</td>
+      <td>9999-12-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>DataSoft</td>
+      <td>Profesional</td>
+      <td>Bogota</td>
+      <td>2022-03-01</td>
+      <td>9999-12-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Analitika</td>
+      <td>Startup</td>
+      <td>Cali</td>
+      <td>2022-06-15</td>
+      <td>9999-12-31</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-0d508362-8e63-4f12-bfd3-3f35a06e86be')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-0d508362-8e63-4f12-bfd3-3f35a06e86be button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-0d508362-8e63-4f12-bfd3-3f35a06e86be');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    </div>
+  </div>
+</div></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -1297,6 +4297,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vista mart_ventas creada.
+Ahora el analista solo escribe:
+  SELECT ciudad, SUM(ingreso) FROM mart_ventas GROUP BY ciudad
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1331,6 +4338,22 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Ingreso por ciudad (2024) ===
+ciudad  ingreso  margen
+Bogota  11100.0  6180.0
+
+=== Ingreso por categoria (2024) ===
+categoria_producto  ingreso  transacciones
+                BI  11100.0              3
+
+=== Top 5 clientes (2024) ===
+  cliente    segmento  ingreso
+ TechCorp     Startup   7110.0
+Analitika Profesional   3990.0
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1350,6 +4373,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data Mart exportado: 3 filas
+Archivo: mart_ventas.parquet (0.0 MB)
+
+Columnas: ['fecha', 'anio', 'mes', 'trimestre', 'dia_semana', 'producto', 'categoria_producto', 'ciudad', 'zona', 'cliente', 'segmento', 'unidades', 'precio_venta', 'costo', 'descuento', 'ingreso', 'costo_total', 'margen']
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1359,6 +4390,11 @@
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Archivos de prueba eliminados."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archivos de prueba eliminados.
 </pre></div>
 </div>
 </div>
